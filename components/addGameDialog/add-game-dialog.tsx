@@ -2,9 +2,9 @@
 
 import React, { ReactNode, useCallback } from "react";
 import AppDialog from "../Dialog/app-dialog";
-import AddGameForm, { addGameFormValues } from "../addGameForm/add-game-form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import createGame from "@/app/actions";
+import { createGame } from "@/app/actions";
+import GameForm, { gameFormValues } from "../gameForm/game-form";
 
 const AddGameDialog = () => {
   const router = useRouter();
@@ -22,12 +22,12 @@ const AddGameDialog = () => {
     [searchParams]
   );
 
-  const handleSubmit = (values: addGameFormValues) => {
+  const handleSubmit = (values: gameFormValues) => {
     createGame({ ...values });
     router.push(`${pathname}?${createQueryString("addGameDialogOpen", "")}`);
   };
 
-  const content = <AddGameForm onSubmit={handleSubmit} />;
+  const content = <GameForm onSubmit={handleSubmit} />;
 
   return (
     <AppDialog

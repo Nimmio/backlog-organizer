@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   DataList,
@@ -6,6 +7,7 @@ import {
   DataListValue,
 } from "@/components/ui/data-list";
 import prisma from "@/lib/prisma";
+import Link from "next/link";
 
 const View = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -26,6 +28,9 @@ const View = async ({ params }: { params: Promise<{ id: string }> }) => {
             <DataListValue>{game?.platform}</DataListValue>
           </DataListItem>
         </DataList>
+        <Button variant="secondary" asChild>
+          <Link href={`/edit/${id}`}>Edit</Link>
+        </Button>
       </Card>
     </main>
   );

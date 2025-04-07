@@ -8,7 +8,7 @@ interface createGameProps {
   platform: string;
 }
 
-const createGame = async (props: createGameProps): Promise<game> => {
+export const createGame = async (props: createGameProps): Promise<game> => {
   return await prisma.game.create({
     data: {
       ...props,
@@ -16,4 +16,18 @@ const createGame = async (props: createGameProps): Promise<game> => {
   });
 };
 
-export default createGame;
+interface editGameProps extends createGameProps {
+  id: number;
+}
+
+export const editgame = async (props: editGameProps): Promise<game> => {
+  const { id } = props;
+  return await prisma.game.update({
+    data: {
+      ...props,
+    },
+    where: {
+      id,
+    },
+  });
+};

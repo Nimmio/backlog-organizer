@@ -13,6 +13,8 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { editgame } from "@/app/actions";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -23,27 +25,37 @@ const formSchema = z.object({
   }),
 });
 
-export interface addGameFormValues {
+export interface gameFormValues {
   name: string;
   platform: string;
 }
 
-interface AddGameFormProps {
-  onSubmit: (values: addGameFormValues) => void;
+interface GameFormProps {
+  onSubmit?: (values: gameFormValues) => void;
+  name?: string;
+  platform?: string;
+  edit?: boolean;
+  id?: number;
 }
 
-const AddGameForm = (props: AddGameFormProps) => {
-  const { onSubmit: _onSubmit } = props;
+const GameForm = (props: GameFormProps) => {
+  const { onSubmit: _onSubmit, name = "", platform = "", edit, id } = props;
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      platform: "",
+      name,
+      platform,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    _onSubmit(values);
+    if (_onSubmit) _onSubmit(values);
+    if (edit && id) {
+      editgame({ id, ...values }).then(() => {
+        router.push("/");
+      });
+    }
   }
 
   return (
@@ -85,4 +97,4 @@ const AddGameForm = (props: AddGameFormProps) => {
   );
 };
 
-export default AddGameForm;
+export default GameForm;
