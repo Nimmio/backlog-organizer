@@ -1,0 +1,18 @@
+import { Game } from "@/types/game";
+import { DataTable } from "../dataTable/data-table";
+import { columns } from "./columns";
+
+interface GameTableProps {
+  games: Game[];
+}
+
+const GameTable = (props: GameTableProps) => {
+  const { games } = props;
+  return (
+    <div>
+      <DataTable columns={columns} data={games} />
+    </div>
+  );
+};
+
+export default GameTable;

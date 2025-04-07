@@ -29,11 +29,11 @@ export interface addGameFormValues {
 }
 
 interface AddGameFormProps {
-  handleSubmit: (values: addGameFormValues) => void;
+  onSubmit: (values: addGameFormValues) => void;
 }
 
 const AddGameForm = (props: AddGameFormProps) => {
-  const { handleSubmit } = props;
+  const { onSubmit: _onSubmit } = props;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,7 +43,7 @@ const AddGameForm = (props: AddGameFormProps) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    handleSubmit(values);
+    _onSubmit(values);
   }
 
   return (

@@ -1,53 +1,22 @@
-import GameCard from "@/components/gameCard/game-card";
+import AddGameDialog from "@/components/addGameDialog/add-game-dialog";
+import GameTable from "@/components/gameTable/game-table";
+import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
+import { Game } from "@/types/game";
+import Link from "next/link";
 
-export default function Home() {
-  const DEMODATA: { name: string; platform: string }[] = [
-    {
-      name: "Cyberpunk 2077",
-      platform: "PC",
-    },
-    {
-      name: "Stardew Valley",
-      platform: "Nintendo Switch",
-    },
-    {
-      name: "Elden Ring",
-      platform: "PlayStation 5",
-    },
-    {
-      name: "Grand Theft Auto V",
-      platform: "Xbox Series X",
-    },
-    {
-      name: "The Legend of Zelda: Breath of the Wild",
-      platform: "Nintendo Switch",
-    },
-    {
-      name: "Hades",
-      platform: "PC",
-    },
-    {
-      name: "Red Dead Redemption 2",
-      platform: "PlayStation 4",
-    },
-    {
-      name: "Minecraft",
-      platform: "Mobile",
-    },
-  ];
-
+const Home = async () => {
+  const games = await prisma.game.findMany();
+  console.log(games);
   return (
     <main>
-      <div className="grid grid-cols-4 gap-4">
-        {DEMODATA.map((element) => (
-          <GameCard
-            key={element.name}
-            name={element.name}
-            platform={element.platform}
-          />
-        ))}
-      </div>
+      <AddGameDialog />
+      <Button asChild className="mb-4">
+        <Link href="?addGameDialogOpen=true">Add New Game</Link>
+      </Button>
+      <GameTable games={games} />
     </main>
   );
-}
+};
+
+export default Home;
