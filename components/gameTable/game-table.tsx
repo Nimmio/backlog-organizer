@@ -1,9 +1,9 @@
-import { Game } from "@/types/game";
+import { game } from "@/generated/prisma";
 import { DataTable } from "../dataTable/data-table";
 import { columns } from "./columns";
 
 interface GameTableProps {
-  games: Game[];
+  games: game[];
 }
 
 const GameTable = (props: GameTableProps) => {
