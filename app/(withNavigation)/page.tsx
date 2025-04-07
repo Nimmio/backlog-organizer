@@ -1,4 +1,5 @@
 import GameCard from "@/components/gameCard/game-card";
+import prisma from "@/lib/prisma";
 
 export default function Home() {
   const DEMODATA: { name: string; platform: string }[] = [
