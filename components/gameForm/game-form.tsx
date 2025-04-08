@@ -22,6 +22,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import FormDatePicker, {
+  DatePickerWithClear,
+  DatePickerWithClearFormItem,
+} from "../date-picker/date-picker";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -41,6 +45,7 @@ const formSchema = z.object({
   genre: z.string().min(2, {
     message: "Platform must be at least 2 characters.",
   }),
+  releaseDate: z.date().nullable(),
 });
 
 export interface GameFormProps {
@@ -54,6 +59,7 @@ export interface GameFormProps {
     | "COMPLETED"
     | "DROPPED";
   genre?: string;
+  releaseDate?: Date;
   onSubmit: (values: Omit<Game, "id">) => void;
 }
 
@@ -64,6 +70,7 @@ const GameForm = (props: GameFormProps) => {
     platform = "",
     status = "TO_PLAY",
     genre = "",
+    releaseDate = null,
   } = props;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,6 +79,7 @@ const GameForm = (props: GameFormProps) => {
       platform,
       status,
       genre,
+      releaseDate,
     },
   });
 
@@ -152,6 +160,13 @@ const GameForm = (props: GameFormProps) => {
                 <FormMessage />
               </FormItem>
             )}
+          />
+
+          <FormDatePicker
+            name="releaseDate"
+            label="Release Date"
+            placeholder="Select the Release Date"
+            modal
           />
 
           <Button type="submit">Submit</Button>

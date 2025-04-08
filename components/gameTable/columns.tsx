@@ -7,6 +7,7 @@ import { Edit, Eye } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
 import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
+import { format } from "date-fns";
 
 export const columns: ColumnDef<Game>[] = [
   {
@@ -28,6 +29,11 @@ export const columns: ColumnDef<Game>[] = [
   {
     accessorKey: "genre",
     header: "Genre",
+  },
+  {
+    accessorKey: "releaseDate",
+    header: "Release Date",
+    cell: ({ row }) => <>{format(row.getValue("releaseDate"), "PPP")}</>,
   },
   {
     id: "actions",
