@@ -20,7 +20,7 @@ interface editGameProps extends createGameProps {
   id: number;
 }
 
-export const editgame = async (props: editGameProps): Promise<game> => {
+export const editGame = async (props: editGameProps): Promise<game> => {
   const { id } = props;
   return await prisma.game.update({
     data: {

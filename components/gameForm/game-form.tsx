@@ -13,7 +13,7 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { editgame } from "@/app/actions";
+import { editGame } from "@/app/actions";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -52,7 +52,7 @@ const GameForm = (props: GameFormProps) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (_onSubmit) _onSubmit(values);
     if (edit && id) {
-      editgame({ id, ...values }).then(() => {
+      editGame({ id, ...values }).then(() => {
         router.push("/");
       });
     }
