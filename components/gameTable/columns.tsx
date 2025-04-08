@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { Edit, Eraser, Eye } from "lucide-react";
 import { deleteGame } from "@/app/actions";
-import ConfirmPopover from "../confirmPopover/confirm-popover";
+import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
 
 const handleDelete = (id: number) => {
   deleteGame({ id });
@@ -38,17 +38,7 @@ export const columns: ColumnDef<game>[] = [
               <Edit />
             </Link>
           </Button>
-          <ConfirmPopover
-            trigger={
-              <Button variant="ghost">
-                <Eraser />
-              </Button>
-            }
-            onConfirm={() => handleDelete(game.id)}
-            isDescrutive
-            confirmButtonText="Delete"
-            description="Delete Game?"
-          />
+          <DeleteGamePopover id={game.id} />
         </>
       );
     },
