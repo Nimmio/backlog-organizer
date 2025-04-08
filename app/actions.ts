@@ -2,6 +2,7 @@
 
 import { game } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 
 interface createGameProps {
   name: string;
@@ -38,9 +39,12 @@ interface deleteGameProps {
 
 export const deleteGame = async (props: deleteGameProps): Promise<game> => {
   const { id } = props;
-  return await prisma.game.delete({
+  const game = await prisma.game.delete({
     where: {
       id,
     },
   });
+
+  revalidatePath("/");
+  return game;
 };
