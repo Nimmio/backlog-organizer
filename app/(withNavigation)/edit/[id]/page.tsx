@@ -1,4 +1,4 @@
-import GameForm from "@/components/gameForm/game-form";
+import EditGameForm from "@/components/editGameForm/edit-game-form";
 import { Card } from "@/components/ui/card";
 
 import prisma from "@/lib/prisma";
@@ -12,7 +12,7 @@ const View = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <main>
       <Card className="p-4">
-        <GameForm name={game?.name} platform={game?.platform} edit id={+id} />
+        <EditGameForm name={game?.name} platform={game?.platform} id={+id} />
       </Card>
     </main>
   );

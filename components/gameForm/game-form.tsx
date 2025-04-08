@@ -30,16 +30,14 @@ export interface gameFormValues {
   platform: string;
 }
 
-interface GameFormProps {
-  onSubmit?: (values: gameFormValues) => void;
+export interface GameFormProps {
+  onSubmit: (values: gameFormValues) => void;
   name?: string;
   platform?: string;
-  edit?: boolean;
-  id?: number;
 }
 
 const GameForm = (props: GameFormProps) => {
-  const { onSubmit: _onSubmit, name = "", platform = "", edit, id } = props;
+  const { onSubmit: _onSubmit, name = "", platform = "" } = props;
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,12 +48,7 @@ const GameForm = (props: GameFormProps) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    if (_onSubmit) _onSubmit(values);
-    if (edit && id) {
-      editGame({ id, ...values }).then(() => {
-        router.push("/");
-      });
-    }
+    _onSubmit(values);
   }
 
   return (
