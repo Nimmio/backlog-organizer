@@ -14,8 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model game {
+model Game {
   id       Int    @id @default(autoincrement())
   name     String
   platform String
+  status   Status @default(TO_PLAY)
+}
+
+enum Status {
+  WANT_TO_BUY
+  PREORDER
+  TO_PLAY
+  PLAYING
+  COMPLETED
+  DROPPED
 }
