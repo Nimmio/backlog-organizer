@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/data-list";
 import { statusTranslation } from "@/lib/game";
 import prisma from "@/lib/prisma";
+import { format } from "date-fns";
 import Link from "next/link";
 
 const View = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -39,7 +40,17 @@ const View = async ({ params }: { params: Promise<{ id: string }> }) => {
               <DataListLabel className="w-32">Genre: </DataListLabel>
               <DataListValue>{game.genre}</DataListValue>
             </DataListItem>
+
+            <DataListItem>
+              <DataListLabel className="w-32">Release Date: </DataListLabel>
+              <DataListValue>
+                {game.releaseDate && format(game.releaseDate, "PPP")}
+              </DataListValue>
+            </DataListItem>
           </DataList>
+          <h1>Notes:</h1>
+          {game.notes && <p className="break-all">{game.notes}</p>}
+
           <Button variant="secondary" asChild>
             <Link href={`/edit/${id}`}>Edit</Link>
           </Button>

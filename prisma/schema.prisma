@@ -21,7 +21,7 @@ model Game {
   status Status @default(TO_PLAY)
   genre String
   releaseDate DateTime? 
-  Notes String?
+  notes String?
 }
 
 enum Status {

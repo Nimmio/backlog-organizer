@@ -917,7 +917,7 @@ export namespace Prisma {
     status: $Enums.Status | null
     genre: string | null
     releaseDate: Date | null
-    Notes: string | null
+    notes: string | null
   }
 
   export type GameMaxAggregateOutputType = {
@@ -927,7 +927,7 @@ export namespace Prisma {
     status: $Enums.Status | null
     genre: string | null
     releaseDate: Date | null
-    Notes: string | null
+    notes: string | null
   }
 
   export type GameCountAggregateOutputType = {
@@ -937,7 +937,7 @@ export namespace Prisma {
     status: number
     genre: number
     releaseDate: number
-    Notes: number
+    notes: number
     _all: number
   }
 
@@ -957,7 +957,7 @@ export namespace Prisma {
     status?: true
     genre?: true
     releaseDate?: true
-    Notes?: true
+    notes?: true
   }
 
   export type GameMaxAggregateInputType = {
@@ -967,7 +967,7 @@ export namespace Prisma {
     status?: true
     genre?: true
     releaseDate?: true
-    Notes?: true
+    notes?: true
   }
 
   export type GameCountAggregateInputType = {
@@ -977,7 +977,7 @@ export namespace Prisma {
     status?: true
     genre?: true
     releaseDate?: true
-    Notes?: true
+    notes?: true
     _all?: true
   }
 
@@ -1074,7 +1074,7 @@ export namespace Prisma {
     status: $Enums.Status
     genre: string
     releaseDate: Date | null
-    Notes: string | null
+    notes: string | null
     _count: GameCountAggregateOutputType | null
     _avg: GameAvgAggregateOutputType | null
     _sum: GameSumAggregateOutputType | null
@@ -1103,7 +1103,7 @@ export namespace Prisma {
     status?: boolean
     genre?: boolean
     releaseDate?: boolean
-    Notes?: boolean
+    notes?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1113,7 +1113,7 @@ export namespace Prisma {
     status?: boolean
     genre?: boolean
     releaseDate?: boolean
-    Notes?: boolean
+    notes?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1123,7 +1123,7 @@ export namespace Prisma {
     status?: boolean
     genre?: boolean
     releaseDate?: boolean
-    Notes?: boolean
+    notes?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectScalar = {
@@ -1133,10 +1133,10 @@ export namespace Prisma {
     status?: boolean
     genre?: boolean
     releaseDate?: boolean
-    Notes?: boolean
+    notes?: boolean
   }
 
-  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre" | "releaseDate" | "Notes", ExtArgs["result"]["game"]>
+  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre" | "releaseDate" | "notes", ExtArgs["result"]["game"]>
 
   export type $GamePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Game"
@@ -1148,7 +1148,7 @@ export namespace Prisma {
       status: $Enums.Status
       genre: string
       releaseDate: Date | null
-      Notes: string | null
+      notes: string | null
     }, ExtArgs["result"]["game"]>
     composites: {}
   }
@@ -1578,7 +1578,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Game", 'Status'>
     readonly genre: FieldRef<"Game", 'String'>
     readonly releaseDate: FieldRef<"Game", 'DateTime'>
-    readonly Notes: FieldRef<"Game", 'String'>
+    readonly notes: FieldRef<"Game", 'String'>
   }
     
 
@@ -1966,7 +1966,7 @@ export namespace Prisma {
     status: 'status',
     genre: 'genre',
     releaseDate: 'releaseDate',
-    Notes: 'Notes'
+    notes: 'notes'
   };
 
   export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
@@ -2084,7 +2084,7 @@ export namespace Prisma {
     status?: EnumStatusFilter<"Game"> | $Enums.Status
     genre?: StringFilter<"Game"> | string
     releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
-    Notes?: StringNullableFilter<"Game"> | string | null
+    notes?: StringNullableFilter<"Game"> | string | null
   }
 
   export type GameOrderByWithRelationInput = {
@@ -2094,7 +2094,7 @@ export namespace Prisma {
     status?: SortOrder
     genre?: SortOrder
     releaseDate?: SortOrderInput | SortOrder
-    Notes?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
   }
 
   export type GameWhereUniqueInput = Prisma.AtLeast<{
@@ -2107,7 +2107,7 @@ export namespace Prisma {
     status?: EnumStatusFilter<"Game"> | $Enums.Status
     genre?: StringFilter<"Game"> | string
     releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
-    Notes?: StringNullableFilter<"Game"> | string | null
+    notes?: StringNullableFilter<"Game"> | string | null
   }, "id">
 
   export type GameOrderByWithAggregationInput = {
@@ -2117,7 +2117,7 @@ export namespace Prisma {
     status?: SortOrder
     genre?: SortOrder
     releaseDate?: SortOrderInput | SortOrder
-    Notes?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
     _count?: GameCountOrderByAggregateInput
     _avg?: GameAvgOrderByAggregateInput
     _max?: GameMaxOrderByAggregateInput
@@ -2135,7 +2135,7 @@ export namespace Prisma {
     status?: EnumStatusWithAggregatesFilter<"Game"> | $Enums.Status
     genre?: StringWithAggregatesFilter<"Game"> | string
     releaseDate?: DateTimeNullableWithAggregatesFilter<"Game"> | Date | string | null
-    Notes?: StringNullableWithAggregatesFilter<"Game"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"Game"> | string | null
   }
 
   export type GameCreateInput = {
@@ -2144,7 +2144,7 @@ export namespace Prisma {
     status?: $Enums.Status
     genre: string
     releaseDate?: Date | string | null
-    Notes?: string | null
+    notes?: string | null
   }
 
   export type GameUncheckedCreateInput = {
@@ -2154,7 +2154,7 @@ export namespace Prisma {
     status?: $Enums.Status
     genre: string
     releaseDate?: Date | string | null
-    Notes?: string | null
+    notes?: string | null
   }
 
   export type GameUpdateInput = {
@@ -2163,7 +2163,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Notes?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GameUncheckedUpdateInput = {
@@ -2173,7 +2173,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Notes?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GameCreateManyInput = {
@@ -2183,7 +2183,7 @@ export namespace Prisma {
     status?: $Enums.Status
     genre: string
     releaseDate?: Date | string | null
-    Notes?: string | null
+    notes?: string | null
   }
 
   export type GameUpdateManyMutationInput = {
@@ -2192,7 +2192,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Notes?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type GameUncheckedUpdateManyInput = {
@@ -2202,7 +2202,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    Notes?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2276,7 +2276,7 @@ export namespace Prisma {
     status?: SortOrder
     genre?: SortOrder
     releaseDate?: SortOrder
-    Notes?: SortOrder
+    notes?: SortOrder
   }
 
   export type GameAvgOrderByAggregateInput = {
@@ -2290,7 +2290,7 @@ export namespace Prisma {
     status?: SortOrder
     genre?: SortOrder
     releaseDate?: SortOrder
-    Notes?: SortOrder
+    notes?: SortOrder
   }
 
   export type GameMinOrderByAggregateInput = {
@@ -2300,7 +2300,7 @@ export namespace Prisma {
     status?: SortOrder
     genre?: SortOrder
     releaseDate?: SortOrder
-    Notes?: SortOrder
+    notes?: SortOrder
   }
 
   export type GameSumOrderByAggregateInput = {
