@@ -4,7 +4,12 @@ import { game } from "@/generated/prisma";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Edit, Eye } from "lucide-react";
+import { Edit, Eraser, Eye } from "lucide-react";
+import { deleteGame } from "@/app/actions";
+
+const handleDelete = (id: number) => {
+  deleteGame({ id });
+};
 
 export const columns: ColumnDef<game>[] = [
   {
@@ -31,6 +36,9 @@ export const columns: ColumnDef<game>[] = [
             <Link href={`edit/${game.id}/`}>
               <Edit />
             </Link>
+          </Button>
+          <Button variant="ghost" onClick={() => handleDelete(game.id)}>
+            <Eraser />
           </Button>
         </>
       );
