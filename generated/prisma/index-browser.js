@@ -122,7 +122,8 @@ exports.Prisma.GameScalarFieldEnum = {
   name: 'name',
   platform: 'platform',
   status: 'status',
-  genre: 'genre'
+  genre: 'genre',
+  releaseDate: 'releaseDate'
 };
 
 exports.Prisma.SortOrder = {
@@ -133,6 +134,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.Status = exports.$Enums.Status = {
   WANT_TO_BUY: 'WANT_TO_BUY',

@@ -15,11 +15,12 @@ datasource db {
 }
 
 model Game {
-  id       Int    @id @default(autoincrement())
-  name     String
-  platform String
-  status   Status @default(TO_PLAY)
-  genre    String
+  id          Int       @id @default(autoincrement())
+  name        String
+  platform    String
+  status      Status    @default(TO_PLAY)
+  genre       String
+  releaseDate DateTime?
 }
 
 enum Status {

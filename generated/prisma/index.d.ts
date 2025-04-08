@@ -916,6 +916,7 @@ export namespace Prisma {
     platform: string | null
     status: $Enums.Status | null
     genre: string | null
+    releaseDate: Date | null
   }
 
   export type GameMaxAggregateOutputType = {
@@ -924,6 +925,7 @@ export namespace Prisma {
     platform: string | null
     status: $Enums.Status | null
     genre: string | null
+    releaseDate: Date | null
   }
 
   export type GameCountAggregateOutputType = {
@@ -932,6 +934,7 @@ export namespace Prisma {
     platform: number
     status: number
     genre: number
+    releaseDate: number
     _all: number
   }
 
@@ -950,6 +953,7 @@ export namespace Prisma {
     platform?: true
     status?: true
     genre?: true
+    releaseDate?: true
   }
 
   export type GameMaxAggregateInputType = {
@@ -958,6 +962,7 @@ export namespace Prisma {
     platform?: true
     status?: true
     genre?: true
+    releaseDate?: true
   }
 
   export type GameCountAggregateInputType = {
@@ -966,6 +971,7 @@ export namespace Prisma {
     platform?: true
     status?: true
     genre?: true
+    releaseDate?: true
     _all?: true
   }
 
@@ -1061,6 +1067,7 @@ export namespace Prisma {
     platform: string
     status: $Enums.Status
     genre: string
+    releaseDate: Date | null
     _count: GameCountAggregateOutputType | null
     _avg: GameAvgAggregateOutputType | null
     _sum: GameSumAggregateOutputType | null
@@ -1088,6 +1095,7 @@ export namespace Prisma {
     platform?: boolean
     status?: boolean
     genre?: boolean
+    releaseDate?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1096,6 +1104,7 @@ export namespace Prisma {
     platform?: boolean
     status?: boolean
     genre?: boolean
+    releaseDate?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1104,6 +1113,7 @@ export namespace Prisma {
     platform?: boolean
     status?: boolean
     genre?: boolean
+    releaseDate?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectScalar = {
@@ -1112,9 +1122,10 @@ export namespace Prisma {
     platform?: boolean
     status?: boolean
     genre?: boolean
+    releaseDate?: boolean
   }
 
-  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre", ExtArgs["result"]["game"]>
+  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre" | "releaseDate", ExtArgs["result"]["game"]>
 
   export type $GamePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Game"
@@ -1125,6 +1136,7 @@ export namespace Prisma {
       platform: string
       status: $Enums.Status
       genre: string
+      releaseDate: Date | null
     }, ExtArgs["result"]["game"]>
     composites: {}
   }
@@ -1553,6 +1565,7 @@ export namespace Prisma {
     readonly platform: FieldRef<"Game", 'String'>
     readonly status: FieldRef<"Game", 'Status'>
     readonly genre: FieldRef<"Game", 'String'>
+    readonly releaseDate: FieldRef<"Game", 'DateTime'>
   }
     
 
@@ -1938,7 +1951,8 @@ export namespace Prisma {
     name: 'name',
     platform: 'platform',
     status: 'status',
-    genre: 'genre'
+    genre: 'genre',
+    releaseDate: 'releaseDate'
   };
 
   export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
@@ -1958,6 +1972,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -2008,6 +2030,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2033,6 +2069,7 @@ export namespace Prisma {
     platform?: StringFilter<"Game"> | string
     status?: EnumStatusFilter<"Game"> | $Enums.Status
     genre?: StringFilter<"Game"> | string
+    releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
   }
 
   export type GameOrderByWithRelationInput = {
@@ -2041,6 +2078,7 @@ export namespace Prisma {
     platform?: SortOrder
     status?: SortOrder
     genre?: SortOrder
+    releaseDate?: SortOrderInput | SortOrder
   }
 
   export type GameWhereUniqueInput = Prisma.AtLeast<{
@@ -2052,6 +2090,7 @@ export namespace Prisma {
     platform?: StringFilter<"Game"> | string
     status?: EnumStatusFilter<"Game"> | $Enums.Status
     genre?: StringFilter<"Game"> | string
+    releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
   }, "id">
 
   export type GameOrderByWithAggregationInput = {
@@ -2060,6 +2099,7 @@ export namespace Prisma {
     platform?: SortOrder
     status?: SortOrder
     genre?: SortOrder
+    releaseDate?: SortOrderInput | SortOrder
     _count?: GameCountOrderByAggregateInput
     _avg?: GameAvgOrderByAggregateInput
     _max?: GameMaxOrderByAggregateInput
@@ -2076,6 +2116,7 @@ export namespace Prisma {
     platform?: StringWithAggregatesFilter<"Game"> | string
     status?: EnumStatusWithAggregatesFilter<"Game"> | $Enums.Status
     genre?: StringWithAggregatesFilter<"Game"> | string
+    releaseDate?: DateTimeNullableWithAggregatesFilter<"Game"> | Date | string | null
   }
 
   export type GameCreateInput = {
@@ -2083,6 +2124,7 @@ export namespace Prisma {
     platform: string
     status?: $Enums.Status
     genre: string
+    releaseDate?: Date | string | null
   }
 
   export type GameUncheckedCreateInput = {
@@ -2091,6 +2133,7 @@ export namespace Prisma {
     platform: string
     status?: $Enums.Status
     genre: string
+    releaseDate?: Date | string | null
   }
 
   export type GameUpdateInput = {
@@ -2098,6 +2141,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GameUncheckedUpdateInput = {
@@ -2106,6 +2150,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GameCreateManyInput = {
@@ -2114,6 +2159,7 @@ export namespace Prisma {
     platform: string
     status?: $Enums.Status
     genre: string
+    releaseDate?: Date | string | null
   }
 
   export type GameUpdateManyMutationInput = {
@@ -2121,6 +2167,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GameUncheckedUpdateManyInput = {
@@ -2129,6 +2176,7 @@ export namespace Prisma {
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     genre?: StringFieldUpdateOperationsInput | string
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2164,12 +2212,29 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type GameCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     platform?: SortOrder
     status?: SortOrder
     genre?: SortOrder
+    releaseDate?: SortOrder
   }
 
   export type GameAvgOrderByAggregateInput = {
@@ -2182,6 +2247,7 @@ export namespace Prisma {
     platform?: SortOrder
     status?: SortOrder
     genre?: SortOrder
+    releaseDate?: SortOrder
   }
 
   export type GameMinOrderByAggregateInput = {
@@ -2190,6 +2256,7 @@ export namespace Prisma {
     platform?: SortOrder
     status?: SortOrder
     genre?: SortOrder
+    releaseDate?: SortOrder
   }
 
   export type GameSumOrderByAggregateInput = {
@@ -2240,12 +2307,30 @@ export namespace Prisma {
     _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type EnumStatusFieldUpdateOperationsInput = {
     set?: $Enums.Status
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2286,6 +2371,17 @@ export namespace Prisma {
     in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2340,6 +2436,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 
