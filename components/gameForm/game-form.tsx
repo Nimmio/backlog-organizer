@@ -38,6 +38,9 @@ const formSchema = z.object({
     "COMPLETED",
     "DROPPED",
   ]),
+  genre: z.string().min(2, {
+    message: "Platform must be at least 2 characters.",
+  }),
 });
 
 export interface GameFormProps {
@@ -50,6 +53,7 @@ export interface GameFormProps {
     | "PLAYING"
     | "COMPLETED"
     | "DROPPED";
+  genre?: string;
   onSubmit: (values: Omit<Game, "id">) => void;
 }
 
@@ -59,6 +63,7 @@ const GameForm = (props: GameFormProps) => {
     name = "",
     platform = "",
     status = "TO_PLAY",
+    genre = "",
   } = props;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,6 +71,7 @@ const GameForm = (props: GameFormProps) => {
       name,
       platform,
       status,
+      genre,
     },
   });
 
@@ -128,6 +134,20 @@ const GameForm = (props: GameFormProps) => {
                       <SelectItem value="DROPPED">Dropped</SelectItem>
                     </SelectContent>
                   </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="genre"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Genre</FormLabel>
+                <FormControl>
+                  <Input placeholder="Genre" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

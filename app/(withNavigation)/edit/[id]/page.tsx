@@ -15,7 +15,7 @@ const Edit = async ({ params }: { params: Promise<{ id: string }> }) => {
     <main>
       {game && (
         <Card className="p-4">
-          <EditGameForm name={game.name} platform={game.platform} id={+id} />
+          <EditGameForm {...game} />
           <DeleteGamePopover id={game.id} redirectTo="/" />
         </Card>
       )}

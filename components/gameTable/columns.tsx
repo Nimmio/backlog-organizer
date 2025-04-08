@@ -26,6 +26,10 @@ export const columns: ColumnDef<Game>[] = [
     },
   },
   {
+    accessorKey: "genre",
+    header: "Genre",
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const game = row.original;
