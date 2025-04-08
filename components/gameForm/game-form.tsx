@@ -13,8 +13,15 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { editGame } from "@/app/actions";
 import { useRouter } from "next/navigation";
+import { Game } from "@/generated/prisma";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -23,27 +30,42 @@ const formSchema = z.object({
   platform: z.string().min(2, {
     message: "Platform must be at least 2 characters.",
   }),
+  status: z.enum([
+    "WANT_TO_BUY",
+    "PREORDER",
+    "TO_PLAY",
+    "PLAYING",
+    "COMPLETED",
+    "DROPPED",
+  ]),
 });
 
-export interface gameFormValues {
-  name: string;
-  platform: string;
-}
-
 export interface GameFormProps {
-  onSubmit: (values: gameFormValues) => void;
   name?: string;
   platform?: string;
+  status?:
+    | "WANT_TO_BUY"
+    | "PREORDER"
+    | "TO_PLAY"
+    | "PLAYING"
+    | "COMPLETED"
+    | "DROPPED";
+  onSubmit: (values: Omit<Game, "id">) => void;
 }
 
 const GameForm = (props: GameFormProps) => {
-  const { onSubmit: _onSubmit, name = "", platform = "" } = props;
-  const router = useRouter();
+  const {
+    onSubmit: _onSubmit,
+    name = "",
+    platform = "",
+    status = "TO_PLAY",
+  } = props;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name,
       platform,
+      status,
     },
   });
 
@@ -77,6 +99,35 @@ const GameForm = (props: GameFormProps) => {
                 <FormLabel>Platform</FormLabel>
                 <FormControl>
                   <Input placeholder="Platform" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Status</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="WANT_TO_BUY">Want to buy</SelectItem>
+                      <SelectItem value="PREORDER">Preorder</SelectItem>
+                      <SelectItem value="TO_PLAY">To play</SelectItem>
+                      <SelectItem value="PLAYING">Playing</SelectItem>
+                      <SelectItem value="COMPLETED">Completed</SelectItem>
+                      <SelectItem value="DROPPED">Dropped</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>

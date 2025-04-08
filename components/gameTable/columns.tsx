@@ -1,18 +1,14 @@
 "use client";
 
-import { game } from "@/generated/prisma";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Edit, Eraser, Eye } from "lucide-react";
-import { deleteGame } from "@/app/actions";
+import { Edit, Eye } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
+import { Game } from "@/generated/prisma";
+import { statusTranslation } from "@/lib/game";
 
-const handleDelete = (id: number) => {
-  deleteGame({ id });
-};
-
-export const columns: ColumnDef<game>[] = [
+export const columns: ColumnDef<Game>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -20,6 +16,14 @@ export const columns: ColumnDef<game>[] = [
   {
     accessorKey: "platform",
     header: "Platform",
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const status = statusTranslation(row.getValue("status"));
+      return <>{status}</>;
+    },
   },
   {
     id: "actions",

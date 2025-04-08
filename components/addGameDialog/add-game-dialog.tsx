@@ -4,7 +4,8 @@ import React, { ReactNode, useCallback } from "react";
 import AppDialog from "../Dialog/app-dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createGame } from "@/app/actions";
-import GameForm, { gameFormValues } from "../gameForm/game-form";
+import GameForm from "../gameForm/game-form";
+import { Game } from "@/generated/prisma";
 
 const AddGameDialog = () => {
   const router = useRouter();
@@ -22,7 +23,7 @@ const AddGameDialog = () => {
     [searchParams]
   );
 
-  const handleSubmit = (values: gameFormValues) => {
+  const handleSubmit = (values: Omit<Game, "id">) => {
     createGame({ ...values });
     router.push(`${pathname}?${createQueryString("addGameDialogOpen", "")}`);
   };
