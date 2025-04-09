@@ -3,11 +3,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Edit, Eye } from "lucide-react";
+import { Edit, Eye, Funnel } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
 import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
 import { format } from "date-fns";
+import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
 
 export const columns: ColumnDef<Game>[] = [
   {
@@ -20,7 +21,9 @@ export const columns: ColumnDef<Game>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => {
+      return <GameStatusFilterDropdown />;
+    },
     cell: ({ row }) => {
       const status = statusTranslation(row.getValue("status"));
       return <>{status}</>;

@@ -6,22 +6,14 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { createGame } from "@/app/actions";
 import GameForm from "../gameForm/game-form";
 import { Game } from "@/generated/prisma";
+import { useQueryString } from "@/hooks/use-query-string,";
 
 const AddGameDialog = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const addGameDialogOpen = searchParams.get("addGameDialogOpen") === "true";
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams]
-  );
+  const createQueryString = useQueryString();
 
   const handleSubmit = (values: Omit<Game, "id">) => {
     createGame({ ...values });
