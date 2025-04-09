@@ -38,9 +38,11 @@ const GameStatusFilterDropdown = () => {
     } else {
       setFilterActive(false);
     }
-    createQueryString("filter", filter.toString());
     router.push(
-      `${pathname}?${createQueryString("filters", JSON.stringify(filter))}`
+      `${pathname}?${createQueryString(
+        "filters",
+        JSON.stringify(filter.filter)
+      )}`
     );
 
     return () => {

@@ -9,11 +9,17 @@ import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
 import { format } from "date-fns";
 import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
+import SortIconButton from "../sortIconButton/sort-icon-button";
 
 export const columns: ColumnDef<Game>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: () => (
+      <>
+        Name
+        <SortIconButton type="letter" name="name" />
+      </>
+    ),
   },
   {
     accessorKey: "platform",
@@ -21,9 +27,13 @@ export const columns: ColumnDef<Game>[] = [
   },
   {
     accessorKey: "status",
-    header: () => {
-      return <GameStatusFilterDropdown />;
-    },
+    header: () => (
+      <>
+        Status
+        <GameStatusFilterDropdown />
+      </>
+    ),
+
     cell: ({ row }) => {
       const status = statusTranslation(row.getValue("status"));
       return <>{status}</>;
