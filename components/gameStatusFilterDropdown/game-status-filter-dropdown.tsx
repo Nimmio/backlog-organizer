@@ -5,7 +5,7 @@ import CheckboxDropdown from "../checkboxDropdown/checkbox-dropdown";
 import { Button } from "../ui/button";
 import { Funnel, ListFilter, ListFilterPlus } from "lucide-react";
 import { useQueryString } from "@/hooks/use-query-string,";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface Filter {
   [key: string]: boolean;
@@ -21,7 +21,13 @@ const Defaults = {
 };
 
 const GameStatusFilterDropdown = () => {
-  const [filter, setFilter] = useState<Filter>(Defaults);
+  const searchParams = useSearchParams();
+  const filterString = searchParams.get("filters");
+  const paramsFilter = filterString ? JSON.parse(filterString) : {};
+  const [filter, setFilter] = useState<Filter>({
+    ...Defaults,
+    ...paramsFilter,
+  });
   const [filterActive, setFilterActive] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -86,7 +92,6 @@ const GameStatusFilterDropdown = () => {
       <CheckboxDropdown
         trigger={
           <Button variant="ghost">
-            Status
             {filterActive ? <ListFilterPlus /> : <ListFilter />}
           </Button>
         }
