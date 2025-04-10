@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Funnel, ListFilter, ListFilterPlus } from "lucide-react";
 import { useQueryString } from "@/hooks/use-query-string,";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { getJsonParsedStringOrNull, stringIsJsonParsable } from "@/lib/utils";
 
 interface Filter {
   [key: string]: boolean;
@@ -23,7 +24,9 @@ const Defaults = {
 const GameStatusFilterDropdown = () => {
   const searchParams = useSearchParams();
   const filterString = searchParams.get("filters");
-  const paramsFilter = filterString ? JSON.parse(filterString) : {};
+  const paramsFilter = stringIsJsonParsable(filterString)
+    ? getJsonParsedStringOrNull(filterString)
+    : {};
   const [filter, setFilter] = useState<Filter>({
     ...Defaults,
     ...paramsFilter,
@@ -33,21 +36,21 @@ const GameStatusFilterDropdown = () => {
   const pathname = usePathname();
   const createQueryString = useQueryString();
   useEffect(() => {
-    if (Object.keys(filter).some((element) => !filter[element])) {
-      setFilterActive(true);
-    } else {
-      setFilterActive(false);
-    }
-    router.push(
-      `${pathname}?${createQueryString(
-        "filters",
-        JSON.stringify(filter.filter)
-      )}`
-    );
+    if (filter) {
+      console.log(filter);
+      if (Object.keys(filter).some((element) => !filter[element])) {
+        setFilterActive(true);
+      } else {
+        setFilterActive(false);
+      }
+      router.push(
+        `${pathname}?${createQueryString("filters", JSON.stringify(filter))}`
+      );
 
-    return () => {
-      setFilterActive(false);
-    };
+      return () => {
+        setFilterActive(false);
+      };
+    }
   }, [filter]);
 
   const handleElementClicked = (key: string) => {

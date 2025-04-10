@@ -20,12 +20,12 @@ interface Icons {
 
 const icons: Icons = {
   number: {
-    none: <ArrowDownUp />,
+    "": <ArrowDownUp />,
     asc: <ArrowDown10 />,
     desc: <ArrowUp10 />,
   },
   letter: {
-    none: <ArrowDownUp />,
+    "": <ArrowDownUp />,
     asc: <ArrowDownAZ />,
     desc: <ArrowUpAz />,
   },
@@ -43,7 +43,7 @@ const SortIconButton = (props: SortIconButtonProps) => {
   const pathname = usePathname();
 
   const iconObject = icons[type];
-  const [direction, setDirection] = useState<"none" | "asc" | "desc">("none");
+  const [direction, setDirection] = useState<"" | "asc" | "desc">("");
 
   const searchParams = useSearchParams();
   const sortString = searchParams.get("sort");
@@ -52,7 +52,7 @@ const SortIconButton = (props: SortIconButtonProps) => {
 
   const handleClick = () => {
     const newValue =
-      direction === "none" ? "asc" : direction === "asc" ? "desc" : "none";
+      direction === "" ? "asc" : direction === "asc" ? "desc" : "";
     setDirection(newValue);
     router.push(
       `${pathname}?${createQueryString(
