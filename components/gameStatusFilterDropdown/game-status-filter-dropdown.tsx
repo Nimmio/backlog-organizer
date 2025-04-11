@@ -8,7 +8,7 @@ import { useQueryString } from "@/hooks/use-query-string,";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getJsonParsedStringOrNull, stringIsJsonParsable } from "@/lib/utils";
 
-interface Filter {
+interface Filters {
   [key: string]: boolean;
 }
 
@@ -27,68 +27,69 @@ const GameStatusFilterDropdown = () => {
   const paramsFilter = stringIsJsonParsable(filterString)
     ? getJsonParsedStringOrNull(filterString)
     : {};
-  const [filter, setFilter] = useState<Filter>({
+  const [filters, setFilters] = useState<Filters>({
     ...Defaults,
     ...paramsFilter,
   });
   const [filterActive, setFilterActive] = useState<boolean>(false);
   const router = useRouter();
   const pathname = usePathname();
+
   const createQueryString = useQueryString();
+
   useEffect(() => {
-    if (filter) {
-      console.log(filter);
-      if (Object.keys(filter).some((element) => !filter[element])) {
+    if (filters) {
+      if (Object.keys(filters).some((element) => !filters[element])) {
         setFilterActive(true);
-      } else {
+
         setFilterActive(false);
       }
       router.push(
-        `${pathname}?${createQueryString("filters", JSON.stringify(filter))}`
+        `${pathname}?${createQueryString("filters", JSON.stringify(filters))}`
       );
-
+    } else {
       return () => {
         setFilterActive(false);
       };
     }
-  }, [filter]);
+  }, [filters]);
 
   const handleElementClicked = (key: string) => {
-    setFilter({
-      ...filter,
-      [key]: !filter[key],
+    setFilters({
+      ...filters,
+      [key]: !filters[key],
     });
   };
 
   const Status = [
     {
       label: "Want to buy",
-      isActive: filter.WANT_TO_BUY,
+      isActive: filters.WANT_TO_BUY,
       key: "WANT_TO_BUY",
     },
     {
       label: "Preorder",
-      isActive: filter.PREORDER,
+      isActive: filters.PREORDER,
       key: "PREORDER",
     },
     {
       label: "To play",
-      isActive: filter.TO_PLAY,
+      isActive: filters.TO_PLAY,
       key: "TO_PLAY",
     },
     {
       label: "Playing",
-      isActive: filter.PLAYING,
+      isActive: filters.PLAYING,
       key: "PLAYING",
     },
     {
       label: "Completed",
-      isActive: filter.COMPLETED,
+      isActive: filters.COMPLETED,
       key: "COMPLETED",
     },
     {
       label: "Dropped",
-      isActive: filter.DROPPED,
+      isActive: filters.DROPPED,
       key: "DROPPED",
     },
   ];

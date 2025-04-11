@@ -3,9 +3,11 @@ import GameTable from "@/components/gameTable/game-table";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
-import { getJsonParsedStringOrNull } from "@/lib/utils";
+import {
+  getJsonParsedStringOrNull,
+  getValueFromSearchParamsOrNull,
+} from "@/lib/utils";
 import Link from "next/link";
-import { boolean } from "zod";
 
 interface KeyStringObject {
   [key: string]: any;
@@ -16,25 +18,31 @@ const Home = async ({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const filtersString = (await searchParams).filters;
   const sortString = (await searchParams).sort;
 
-  const filters: KeyStringObject | null = getJsonParsedStringOrNull(
-    (filtersString as string) || null
-  ) as KeyStringObject;
+  const filter = await getValueFromSearchParamsOrNull({
+    searchParams: searchParams,
+    key: "filters",
+  });
 
-  const sort: KeyStringObject | null = getJsonParsedStringOrNull(
-    (sortString as string) || null
-  ) as KeyStringObject;
-
-  const getFilterArray = (): Status[] => {
-    if (!filters) return [];
-    return Object.keys(filters).filter(
-      (filterKey) => filters[filterKey]
-    ) as Status[];
+  const getFilterArray = () => {
+    if (!filter) return [];
+    const returnArray = [];
+    for (const [key, value] of Object.entries(filter)) {
+      if (value) returnArray.push(key);
+    }
+    return returnArray;
   };
 
-  const validateSortObjectOrEmptyObject = (input: KeyStringObject): object => {
+  const sort = (await getValueFromSearchParamsOrNull({
+    searchParams: searchParams,
+    key: "sort",
+  })) as KeyStringObject;
+
+  const validateSortObjectOrEmptyObject = (
+    input: KeyStringObject | null
+  ): object => {
+    if (!input) return {};
     if (
       Object.keys(input).some((key) => !["asc", "desc"].includes(input[key]))
     ) {
@@ -42,11 +50,9 @@ const Home = async ({
     }
     return input;
   };
-  console.log(validateSortObjectOrEmptyObject(sort));
-
   const games = await prisma.game.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
-    where: { status: { in: getFilterArray() } },
+    where: { status: { in: getFilterArray() as Status[] } },
   });
 
   return (

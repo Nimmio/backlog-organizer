@@ -23,7 +23,12 @@ export const columns: ColumnDef<Game>[] = [
   },
   {
     accessorKey: "platform",
-    header: "Platform",
+    header: () => (
+      <>
+        Platform
+        <SortIconButton type="letter" name="platform" />
+      </>
+    ),
   },
   {
     accessorKey: "status",
@@ -41,11 +46,21 @@ export const columns: ColumnDef<Game>[] = [
   },
   {
     accessorKey: "genre",
-    header: "Genre",
+    header: () => (
+      <>
+        Genre
+        <SortIconButton type="letter" name="genre" />
+      </>
+    ),
   },
   {
     accessorKey: "releaseDate",
-    header: "Release Date",
+    header: () => (
+      <>
+        Release Date
+        <SortIconButton type="number" name="releaseDate" />
+      </>
+    ),
     cell: ({ row }) => <>{format(row.getValue("releaseDate"), "PPP")}</>,
   },
   {
