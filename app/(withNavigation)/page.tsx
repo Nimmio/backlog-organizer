@@ -1,5 +1,6 @@
 import AddGameDialog from "@/components/addGameDialog/add-game-dialog";
 import GameTable from "@/components/gameTable/game-table";
+import SearchInput from "@/components/searchInput/searchInput";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
@@ -39,6 +40,12 @@ const Home = async ({
     key: "sort",
   })) as KeyStringObject;
 
+  const search = (await getValueFromSearchParamsOrNull({
+    searchParams: searchParams,
+    key: "gameSearch",
+  })) as string;
+  console.log(search);
+
   const validateSortObjectOrEmptyObject = (
     input: KeyStringObject | null
   ): object => {
@@ -50,17 +57,24 @@ const Home = async ({
     }
     return input;
   };
+
   const games = await prisma.game.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
-    where: { status: { in: getFilterArray() as Status[] } },
+    where: {
+      status: { in: getFilterArray() as Status[] },
+      name: { contains: search || "" },
+    },
   });
 
   return (
     <main>
       <AddGameDialog />
-      <Button asChild className="mb-4">
-        <Link href="?addGameDialogOpen=true">Add New Game</Link>
-      </Button>
+      <div className="flex">
+        <Button asChild className="mb-4">
+          <Link href="?addGameDialogOpen=true">Add New Game</Link>
+        </Button>
+        <SearchInput searchParamValue="gameSearch" />
+      </div>
       <GameTable games={games} />
     </main>
   );
