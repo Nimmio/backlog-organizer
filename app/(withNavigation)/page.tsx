@@ -4,10 +4,7 @@ import SearchInput from "@/components/searchInput/searchInput";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
-import {
-  getJsonParsedStringOrNull,
-  getValueFromSearchParamsOrNull,
-} from "@/lib/utils";
+import { getValueFromSearchParamsOrNull } from "@/lib/utils";
 import Link from "next/link";
 
 interface KeyStringObject {
@@ -44,7 +41,6 @@ const Home = async ({
     searchParams: searchParams,
     key: "gameSearch",
   })) as string;
-  console.log(search);
 
   const validateSortObjectOrEmptyObject = (
     input: KeyStringObject | null
