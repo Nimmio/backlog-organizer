@@ -1,3 +1,4 @@
+import BreadcrumbSetter from "@/components/layout/header/breadcrumbs/breadcrum-setter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -20,6 +21,13 @@ const View = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <main>
+      <BreadcrumbSetter
+        newBreadcrumbs={[
+          { title: "Games", href: "/" },
+          { title: "View" },
+          { title: game?.name || "" },
+        ]}
+      />
       {game && (
         <Card className="p-4">
           <DataList orientation="horizontal" className="gap-4">
