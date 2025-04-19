@@ -1,5 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import AppBreadcrumbs from "./breadcrumbs/app-breadcrumbs";
 
 interface AppHeaderProps {
   withSidebarTrigger?: boolean;
@@ -15,7 +16,9 @@ const AppHeader = (props: AppHeaderProps) => {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">Breadcrumbs</h1>
+        <h1 className="text-base font-medium">
+          <AppBreadcrumbs />
+        </h1>
       </div>
     </header>
   );

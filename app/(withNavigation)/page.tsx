@@ -1,5 +1,6 @@
 import AddGameDialog from "@/components/addGameDialog/add-game-dialog";
 import GameTable from "@/components/gameTable/game-table";
+import BreadcrumbSetter from "@/components/layout/header/breadcrumbs/breadcrum-setter";
 import SearchInput from "@/components/searchInput/searchInput";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
@@ -65,6 +66,7 @@ const Home = async ({
   return (
     <main>
       <AddGameDialog />
+      <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
       <div className="flex">
         <Button asChild className="mb-4">
           <Link href="?addGameDialogOpen=true">Add New Game</Link>
