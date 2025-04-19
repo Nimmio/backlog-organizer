@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import ConfirmPopover from "../confirmPopover/confirm-popover";
 import { deleteGame } from "@/app/actions";
 import { useRouter } from "next/navigation";
+import { Trash } from "lucide-react";
 
 interface DeleteGamePopoverProps {
   id: number;
@@ -23,7 +24,11 @@ const DeleteGamePopover = (props: DeleteGamePopoverProps) => {
 
   return (
     <ConfirmPopover
-      trigger={<Button variant="secondary">Delete Game</Button>}
+      trigger={
+        <Button variant="ghost" className="cursor-pointer">
+          <Trash />
+        </Button>
+      }
       isDescrutive
       confirmButtonText="Delete"
       description="Delete Game?"
