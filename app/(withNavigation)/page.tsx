@@ -7,6 +7,7 @@ import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 import { getValueFromSearchParamsOrNull } from "@/lib/utils";
 import Link from "next/link";
+import { getCurrentUserIdOrNull } from "../actions";
 
 interface KeyStringObject {
   [key: string]: any;
@@ -17,8 +18,6 @@ const Home = async ({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const sortString = (await searchParams).sort;
-
   const filter = await getValueFromSearchParamsOrNull({
     searchParams: searchParams,
     key: "filters",
@@ -54,12 +53,13 @@ const Home = async ({
     }
     return input;
   };
-
+  const currentUserId = getCurrentUserIdOrNull();
   const games = await prisma.game.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
     where: {
       status: { in: getFilterArray() as Status[] },
       name: { contains: search || "" },
+      userId: currentUserId,
     },
   });
 
