@@ -7,7 +7,6 @@ import { Edit, Eye, Funnel } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
 import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
-import { format } from "date-fns";
 import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
 import SortIconButton from "../sortIconButton/sort-icon-button";
 
@@ -61,7 +60,7 @@ export const columns: ColumnDef<Game>[] = [
         <SortIconButton type="number" name="releaseDate" />
       </>
     ),
-    cell: ({ row }) => <>{format(row.getValue("releaseDate"), "PPP")}</>,
+    cell: ({ row }) => <>{row.getValue("releaseDate")}</>,
   },
   {
     id: "actions",

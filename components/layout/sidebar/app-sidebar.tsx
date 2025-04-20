@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
+import SidebarUser from "./user/sidebar-user";
 
 export interface ISidebarLinks {
   groups: {
@@ -57,7 +58,9 @@ const AppSidebar = (props: AppSidebarProps) => {
         <SidebarGroup />
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarUser />
+      </SidebarFooter>
     </Sidebar>
   );
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { format } from "date-fns";
 import { CalendarIcon, X } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
@@ -61,7 +60,7 @@ const FormDatePicker = ({
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {field.value ? (
-                      format(field.value, "PPP")
+                      field.value.toDateString()
                     ) : (
                       <span>{placeholder}</span>
                     )}
