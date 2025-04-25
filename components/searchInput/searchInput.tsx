@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ComponentProps } from "react";
 import { Input } from "../ui/input";
 import { useDebounce } from "use-debounce";
 import { useQueryString } from "@/hooks/use-query-string,";
@@ -13,12 +13,17 @@ interface SearchInputProps {
   searchParamValue?: string;
 }
 
-const SearchInput = (props: SearchInputProps) => {
+interface Props
+  extends SearchInputProps,
+    Omit<ComponentProps<"input">, "onChange"> {}
+
+const SearchInput = (props: Props) => {
   const {
     placeholder = "Search",
     onChange,
     debounceTime = 500,
     searchParamValue,
+    className,
   } = props;
 
   const [searchInput, setSearchInput] = useState<string>("");
@@ -45,6 +50,7 @@ const SearchInput = (props: SearchInputProps) => {
 
   return (
     <Input
+      className={className}
       value={searchInput}
       onChange={(e) => setSearchInput(e.currentTarget.value)}
       placeholder={placeholder}

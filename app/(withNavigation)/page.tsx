@@ -5,9 +5,10 @@ import SearchInput from "@/components/searchInput/searchInput";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
-import { getValueFromSearchParamsOrNull } from "@/lib/utils";
+import { ensureString, getValueFromSearchParamsOrNull } from "@/lib/utils";
 import Link from "next/link";
 import { getCurrentUserIdOrNull } from "../actions";
+import { Plus } from "lucide-react";
 
 interface KeyStringObject {
   [key: string]: string;
@@ -37,10 +38,10 @@ const Home = async ({
     key: "sort",
   })) as KeyStringObject;
 
-  const search = (await getValueFromSearchParamsOrNull({
+  const search = await getValueFromSearchParamsOrNull({
     searchParams: searchParams,
     key: "gameSearch",
-  })) as string;
+  });
 
   const validateSortObjectOrEmptyObject = (
     input: KeyStringObject | null
@@ -58,7 +59,7 @@ const Home = async ({
     orderBy: validateSortObjectOrEmptyObject(sort),
     where: {
       status: { in: getFilterArray() as Status[] },
-      name: { contains: search || "" },
+      name: { contains: ensureString(search) || "" },
       userId: currentUserId || "",
     },
   });
@@ -67,11 +68,13 @@ const Home = async ({
     <main>
       <AddGameDialog />
       <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
-      <div className="flex">
-        <Button asChild className="mb-4">
-          <Link href="?addGameDialogOpen=true">Add New Game</Link>
+      <div className="flex mb-4 justify-between">
+        <Button asChild className="mr-4">
+          <Link href="?addGameDialogOpen=true">
+            <Plus />
+          </Link>
         </Button>
-        <SearchInput searchParamValue="gameSearch" />
+        <SearchInput searchParamValue="gameSearch" className="w-1/3" />
       </div>
       <GameTable games={games} />
     </main>
