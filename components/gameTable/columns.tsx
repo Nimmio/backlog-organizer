@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Edit, Eye, Funnel } from "lucide-react";
+import { Edit, Eye } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
 import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";

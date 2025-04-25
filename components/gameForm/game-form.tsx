@@ -13,7 +13,6 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { useRouter } from "next/navigation";
 import { Game } from "@/generated/prisma";
 import {
   Select,
@@ -22,10 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import FormDatePicker, {
-  DatePickerWithClear,
-  DatePickerWithClearFormItem,
-} from "../date-picker/date-picker";
+import FormDatePicker from "../date-picker/date-picker";
 import { Textarea } from "../ui/textarea";
 
 const formSchema = z.object({

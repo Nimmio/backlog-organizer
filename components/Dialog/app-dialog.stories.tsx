@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import AppDialog from "./app-dialog";
-import { ReactNode } from "react";
 
 const meta: Meta<typeof AppDialog> = {
   component: AppDialog,

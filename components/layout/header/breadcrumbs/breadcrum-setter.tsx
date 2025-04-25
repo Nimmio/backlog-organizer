@@ -13,7 +13,7 @@ const BreadcrumbSetter = (props: BreadcrumbSetterProps) => {
   const { breadcrumbs, setBreadcrumbs } = useBreadcrumStore((state) => state);
   useEffect(() => {
     if (breadcrumbs !== newBreadcrumbs) setBreadcrumbs(newBreadcrumbs);
-  }, [newBreadcrumbs]);
+  }, [newBreadcrumbs, breadcrumbs, setBreadcrumbs]);
 
   return <></>;
 };

@@ -11,7 +11,7 @@ export const stringIsJsonParsable = (input: string | null): boolean => {
   try {
     JSON.parse(input);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };
@@ -26,13 +26,9 @@ interface getValueFromSearchParamsOrNullProps {
   key: string;
 }
 
-interface KeyStringObject {
-  [key: string]: any;
-}
-
 export const getValueFromSearchParamsOrNull = async (
   props: getValueFromSearchParamsOrNullProps
-): Promise<string | string[] | KeyStringObject | null> => {
+): Promise<string | string[] | object | null> => {
   const { searchParams, key } = props;
   const stringValue = (await searchParams)[key];
   if (!stringValue) return null;

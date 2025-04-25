@@ -34,7 +34,14 @@ const SearchInput = (props: SearchInputProps) => {
       router.push(
         `${pathname}?${createQueryString(searchParamValue, debouncedValue)}`
       );
-  }, [debouncedValue]);
+  }, [
+    debouncedValue,
+    createQueryString,
+    onChange,
+    pathname,
+    router,
+    searchParamValue,
+  ]);
 
   return (
     <Input

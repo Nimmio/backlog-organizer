@@ -7,7 +7,7 @@ import {
   ArrowUp10,
   ArrowUpAz,
 } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { useQueryString } from "@/hooks/use-query-string,";
@@ -44,9 +44,6 @@ const SortIconButton = (props: SortIconButtonProps) => {
 
   const iconObject = icons[type];
   const [direction, setDirection] = useState<"" | "asc" | "desc">("");
-
-  const searchParams = useSearchParams();
-  const sortString = searchParams.get("sort");
 
   const createQueryString = useQueryString();
 

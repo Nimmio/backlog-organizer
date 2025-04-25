@@ -10,7 +10,7 @@ import Link from "next/link";
 import { getCurrentUserIdOrNull } from "../actions";
 
 interface KeyStringObject {
-  [key: string]: any;
+  [key: string]: string;
 }
 
 const Home = async ({
@@ -53,13 +53,13 @@ const Home = async ({
     }
     return input;
   };
-  const currentUserId = getCurrentUserIdOrNull();
+  const currentUserId = await getCurrentUserIdOrNull();
   const games = await prisma.game.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
     where: {
       status: { in: getFilterArray() as Status[] },
       name: { contains: search || "" },
-      userId: currentUserId,
+      userId: currentUserId || "",
     },
   });
 

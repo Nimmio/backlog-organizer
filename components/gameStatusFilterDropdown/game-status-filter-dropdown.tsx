@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import CheckboxDropdown from "../checkboxDropdown/checkbox-dropdown";
 import { Button } from "../ui/button";
-import { Funnel, ListFilter, ListFilterPlus } from "lucide-react";
+import { ListFilter, ListFilterPlus } from "lucide-react";
 import { useQueryString } from "@/hooks/use-query-string,";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { getJsonParsedStringOrNull, stringIsJsonParsable } from "@/lib/utils";
@@ -52,7 +52,7 @@ const GameStatusFilterDropdown = () => {
         setFilterActive(false);
       };
     }
-  }, [filters]);
+  }, [filters, createQueryString, pathname, router]);
 
   const handleElementClicked = (key: string) => {
     setFilters({
