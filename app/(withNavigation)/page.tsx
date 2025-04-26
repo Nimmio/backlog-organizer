@@ -7,8 +7,9 @@ import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 import { ensureString, getValueFromSearchParamsOrNull } from "@/lib/utils";
 import Link from "next/link";
-import { getCurrentUserIdOrNull } from "../actions";
+import { getCurrentUserId } from "../actions";
 import { Plus } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface KeyStringObject {
   [key: string]: string;
@@ -54,7 +55,7 @@ const Home = async ({
     }
     return input;
   };
-  const currentUserId = await getCurrentUserIdOrNull();
+  const currentUserId = await getCurrentUserId();
   const games = await prisma.game.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
     where: {
@@ -66,17 +67,19 @@ const Home = async ({
 
   return (
     <main>
-      <AddGameDialog />
-      <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
-      <div className="flex mb-4 justify-between">
-        <Button asChild className="mr-4">
-          <Link href="?addGameDialogOpen=true">
-            <Plus />
-          </Link>
-        </Button>
-        <SearchInput searchParamValue="gameSearch" className="w-1/3" />
-      </div>
-      <GameTable games={games} />
+      <Card className="p-4">
+        <AddGameDialog />
+        <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
+        <div className="flex mb-4 justify-between">
+          <Button asChild className="mr-4">
+            <Link href="?addGameDialogOpen=true">
+              <Plus />
+            </Link>
+          </Button>
+          <SearchInput searchParamValue="gameSearch" className="w-1/3" />
+        </div>
+        <GameTable games={games} />
+      </Card>
     </main>
   );
 };

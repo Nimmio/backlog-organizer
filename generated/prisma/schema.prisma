@@ -35,8 +35,21 @@ enum Status {
   DROPPED
 }
 
+model UserSettings {
+  id     Int    @id @default(autoincrement())
+  theme  Theme
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+}
+
+enum Theme {
+  LIGHT
+  DARK
+  SYSTEM
+}
+
 model User {
-  id            String    @id
+  id            String        @id
   name          String
   email         String
   emailVerified Boolean
@@ -46,6 +59,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   Game          Game[]
+  UserSettings  UserSettings?
 
   @@unique([email])
   @@map("user")

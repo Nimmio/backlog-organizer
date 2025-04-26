@@ -128,6 +128,12 @@ exports.Prisma.GameScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.UserSettingsScalarFieldEnum = {
+  id: 'id',
+  theme: 'theme',
+  userId: 'userId'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -197,8 +203,15 @@ exports.Status = exports.$Enums.Status = {
   DROPPED: 'DROPPED'
 };
 
+exports.Theme = exports.$Enums.Theme = {
+  LIGHT: 'LIGHT',
+  DARK: 'DARK',
+  SYSTEM: 'SYSTEM'
+};
+
 exports.Prisma.ModelName = {
   Game: 'Game',
+  UserSettings: 'UserSettings',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

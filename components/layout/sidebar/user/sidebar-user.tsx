@@ -26,6 +26,7 @@ import {
 import { useUserStore } from "@/providers/user-store-provider";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SidebarUser() {
   const { isMobile } = useSidebar();
@@ -89,9 +90,11 @@ export default function SidebarUser() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <UserCircleIcon />
-                    Account
+                  <DropdownMenuItem asChild>
+                    <Link href={"/user/settings"}>
+                      <UserCircleIcon />
+                      Account
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <BellIcon />

@@ -27,11 +27,7 @@ const DeleteGamePopover = (props: DeleteGamePopoverProps) => {
   return (
     <AppTooltip text="Delete">
       <ConfirmPopover
-        trigger={
-          <Button variant="ghost" className="cursor-pointer">
-            <Trash />
-          </Button>
-        }
+        trigger={<Trash />}
         isDescrutive
         confirmButtonText="Delete"
         description="Delete Game?"

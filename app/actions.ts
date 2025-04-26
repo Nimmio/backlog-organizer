@@ -12,7 +12,7 @@ interface createGameProps {
 }
 
 export const createGame = async (props: createGameProps): Promise<Game> => {
-  const userId = await getCurrentUserIdOrNull();
+  const userId = await getCurrentUserId();
   return await prisma.game.create({
     data: {
       ...props,
@@ -53,9 +53,9 @@ export const deleteGame = async (props: deleteGameProps): Promise<Game> => {
   return game;
 };
 
-export const getCurrentUserIdOrNull = async (): Promise<string | null> => {
+export const getCurrentUserId = async (): Promise<string> => {
   const sessionResponse = await auth.api.getSession({
     headers: await headers(),
   });
-  return sessionResponse?.user.id || null;
+  return sessionResponse?.user.id as string;
 };
