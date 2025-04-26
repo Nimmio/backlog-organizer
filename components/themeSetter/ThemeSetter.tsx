@@ -12,7 +12,8 @@ const ThemeSetter = () => {
   useEffect(() => {
     getUserTheme(userStore.user?.id as string).then((systemTheme) => {
       if (systemTheme && systemTheme.toLowerCase() !== theme) {
-        setTheme(systemTheme);
+        console.log("marko");
+        setTheme(systemTheme.toLowerCase());
       }
     });
   }, [theme]);
