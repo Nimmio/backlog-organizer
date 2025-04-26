@@ -6,6 +6,8 @@ import ConfirmPopover from "../confirmPopover/confirm-popover";
 import { deleteGame } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { Trash } from "lucide-react";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+import AppTooltip from "../tooltip/tooltip";
 
 interface DeleteGamePopoverProps {
   id: number;
@@ -23,17 +25,19 @@ const DeleteGamePopover = (props: DeleteGamePopoverProps) => {
   };
 
   return (
-    <ConfirmPopover
-      trigger={
-        <Button variant="ghost" className="cursor-pointer">
-          <Trash />
-        </Button>
-      }
-      isDescrutive
-      confirmButtonText="Delete"
-      description="Delete Game?"
-      onConfirm={handleDelete}
-    />
+    <AppTooltip text="Delete">
+      <ConfirmPopover
+        trigger={
+          <Button variant="ghost" className="cursor-pointer">
+            <Trash />
+          </Button>
+        }
+        isDescrutive
+        confirmButtonText="Delete"
+        description="Delete Game?"
+        onConfirm={handleDelete}
+      />
+    </AppTooltip>
   );
 };
 

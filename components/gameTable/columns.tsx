@@ -9,6 +9,7 @@ import { Game } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
 import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
 import SortIconButton from "../sortIconButton/sort-icon-button";
+import ColumnButton from "./columnButton";
 
 export const columns: ColumnDef<Game>[] = [
   {
@@ -69,16 +70,16 @@ export const columns: ColumnDef<Game>[] = [
 
       return (
         <>
-          <Button asChild variant="ghost">
-            <Link href={`view/${game.id}/`}>
-              <Eye />
-            </Link>
-          </Button>
-          <Button asChild variant="ghost">
-            <Link href={`edit/${game.id}/`}>
-              <Edit />
-            </Link>
-          </Button>
+          <ColumnButton
+            icon={<Eye />}
+            link={`view/${game.id}/`}
+            tooltip="View"
+          />
+          <ColumnButton
+            icon={<Edit />}
+            link={`edit/${game.id}/`}
+            tooltip="Edit"
+          />
           <DeleteGamePopover id={game.id} />
         </>
       );
