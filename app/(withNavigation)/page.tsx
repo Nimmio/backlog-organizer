@@ -67,7 +67,14 @@ const Home = async ({
     },
   });
 
-  console.log("auth", await searchGame("Claire Obscure"));
+  console.log(
+    "auth",
+    await searchGame({
+      input: "claire obscure",
+      fields: ["name"],
+      filterEditions: false,
+    })
+  );
 
   return (
     <main>
