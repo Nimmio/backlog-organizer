@@ -10,6 +10,8 @@ import Link from "next/link";
 import { getCurrentUserId } from "../actions";
 import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { getAuthentication } from "@/lib/igdb/auth";
+import { searchGame } from "@/lib/igdb/game";
 
 interface KeyStringObject {
   [key: string]: string;
@@ -64,6 +66,8 @@ const Home = async ({
       userId: currentUserId || "",
     },
   });
+
+  console.log("auth", await searchGame("Claire Obscure"));
 
   return (
     <main>

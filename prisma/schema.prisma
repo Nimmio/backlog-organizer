@@ -48,6 +48,13 @@ enum Theme {
   SYSTEM
 }
 
+model IGDBAuth {
+  id Int @id @default(autoincrement())
+  access_token String?
+  expires DateTime?
+  updatedAt DateTime
+}
+
 model User {
   id            String        @id
   name          String

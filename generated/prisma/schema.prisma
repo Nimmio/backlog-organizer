@@ -37,7 +37,7 @@ enum Status {
 
 model UserSettings {
   id     Int    @id @default(autoincrement())
-  theme  Theme
+  theme  Theme  @default(SYSTEM)
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
 }
@@ -46,6 +46,13 @@ enum Theme {
   LIGHT
   DARK
   SYSTEM
+}
+
+model IGDBAuth {
+  id           Int       @id @default(autoincrement())
+  access_token String?
+  expires      DateTime?
+  updatedAt    DateTime
 }
 
 model User {

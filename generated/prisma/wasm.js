@@ -134,6 +134,13 @@ exports.Prisma.UserSettingsScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.IGDBAuthScalarFieldEnum = {
+  id: 'id',
+  access_token: 'access_token',
+  expires: 'expires',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -212,6 +219,7 @@ exports.Theme = exports.$Enums.Theme = {
 exports.Prisma.ModelName = {
   Game: 'Game',
   UserSettings: 'UserSettings',
+  IGDBAuth: 'IGDBAuth',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

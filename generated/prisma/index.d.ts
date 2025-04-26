@@ -24,6 +24,11 @@ export type Game = $Result.DefaultSelection<Prisma.$GamePayload>
  */
 export type UserSettings = $Result.DefaultSelection<Prisma.$UserSettingsPayload>
 /**
+ * Model IGDBAuth
+ * 
+ */
+export type IGDBAuth = $Result.DefaultSelection<Prisma.$IGDBAuthPayload>
+/**
  * Model User
  * 
  */
@@ -222,6 +227,16 @@ export class PrismaClient<
     * ```
     */
   get userSettings(): Prisma.UserSettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.iGDBAuth`: Exposes CRUD operations for the **IGDBAuth** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IGDBAuths
+    * const iGDBAuths = await prisma.iGDBAuth.findMany()
+    * ```
+    */
+  get iGDBAuth(): Prisma.IGDBAuthDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -704,6 +719,7 @@ export namespace Prisma {
   export const ModelName: {
     Game: 'Game',
     UserSettings: 'UserSettings',
+    IGDBAuth: 'IGDBAuth',
     User: 'User',
     Session: 'Session',
     Account: 'Account',
@@ -726,7 +742,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "game" | "userSettings" | "user" | "session" | "account" | "verification"
+      modelProps: "game" | "userSettings" | "iGDBAuth" | "user" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -875,6 +891,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserSettingsCountArgs<ExtArgs>
             result: $Utils.Optional<UserSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
+      IGDBAuth: {
+        payload: Prisma.$IGDBAuthPayload<ExtArgs>
+        fields: Prisma.IGDBAuthFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IGDBAuthFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IGDBAuthFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          findFirst: {
+            args: Prisma.IGDBAuthFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IGDBAuthFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          findMany: {
+            args: Prisma.IGDBAuthFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>[]
+          }
+          create: {
+            args: Prisma.IGDBAuthCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          createMany: {
+            args: Prisma.IGDBAuthCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IGDBAuthCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>[]
+          }
+          delete: {
+            args: Prisma.IGDBAuthDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          update: {
+            args: Prisma.IGDBAuthUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          deleteMany: {
+            args: Prisma.IGDBAuthDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IGDBAuthUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IGDBAuthUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>[]
+          }
+          upsert: {
+            args: Prisma.IGDBAuthUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBAuthPayload>
+          }
+          aggregate: {
+            args: Prisma.IGDBAuthAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIGDBAuth>
+          }
+          groupBy: {
+            args: Prisma.IGDBAuthGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IGDBAuthGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IGDBAuthCountArgs<ExtArgs>
+            result: $Utils.Optional<IGDBAuthCountAggregateOutputType> | number
           }
         }
       }
@@ -1260,6 +1350,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     game?: GameOmit
     userSettings?: UserSettingsOmit
+    iGDBAuth?: IGDBAuthOmit
     user?: UserOmit
     session?: SessionOmit
     account?: AccountOmit
@@ -3600,6 +3691,1022 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IGDBAuth
+   */
+
+  export type AggregateIGDBAuth = {
+    _count: IGDBAuthCountAggregateOutputType | null
+    _avg: IGDBAuthAvgAggregateOutputType | null
+    _sum: IGDBAuthSumAggregateOutputType | null
+    _min: IGDBAuthMinAggregateOutputType | null
+    _max: IGDBAuthMaxAggregateOutputType | null
+  }
+
+  export type IGDBAuthAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IGDBAuthSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IGDBAuthMinAggregateOutputType = {
+    id: number | null
+    access_token: string | null
+    expires: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IGDBAuthMaxAggregateOutputType = {
+    id: number | null
+    access_token: string | null
+    expires: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IGDBAuthCountAggregateOutputType = {
+    id: number
+    access_token: number
+    expires: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IGDBAuthAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type IGDBAuthSumAggregateInputType = {
+    id?: true
+  }
+
+  export type IGDBAuthMinAggregateInputType = {
+    id?: true
+    access_token?: true
+    expires?: true
+    updatedAt?: true
+  }
+
+  export type IGDBAuthMaxAggregateInputType = {
+    id?: true
+    access_token?: true
+    expires?: true
+    updatedAt?: true
+  }
+
+  export type IGDBAuthCountAggregateInputType = {
+    id?: true
+    access_token?: true
+    expires?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IGDBAuthAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IGDBAuth to aggregate.
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBAuths to fetch.
+     */
+    orderBy?: IGDBAuthOrderByWithRelationInput | IGDBAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IGDBAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IGDBAuths
+    **/
+    _count?: true | IGDBAuthCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IGDBAuthAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IGDBAuthSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IGDBAuthMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IGDBAuthMaxAggregateInputType
+  }
+
+  export type GetIGDBAuthAggregateType<T extends IGDBAuthAggregateArgs> = {
+        [P in keyof T & keyof AggregateIGDBAuth]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIGDBAuth[P]>
+      : GetScalarType<T[P], AggregateIGDBAuth[P]>
+  }
+
+
+
+
+  export type IGDBAuthGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IGDBAuthWhereInput
+    orderBy?: IGDBAuthOrderByWithAggregationInput | IGDBAuthOrderByWithAggregationInput[]
+    by: IGDBAuthScalarFieldEnum[] | IGDBAuthScalarFieldEnum
+    having?: IGDBAuthScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IGDBAuthCountAggregateInputType | true
+    _avg?: IGDBAuthAvgAggregateInputType
+    _sum?: IGDBAuthSumAggregateInputType
+    _min?: IGDBAuthMinAggregateInputType
+    _max?: IGDBAuthMaxAggregateInputType
+  }
+
+  export type IGDBAuthGroupByOutputType = {
+    id: number
+    access_token: string | null
+    expires: Date | null
+    updatedAt: Date
+    _count: IGDBAuthCountAggregateOutputType | null
+    _avg: IGDBAuthAvgAggregateOutputType | null
+    _sum: IGDBAuthSumAggregateOutputType | null
+    _min: IGDBAuthMinAggregateOutputType | null
+    _max: IGDBAuthMaxAggregateOutputType | null
+  }
+
+  type GetIGDBAuthGroupByPayload<T extends IGDBAuthGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IGDBAuthGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IGDBAuthGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IGDBAuthGroupByOutputType[P]>
+            : GetScalarType<T[P], IGDBAuthGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IGDBAuthSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    access_token?: boolean
+    expires?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["iGDBAuth"]>
+
+  export type IGDBAuthSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    access_token?: boolean
+    expires?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["iGDBAuth"]>
+
+  export type IGDBAuthSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    access_token?: boolean
+    expires?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["iGDBAuth"]>
+
+  export type IGDBAuthSelectScalar = {
+    id?: boolean
+    access_token?: boolean
+    expires?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IGDBAuthOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "access_token" | "expires" | "updatedAt", ExtArgs["result"]["iGDBAuth"]>
+
+  export type $IGDBAuthPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IGDBAuth"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      access_token: string | null
+      expires: Date | null
+      updatedAt: Date
+    }, ExtArgs["result"]["iGDBAuth"]>
+    composites: {}
+  }
+
+  type IGDBAuthGetPayload<S extends boolean | null | undefined | IGDBAuthDefaultArgs> = $Result.GetResult<Prisma.$IGDBAuthPayload, S>
+
+  type IGDBAuthCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IGDBAuthFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IGDBAuthCountAggregateInputType | true
+    }
+
+  export interface IGDBAuthDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IGDBAuth'], meta: { name: 'IGDBAuth' } }
+    /**
+     * Find zero or one IGDBAuth that matches the filter.
+     * @param {IGDBAuthFindUniqueArgs} args - Arguments to find a IGDBAuth
+     * @example
+     * // Get one IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IGDBAuthFindUniqueArgs>(args: SelectSubset<T, IGDBAuthFindUniqueArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IGDBAuth that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IGDBAuthFindUniqueOrThrowArgs} args - Arguments to find a IGDBAuth
+     * @example
+     * // Get one IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IGDBAuthFindUniqueOrThrowArgs>(args: SelectSubset<T, IGDBAuthFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IGDBAuth that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthFindFirstArgs} args - Arguments to find a IGDBAuth
+     * @example
+     * // Get one IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IGDBAuthFindFirstArgs>(args?: SelectSubset<T, IGDBAuthFindFirstArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IGDBAuth that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthFindFirstOrThrowArgs} args - Arguments to find a IGDBAuth
+     * @example
+     * // Get one IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IGDBAuthFindFirstOrThrowArgs>(args?: SelectSubset<T, IGDBAuthFindFirstOrThrowArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IGDBAuths that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IGDBAuths
+     * const iGDBAuths = await prisma.iGDBAuth.findMany()
+     * 
+     * // Get first 10 IGDBAuths
+     * const iGDBAuths = await prisma.iGDBAuth.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const iGDBAuthWithIdOnly = await prisma.iGDBAuth.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IGDBAuthFindManyArgs>(args?: SelectSubset<T, IGDBAuthFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IGDBAuth.
+     * @param {IGDBAuthCreateArgs} args - Arguments to create a IGDBAuth.
+     * @example
+     * // Create one IGDBAuth
+     * const IGDBAuth = await prisma.iGDBAuth.create({
+     *   data: {
+     *     // ... data to create a IGDBAuth
+     *   }
+     * })
+     * 
+     */
+    create<T extends IGDBAuthCreateArgs>(args: SelectSubset<T, IGDBAuthCreateArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IGDBAuths.
+     * @param {IGDBAuthCreateManyArgs} args - Arguments to create many IGDBAuths.
+     * @example
+     * // Create many IGDBAuths
+     * const iGDBAuth = await prisma.iGDBAuth.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IGDBAuthCreateManyArgs>(args?: SelectSubset<T, IGDBAuthCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IGDBAuths and returns the data saved in the database.
+     * @param {IGDBAuthCreateManyAndReturnArgs} args - Arguments to create many IGDBAuths.
+     * @example
+     * // Create many IGDBAuths
+     * const iGDBAuth = await prisma.iGDBAuth.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IGDBAuths and only return the `id`
+     * const iGDBAuthWithIdOnly = await prisma.iGDBAuth.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IGDBAuthCreateManyAndReturnArgs>(args?: SelectSubset<T, IGDBAuthCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IGDBAuth.
+     * @param {IGDBAuthDeleteArgs} args - Arguments to delete one IGDBAuth.
+     * @example
+     * // Delete one IGDBAuth
+     * const IGDBAuth = await prisma.iGDBAuth.delete({
+     *   where: {
+     *     // ... filter to delete one IGDBAuth
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IGDBAuthDeleteArgs>(args: SelectSubset<T, IGDBAuthDeleteArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IGDBAuth.
+     * @param {IGDBAuthUpdateArgs} args - Arguments to update one IGDBAuth.
+     * @example
+     * // Update one IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IGDBAuthUpdateArgs>(args: SelectSubset<T, IGDBAuthUpdateArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IGDBAuths.
+     * @param {IGDBAuthDeleteManyArgs} args - Arguments to filter IGDBAuths to delete.
+     * @example
+     * // Delete a few IGDBAuths
+     * const { count } = await prisma.iGDBAuth.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IGDBAuthDeleteManyArgs>(args?: SelectSubset<T, IGDBAuthDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IGDBAuths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IGDBAuths
+     * const iGDBAuth = await prisma.iGDBAuth.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IGDBAuthUpdateManyArgs>(args: SelectSubset<T, IGDBAuthUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IGDBAuths and returns the data updated in the database.
+     * @param {IGDBAuthUpdateManyAndReturnArgs} args - Arguments to update many IGDBAuths.
+     * @example
+     * // Update many IGDBAuths
+     * const iGDBAuth = await prisma.iGDBAuth.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IGDBAuths and only return the `id`
+     * const iGDBAuthWithIdOnly = await prisma.iGDBAuth.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IGDBAuthUpdateManyAndReturnArgs>(args: SelectSubset<T, IGDBAuthUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IGDBAuth.
+     * @param {IGDBAuthUpsertArgs} args - Arguments to update or create a IGDBAuth.
+     * @example
+     * // Update or create a IGDBAuth
+     * const iGDBAuth = await prisma.iGDBAuth.upsert({
+     *   create: {
+     *     // ... data to create a IGDBAuth
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IGDBAuth we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IGDBAuthUpsertArgs>(args: SelectSubset<T, IGDBAuthUpsertArgs<ExtArgs>>): Prisma__IGDBAuthClient<$Result.GetResult<Prisma.$IGDBAuthPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IGDBAuths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthCountArgs} args - Arguments to filter IGDBAuths to count.
+     * @example
+     * // Count the number of IGDBAuths
+     * const count = await prisma.iGDBAuth.count({
+     *   where: {
+     *     // ... the filter for the IGDBAuths we want to count
+     *   }
+     * })
+    **/
+    count<T extends IGDBAuthCountArgs>(
+      args?: Subset<T, IGDBAuthCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IGDBAuthCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IGDBAuth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IGDBAuthAggregateArgs>(args: Subset<T, IGDBAuthAggregateArgs>): Prisma.PrismaPromise<GetIGDBAuthAggregateType<T>>
+
+    /**
+     * Group by IGDBAuth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBAuthGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IGDBAuthGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IGDBAuthGroupByArgs['orderBy'] }
+        : { orderBy?: IGDBAuthGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IGDBAuthGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIGDBAuthGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IGDBAuth model
+   */
+  readonly fields: IGDBAuthFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IGDBAuth.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IGDBAuthClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IGDBAuth model
+   */ 
+  interface IGDBAuthFieldRefs {
+    readonly id: FieldRef<"IGDBAuth", 'Int'>
+    readonly access_token: FieldRef<"IGDBAuth", 'String'>
+    readonly expires: FieldRef<"IGDBAuth", 'DateTime'>
+    readonly updatedAt: FieldRef<"IGDBAuth", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IGDBAuth findUnique
+   */
+  export type IGDBAuthFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBAuth to fetch.
+     */
+    where: IGDBAuthWhereUniqueInput
+  }
+
+  /**
+   * IGDBAuth findUniqueOrThrow
+   */
+  export type IGDBAuthFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBAuth to fetch.
+     */
+    where: IGDBAuthWhereUniqueInput
+  }
+
+  /**
+   * IGDBAuth findFirst
+   */
+  export type IGDBAuthFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBAuth to fetch.
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBAuths to fetch.
+     */
+    orderBy?: IGDBAuthOrderByWithRelationInput | IGDBAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IGDBAuths.
+     */
+    cursor?: IGDBAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IGDBAuths.
+     */
+    distinct?: IGDBAuthScalarFieldEnum | IGDBAuthScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBAuth findFirstOrThrow
+   */
+  export type IGDBAuthFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBAuth to fetch.
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBAuths to fetch.
+     */
+    orderBy?: IGDBAuthOrderByWithRelationInput | IGDBAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IGDBAuths.
+     */
+    cursor?: IGDBAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBAuths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IGDBAuths.
+     */
+    distinct?: IGDBAuthScalarFieldEnum | IGDBAuthScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBAuth findMany
+   */
+  export type IGDBAuthFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBAuths to fetch.
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBAuths to fetch.
+     */
+    orderBy?: IGDBAuthOrderByWithRelationInput | IGDBAuthOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IGDBAuths.
+     */
+    cursor?: IGDBAuthWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBAuths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBAuths.
+     */
+    skip?: number
+    distinct?: IGDBAuthScalarFieldEnum | IGDBAuthScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBAuth create
+   */
+  export type IGDBAuthCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * The data needed to create a IGDBAuth.
+     */
+    data: XOR<IGDBAuthCreateInput, IGDBAuthUncheckedCreateInput>
+  }
+
+  /**
+   * IGDBAuth createMany
+   */
+  export type IGDBAuthCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IGDBAuths.
+     */
+    data: IGDBAuthCreateManyInput | IGDBAuthCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IGDBAuth createManyAndReturn
+   */
+  export type IGDBAuthCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * The data used to create many IGDBAuths.
+     */
+    data: IGDBAuthCreateManyInput | IGDBAuthCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IGDBAuth update
+   */
+  export type IGDBAuthUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * The data needed to update a IGDBAuth.
+     */
+    data: XOR<IGDBAuthUpdateInput, IGDBAuthUncheckedUpdateInput>
+    /**
+     * Choose, which IGDBAuth to update.
+     */
+    where: IGDBAuthWhereUniqueInput
+  }
+
+  /**
+   * IGDBAuth updateMany
+   */
+  export type IGDBAuthUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IGDBAuths.
+     */
+    data: XOR<IGDBAuthUpdateManyMutationInput, IGDBAuthUncheckedUpdateManyInput>
+    /**
+     * Filter which IGDBAuths to update
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * Limit how many IGDBAuths to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBAuth updateManyAndReturn
+   */
+  export type IGDBAuthUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * The data used to update IGDBAuths.
+     */
+    data: XOR<IGDBAuthUpdateManyMutationInput, IGDBAuthUncheckedUpdateManyInput>
+    /**
+     * Filter which IGDBAuths to update
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * Limit how many IGDBAuths to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBAuth upsert
+   */
+  export type IGDBAuthUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * The filter to search for the IGDBAuth to update in case it exists.
+     */
+    where: IGDBAuthWhereUniqueInput
+    /**
+     * In case the IGDBAuth found by the `where` argument doesn't exist, create a new IGDBAuth with this data.
+     */
+    create: XOR<IGDBAuthCreateInput, IGDBAuthUncheckedCreateInput>
+    /**
+     * In case the IGDBAuth was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IGDBAuthUpdateInput, IGDBAuthUncheckedUpdateInput>
+  }
+
+  /**
+   * IGDBAuth delete
+   */
+  export type IGDBAuthDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
+    /**
+     * Filter which IGDBAuth to delete.
+     */
+    where: IGDBAuthWhereUniqueInput
+  }
+
+  /**
+   * IGDBAuth deleteMany
+   */
+  export type IGDBAuthDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IGDBAuths to delete
+     */
+    where?: IGDBAuthWhereInput
+    /**
+     * Limit how many IGDBAuths to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBAuth without action
+   */
+  export type IGDBAuthDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBAuth
+     */
+    select?: IGDBAuthSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBAuth
+     */
+    omit?: IGDBAuthOmit<ExtArgs> | null
   }
 
 
@@ -8082,6 +9189,16 @@ export namespace Prisma {
   export type UserSettingsScalarFieldEnum = (typeof UserSettingsScalarFieldEnum)[keyof typeof UserSettingsScalarFieldEnum]
 
 
+  export const IGDBAuthScalarFieldEnum: {
+    id: 'id',
+    access_token: 'access_token',
+    expires: 'expires',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IGDBAuthScalarFieldEnum = (typeof IGDBAuthScalarFieldEnum)[keyof typeof IGDBAuthScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -8380,6 +9497,55 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"UserSettings"> | number
     theme?: EnumThemeWithAggregatesFilter<"UserSettings"> | $Enums.Theme
     userId?: StringWithAggregatesFilter<"UserSettings"> | string
+  }
+
+  export type IGDBAuthWhereInput = {
+    AND?: IGDBAuthWhereInput | IGDBAuthWhereInput[]
+    OR?: IGDBAuthWhereInput[]
+    NOT?: IGDBAuthWhereInput | IGDBAuthWhereInput[]
+    id?: IntFilter<"IGDBAuth"> | number
+    access_token?: StringNullableFilter<"IGDBAuth"> | string | null
+    expires?: DateTimeNullableFilter<"IGDBAuth"> | Date | string | null
+    updatedAt?: DateTimeFilter<"IGDBAuth"> | Date | string
+  }
+
+  export type IGDBAuthOrderByWithRelationInput = {
+    id?: SortOrder
+    access_token?: SortOrderInput | SortOrder
+    expires?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IGDBAuthWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: IGDBAuthWhereInput | IGDBAuthWhereInput[]
+    OR?: IGDBAuthWhereInput[]
+    NOT?: IGDBAuthWhereInput | IGDBAuthWhereInput[]
+    access_token?: StringNullableFilter<"IGDBAuth"> | string | null
+    expires?: DateTimeNullableFilter<"IGDBAuth"> | Date | string | null
+    updatedAt?: DateTimeFilter<"IGDBAuth"> | Date | string
+  }, "id">
+
+  export type IGDBAuthOrderByWithAggregationInput = {
+    id?: SortOrder
+    access_token?: SortOrderInput | SortOrder
+    expires?: SortOrderInput | SortOrder
+    updatedAt?: SortOrder
+    _count?: IGDBAuthCountOrderByAggregateInput
+    _avg?: IGDBAuthAvgOrderByAggregateInput
+    _max?: IGDBAuthMaxOrderByAggregateInput
+    _min?: IGDBAuthMinOrderByAggregateInput
+    _sum?: IGDBAuthSumOrderByAggregateInput
+  }
+
+  export type IGDBAuthScalarWhereWithAggregatesInput = {
+    AND?: IGDBAuthScalarWhereWithAggregatesInput | IGDBAuthScalarWhereWithAggregatesInput[]
+    OR?: IGDBAuthScalarWhereWithAggregatesInput[]
+    NOT?: IGDBAuthScalarWhereWithAggregatesInput | IGDBAuthScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"IGDBAuth"> | number
+    access_token?: StringNullableWithAggregatesFilter<"IGDBAuth"> | string | null
+    expires?: DateTimeNullableWithAggregatesFilter<"IGDBAuth"> | Date | string | null
+    updatedAt?: DateTimeWithAggregatesFilter<"IGDBAuth"> | Date | string
   }
 
   export type UserWhereInput = {
@@ -8752,13 +9918,13 @@ export namespace Prisma {
   }
 
   export type UserSettingsCreateInput = {
-    theme: $Enums.Theme
+    theme?: $Enums.Theme
     user: UserCreateNestedOneWithoutUserSettingsInput
   }
 
   export type UserSettingsUncheckedCreateInput = {
     id?: number
-    theme: $Enums.Theme
+    theme?: $Enums.Theme
     userId: string
   }
 
@@ -8775,7 +9941,7 @@ export namespace Prisma {
 
   export type UserSettingsCreateManyInput = {
     id?: number
-    theme: $Enums.Theme
+    theme?: $Enums.Theme
     userId: string
   }
 
@@ -8787,6 +9953,52 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     theme?: EnumThemeFieldUpdateOperationsInput | $Enums.Theme
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IGDBAuthCreateInput = {
+    access_token?: string | null
+    expires?: Date | string | null
+    updatedAt: Date | string
+  }
+
+  export type IGDBAuthUncheckedCreateInput = {
+    id?: number
+    access_token?: string | null
+    expires?: Date | string | null
+    updatedAt: Date | string
+  }
+
+  export type IGDBAuthUpdateInput = {
+    access_token?: NullableStringFieldUpdateOperationsInput | string | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IGDBAuthUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    access_token?: NullableStringFieldUpdateOperationsInput | string | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IGDBAuthCreateManyInput = {
+    id?: number
+    access_token?: string | null
+    expires?: Date | string | null
+    updatedAt: Date | string
+  }
+
+  export type IGDBAuthUpdateManyMutationInput = {
+    access_token?: NullableStringFieldUpdateOperationsInput | string | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IGDBAuthUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    access_token?: NullableStringFieldUpdateOperationsInput | string | null
+    expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateInput = {
@@ -9354,11 +10566,6 @@ export namespace Prisma {
     _max?: NestedEnumThemeFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9368,6 +10575,54 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type IGDBAuthCountOrderByAggregateInput = {
+    id?: SortOrder
+    access_token?: SortOrder
+    expires?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IGDBAuthAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IGDBAuthMaxOrderByAggregateInput = {
+    id?: SortOrder
+    access_token?: SortOrder
+    expires?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IGDBAuthMinOrderByAggregateInput = {
+    id?: SortOrder
+    access_token?: SortOrder
+    expires?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IGDBAuthSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type SessionListRelationFilter = {
@@ -9441,20 +10696,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -9621,6 +10862,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserSettingsInput, UserUpdateWithoutUserSettingsInput>, UserUncheckedUpdateWithoutUserSettingsInput>
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -9677,10 +10922,6 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type SessionUpdateManyWithoutUserNestedInput = {
@@ -9985,11 +11226,6 @@ export namespace Prisma {
     _max?: NestedEnumThemeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9999,14 +11235,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10021,6 +11249,19 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutGameInput = {
@@ -10259,12 +11500,12 @@ export namespace Prisma {
   }
 
   export type UserSettingsCreateWithoutUserInput = {
-    theme: $Enums.Theme
+    theme?: $Enums.Theme
   }
 
   export type UserSettingsUncheckedCreateWithoutUserInput = {
     id?: number
-    theme: $Enums.Theme
+    theme?: $Enums.Theme
   }
 
   export type UserSettingsCreateOrConnectWithoutUserInput = {
