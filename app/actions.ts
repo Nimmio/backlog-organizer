@@ -74,11 +74,12 @@ export const searchGame = async (params: searchGameParams) => {
 
   const filter = filterEditions ? ["version_parent = null"] : undefined;
   const response = await queryBuilder({
-    access_token,
+    access_token: access_token || undefined,
     requestUrl: RequestUrls.game,
     search: search,
     fields: fields,
     where: filter,
   });
+
   return response.data;
 };

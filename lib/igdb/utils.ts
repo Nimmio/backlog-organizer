@@ -1,4 +1,3 @@
-import { unknown } from "zod";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
 import apicalyspe from "apicalypse";
@@ -7,6 +6,7 @@ export const RequestUrls: {
   [key: string]: string;
 } = {
   game: "https://api.igdb.com/v4/games",
+  release_date: "https://api.igdb.com/v4/release_dates",
 };
 
 export const getRequestOptions = (access_token: string) => {
@@ -59,7 +59,7 @@ const getRequesQuery = (query, requestUrl) => {
 };
 
 interface queryBuilderParams {
-  access_token: string;
+  access_token?: string;
   fields?: string | string[];
   limit?: number;
   search?: string;
