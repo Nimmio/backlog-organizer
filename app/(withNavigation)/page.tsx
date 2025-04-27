@@ -11,6 +11,7 @@ import { getCurrentUserId } from "../actions";
 import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { searchGame } from "@/lib/igdb/game";
+import IgdbGameDialog from "@/components/igdbGameDialog/igdb-game-dialog";
 
 interface KeyStringObject {
   [key: string]: string;
@@ -69,6 +70,7 @@ const Home = async ({
     <main>
       <Card className="p-4">
         <AddGameDialog />
+        <IgdbGameDialog />
         <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
         <div className="flex mb-4 justify-between">
           <Button asChild className="mr-4">

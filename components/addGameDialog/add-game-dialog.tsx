@@ -12,7 +12,7 @@ const AddGameDialog = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const addGameDialogOpen = searchParams.get("addGameDialogOpen") === "true";
+  //const addGameDialogOpen = searchParams.get("addGameDialogOpen") === "true";
   const createQueryString = useQueryString();
 
   const handleSubmit = (values: Omit<Game, "id">) => {
@@ -27,7 +27,7 @@ const AddGameDialog = () => {
       title="Add Game"
       description="Add a new Game to the Backlog"
       content={content}
-      open={addGameDialogOpen}
+      // open={addGameDialogOpen}
       onOpenChange={(open) =>
         router.push(
           `${pathname}?${createQueryString(

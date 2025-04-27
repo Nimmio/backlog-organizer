@@ -2,6 +2,8 @@
 
 import { auth } from "@/auth";
 import { Game } from "@/generated/prisma";
+import { getAuthentication } from "@/lib/igdb/auth";
+import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -58,4 +60,25 @@ export const getCurrentUserId = async (): Promise<string> => {
     headers: await headers(),
   });
   return sessionResponse?.user.id as string;
+};
+
+interface searchGameParams {
+  search: string;
+  fields: GameField[];
+  filterEditions?: boolean;
+}
+
+export const searchGame = async (params: searchGameParams) => {
+  const { search, fields, filterEditions = false } = params;
+  const { access_token } = await getAuthentication();
+
+  const filter = filterEditions ? ["version_parent = null"] : undefined;
+  const response = await queryBuilder({
+    access_token,
+    requestUrl: RequestUrls.game,
+    search: search,
+    fields: fields,
+    where: filter,
+  });
+  return response.data;
 };
