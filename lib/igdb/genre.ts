@@ -43,7 +43,7 @@ const getFromExternal = async (ids: number[]): Promise<Genre[]> => {
     where: `id =${getIdString(ids)}`,
   });
   const data = response.data;
-  return data.map((entry) => ({
+  return data.map((entry: ExternalGenre) => ({
     ...entry,
     created_at: fromUnixTime(entry.created_at),
     updated_at: fromUnixTime(entry.updated_at),

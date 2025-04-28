@@ -9,6 +9,9 @@ import { getGameDetails, searchGame } from "@/app/actions";
 import { number } from "zod";
 import { format, fromUnixTime } from "date-fns";
 import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+import { Badge } from "../ui/badge";
+import { Genre } from "@/generated/prisma";
 
 interface Game {
   id: number;
@@ -133,7 +136,20 @@ const IgdbGameDialog = () => {
       </div>
       <div>
         Genres:
-        {gameDetails?.genres}
+        {gameDetails?.genres.length ? (
+          <div className="flex">
+            {gameDetails.genres.map((genre: Genre) => (
+              <Badge key={genre.id} className="mr-2">
+                {genre.name}
+              </Badge>
+            ))}
+          </div>
+        ) : (
+          <>
+            ^^
+            <Skeleton />
+          </>
+        )}
       </div>
     </>
   );

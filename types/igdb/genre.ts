@@ -15,3 +15,8 @@ interface Genre {
   updated_at: Date;
   url: string;
 }
+
+interface ExternalGenre extends Omit<Genre, "created_at" | "updated_at"> {
+  created_at: number;
+  updated_at: number;
+}

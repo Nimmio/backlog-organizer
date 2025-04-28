@@ -100,7 +100,7 @@ export const getGameDetails = async (id: number) => {
 
   const genres = await getGenresForIds(data.genres);
   return {
-    genres: genres.map((genre) => genre.name),
+    genres: genres,
   };
 };
 
