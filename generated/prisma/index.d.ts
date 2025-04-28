@@ -29,6 +29,11 @@ export type UserSettings = $Result.DefaultSelection<Prisma.$UserSettingsPayload>
  */
 export type IGDBAuth = $Result.DefaultSelection<Prisma.$IGDBAuthPayload>
 /**
+ * Model IGDBGenreCache
+ * 
+ */
+export type IGDBGenreCache = $Result.DefaultSelection<Prisma.$IGDBGenreCachePayload>
+/**
  * Model User
  * 
  */
@@ -237,6 +242,16 @@ export class PrismaClient<
     * ```
     */
   get iGDBAuth(): Prisma.IGDBAuthDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.iGDBGenreCache`: Exposes CRUD operations for the **IGDBGenreCache** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more IGDBGenreCaches
+    * const iGDBGenreCaches = await prisma.iGDBGenreCache.findMany()
+    * ```
+    */
+  get iGDBGenreCache(): Prisma.IGDBGenreCacheDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -720,6 +735,7 @@ export namespace Prisma {
     Game: 'Game',
     UserSettings: 'UserSettings',
     IGDBAuth: 'IGDBAuth',
+    IGDBGenreCache: 'IGDBGenreCache',
     User: 'User',
     Session: 'Session',
     Account: 'Account',
@@ -742,7 +758,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "game" | "userSettings" | "iGDBAuth" | "user" | "session" | "account" | "verification"
+      modelProps: "game" | "userSettings" | "iGDBAuth" | "iGDBGenreCache" | "user" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -965,6 +981,80 @@ export namespace Prisma {
           count: {
             args: Prisma.IGDBAuthCountArgs<ExtArgs>
             result: $Utils.Optional<IGDBAuthCountAggregateOutputType> | number
+          }
+        }
+      }
+      IGDBGenreCache: {
+        payload: Prisma.$IGDBGenreCachePayload<ExtArgs>
+        fields: Prisma.IGDBGenreCacheFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IGDBGenreCacheFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IGDBGenreCacheFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          findFirst: {
+            args: Prisma.IGDBGenreCacheFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IGDBGenreCacheFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          findMany: {
+            args: Prisma.IGDBGenreCacheFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>[]
+          }
+          create: {
+            args: Prisma.IGDBGenreCacheCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          createMany: {
+            args: Prisma.IGDBGenreCacheCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.IGDBGenreCacheCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>[]
+          }
+          delete: {
+            args: Prisma.IGDBGenreCacheDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          update: {
+            args: Prisma.IGDBGenreCacheUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          deleteMany: {
+            args: Prisma.IGDBGenreCacheDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IGDBGenreCacheUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.IGDBGenreCacheUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>[]
+          }
+          upsert: {
+            args: Prisma.IGDBGenreCacheUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IGDBGenreCachePayload>
+          }
+          aggregate: {
+            args: Prisma.IGDBGenreCacheAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIGDBGenreCache>
+          }
+          groupBy: {
+            args: Prisma.IGDBGenreCacheGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IGDBGenreCacheGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IGDBGenreCacheCountArgs<ExtArgs>
+            result: $Utils.Optional<IGDBGenreCacheCountAggregateOutputType> | number
           }
         }
       }
@@ -1351,6 +1441,7 @@ export namespace Prisma {
     game?: GameOmit
     userSettings?: UserSettingsOmit
     iGDBAuth?: IGDBAuthOmit
+    iGDBGenreCache?: IGDBGenreCacheOmit
     user?: UserOmit
     session?: SessionOmit
     account?: AccountOmit
@@ -4707,6 +4798,1061 @@ export namespace Prisma {
      * Omit specific fields from the IGDBAuth
      */
     omit?: IGDBAuthOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model IGDBGenreCache
+   */
+
+  export type AggregateIGDBGenreCache = {
+    _count: IGDBGenreCacheCountAggregateOutputType | null
+    _avg: IGDBGenreCacheAvgAggregateOutputType | null
+    _sum: IGDBGenreCacheSumAggregateOutputType | null
+    _min: IGDBGenreCacheMinAggregateOutputType | null
+    _max: IGDBGenreCacheMaxAggregateOutputType | null
+  }
+
+  export type IGDBGenreCacheAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IGDBGenreCacheSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IGDBGenreCacheMinAggregateOutputType = {
+    id: number | null
+    checksum: string | null
+    created_at: Date | null
+    name: string | null
+    slug: string | null
+    updated_at: Date | null
+    url: string | null
+  }
+
+  export type IGDBGenreCacheMaxAggregateOutputType = {
+    id: number | null
+    checksum: string | null
+    created_at: Date | null
+    name: string | null
+    slug: string | null
+    updated_at: Date | null
+    url: string | null
+  }
+
+  export type IGDBGenreCacheCountAggregateOutputType = {
+    id: number
+    checksum: number
+    created_at: number
+    name: number
+    slug: number
+    updated_at: number
+    url: number
+    _all: number
+  }
+
+
+  export type IGDBGenreCacheAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type IGDBGenreCacheSumAggregateInputType = {
+    id?: true
+  }
+
+  export type IGDBGenreCacheMinAggregateInputType = {
+    id?: true
+    checksum?: true
+    created_at?: true
+    name?: true
+    slug?: true
+    updated_at?: true
+    url?: true
+  }
+
+  export type IGDBGenreCacheMaxAggregateInputType = {
+    id?: true
+    checksum?: true
+    created_at?: true
+    name?: true
+    slug?: true
+    updated_at?: true
+    url?: true
+  }
+
+  export type IGDBGenreCacheCountAggregateInputType = {
+    id?: true
+    checksum?: true
+    created_at?: true
+    name?: true
+    slug?: true
+    updated_at?: true
+    url?: true
+    _all?: true
+  }
+
+  export type IGDBGenreCacheAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IGDBGenreCache to aggregate.
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBGenreCaches to fetch.
+     */
+    orderBy?: IGDBGenreCacheOrderByWithRelationInput | IGDBGenreCacheOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IGDBGenreCacheWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBGenreCaches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBGenreCaches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned IGDBGenreCaches
+    **/
+    _count?: true | IGDBGenreCacheCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IGDBGenreCacheAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IGDBGenreCacheSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IGDBGenreCacheMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IGDBGenreCacheMaxAggregateInputType
+  }
+
+  export type GetIGDBGenreCacheAggregateType<T extends IGDBGenreCacheAggregateArgs> = {
+        [P in keyof T & keyof AggregateIGDBGenreCache]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIGDBGenreCache[P]>
+      : GetScalarType<T[P], AggregateIGDBGenreCache[P]>
+  }
+
+
+
+
+  export type IGDBGenreCacheGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IGDBGenreCacheWhereInput
+    orderBy?: IGDBGenreCacheOrderByWithAggregationInput | IGDBGenreCacheOrderByWithAggregationInput[]
+    by: IGDBGenreCacheScalarFieldEnum[] | IGDBGenreCacheScalarFieldEnum
+    having?: IGDBGenreCacheScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IGDBGenreCacheCountAggregateInputType | true
+    _avg?: IGDBGenreCacheAvgAggregateInputType
+    _sum?: IGDBGenreCacheSumAggregateInputType
+    _min?: IGDBGenreCacheMinAggregateInputType
+    _max?: IGDBGenreCacheMaxAggregateInputType
+  }
+
+  export type IGDBGenreCacheGroupByOutputType = {
+    id: number
+    checksum: string
+    created_at: Date
+    name: string
+    slug: string
+    updated_at: Date
+    url: string
+    _count: IGDBGenreCacheCountAggregateOutputType | null
+    _avg: IGDBGenreCacheAvgAggregateOutputType | null
+    _sum: IGDBGenreCacheSumAggregateOutputType | null
+    _min: IGDBGenreCacheMinAggregateOutputType | null
+    _max: IGDBGenreCacheMaxAggregateOutputType | null
+  }
+
+  type GetIGDBGenreCacheGroupByPayload<T extends IGDBGenreCacheGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IGDBGenreCacheGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IGDBGenreCacheGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IGDBGenreCacheGroupByOutputType[P]>
+            : GetScalarType<T[P], IGDBGenreCacheGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IGDBGenreCacheSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    name?: boolean
+    slug?: boolean
+    updated_at?: boolean
+    url?: boolean
+  }, ExtArgs["result"]["iGDBGenreCache"]>
+
+  export type IGDBGenreCacheSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    name?: boolean
+    slug?: boolean
+    updated_at?: boolean
+    url?: boolean
+  }, ExtArgs["result"]["iGDBGenreCache"]>
+
+  export type IGDBGenreCacheSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    name?: boolean
+    slug?: boolean
+    updated_at?: boolean
+    url?: boolean
+  }, ExtArgs["result"]["iGDBGenreCache"]>
+
+  export type IGDBGenreCacheSelectScalar = {
+    id?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    name?: boolean
+    slug?: boolean
+    updated_at?: boolean
+    url?: boolean
+  }
+
+  export type IGDBGenreCacheOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "checksum" | "created_at" | "name" | "slug" | "updated_at" | "url", ExtArgs["result"]["iGDBGenreCache"]>
+
+  export type $IGDBGenreCachePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IGDBGenreCache"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      checksum: string
+      created_at: Date
+      name: string
+      slug: string
+      updated_at: Date
+      url: string
+    }, ExtArgs["result"]["iGDBGenreCache"]>
+    composites: {}
+  }
+
+  type IGDBGenreCacheGetPayload<S extends boolean | null | undefined | IGDBGenreCacheDefaultArgs> = $Result.GetResult<Prisma.$IGDBGenreCachePayload, S>
+
+  type IGDBGenreCacheCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IGDBGenreCacheFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IGDBGenreCacheCountAggregateInputType | true
+    }
+
+  export interface IGDBGenreCacheDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IGDBGenreCache'], meta: { name: 'IGDBGenreCache' } }
+    /**
+     * Find zero or one IGDBGenreCache that matches the filter.
+     * @param {IGDBGenreCacheFindUniqueArgs} args - Arguments to find a IGDBGenreCache
+     * @example
+     * // Get one IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IGDBGenreCacheFindUniqueArgs>(args: SelectSubset<T, IGDBGenreCacheFindUniqueArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one IGDBGenreCache that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IGDBGenreCacheFindUniqueOrThrowArgs} args - Arguments to find a IGDBGenreCache
+     * @example
+     * // Get one IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IGDBGenreCacheFindUniqueOrThrowArgs>(args: SelectSubset<T, IGDBGenreCacheFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IGDBGenreCache that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheFindFirstArgs} args - Arguments to find a IGDBGenreCache
+     * @example
+     * // Get one IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IGDBGenreCacheFindFirstArgs>(args?: SelectSubset<T, IGDBGenreCacheFindFirstArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first IGDBGenreCache that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheFindFirstOrThrowArgs} args - Arguments to find a IGDBGenreCache
+     * @example
+     * // Get one IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IGDBGenreCacheFindFirstOrThrowArgs>(args?: SelectSubset<T, IGDBGenreCacheFindFirstOrThrowArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more IGDBGenreCaches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all IGDBGenreCaches
+     * const iGDBGenreCaches = await prisma.iGDBGenreCache.findMany()
+     * 
+     * // Get first 10 IGDBGenreCaches
+     * const iGDBGenreCaches = await prisma.iGDBGenreCache.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const iGDBGenreCacheWithIdOnly = await prisma.iGDBGenreCache.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IGDBGenreCacheFindManyArgs>(args?: SelectSubset<T, IGDBGenreCacheFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a IGDBGenreCache.
+     * @param {IGDBGenreCacheCreateArgs} args - Arguments to create a IGDBGenreCache.
+     * @example
+     * // Create one IGDBGenreCache
+     * const IGDBGenreCache = await prisma.iGDBGenreCache.create({
+     *   data: {
+     *     // ... data to create a IGDBGenreCache
+     *   }
+     * })
+     * 
+     */
+    create<T extends IGDBGenreCacheCreateArgs>(args: SelectSubset<T, IGDBGenreCacheCreateArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many IGDBGenreCaches.
+     * @param {IGDBGenreCacheCreateManyArgs} args - Arguments to create many IGDBGenreCaches.
+     * @example
+     * // Create many IGDBGenreCaches
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IGDBGenreCacheCreateManyArgs>(args?: SelectSubset<T, IGDBGenreCacheCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many IGDBGenreCaches and returns the data saved in the database.
+     * @param {IGDBGenreCacheCreateManyAndReturnArgs} args - Arguments to create many IGDBGenreCaches.
+     * @example
+     * // Create many IGDBGenreCaches
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many IGDBGenreCaches and only return the `id`
+     * const iGDBGenreCacheWithIdOnly = await prisma.iGDBGenreCache.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends IGDBGenreCacheCreateManyAndReturnArgs>(args?: SelectSubset<T, IGDBGenreCacheCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a IGDBGenreCache.
+     * @param {IGDBGenreCacheDeleteArgs} args - Arguments to delete one IGDBGenreCache.
+     * @example
+     * // Delete one IGDBGenreCache
+     * const IGDBGenreCache = await prisma.iGDBGenreCache.delete({
+     *   where: {
+     *     // ... filter to delete one IGDBGenreCache
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IGDBGenreCacheDeleteArgs>(args: SelectSubset<T, IGDBGenreCacheDeleteArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one IGDBGenreCache.
+     * @param {IGDBGenreCacheUpdateArgs} args - Arguments to update one IGDBGenreCache.
+     * @example
+     * // Update one IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IGDBGenreCacheUpdateArgs>(args: SelectSubset<T, IGDBGenreCacheUpdateArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more IGDBGenreCaches.
+     * @param {IGDBGenreCacheDeleteManyArgs} args - Arguments to filter IGDBGenreCaches to delete.
+     * @example
+     * // Delete a few IGDBGenreCaches
+     * const { count } = await prisma.iGDBGenreCache.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IGDBGenreCacheDeleteManyArgs>(args?: SelectSubset<T, IGDBGenreCacheDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IGDBGenreCaches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many IGDBGenreCaches
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IGDBGenreCacheUpdateManyArgs>(args: SelectSubset<T, IGDBGenreCacheUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more IGDBGenreCaches and returns the data updated in the database.
+     * @param {IGDBGenreCacheUpdateManyAndReturnArgs} args - Arguments to update many IGDBGenreCaches.
+     * @example
+     * // Update many IGDBGenreCaches
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more IGDBGenreCaches and only return the `id`
+     * const iGDBGenreCacheWithIdOnly = await prisma.iGDBGenreCache.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends IGDBGenreCacheUpdateManyAndReturnArgs>(args: SelectSubset<T, IGDBGenreCacheUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one IGDBGenreCache.
+     * @param {IGDBGenreCacheUpsertArgs} args - Arguments to update or create a IGDBGenreCache.
+     * @example
+     * // Update or create a IGDBGenreCache
+     * const iGDBGenreCache = await prisma.iGDBGenreCache.upsert({
+     *   create: {
+     *     // ... data to create a IGDBGenreCache
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the IGDBGenreCache we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IGDBGenreCacheUpsertArgs>(args: SelectSubset<T, IGDBGenreCacheUpsertArgs<ExtArgs>>): Prisma__IGDBGenreCacheClient<$Result.GetResult<Prisma.$IGDBGenreCachePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of IGDBGenreCaches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheCountArgs} args - Arguments to filter IGDBGenreCaches to count.
+     * @example
+     * // Count the number of IGDBGenreCaches
+     * const count = await prisma.iGDBGenreCache.count({
+     *   where: {
+     *     // ... the filter for the IGDBGenreCaches we want to count
+     *   }
+     * })
+    **/
+    count<T extends IGDBGenreCacheCountArgs>(
+      args?: Subset<T, IGDBGenreCacheCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IGDBGenreCacheCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a IGDBGenreCache.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IGDBGenreCacheAggregateArgs>(args: Subset<T, IGDBGenreCacheAggregateArgs>): Prisma.PrismaPromise<GetIGDBGenreCacheAggregateType<T>>
+
+    /**
+     * Group by IGDBGenreCache.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IGDBGenreCacheGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IGDBGenreCacheGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IGDBGenreCacheGroupByArgs['orderBy'] }
+        : { orderBy?: IGDBGenreCacheGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IGDBGenreCacheGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIGDBGenreCacheGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the IGDBGenreCache model
+   */
+  readonly fields: IGDBGenreCacheFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for IGDBGenreCache.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IGDBGenreCacheClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the IGDBGenreCache model
+   */ 
+  interface IGDBGenreCacheFieldRefs {
+    readonly id: FieldRef<"IGDBGenreCache", 'Int'>
+    readonly checksum: FieldRef<"IGDBGenreCache", 'String'>
+    readonly created_at: FieldRef<"IGDBGenreCache", 'DateTime'>
+    readonly name: FieldRef<"IGDBGenreCache", 'String'>
+    readonly slug: FieldRef<"IGDBGenreCache", 'String'>
+    readonly updated_at: FieldRef<"IGDBGenreCache", 'DateTime'>
+    readonly url: FieldRef<"IGDBGenreCache", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * IGDBGenreCache findUnique
+   */
+  export type IGDBGenreCacheFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBGenreCache to fetch.
+     */
+    where: IGDBGenreCacheWhereUniqueInput
+  }
+
+  /**
+   * IGDBGenreCache findUniqueOrThrow
+   */
+  export type IGDBGenreCacheFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBGenreCache to fetch.
+     */
+    where: IGDBGenreCacheWhereUniqueInput
+  }
+
+  /**
+   * IGDBGenreCache findFirst
+   */
+  export type IGDBGenreCacheFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBGenreCache to fetch.
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBGenreCaches to fetch.
+     */
+    orderBy?: IGDBGenreCacheOrderByWithRelationInput | IGDBGenreCacheOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IGDBGenreCaches.
+     */
+    cursor?: IGDBGenreCacheWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBGenreCaches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBGenreCaches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IGDBGenreCaches.
+     */
+    distinct?: IGDBGenreCacheScalarFieldEnum | IGDBGenreCacheScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBGenreCache findFirstOrThrow
+   */
+  export type IGDBGenreCacheFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBGenreCache to fetch.
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBGenreCaches to fetch.
+     */
+    orderBy?: IGDBGenreCacheOrderByWithRelationInput | IGDBGenreCacheOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for IGDBGenreCaches.
+     */
+    cursor?: IGDBGenreCacheWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBGenreCaches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBGenreCaches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of IGDBGenreCaches.
+     */
+    distinct?: IGDBGenreCacheScalarFieldEnum | IGDBGenreCacheScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBGenreCache findMany
+   */
+  export type IGDBGenreCacheFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter, which IGDBGenreCaches to fetch.
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of IGDBGenreCaches to fetch.
+     */
+    orderBy?: IGDBGenreCacheOrderByWithRelationInput | IGDBGenreCacheOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing IGDBGenreCaches.
+     */
+    cursor?: IGDBGenreCacheWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` IGDBGenreCaches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` IGDBGenreCaches.
+     */
+    skip?: number
+    distinct?: IGDBGenreCacheScalarFieldEnum | IGDBGenreCacheScalarFieldEnum[]
+  }
+
+  /**
+   * IGDBGenreCache create
+   */
+  export type IGDBGenreCacheCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * The data needed to create a IGDBGenreCache.
+     */
+    data: XOR<IGDBGenreCacheCreateInput, IGDBGenreCacheUncheckedCreateInput>
+  }
+
+  /**
+   * IGDBGenreCache createMany
+   */
+  export type IGDBGenreCacheCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many IGDBGenreCaches.
+     */
+    data: IGDBGenreCacheCreateManyInput | IGDBGenreCacheCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IGDBGenreCache createManyAndReturn
+   */
+  export type IGDBGenreCacheCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * The data used to create many IGDBGenreCaches.
+     */
+    data: IGDBGenreCacheCreateManyInput | IGDBGenreCacheCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * IGDBGenreCache update
+   */
+  export type IGDBGenreCacheUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * The data needed to update a IGDBGenreCache.
+     */
+    data: XOR<IGDBGenreCacheUpdateInput, IGDBGenreCacheUncheckedUpdateInput>
+    /**
+     * Choose, which IGDBGenreCache to update.
+     */
+    where: IGDBGenreCacheWhereUniqueInput
+  }
+
+  /**
+   * IGDBGenreCache updateMany
+   */
+  export type IGDBGenreCacheUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update IGDBGenreCaches.
+     */
+    data: XOR<IGDBGenreCacheUpdateManyMutationInput, IGDBGenreCacheUncheckedUpdateManyInput>
+    /**
+     * Filter which IGDBGenreCaches to update
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * Limit how many IGDBGenreCaches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBGenreCache updateManyAndReturn
+   */
+  export type IGDBGenreCacheUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * The data used to update IGDBGenreCaches.
+     */
+    data: XOR<IGDBGenreCacheUpdateManyMutationInput, IGDBGenreCacheUncheckedUpdateManyInput>
+    /**
+     * Filter which IGDBGenreCaches to update
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * Limit how many IGDBGenreCaches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBGenreCache upsert
+   */
+  export type IGDBGenreCacheUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * The filter to search for the IGDBGenreCache to update in case it exists.
+     */
+    where: IGDBGenreCacheWhereUniqueInput
+    /**
+     * In case the IGDBGenreCache found by the `where` argument doesn't exist, create a new IGDBGenreCache with this data.
+     */
+    create: XOR<IGDBGenreCacheCreateInput, IGDBGenreCacheUncheckedCreateInput>
+    /**
+     * In case the IGDBGenreCache was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IGDBGenreCacheUpdateInput, IGDBGenreCacheUncheckedUpdateInput>
+  }
+
+  /**
+   * IGDBGenreCache delete
+   */
+  export type IGDBGenreCacheDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
+    /**
+     * Filter which IGDBGenreCache to delete.
+     */
+    where: IGDBGenreCacheWhereUniqueInput
+  }
+
+  /**
+   * IGDBGenreCache deleteMany
+   */
+  export type IGDBGenreCacheDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which IGDBGenreCaches to delete
+     */
+    where?: IGDBGenreCacheWhereInput
+    /**
+     * Limit how many IGDBGenreCaches to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * IGDBGenreCache without action
+   */
+  export type IGDBGenreCacheDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IGDBGenreCache
+     */
+    select?: IGDBGenreCacheSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IGDBGenreCache
+     */
+    omit?: IGDBGenreCacheOmit<ExtArgs> | null
   }
 
 
@@ -9199,6 +10345,19 @@ export namespace Prisma {
   export type IGDBAuthScalarFieldEnum = (typeof IGDBAuthScalarFieldEnum)[keyof typeof IGDBAuthScalarFieldEnum]
 
 
+  export const IGDBGenreCacheScalarFieldEnum: {
+    id: 'id',
+    checksum: 'checksum',
+    created_at: 'created_at',
+    name: 'name',
+    slug: 'slug',
+    updated_at: 'updated_at',
+    url: 'url'
+  };
+
+  export type IGDBGenreCacheScalarFieldEnum = (typeof IGDBGenreCacheScalarFieldEnum)[keyof typeof IGDBGenreCacheScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -9546,6 +10705,70 @@ export namespace Prisma {
     access_token?: StringNullableWithAggregatesFilter<"IGDBAuth"> | string | null
     expires?: DateTimeNullableWithAggregatesFilter<"IGDBAuth"> | Date | string | null
     updatedAt?: DateTimeWithAggregatesFilter<"IGDBAuth"> | Date | string
+  }
+
+  export type IGDBGenreCacheWhereInput = {
+    AND?: IGDBGenreCacheWhereInput | IGDBGenreCacheWhereInput[]
+    OR?: IGDBGenreCacheWhereInput[]
+    NOT?: IGDBGenreCacheWhereInput | IGDBGenreCacheWhereInput[]
+    id?: IntFilter<"IGDBGenreCache"> | number
+    checksum?: StringFilter<"IGDBGenreCache"> | string
+    created_at?: DateTimeFilter<"IGDBGenreCache"> | Date | string
+    name?: StringFilter<"IGDBGenreCache"> | string
+    slug?: StringFilter<"IGDBGenreCache"> | string
+    updated_at?: DateTimeFilter<"IGDBGenreCache"> | Date | string
+    url?: StringFilter<"IGDBGenreCache"> | string
+  }
+
+  export type IGDBGenreCacheOrderByWithRelationInput = {
+    id?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type IGDBGenreCacheWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: IGDBGenreCacheWhereInput | IGDBGenreCacheWhereInput[]
+    OR?: IGDBGenreCacheWhereInput[]
+    NOT?: IGDBGenreCacheWhereInput | IGDBGenreCacheWhereInput[]
+    checksum?: StringFilter<"IGDBGenreCache"> | string
+    created_at?: DateTimeFilter<"IGDBGenreCache"> | Date | string
+    name?: StringFilter<"IGDBGenreCache"> | string
+    slug?: StringFilter<"IGDBGenreCache"> | string
+    updated_at?: DateTimeFilter<"IGDBGenreCache"> | Date | string
+    url?: StringFilter<"IGDBGenreCache"> | string
+  }, "id">
+
+  export type IGDBGenreCacheOrderByWithAggregationInput = {
+    id?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+    _count?: IGDBGenreCacheCountOrderByAggregateInput
+    _avg?: IGDBGenreCacheAvgOrderByAggregateInput
+    _max?: IGDBGenreCacheMaxOrderByAggregateInput
+    _min?: IGDBGenreCacheMinOrderByAggregateInput
+    _sum?: IGDBGenreCacheSumOrderByAggregateInput
+  }
+
+  export type IGDBGenreCacheScalarWhereWithAggregatesInput = {
+    AND?: IGDBGenreCacheScalarWhereWithAggregatesInput | IGDBGenreCacheScalarWhereWithAggregatesInput[]
+    OR?: IGDBGenreCacheScalarWhereWithAggregatesInput[]
+    NOT?: IGDBGenreCacheScalarWhereWithAggregatesInput | IGDBGenreCacheScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"IGDBGenreCache"> | number
+    checksum?: StringWithAggregatesFilter<"IGDBGenreCache"> | string
+    created_at?: DateTimeWithAggregatesFilter<"IGDBGenreCache"> | Date | string
+    name?: StringWithAggregatesFilter<"IGDBGenreCache"> | string
+    slug?: StringWithAggregatesFilter<"IGDBGenreCache"> | string
+    updated_at?: DateTimeWithAggregatesFilter<"IGDBGenreCache"> | Date | string
+    url?: StringWithAggregatesFilter<"IGDBGenreCache"> | string
   }
 
   export type UserWhereInput = {
@@ -9999,6 +11222,76 @@ export namespace Prisma {
     access_token?: NullableStringFieldUpdateOperationsInput | string | null
     expires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IGDBGenreCacheCreateInput = {
+    id: number
+    checksum: string
+    created_at: Date | string
+    name: string
+    slug: string
+    updated_at: Date | string
+    url: string
+  }
+
+  export type IGDBGenreCacheUncheckedCreateInput = {
+    id: number
+    checksum: string
+    created_at: Date | string
+    name: string
+    slug: string
+    updated_at: Date | string
+    url: string
+  }
+
+  export type IGDBGenreCacheUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IGDBGenreCacheUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IGDBGenreCacheCreateManyInput = {
+    id: number
+    checksum: string
+    created_at: Date | string
+    name: string
+    slug: string
+    updated_at: Date | string
+    url: string
+  }
+
+  export type IGDBGenreCacheUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type IGDBGenreCacheUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserCreateInput = {
@@ -10618,6 +11911,44 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type IGDBGenreCacheCountOrderByAggregateInput = {
+    id?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type IGDBGenreCacheAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IGDBGenreCacheMaxOrderByAggregateInput = {
+    id?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type IGDBGenreCacheMinOrderByAggregateInput = {
+    id?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type IGDBGenreCacheSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type BoolFilter<$PrismaModel = never> = {

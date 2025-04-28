@@ -3,10 +3,13 @@ import { readIGDBEnvVars } from "./auth";
 import apicalyspe from "apicalypse";
 
 export const RequestUrls: {
-  [key: string]: string;
+  game: string;
+  release_date: string;
+  genre: string;
 } = {
   game: "https://api.igdb.com/v4/games",
   release_date: "https://api.igdb.com/v4/release_dates",
+  genre: "https://api.igdb.com/v4/genres",
 };
 
 export const getRequestOptions = (access_token: string) => {

@@ -55,6 +55,16 @@ model IGDBAuth {
   updatedAt DateTime
 }
 
+model IGDBGenreCache {
+  id Int @id
+  checksum String
+  created_at DateTime
+  name String
+  slug String
+  updated_at DateTime
+  url String
+}
+
 model User {
   id            String        @id
   name          String

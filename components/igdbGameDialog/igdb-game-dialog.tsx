@@ -5,14 +5,20 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Input } from "../ui/input";
 import AppDialog from "../Dialog/app-dialog";
-import { searchGame } from "@/app/actions";
+import { getGameDetails, searchGame } from "@/app/actions";
 import { number } from "zod";
 import { format, fromUnixTime } from "date-fns";
+import { Button } from "../ui/button";
 
 interface Game {
   id: number;
   name: string;
   releaseDate?: Date | undefined;
+}
+
+interface GameDetails {
+  genres: string[];
+  platform: string[];
 }
 
 const IgdbGameDialog = () => {
@@ -23,9 +29,12 @@ const IgdbGameDialog = () => {
   const createQueryString = useQueryString();
 
   const [input, setInput] = useState<string>("");
-  const [debouncedInput] = useDebounce(input, 500);
-
   const [games, setGames] = useState<Game[]>([]);
+  const [selectedGame, setSelectedGame] = useState<Game | undefined>(undefined);
+  const [gameDetails, setGameDetails] = useState<GameDetails | undefined>(
+    undefined
+  );
+  const [debouncedInput] = useDebounce(input, 500);
 
   useEffect(() => {
     if (debouncedInput !== "") {
@@ -35,16 +44,22 @@ const IgdbGameDialog = () => {
         filterEditions: true,
       }).then((response) => {
         const gamesArray: Game[] = [];
-        response.forEach((element) => {
-          gamesArray.push({
-            id: element.id,
-            name: element.name,
+        response.forEach(
+          (element: {
+            id: number;
+            name: string;
+            first_release_date: number;
+          }) => {
+            gamesArray.push({
+              id: element.id,
+              name: element.name,
 
-            releaseDate: element.first_release_date
-              ? fromUnixTime(element.first_release_date)
-              : undefined,
-          });
-        });
+              releaseDate: element.first_release_date
+                ? fromUnixTime(element.first_release_date)
+                : undefined,
+            });
+          }
+        );
         setGames(gamesArray);
       });
     } else {
@@ -56,6 +71,15 @@ const IgdbGameDialog = () => {
     };
   }, [debouncedInput]);
 
+  useEffect(() => {
+    if (selectedGame) {
+      getGameDetails(selectedGame.id);
+    }
+    return () => {
+      setGameDetails(undefined);
+    };
+  }, [selectedGame]);
+
   const handleOpenChange = (open: boolean) => {
     setInput("");
     router.push(
@@ -66,7 +90,11 @@ const IgdbGameDialog = () => {
     );
   };
 
-  const content = (
+  const handleButtonClick = (game: Game) => {
+    setSelectedGame(game);
+  };
+
+  const contentSearch = (
     <>
       <Input
         placeholder="GameName"
@@ -74,15 +102,33 @@ const IgdbGameDialog = () => {
         onChange={(e) => setInput(e.currentTarget.value)}
       />
       {games && games.length > 0 && (
-        <ul>
+        <>
           {games.map((game) => (
-            <li key={game.id}>
+            <Button
+              key={game.id}
+              variant="ghost"
+              className="cursor-pointer"
+              onClick={() => handleButtonClick(game)}
+            >
               {game.name}
               {game.releaseDate ? ` (${format(game.releaseDate, "yyyy")})` : ""}
-            </li>
+            </Button>
           ))}
-        </ul>
+        </>
       )}
+    </>
+  );
+
+  const contentAdd = (
+    <>
+      <Button onClick={() => setSelectedGame(undefined)}>Back</Button>
+      <div>Name: {selectedGame?.name}</div>
+      <div>
+        ReleaseDate:{" "}
+        {selectedGame?.releaseDate
+          ? format(selectedGame?.releaseDate, "yyyy")
+          : ""}
+      </div>
     </>
   );
 
@@ -90,7 +136,7 @@ const IgdbGameDialog = () => {
     <AppDialog
       title="Add Game"
       description="Add a new Game to the Backlog"
-      content={content}
+      content={selectedGame == undefined ? contentSearch : contentAdd}
       open={addGameDialogOpen}
       onOpenChange={(open) => {
         handleOpenChange(open);
