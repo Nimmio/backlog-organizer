@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Badge } from "../ui/badge";
 import { Genre } from "@/generated/prisma";
+import { Label } from "../ui/label";
 
 interface Game {
   id: number;
@@ -20,7 +21,7 @@ interface Game {
 }
 
 interface GameDetails {
-  genres: string[];
+  genres: Genre[];
   platform: string[];
 }
 
@@ -127,15 +128,22 @@ const IgdbGameDialog = () => {
   const contentAdd = (
     <>
       <Button onClick={() => setSelectedGame(undefined)}>Back</Button>
-      <div>Name: {selectedGame?.name}</div>
       <div>
-        ReleaseDate:
+        <Label>Name:</Label>
+      </div>
+      <div> {selectedGame?.name}</div>
+      <div>
+        <Label>ReleaseDate:</Label>
+      </div>
+      <div>
         {selectedGame?.releaseDate
           ? format(selectedGame?.releaseDate, "yyyy")
           : ""}
       </div>
       <div>
-        Genres:
+        <Label>Genres:</Label>
+      </div>
+      <div>
         {gameDetails?.genres.length ? (
           <div className="flex">
             {gameDetails.genres.map((genre: Genre) => (
@@ -146,7 +154,6 @@ const IgdbGameDialog = () => {
           </div>
         ) : (
           <>
-            ^^
             <Skeleton />
           </>
         )}

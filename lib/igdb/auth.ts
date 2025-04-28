@@ -26,9 +26,7 @@ const requestNewAuthentication = async (): Promise<{
     method: "POST",
   });
 
-  console.log(response);
-
-  const { access_token, expires_in } = response.data;
+  const { access_token, expires_in } = await response.json();
   const currentDate = new Date();
   const expireDate = addSeconds(currentDate, expires_in);
   return {

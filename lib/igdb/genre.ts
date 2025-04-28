@@ -7,7 +7,7 @@ export const getGenres = async (ids: number[]): Promise<Genre[]> => {
   const { cachedGenres, missing } = await getCached(ids);
   let genres: Genre[] = cachedGenres;
   if (missing.length) {
-    const externalGenres: Genre[] = await getFromExternal(ids);
+    const externalGenres: Genre[] = await getFromExternal(missing);
     await saveToCache(externalGenres);
     genres = genres.concat(externalGenres);
   }
@@ -42,8 +42,7 @@ const getFromExternal = async (ids: number[]): Promise<Genre[]> => {
     fields: "*",
     where: `id =${getIdString(ids)}`,
   });
-  const data = response.data;
-  return data.map((entry: ExternalGenre) => ({
+  return response.map((entry: ExternalGenre) => ({
     ...entry,
     created_at: fromUnixTime(entry.created_at),
     updated_at: fromUnixTime(entry.updated_at),
