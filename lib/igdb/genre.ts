@@ -3,7 +3,7 @@ import prisma from "../prisma";
 import { getAuthentication } from "./auth";
 import { queryBuilder, RequestUrls } from "./utils";
 
-export const get = async (ids: number[]): Promise<Genre[]> => {
+export const getGenres = async (ids: number[]): Promise<Genre[]> => {
   const { cachedGenres, missing } = await getCached(ids);
   let genres: Genre[] = cachedGenres;
   if (missing.length) {
@@ -17,7 +17,7 @@ export const get = async (ids: number[]): Promise<Genre[]> => {
 const getCached = async (
   ids: number[]
 ): Promise<{ cachedGenres: Genre[]; missing: number[] }> => {
-  const cachedGenres = await prisma.iGDBGenreCache.findMany({
+  const cachedGenres = await prisma.genre.findMany({
     where: {
       id: {
         in: ids,
@@ -33,7 +33,7 @@ const getCached = async (
 
 const getFromExternal = async (ids: number[]): Promise<Genre[]> => {
   const { access_token } = await getAuthentication();
-
+  console.log("missing", ids);
   const fields: GameField[] = ["genres", "platforms"];
   const idString = getIdString(ids);
   const response = await queryBuilder({
@@ -51,7 +51,7 @@ const getFromExternal = async (ids: number[]): Promise<Genre[]> => {
 };
 
 const saveToCache = async (genres: Genre[]) => {
-  await prisma.iGDBGenreCache.createMany({
+  await prisma.genre.createMany({
     data: genres,
   });
 };

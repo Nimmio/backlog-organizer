@@ -3,7 +3,7 @@
 import { auth } from "@/auth";
 import { Game } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
-import { get } from "@/lib/igdb/genre";
+import { getGenres } from "@/lib/igdb/genre";
 import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -82,7 +82,7 @@ export const searchGame = async (params: searchGameParams) => {
     where: filter,
   });
 
-  return response.data;
+  return response;
 };
 
 export const getGameDetails = async (id: number) => {
@@ -90,19 +90,20 @@ export const getGameDetails = async (id: number) => {
 
   const fields: GameField[] = ["genres", "platforms"];
 
-  const response = await queryBuilder({
+  const games = await queryBuilder({
     access_token: access_token || undefined,
     requestUrl: RequestUrls.game,
     fields: fields,
     where: `id =${id}`,
   });
-  const data = response.data[0];
-  const genres: string[] = [];
+  const data = games[0];
 
-  const genreResponse = await getGenresForIds(data.genres);
-  genres.push(genreResponse);
+  const genres = await getGenresForIds(data.genres);
+  return {
+    genres: genres.map((genre) => genre.name),
+  };
 };
 
 export const getGenresForIds = async (ids: number[]) => {
-  get(ids);
+  return await getGenres(ids);
 };

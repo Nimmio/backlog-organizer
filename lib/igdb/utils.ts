@@ -1,6 +1,5 @@
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
-import apicalyspe from "apicalypse";
 
 export const RequestUrls: {
   game: string;
@@ -17,8 +16,9 @@ export const getRequestOptions = (access_token: string) => {
     headers: {
       "Client-ID": readIGDBEnvVars().client,
       Authorization: `Bearer ${access_token}`,
+      Accept: "application/json",
     },
-    method: "post", // The default is `get`
+    method: "POST",
   };
 };
 
@@ -30,40 +30,33 @@ const isNonEmptyArrayOrString = (
   return false;
 };
 
-const getRootQuery = (access_token: string) => {
-  return apicalyspe(getRequestOptions(access_token));
-};
-
-const getFieldsQuery = (query, fields) => {
+const getFieldsBody = (fields: IGDBFields): string => {
   if (isNonEmptyArrayOrString(fields)) {
-    return query.fields(fields);
+    return `fields ${fields.toString()} ;`;
   }
-  return query;
+  return "";
 };
 
-const getLimitQuery = (query, limit = 10) => {
-  return query.limit(limit);
+const getLimitBody = (limit = 10): string => {
+  return `limit ${limit} ;`;
 };
 
-const getSearchQuery = (query, search) => {
-  if (search && search !== "") {
-    return query.search(search);
+const getSearchBody = (search: string): string => {
+  if (search !== "") {
+    return `search "${search}" ;`;
   }
-  return query;
+  return "";
 };
 
-const getWhereQuery = (query, where) => {
-  if (isNonEmptyArrayOrString(where)) return query.where(where);
-  return query;
+const getWhereBody = (where: string | string[]) => {
+  if (Array.isArray(where)) {
+    return `where ${where.join(" & ")} ;`;
+  }
+  return `where ${where} ;`;
 };
-
-const getRequesQuery = (query, requestUrl) => {
-  return query.request(requestUrl);
-};
-
 interface queryBuilderParams {
   access_token?: string;
-  fields?: string | string[];
+  fields?: IGDBFields[] | string;
   limit?: number;
   search?: string;
   where?: string | string[];
@@ -82,11 +75,18 @@ export const queryBuilder = async (params: queryBuilderParams) => {
 
   if (!access_token) throw new Error("access Token not Found");
 
-  let query = getRootQuery(access_token);
-  query = getFieldsQuery(query, fields);
-  query = getLimitQuery(query, limit);
-  query = getSearchQuery(query, search);
-  query = getWhereQuery(query, where);
-  query = getRequesQuery(query, requestUrl);
-  return await query;
+  const query = getRequestOptions(access_token);
+  let body: string = "";
+  if (fields) body += getFieldsBody(fields);
+  body += getLimitBody(limit);
+  if (search) body += getSearchBody(search);
+  if (where && isNonEmptyArrayOrString(where)) body += getWhereBody(where);
+
+  const response = await fetch(requestUrl, {
+    ...query,
+    body,
+  });
+
+  const data = await response.json();
+  return data;
 };

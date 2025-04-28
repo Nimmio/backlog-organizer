@@ -141,7 +141,7 @@ exports.Prisma.IGDBAuthScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.IGDBGenreCacheScalarFieldEnum = {
+exports.Prisma.GenreScalarFieldEnum = {
   id: 'id',
   checksum: 'checksum',
   created_at: 'created_at',
@@ -230,7 +230,7 @@ exports.Prisma.ModelName = {
   Game: 'Game',
   UserSettings: 'UserSettings',
   IGDBAuth: 'IGDBAuth',
-  IGDBGenreCache: 'IGDBGenreCache',
+  Genre: 'Genre',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

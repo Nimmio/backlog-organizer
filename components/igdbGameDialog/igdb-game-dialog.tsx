@@ -73,7 +73,9 @@ const IgdbGameDialog = () => {
 
   useEffect(() => {
     if (selectedGame) {
-      getGameDetails(selectedGame.id);
+      getGameDetails(selectedGame.id).then((gameDetails) => {
+        setGameDetails(gameDetails);
+      });
     }
     return () => {
       setGameDetails(undefined);
@@ -124,10 +126,14 @@ const IgdbGameDialog = () => {
       <Button onClick={() => setSelectedGame(undefined)}>Back</Button>
       <div>Name: {selectedGame?.name}</div>
       <div>
-        ReleaseDate:{" "}
+        ReleaseDate:
         {selectedGame?.releaseDate
           ? format(selectedGame?.releaseDate, "yyyy")
           : ""}
+      </div>
+      <div>
+        Genres:
+        {gameDetails?.genres}
       </div>
     </>
   );

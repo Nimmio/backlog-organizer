@@ -1,5 +1,4 @@
 import { IGDBAuth } from "@/generated/prisma";
-import apicalyspe from "apicalypse";
 import { addSeconds, isAfter } from "date-fns";
 import prisma from "../prisma";
 
@@ -23,10 +22,11 @@ const requestNewAuthentication = async (): Promise<{
   const { client, secret } = readIGDBEnvVars();
   const url = `https://id.twitch.tv/oauth2/token?client_id=${client}&client_secret=${secret}&grant_type=client_credentials`;
 
-  const response = await apicalyspe({
-    queryMethod: "url",
-    method: "post",
-  }).request(url);
+  const response = await fetch(url, {
+    method: "POST",
+  });
+
+  console.log(response);
 
   const { access_token, expires_in } = response.data;
   const currentDate = new Date();

@@ -55,7 +55,7 @@ model IGDBAuth {
   updatedAt DateTime
 }
 
-model IGDBGenreCache {
+model Genre {
   id Int @id
   checksum String
   created_at DateTime
