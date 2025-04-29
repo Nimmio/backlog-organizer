@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Game {
+model GameUser {
   id          Int       @id @default(autoincrement())
   name        String
   platform    String
@@ -65,6 +65,85 @@ model Genre {
   url        String
 }
 
+model Platform {
+  id               Int      @id
+  abbreviation     String?
+  alternative_name String?
+  checksum         String?
+  created_at       DateTime
+  generation       Int?
+  name             String?
+  platform_family  Int?
+  platform_logo    Int?
+  platform_type    Int?
+  slug             String?
+  summary          String?
+  updated_at       DateTime
+  url              String?
+  versions         Int[]
+  websites         Int[]
+}
+
+model Game {
+  id Int @id
+
+  age_ratings             Int[]
+  aggregated_rating       Float?
+  aggregated_rating_count Int?
+  alternative_names       Int[]
+  artworks                Int[]
+  bundles                 Int[]
+  checksum                String
+  collections             Int[]
+  cover                   Int?
+  created_at              DateTime
+  dlcs                    Int[]
+  expanded_games          Int[]
+  expansions              Int[]
+  external_games          Int[]
+  first_release_date      Int?
+  forks                   Int[]
+  franchise               Int?
+  franchises              Int[]
+  game_engines            Int[]
+  game_localizations      Int[]
+  game_modes              Int[]
+  game_status             Int?
+  game_type               Int?
+  genres                  Int[]
+  hypes                   Int?
+  involved_companies      Int[]
+  keywords                Int[]
+  language_supports       Int[]
+  multiplayer_modes       Int[]
+  name                    String
+  parent_game             Int?
+  platforms               Int[]
+  player_perspectives     Int[]
+  ports                   Int[]
+  rating                  Float?
+  rating_count            Int?
+  release_dates           Int[]
+  remakes                 Int[]
+  remasters               Int[]
+  screenshots             Int[]
+  similar_games           Int[]
+  slug                    String
+  standalone_expansions   Int[]
+  storyline               String?
+  summary                 String?
+  tags                    Int[]
+  themes                  Int[]
+  total_rating            Float?
+  total_rating_count      Int?
+  updated_at              DateTime
+  url                     String?
+  version_parent          Int[]
+  version_title           String?
+  videos                  Int[]
+  websites                Int[]
+}
+
 model User {
   id            String        @id
   name          String
@@ -75,7 +154,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
-  Game          Game[]
+  Game          GameUser[]
   UserSettings  UserSettings?
 
   @@unique([email])

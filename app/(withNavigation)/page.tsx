@@ -10,7 +10,6 @@ import Link from "next/link";
 import { getCurrentUserId } from "../actions";
 import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { searchGame } from "@/lib/igdb/game";
 import IgdbGameDialog from "@/components/igdbGameDialog/igdb-game-dialog";
 
 interface KeyStringObject {
@@ -58,7 +57,7 @@ const Home = async ({
     return input;
   };
   const currentUserId = await getCurrentUserId();
-  const games = await prisma.game.findMany({
+  const games = await prisma.gameUser.findMany({
     orderBy: validateSortObjectOrEmptyObject(sort),
     where: {
       status: { in: getFilterArray() as Status[] },
@@ -66,6 +65,8 @@ const Home = async ({
       userId: currentUserId || "",
     },
   });
+
+  console.log("typeof", typeof prisma.genre);
   return (
     <main>
       <Card className="p-4">

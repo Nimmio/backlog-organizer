@@ -2,6 +2,8 @@ import { fromUnixTime } from "date-fns";
 import prisma from "../prisma";
 import { getAuthentication } from "./auth";
 import { queryBuilder, RequestUrls } from "./utils";
+import { Genre } from "@/generated/prisma";
+import { ExternalGenre } from "@/types/igdb/genre";
 
 export const getGenres = async (ids: number[]): Promise<Genre[]> => {
   const { cachedGenres, missing } = await getCached(ids);

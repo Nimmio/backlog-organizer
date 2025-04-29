@@ -1,4 +1,6 @@
-type GameField =
+import { Game } from "@/generated/prisma";
+
+export type GameField =
   | "age_ratings"
   | "aggregated_rating"
   | "aggregated_rating_count"
@@ -54,3 +56,8 @@ type GameField =
   | "version_title"
   | "videos"
   | "websites";
+
+export interface ExternalGame extends Omit<Game, "created_at" | "updated_at"> {
+  created_at: number;
+  updated_at: number;
+}

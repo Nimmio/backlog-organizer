@@ -5,14 +5,16 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Input } from "../ui/input";
 import AppDialog from "../Dialog/app-dialog";
-import { getGameDetails, searchGame } from "@/app/actions";
-import { number } from "zod";
-import { format, fromUnixTime } from "date-fns";
+import {
+  getGameDetails,
+  getGenresForIdsAsStrings,
+  getPlatformsForIdsAsStrings,
+  searchGame,
+} from "@/app/actions";
+import { format, formatDate, fromUnixTime } from "date-fns";
 import { Button } from "../ui/button";
-import { Skeleton } from "../ui/skeleton";
-import { Badge } from "../ui/badge";
 import { Genre } from "@/generated/prisma";
-import { Label } from "../ui/label";
+import GameDetailsCard from "./igdb-game-dialog-details";
 
 interface Game {
   id: number;
@@ -38,6 +40,8 @@ const IgdbGameDialog = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails | undefined>(
     undefined
   );
+  const [gameGenres, setGameGenres] = useState<string[] | undefined>(undefined);
+  const [platforms, setPlatforms] = useState<string[] | undefined>(undefined);
   const [debouncedInput] = useDebounce(input, 500);
 
   useEffect(() => {
@@ -86,8 +90,28 @@ const IgdbGameDialog = () => {
     };
   }, [selectedGame]);
 
+  useEffect(() => {
+    if (gameDetails) {
+      getGenresForIdsAsStrings(gameDetails.genres).then((genres) => {
+        setGameGenres(genres);
+      });
+      getPlatformsForIdsAsStrings(gameDetails.platforms).then((platforms) => {
+        setPlatforms(platforms);
+      });
+    }
+
+    return () => {
+      setGameGenres(undefined);
+      setPlatforms(undefined);
+    };
+  }, [gameDetails]);
+
   const handleOpenChange = (open: boolean) => {
     setInput("");
+    setSelectedGame(undefined);
+    setGameDetails(undefined);
+    setGameGenres(undefined);
+    setPlatforms(undefined);
     router.push(
       `${pathname}?${createQueryString(
         "addGameDialogOpen",
@@ -98,6 +122,13 @@ const IgdbGameDialog = () => {
 
   const handleButtonClick = (game: Game) => {
     setSelectedGame(game);
+  };
+
+  const handleBackButtonClick = () => {
+    setSelectedGame(undefined);
+    setGameDetails(undefined);
+    setGameGenres(undefined);
+    setPlatforms(undefined);
   };
 
   const contentSearch = (
@@ -127,37 +158,20 @@ const IgdbGameDialog = () => {
 
   const contentAdd = (
     <>
-      <Button onClick={() => setSelectedGame(undefined)}>Back</Button>
-      <div>
-        <Label>Name:</Label>
-      </div>
-      <div> {selectedGame?.name}</div>
-      <div>
-        <Label>ReleaseDate:</Label>
-      </div>
-      <div>
-        {selectedGame?.releaseDate
-          ? format(selectedGame?.releaseDate, "yyyy")
-          : ""}
-      </div>
-      <div>
-        <Label>Genres:</Label>
-      </div>
-      <div>
-        {gameDetails?.genres.length ? (
-          <div className="flex">
-            {gameDetails.genres.map((genre: Genre) => (
-              <Badge key={genre.id} className="mr-2">
-                {genre.name}
-              </Badge>
-            ))}
-          </div>
-        ) : (
-          <>
-            <Skeleton />
-          </>
-        )}
-      </div>
+      {selectedGame && (
+        <GameDetailsCard
+          name={selectedGame.name}
+          releaseDate={
+            selectedGame.releaseDate
+              ? formatDate(selectedGame.releaseDate, "dd.MM.yyyy")
+              : ""
+          }
+          description={gameDetails?.summary || ""}
+          genres={gameGenres || undefined}
+          onBack={() => handleBackButtonClick()}
+          platforms={platforms}
+        />
+      )}
     </>
   );
 

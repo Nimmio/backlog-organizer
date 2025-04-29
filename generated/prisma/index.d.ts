@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Game
+ * Model GameUser
  * 
  */
-export type Game = $Result.DefaultSelection<Prisma.$GamePayload>
+export type GameUser = $Result.DefaultSelection<Prisma.$GameUserPayload>
 /**
  * Model UserSettings
  * 
@@ -33,6 +33,16 @@ export type IGDBAuth = $Result.DefaultSelection<Prisma.$IGDBAuthPayload>
  * 
  */
 export type Genre = $Result.DefaultSelection<Prisma.$GenrePayload>
+/**
+ * Model Platform
+ * 
+ */
+export type Platform = $Result.DefaultSelection<Prisma.$PlatformPayload>
+/**
+ * Model Game
+ * 
+ */
+export type Game = $Result.DefaultSelection<Prisma.$GamePayload>
 /**
  * Model User
  * 
@@ -95,8 +105,8 @@ export const Theme: typeof $Enums.Theme
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Games
- * const games = await prisma.game.findMany()
+ * // Fetch zero or more GameUsers
+ * const gameUsers = await prisma.gameUser.findMany()
  * ```
  *
  *
@@ -116,8 +126,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Games
-   * const games = await prisma.game.findMany()
+   * // Fetch zero or more GameUsers
+   * const gameUsers = await prisma.gameUser.findMany()
    * ```
    *
    *
@@ -214,14 +224,14 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.game`: Exposes CRUD operations for the **Game** model.
+   * `prisma.gameUser`: Exposes CRUD operations for the **GameUser** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Games
-    * const games = await prisma.game.findMany()
+    * // Fetch zero or more GameUsers
+    * const gameUsers = await prisma.gameUser.findMany()
     * ```
     */
-  get game(): Prisma.GameDelegate<ExtArgs, ClientOptions>;
+  get gameUser(): Prisma.GameUserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.userSettings`: Exposes CRUD operations for the **UserSettings** model.
@@ -252,6 +262,26 @@ export class PrismaClient<
     * ```
     */
   get genre(): Prisma.GenreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.platform`: Exposes CRUD operations for the **Platform** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Platforms
+    * const platforms = await prisma.platform.findMany()
+    * ```
+    */
+  get platform(): Prisma.PlatformDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.game`: Exposes CRUD operations for the **Game** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Games
+    * const games = await prisma.game.findMany()
+    * ```
+    */
+  get game(): Prisma.GameDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
@@ -732,10 +762,12 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Game: 'Game',
+    GameUser: 'GameUser',
     UserSettings: 'UserSettings',
     IGDBAuth: 'IGDBAuth',
     Genre: 'Genre',
+    Platform: 'Platform',
+    Game: 'Game',
     User: 'User',
     Session: 'Session',
     Account: 'Account',
@@ -758,81 +790,81 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "game" | "userSettings" | "iGDBAuth" | "genre" | "user" | "session" | "account" | "verification"
+      modelProps: "gameUser" | "userSettings" | "iGDBAuth" | "genre" | "platform" | "game" | "user" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Game: {
-        payload: Prisma.$GamePayload<ExtArgs>
-        fields: Prisma.GameFieldRefs
+      GameUser: {
+        payload: Prisma.$GameUserPayload<ExtArgs>
+        fields: Prisma.GameUserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.GameFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload> | null
+            args: Prisma.GameUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.GameFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           findFirst: {
-            args: Prisma.GameFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload> | null
+            args: Prisma.GameUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.GameFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           findMany: {
-            args: Prisma.GameFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+            args: Prisma.GameUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>[]
           }
           create: {
-            args: Prisma.GameCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           createMany: {
-            args: Prisma.GameCreateManyArgs<ExtArgs>
+            args: Prisma.GameUserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.GameCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+            args: Prisma.GameUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>[]
           }
           delete: {
-            args: Prisma.GameDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           update: {
-            args: Prisma.GameUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           deleteMany: {
-            args: Prisma.GameDeleteManyArgs<ExtArgs>
+            args: Prisma.GameUserDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.GameUpdateManyArgs<ExtArgs>
+            args: Prisma.GameUserUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.GameUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+            args: Prisma.GameUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>[]
           }
           upsert: {
-            args: Prisma.GameUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+            args: Prisma.GameUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GameUserPayload>
           }
           aggregate: {
-            args: Prisma.GameAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGame>
+            args: Prisma.GameUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGameUser>
           }
           groupBy: {
-            args: Prisma.GameGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GameGroupByOutputType>[]
+            args: Prisma.GameUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GameUserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.GameCountArgs<ExtArgs>
-            result: $Utils.Optional<GameCountAggregateOutputType> | number
+            args: Prisma.GameUserCountArgs<ExtArgs>
+            result: $Utils.Optional<GameUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1055,6 +1087,154 @@ export namespace Prisma {
           count: {
             args: Prisma.GenreCountArgs<ExtArgs>
             result: $Utils.Optional<GenreCountAggregateOutputType> | number
+          }
+        }
+      }
+      Platform: {
+        payload: Prisma.$PlatformPayload<ExtArgs>
+        fields: Prisma.PlatformFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlatformFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlatformFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          findFirst: {
+            args: Prisma.PlatformFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlatformFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          findMany: {
+            args: Prisma.PlatformFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>[]
+          }
+          create: {
+            args: Prisma.PlatformCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          createMany: {
+            args: Prisma.PlatformCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlatformCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>[]
+          }
+          delete: {
+            args: Prisma.PlatformDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          update: {
+            args: Prisma.PlatformUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlatformDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlatformUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlatformUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlatformUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlatformPayload>
+          }
+          aggregate: {
+            args: Prisma.PlatformAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlatform>
+          }
+          groupBy: {
+            args: Prisma.PlatformGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlatformGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlatformCountArgs<ExtArgs>
+            result: $Utils.Optional<PlatformCountAggregateOutputType> | number
+          }
+        }
+      }
+      Game: {
+        payload: Prisma.$GamePayload<ExtArgs>
+        fields: Prisma.GameFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GameFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GameFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          findFirst: {
+            args: Prisma.GameFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GameFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          findMany: {
+            args: Prisma.GameFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+          }
+          create: {
+            args: Prisma.GameCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          createMany: {
+            args: Prisma.GameCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GameCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+          }
+          delete: {
+            args: Prisma.GameDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          update: {
+            args: Prisma.GameUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          deleteMany: {
+            args: Prisma.GameDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GameUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GameUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>[]
+          }
+          upsert: {
+            args: Prisma.GameUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GamePayload>
+          }
+          aggregate: {
+            args: Prisma.GameAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGame>
+          }
+          groupBy: {
+            args: Prisma.GameGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GameGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GameCountArgs<ExtArgs>
+            result: $Utils.Optional<GameCountAggregateOutputType> | number
           }
         }
       }
@@ -1438,10 +1618,12 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    game?: GameOmit
+    gameUser?: GameUserOmit
     userSettings?: UserSettingsOmit
     iGDBAuth?: IGDBAuthOmit
     genre?: GenreOmit
+    platform?: PlatformOmit
+    game?: GameOmit
     user?: UserOmit
     session?: SessionOmit
     account?: AccountOmit
@@ -1580,7 +1762,7 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountGameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GameWhereInput
+    where?: GameUserWhereInput
   }
 
 
@@ -1589,37 +1771,26 @@ export namespace Prisma {
    */
 
   /**
-   * Model Game
+   * Model GameUser
    */
 
-  export type AggregateGame = {
-    _count: GameCountAggregateOutputType | null
-    _avg: GameAvgAggregateOutputType | null
-    _sum: GameSumAggregateOutputType | null
-    _min: GameMinAggregateOutputType | null
-    _max: GameMaxAggregateOutputType | null
+  export type AggregateGameUser = {
+    _count: GameUserCountAggregateOutputType | null
+    _avg: GameUserAvgAggregateOutputType | null
+    _sum: GameUserSumAggregateOutputType | null
+    _min: GameUserMinAggregateOutputType | null
+    _max: GameUserMaxAggregateOutputType | null
   }
 
-  export type GameAvgAggregateOutputType = {
+  export type GameUserAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type GameSumAggregateOutputType = {
+  export type GameUserSumAggregateOutputType = {
     id: number | null
   }
 
-  export type GameMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    platform: string | null
-    status: $Enums.Status | null
-    genre: string | null
-    releaseDate: Date | null
-    notes: string | null
-    userId: string | null
-  }
-
-  export type GameMaxAggregateOutputType = {
+  export type GameUserMinAggregateOutputType = {
     id: number | null
     name: string | null
     platform: string | null
@@ -1630,7 +1801,18 @@ export namespace Prisma {
     userId: string | null
   }
 
-  export type GameCountAggregateOutputType = {
+  export type GameUserMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    platform: string | null
+    status: $Enums.Status | null
+    genre: string | null
+    releaseDate: Date | null
+    notes: string | null
+    userId: string | null
+  }
+
+  export type GameUserCountAggregateOutputType = {
     id: number
     name: number
     platform: number
@@ -1643,26 +1825,15 @@ export namespace Prisma {
   }
 
 
-  export type GameAvgAggregateInputType = {
+  export type GameUserAvgAggregateInputType = {
     id?: true
   }
 
-  export type GameSumAggregateInputType = {
+  export type GameUserSumAggregateInputType = {
     id?: true
   }
 
-  export type GameMinAggregateInputType = {
-    id?: true
-    name?: true
-    platform?: true
-    status?: true
-    genre?: true
-    releaseDate?: true
-    notes?: true
-    userId?: true
-  }
-
-  export type GameMaxAggregateInputType = {
+  export type GameUserMinAggregateInputType = {
     id?: true
     name?: true
     platform?: true
@@ -1673,7 +1844,18 @@ export namespace Prisma {
     userId?: true
   }
 
-  export type GameCountAggregateInputType = {
+  export type GameUserMaxAggregateInputType = {
+    id?: true
+    name?: true
+    platform?: true
+    status?: true
+    genre?: true
+    releaseDate?: true
+    notes?: true
+    userId?: true
+  }
+
+  export type GameUserCountAggregateInputType = {
     id?: true
     name?: true
     platform?: true
@@ -1685,93 +1867,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type GameAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Game to aggregate.
+     * Filter which GameUser to aggregate.
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Games to fetch.
+     * Determine the order of GameUsers to fetch.
      */
-    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    orderBy?: GameUserOrderByWithRelationInput | GameUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: GameWhereUniqueInput
+    cursor?: GameUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Games from the position of the cursor.
+     * Take `±n` GameUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Games.
+     * Skip the first `n` GameUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Games
+     * Count returned GameUsers
     **/
-    _count?: true | GameCountAggregateInputType
+    _count?: true | GameUserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: GameAvgAggregateInputType
+    _avg?: GameUserAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: GameSumAggregateInputType
+    _sum?: GameUserSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: GameMinAggregateInputType
+    _min?: GameUserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: GameMaxAggregateInputType
+    _max?: GameUserMaxAggregateInputType
   }
 
-  export type GetGameAggregateType<T extends GameAggregateArgs> = {
-        [P in keyof T & keyof AggregateGame]: P extends '_count' | 'count'
+  export type GetGameUserAggregateType<T extends GameUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateGameUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateGame[P]>
-      : GetScalarType<T[P], AggregateGame[P]>
+        : GetScalarType<T[P], AggregateGameUser[P]>
+      : GetScalarType<T[P], AggregateGameUser[P]>
   }
 
 
 
 
-  export type GameGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GameWhereInput
-    orderBy?: GameOrderByWithAggregationInput | GameOrderByWithAggregationInput[]
-    by: GameScalarFieldEnum[] | GameScalarFieldEnum
-    having?: GameScalarWhereWithAggregatesInput
+  export type GameUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameUserWhereInput
+    orderBy?: GameUserOrderByWithAggregationInput | GameUserOrderByWithAggregationInput[]
+    by: GameUserScalarFieldEnum[] | GameUserScalarFieldEnum
+    having?: GameUserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: GameCountAggregateInputType | true
-    _avg?: GameAvgAggregateInputType
-    _sum?: GameSumAggregateInputType
-    _min?: GameMinAggregateInputType
-    _max?: GameMaxAggregateInputType
+    _count?: GameUserCountAggregateInputType | true
+    _avg?: GameUserAvgAggregateInputType
+    _sum?: GameUserSumAggregateInputType
+    _min?: GameUserMinAggregateInputType
+    _max?: GameUserMaxAggregateInputType
   }
 
-  export type GameGroupByOutputType = {
+  export type GameUserGroupByOutputType = {
     id: number
     name: string
     platform: string
@@ -1780,28 +1962,28 @@ export namespace Prisma {
     releaseDate: Date | null
     notes: string | null
     userId: string
-    _count: GameCountAggregateOutputType | null
-    _avg: GameAvgAggregateOutputType | null
-    _sum: GameSumAggregateOutputType | null
-    _min: GameMinAggregateOutputType | null
-    _max: GameMaxAggregateOutputType | null
+    _count: GameUserCountAggregateOutputType | null
+    _avg: GameUserAvgAggregateOutputType | null
+    _sum: GameUserSumAggregateOutputType | null
+    _min: GameUserMinAggregateOutputType | null
+    _max: GameUserMaxAggregateOutputType | null
   }
 
-  type GetGameGroupByPayload<T extends GameGroupByArgs> = Prisma.PrismaPromise<
+  type GetGameUserGroupByPayload<T extends GameUserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<GameGroupByOutputType, T['by']> &
+      PickEnumerable<GameUserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof GameGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof GameUserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], GameGroupByOutputType[P]>
-            : GetScalarType<T[P], GameGroupByOutputType[P]>
+              : GetScalarType<T[P], GameUserGroupByOutputType[P]>
+            : GetScalarType<T[P], GameUserGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type GameSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GameUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     platform?: boolean
@@ -1811,9 +1993,9 @@ export namespace Prisma {
     notes?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["game"]>
+  }, ExtArgs["result"]["gameUser"]>
 
-  export type GameSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GameUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     platform?: boolean
@@ -1823,9 +2005,9 @@ export namespace Prisma {
     notes?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["game"]>
+  }, ExtArgs["result"]["gameUser"]>
 
-  export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GameUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     platform?: boolean
@@ -1835,9 +2017,9 @@ export namespace Prisma {
     notes?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["game"]>
+  }, ExtArgs["result"]["gameUser"]>
 
-  export type GameSelectScalar = {
+  export type GameUserSelectScalar = {
     id?: boolean
     name?: boolean
     platform?: boolean
@@ -1848,19 +2030,19 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre" | "releaseDate" | "notes" | "userId", ExtArgs["result"]["game"]>
-  export type GameInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "platform" | "status" | "genre" | "releaseDate" | "notes" | "userId", ExtArgs["result"]["gameUser"]>
+  export type GameUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type GameIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type GameIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $GamePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Game"
+  export type $GameUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GameUser"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
@@ -1873,136 +2055,136 @@ export namespace Prisma {
       releaseDate: Date | null
       notes: string | null
       userId: string
-    }, ExtArgs["result"]["game"]>
+    }, ExtArgs["result"]["gameUser"]>
     composites: {}
   }
 
-  type GameGetPayload<S extends boolean | null | undefined | GameDefaultArgs> = $Result.GetResult<Prisma.$GamePayload, S>
+  type GameUserGetPayload<S extends boolean | null | undefined | GameUserDefaultArgs> = $Result.GetResult<Prisma.$GameUserPayload, S>
 
-  type GameCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GameFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GameCountAggregateInputType | true
+  type GameUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GameUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GameUserCountAggregateInputType | true
     }
 
-  export interface GameDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Game'], meta: { name: 'Game' } }
+  export interface GameUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GameUser'], meta: { name: 'GameUser' } }
     /**
-     * Find zero or one Game that matches the filter.
-     * @param {GameFindUniqueArgs} args - Arguments to find a Game
+     * Find zero or one GameUser that matches the filter.
+     * @param {GameUserFindUniqueArgs} args - Arguments to find a GameUser
      * @example
-     * // Get one Game
-     * const game = await prisma.game.findUnique({
+     * // Get one GameUser
+     * const gameUser = await prisma.gameUser.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends GameFindUniqueArgs>(args: SelectSubset<T, GameFindUniqueArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends GameUserFindUniqueArgs>(args: SelectSubset<T, GameUserFindUniqueArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Game that matches the filter or throw an error with `error.code='P2025'`
+     * Find one GameUser that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {GameFindUniqueOrThrowArgs} args - Arguments to find a Game
+     * @param {GameUserFindUniqueOrThrowArgs} args - Arguments to find a GameUser
      * @example
-     * // Get one Game
-     * const game = await prisma.game.findUniqueOrThrow({
+     * // Get one GameUser
+     * const gameUser = await prisma.gameUser.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends GameFindUniqueOrThrowArgs>(args: SelectSubset<T, GameFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends GameUserFindUniqueOrThrowArgs>(args: SelectSubset<T, GameUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Game that matches the filter.
+     * Find the first GameUser that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameFindFirstArgs} args - Arguments to find a Game
+     * @param {GameUserFindFirstArgs} args - Arguments to find a GameUser
      * @example
-     * // Get one Game
-     * const game = await prisma.game.findFirst({
+     * // Get one GameUser
+     * const gameUser = await prisma.gameUser.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends GameFindFirstArgs>(args?: SelectSubset<T, GameFindFirstArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends GameUserFindFirstArgs>(args?: SelectSubset<T, GameUserFindFirstArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Game that matches the filter or
+     * Find the first GameUser that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameFindFirstOrThrowArgs} args - Arguments to find a Game
+     * @param {GameUserFindFirstOrThrowArgs} args - Arguments to find a GameUser
      * @example
-     * // Get one Game
-     * const game = await prisma.game.findFirstOrThrow({
+     * // Get one GameUser
+     * const gameUser = await prisma.gameUser.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends GameFindFirstOrThrowArgs>(args?: SelectSubset<T, GameFindFirstOrThrowArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends GameUserFindFirstOrThrowArgs>(args?: SelectSubset<T, GameUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Games that matches the filter.
+     * Find zero or more GameUsers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {GameUserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Games
-     * const games = await prisma.game.findMany()
+     * // Get all GameUsers
+     * const gameUsers = await prisma.gameUser.findMany()
      * 
-     * // Get first 10 Games
-     * const games = await prisma.game.findMany({ take: 10 })
+     * // Get first 10 GameUsers
+     * const gameUsers = await prisma.gameUser.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const gameWithIdOnly = await prisma.game.findMany({ select: { id: true } })
+     * const gameUserWithIdOnly = await prisma.gameUser.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends GameFindManyArgs>(args?: SelectSubset<T, GameFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends GameUserFindManyArgs>(args?: SelectSubset<T, GameUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Game.
-     * @param {GameCreateArgs} args - Arguments to create a Game.
+     * Create a GameUser.
+     * @param {GameUserCreateArgs} args - Arguments to create a GameUser.
      * @example
-     * // Create one Game
-     * const Game = await prisma.game.create({
+     * // Create one GameUser
+     * const GameUser = await prisma.gameUser.create({
      *   data: {
-     *     // ... data to create a Game
+     *     // ... data to create a GameUser
      *   }
      * })
      * 
      */
-    create<T extends GameCreateArgs>(args: SelectSubset<T, GameCreateArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends GameUserCreateArgs>(args: SelectSubset<T, GameUserCreateArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Games.
-     * @param {GameCreateManyArgs} args - Arguments to create many Games.
+     * Create many GameUsers.
+     * @param {GameUserCreateManyArgs} args - Arguments to create many GameUsers.
      * @example
-     * // Create many Games
-     * const game = await prisma.game.createMany({
+     * // Create many GameUsers
+     * const gameUser = await prisma.gameUser.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends GameCreateManyArgs>(args?: SelectSubset<T, GameCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends GameUserCreateManyArgs>(args?: SelectSubset<T, GameUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Games and returns the data saved in the database.
-     * @param {GameCreateManyAndReturnArgs} args - Arguments to create many Games.
+     * Create many GameUsers and returns the data saved in the database.
+     * @param {GameUserCreateManyAndReturnArgs} args - Arguments to create many GameUsers.
      * @example
-     * // Create many Games
-     * const game = await prisma.game.createManyAndReturn({
+     * // Create many GameUsers
+     * const gameUser = await prisma.gameUser.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Games and only return the `id`
-     * const gameWithIdOnly = await prisma.game.createManyAndReturn({
+     * // Create many GameUsers and only return the `id`
+     * const gameUserWithIdOnly = await prisma.gameUser.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2012,28 +2194,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends GameCreateManyAndReturnArgs>(args?: SelectSubset<T, GameCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends GameUserCreateManyAndReturnArgs>(args?: SelectSubset<T, GameUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Game.
-     * @param {GameDeleteArgs} args - Arguments to delete one Game.
+     * Delete a GameUser.
+     * @param {GameUserDeleteArgs} args - Arguments to delete one GameUser.
      * @example
-     * // Delete one Game
-     * const Game = await prisma.game.delete({
+     * // Delete one GameUser
+     * const GameUser = await prisma.gameUser.delete({
      *   where: {
-     *     // ... filter to delete one Game
+     *     // ... filter to delete one GameUser
      *   }
      * })
      * 
      */
-    delete<T extends GameDeleteArgs>(args: SelectSubset<T, GameDeleteArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends GameUserDeleteArgs>(args: SelectSubset<T, GameUserDeleteArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Game.
-     * @param {GameUpdateArgs} args - Arguments to update one Game.
+     * Update one GameUser.
+     * @param {GameUserUpdateArgs} args - Arguments to update one GameUser.
      * @example
-     * // Update one Game
-     * const game = await prisma.game.update({
+     * // Update one GameUser
+     * const gameUser = await prisma.gameUser.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2043,30 +2225,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends GameUpdateArgs>(args: SelectSubset<T, GameUpdateArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends GameUserUpdateArgs>(args: SelectSubset<T, GameUserUpdateArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Games.
-     * @param {GameDeleteManyArgs} args - Arguments to filter Games to delete.
+     * Delete zero or more GameUsers.
+     * @param {GameUserDeleteManyArgs} args - Arguments to filter GameUsers to delete.
      * @example
-     * // Delete a few Games
-     * const { count } = await prisma.game.deleteMany({
+     * // Delete a few GameUsers
+     * const { count } = await prisma.gameUser.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends GameDeleteManyArgs>(args?: SelectSubset<T, GameDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends GameUserDeleteManyArgs>(args?: SelectSubset<T, GameUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Games.
+     * Update zero or more GameUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {GameUserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Games
-     * const game = await prisma.game.updateMany({
+     * // Update many GameUsers
+     * const gameUser = await prisma.gameUser.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2076,14 +2258,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends GameUpdateManyArgs>(args: SelectSubset<T, GameUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends GameUserUpdateManyArgs>(args: SelectSubset<T, GameUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Games and returns the data updated in the database.
-     * @param {GameUpdateManyAndReturnArgs} args - Arguments to update many Games.
+     * Update zero or more GameUsers and returns the data updated in the database.
+     * @param {GameUserUpdateManyAndReturnArgs} args - Arguments to update many GameUsers.
      * @example
-     * // Update many Games
-     * const game = await prisma.game.updateManyAndReturn({
+     * // Update many GameUsers
+     * const gameUser = await prisma.gameUser.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2092,8 +2274,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Games and only return the `id`
-     * const gameWithIdOnly = await prisma.game.updateManyAndReturn({
+     * // Update zero or more GameUsers and only return the `id`
+     * const gameUserWithIdOnly = await prisma.gameUser.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2106,56 +2288,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends GameUpdateManyAndReturnArgs>(args: SelectSubset<T, GameUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends GameUserUpdateManyAndReturnArgs>(args: SelectSubset<T, GameUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Game.
-     * @param {GameUpsertArgs} args - Arguments to update or create a Game.
+     * Create or update one GameUser.
+     * @param {GameUserUpsertArgs} args - Arguments to update or create a GameUser.
      * @example
-     * // Update or create a Game
-     * const game = await prisma.game.upsert({
+     * // Update or create a GameUser
+     * const gameUser = await prisma.gameUser.upsert({
      *   create: {
-     *     // ... data to create a Game
+     *     // ... data to create a GameUser
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Game we want to update
+     *     // ... the filter for the GameUser we want to update
      *   }
      * })
      */
-    upsert<T extends GameUpsertArgs>(args: SelectSubset<T, GameUpsertArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends GameUserUpsertArgs>(args: SelectSubset<T, GameUserUpsertArgs<ExtArgs>>): Prisma__GameUserClient<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Games.
+     * Count the number of GameUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameCountArgs} args - Arguments to filter Games to count.
+     * @param {GameUserCountArgs} args - Arguments to filter GameUsers to count.
      * @example
-     * // Count the number of Games
-     * const count = await prisma.game.count({
+     * // Count the number of GameUsers
+     * const count = await prisma.gameUser.count({
      *   where: {
-     *     // ... the filter for the Games we want to count
+     *     // ... the filter for the GameUsers we want to count
      *   }
      * })
     **/
-    count<T extends GameCountArgs>(
-      args?: Subset<T, GameCountArgs>,
+    count<T extends GameUserCountArgs>(
+      args?: Subset<T, GameUserCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], GameCountAggregateOutputType>
+          : GetScalarType<T['select'], GameUserCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Game.
+     * Allows you to perform aggregations operations on a GameUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {GameUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2175,13 +2357,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends GameAggregateArgs>(args: Subset<T, GameAggregateArgs>): Prisma.PrismaPromise<GetGameAggregateType<T>>
+    aggregate<T extends GameUserAggregateArgs>(args: Subset<T, GameUserAggregateArgs>): Prisma.PrismaPromise<GetGameUserAggregateType<T>>
 
     /**
-     * Group by Game.
+     * Group by GameUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GameGroupByArgs} args - Group by arguments.
+     * @param {GameUserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2196,14 +2378,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends GameGroupByArgs,
+      T extends GameUserGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GameGroupByArgs['orderBy'] }
-        : { orderBy?: GameGroupByArgs['orderBy'] },
+        ? { orderBy: GameUserGroupByArgs['orderBy'] }
+        : { orderBy?: GameUserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2252,20 +2434,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, GameGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGameGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, GameUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGameUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Game model
+   * Fields of the GameUser model
    */
-  readonly fields: GameFieldRefs;
+  readonly fields: GameUserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Game.
+   * The delegate class that acts as a "Promise-like" for GameUser.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__GameClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__GameUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -2294,428 +2476,428 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Game model
+   * Fields of the GameUser model
    */ 
-  interface GameFieldRefs {
-    readonly id: FieldRef<"Game", 'Int'>
-    readonly name: FieldRef<"Game", 'String'>
-    readonly platform: FieldRef<"Game", 'String'>
-    readonly status: FieldRef<"Game", 'Status'>
-    readonly genre: FieldRef<"Game", 'String'>
-    readonly releaseDate: FieldRef<"Game", 'DateTime'>
-    readonly notes: FieldRef<"Game", 'String'>
-    readonly userId: FieldRef<"Game", 'String'>
+  interface GameUserFieldRefs {
+    readonly id: FieldRef<"GameUser", 'Int'>
+    readonly name: FieldRef<"GameUser", 'String'>
+    readonly platform: FieldRef<"GameUser", 'String'>
+    readonly status: FieldRef<"GameUser", 'Status'>
+    readonly genre: FieldRef<"GameUser", 'String'>
+    readonly releaseDate: FieldRef<"GameUser", 'DateTime'>
+    readonly notes: FieldRef<"GameUser", 'String'>
+    readonly userId: FieldRef<"GameUser", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Game findUnique
+   * GameUser findUnique
    */
-  export type GameFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter, which Game to fetch.
+     * Filter, which GameUser to fetch.
      */
-    where: GameWhereUniqueInput
+    where: GameUserWhereUniqueInput
   }
 
   /**
-   * Game findUniqueOrThrow
+   * GameUser findUniqueOrThrow
    */
-  export type GameFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter, which Game to fetch.
+     * Filter, which GameUser to fetch.
      */
-    where: GameWhereUniqueInput
+    where: GameUserWhereUniqueInput
   }
 
   /**
-   * Game findFirst
+   * GameUser findFirst
    */
-  export type GameFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter, which Game to fetch.
+     * Filter, which GameUser to fetch.
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Games to fetch.
+     * Determine the order of GameUsers to fetch.
      */
-    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    orderBy?: GameUserOrderByWithRelationInput | GameUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Games.
+     * Sets the position for searching for GameUsers.
      */
-    cursor?: GameWhereUniqueInput
+    cursor?: GameUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Games from the position of the cursor.
+     * Take `±n` GameUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Games.
+     * Skip the first `n` GameUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Games.
+     * Filter by unique combinations of GameUsers.
      */
-    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+    distinct?: GameUserScalarFieldEnum | GameUserScalarFieldEnum[]
   }
 
   /**
-   * Game findFirstOrThrow
+   * GameUser findFirstOrThrow
    */
-  export type GameFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter, which Game to fetch.
+     * Filter, which GameUser to fetch.
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Games to fetch.
+     * Determine the order of GameUsers to fetch.
      */
-    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    orderBy?: GameUserOrderByWithRelationInput | GameUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Games.
+     * Sets the position for searching for GameUsers.
      */
-    cursor?: GameWhereUniqueInput
+    cursor?: GameUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Games from the position of the cursor.
+     * Take `±n` GameUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Games.
+     * Skip the first `n` GameUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Games.
+     * Filter by unique combinations of GameUsers.
      */
-    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+    distinct?: GameUserScalarFieldEnum | GameUserScalarFieldEnum[]
   }
 
   /**
-   * Game findMany
+   * GameUser findMany
    */
-  export type GameFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter, which Games to fetch.
+     * Filter, which GameUsers to fetch.
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Games to fetch.
+     * Determine the order of GameUsers to fetch.
      */
-    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    orderBy?: GameUserOrderByWithRelationInput | GameUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Games.
+     * Sets the position for listing GameUsers.
      */
-    cursor?: GameWhereUniqueInput
+    cursor?: GameUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Games from the position of the cursor.
+     * Take `±n` GameUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Games.
+     * Skip the first `n` GameUsers.
      */
     skip?: number
-    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+    distinct?: GameUserScalarFieldEnum | GameUserScalarFieldEnum[]
   }
 
   /**
-   * Game create
+   * GameUser create
    */
-  export type GameCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * The data needed to create a Game.
+     * The data needed to create a GameUser.
      */
-    data: XOR<GameCreateInput, GameUncheckedCreateInput>
+    data: XOR<GameUserCreateInput, GameUserUncheckedCreateInput>
   }
 
   /**
-   * Game createMany
+   * GameUser createMany
    */
-  export type GameCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Games.
+     * The data used to create many GameUsers.
      */
-    data: GameCreateManyInput | GameCreateManyInput[]
+    data: GameUserCreateManyInput | GameUserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Game createManyAndReturn
+   * GameUser createManyAndReturn
    */
-  export type GameCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelectCreateManyAndReturn<ExtArgs> | null
+    select?: GameUserSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
-     * The data used to create many Games.
+     * The data used to create many GameUsers.
      */
-    data: GameCreateManyInput | GameCreateManyInput[]
+    data: GameUserCreateManyInput | GameUserCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: GameUserIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Game update
+   * GameUser update
    */
-  export type GameUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * The data needed to update a Game.
+     * The data needed to update a GameUser.
      */
-    data: XOR<GameUpdateInput, GameUncheckedUpdateInput>
+    data: XOR<GameUserUpdateInput, GameUserUncheckedUpdateInput>
     /**
-     * Choose, which Game to update.
+     * Choose, which GameUser to update.
      */
-    where: GameWhereUniqueInput
+    where: GameUserWhereUniqueInput
   }
 
   /**
-   * Game updateMany
+   * GameUser updateMany
    */
-  export type GameUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Games.
+     * The data used to update GameUsers.
      */
-    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyInput>
+    data: XOR<GameUserUpdateManyMutationInput, GameUserUncheckedUpdateManyInput>
     /**
-     * Filter which Games to update
+     * Filter which GameUsers to update
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
-     * Limit how many Games to update.
+     * Limit how many GameUsers to update.
      */
     limit?: number
   }
 
   /**
-   * Game updateManyAndReturn
+   * GameUser updateManyAndReturn
    */
-  export type GameUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: GameUserSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
-     * The data used to update Games.
+     * The data used to update GameUsers.
      */
-    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyInput>
+    data: XOR<GameUserUpdateManyMutationInput, GameUserUncheckedUpdateManyInput>
     /**
-     * Filter which Games to update
+     * Filter which GameUsers to update
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
-     * Limit how many Games to update.
+     * Limit how many GameUsers to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: GameUserIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Game upsert
+   * GameUser upsert
    */
-  export type GameUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * The filter to search for the Game to update in case it exists.
+     * The filter to search for the GameUser to update in case it exists.
      */
-    where: GameWhereUniqueInput
+    where: GameUserWhereUniqueInput
     /**
-     * In case the Game found by the `where` argument doesn't exist, create a new Game with this data.
+     * In case the GameUser found by the `where` argument doesn't exist, create a new GameUser with this data.
      */
-    create: XOR<GameCreateInput, GameUncheckedCreateInput>
+    create: XOR<GameUserCreateInput, GameUserUncheckedCreateInput>
     /**
-     * In case the Game was found with the provided `where` argument, update it with this data.
+     * In case the GameUser was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<GameUpdateInput, GameUncheckedUpdateInput>
+    update: XOR<GameUserUpdateInput, GameUserUncheckedUpdateInput>
   }
 
   /**
-   * Game delete
+   * GameUser delete
    */
-  export type GameDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
     /**
-     * Filter which Game to delete.
+     * Filter which GameUser to delete.
      */
-    where: GameWhereUniqueInput
+    where: GameUserWhereUniqueInput
   }
 
   /**
-   * Game deleteMany
+   * GameUser deleteMany
    */
-  export type GameDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Games to delete
+     * Filter which GameUsers to delete
      */
-    where?: GameWhereInput
+    where?: GameUserWhereInput
     /**
-     * Limit how many Games to delete.
+     * Limit how many GameUsers to delete.
      */
     limit?: number
   }
 
   /**
-   * Game without action
+   * GameUser without action
    */
-  export type GameDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GameUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
+    include?: GameUserInclude<ExtArgs> | null
   }
 
 
@@ -5857,6 +6039,2938 @@ export namespace Prisma {
 
 
   /**
+   * Model Platform
+   */
+
+  export type AggregatePlatform = {
+    _count: PlatformCountAggregateOutputType | null
+    _avg: PlatformAvgAggregateOutputType | null
+    _sum: PlatformSumAggregateOutputType | null
+    _min: PlatformMinAggregateOutputType | null
+    _max: PlatformMaxAggregateOutputType | null
+  }
+
+  export type PlatformAvgAggregateOutputType = {
+    id: number | null
+    generation: number | null
+    platform_family: number | null
+    platform_logo: number | null
+    platform_type: number | null
+    versions: number | null
+    websites: number | null
+  }
+
+  export type PlatformSumAggregateOutputType = {
+    id: number | null
+    generation: number | null
+    platform_family: number | null
+    platform_logo: number | null
+    platform_type: number | null
+    versions: number[]
+    websites: number[]
+  }
+
+  export type PlatformMinAggregateOutputType = {
+    id: number | null
+    abbreviation: string | null
+    alternative_name: string | null
+    checksum: string | null
+    created_at: Date | null
+    generation: number | null
+    name: string | null
+    platform_family: number | null
+    platform_logo: number | null
+    platform_type: number | null
+    slug: string | null
+    summary: string | null
+    updated_at: Date | null
+    url: string | null
+  }
+
+  export type PlatformMaxAggregateOutputType = {
+    id: number | null
+    abbreviation: string | null
+    alternative_name: string | null
+    checksum: string | null
+    created_at: Date | null
+    generation: number | null
+    name: string | null
+    platform_family: number | null
+    platform_logo: number | null
+    platform_type: number | null
+    slug: string | null
+    summary: string | null
+    updated_at: Date | null
+    url: string | null
+  }
+
+  export type PlatformCountAggregateOutputType = {
+    id: number
+    abbreviation: number
+    alternative_name: number
+    checksum: number
+    created_at: number
+    generation: number
+    name: number
+    platform_family: number
+    platform_logo: number
+    platform_type: number
+    slug: number
+    summary: number
+    updated_at: number
+    url: number
+    versions: number
+    websites: number
+    _all: number
+  }
+
+
+  export type PlatformAvgAggregateInputType = {
+    id?: true
+    generation?: true
+    platform_family?: true
+    platform_logo?: true
+    platform_type?: true
+    versions?: true
+    websites?: true
+  }
+
+  export type PlatformSumAggregateInputType = {
+    id?: true
+    generation?: true
+    platform_family?: true
+    platform_logo?: true
+    platform_type?: true
+    versions?: true
+    websites?: true
+  }
+
+  export type PlatformMinAggregateInputType = {
+    id?: true
+    abbreviation?: true
+    alternative_name?: true
+    checksum?: true
+    created_at?: true
+    generation?: true
+    name?: true
+    platform_family?: true
+    platform_logo?: true
+    platform_type?: true
+    slug?: true
+    summary?: true
+    updated_at?: true
+    url?: true
+  }
+
+  export type PlatformMaxAggregateInputType = {
+    id?: true
+    abbreviation?: true
+    alternative_name?: true
+    checksum?: true
+    created_at?: true
+    generation?: true
+    name?: true
+    platform_family?: true
+    platform_logo?: true
+    platform_type?: true
+    slug?: true
+    summary?: true
+    updated_at?: true
+    url?: true
+  }
+
+  export type PlatformCountAggregateInputType = {
+    id?: true
+    abbreviation?: true
+    alternative_name?: true
+    checksum?: true
+    created_at?: true
+    generation?: true
+    name?: true
+    platform_family?: true
+    platform_logo?: true
+    platform_type?: true
+    slug?: true
+    summary?: true
+    updated_at?: true
+    url?: true
+    versions?: true
+    websites?: true
+    _all?: true
+  }
+
+  export type PlatformAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Platform to aggregate.
+     */
+    where?: PlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformOrderByWithRelationInput | PlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Platforms
+    **/
+    _count?: true | PlatformCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlatformAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlatformSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlatformMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlatformMaxAggregateInputType
+  }
+
+  export type GetPlatformAggregateType<T extends PlatformAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlatform]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlatform[P]>
+      : GetScalarType<T[P], AggregatePlatform[P]>
+  }
+
+
+
+
+  export type PlatformGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlatformWhereInput
+    orderBy?: PlatformOrderByWithAggregationInput | PlatformOrderByWithAggregationInput[]
+    by: PlatformScalarFieldEnum[] | PlatformScalarFieldEnum
+    having?: PlatformScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlatformCountAggregateInputType | true
+    _avg?: PlatformAvgAggregateInputType
+    _sum?: PlatformSumAggregateInputType
+    _min?: PlatformMinAggregateInputType
+    _max?: PlatformMaxAggregateInputType
+  }
+
+  export type PlatformGroupByOutputType = {
+    id: number
+    abbreviation: string | null
+    alternative_name: string | null
+    checksum: string | null
+    created_at: Date
+    generation: number | null
+    name: string | null
+    platform_family: number | null
+    platform_logo: number | null
+    platform_type: number | null
+    slug: string | null
+    summary: string | null
+    updated_at: Date
+    url: string | null
+    versions: number[]
+    websites: number[]
+    _count: PlatformCountAggregateOutputType | null
+    _avg: PlatformAvgAggregateOutputType | null
+    _sum: PlatformSumAggregateOutputType | null
+    _min: PlatformMinAggregateOutputType | null
+    _max: PlatformMaxAggregateOutputType | null
+  }
+
+  type GetPlatformGroupByPayload<T extends PlatformGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlatformGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlatformGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlatformGroupByOutputType[P]>
+            : GetScalarType<T[P], PlatformGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlatformSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    abbreviation?: boolean
+    alternative_name?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    generation?: boolean
+    name?: boolean
+    platform_family?: boolean
+    platform_logo?: boolean
+    platform_type?: boolean
+    slug?: boolean
+    summary?: boolean
+    updated_at?: boolean
+    url?: boolean
+    versions?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["platform"]>
+
+  export type PlatformSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    abbreviation?: boolean
+    alternative_name?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    generation?: boolean
+    name?: boolean
+    platform_family?: boolean
+    platform_logo?: boolean
+    platform_type?: boolean
+    slug?: boolean
+    summary?: boolean
+    updated_at?: boolean
+    url?: boolean
+    versions?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["platform"]>
+
+  export type PlatformSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    abbreviation?: boolean
+    alternative_name?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    generation?: boolean
+    name?: boolean
+    platform_family?: boolean
+    platform_logo?: boolean
+    platform_type?: boolean
+    slug?: boolean
+    summary?: boolean
+    updated_at?: boolean
+    url?: boolean
+    versions?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["platform"]>
+
+  export type PlatformSelectScalar = {
+    id?: boolean
+    abbreviation?: boolean
+    alternative_name?: boolean
+    checksum?: boolean
+    created_at?: boolean
+    generation?: boolean
+    name?: boolean
+    platform_family?: boolean
+    platform_logo?: boolean
+    platform_type?: boolean
+    slug?: boolean
+    summary?: boolean
+    updated_at?: boolean
+    url?: boolean
+    versions?: boolean
+    websites?: boolean
+  }
+
+  export type PlatformOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "abbreviation" | "alternative_name" | "checksum" | "created_at" | "generation" | "name" | "platform_family" | "platform_logo" | "platform_type" | "slug" | "summary" | "updated_at" | "url" | "versions" | "websites", ExtArgs["result"]["platform"]>
+
+  export type $PlatformPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Platform"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      abbreviation: string | null
+      alternative_name: string | null
+      checksum: string | null
+      created_at: Date
+      generation: number | null
+      name: string | null
+      platform_family: number | null
+      platform_logo: number | null
+      platform_type: number | null
+      slug: string | null
+      summary: string | null
+      updated_at: Date
+      url: string | null
+      versions: number[]
+      websites: number[]
+    }, ExtArgs["result"]["platform"]>
+    composites: {}
+  }
+
+  type PlatformGetPayload<S extends boolean | null | undefined | PlatformDefaultArgs> = $Result.GetResult<Prisma.$PlatformPayload, S>
+
+  type PlatformCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlatformFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlatformCountAggregateInputType | true
+    }
+
+  export interface PlatformDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Platform'], meta: { name: 'Platform' } }
+    /**
+     * Find zero or one Platform that matches the filter.
+     * @param {PlatformFindUniqueArgs} args - Arguments to find a Platform
+     * @example
+     * // Get one Platform
+     * const platform = await prisma.platform.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlatformFindUniqueArgs>(args: SelectSubset<T, PlatformFindUniqueArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Platform that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlatformFindUniqueOrThrowArgs} args - Arguments to find a Platform
+     * @example
+     * // Get one Platform
+     * const platform = await prisma.platform.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlatformFindUniqueOrThrowArgs>(args: SelectSubset<T, PlatformFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Platform that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformFindFirstArgs} args - Arguments to find a Platform
+     * @example
+     * // Get one Platform
+     * const platform = await prisma.platform.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlatformFindFirstArgs>(args?: SelectSubset<T, PlatformFindFirstArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Platform that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformFindFirstOrThrowArgs} args - Arguments to find a Platform
+     * @example
+     * // Get one Platform
+     * const platform = await prisma.platform.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlatformFindFirstOrThrowArgs>(args?: SelectSubset<T, PlatformFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Platforms that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Platforms
+     * const platforms = await prisma.platform.findMany()
+     * 
+     * // Get first 10 Platforms
+     * const platforms = await prisma.platform.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const platformWithIdOnly = await prisma.platform.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlatformFindManyArgs>(args?: SelectSubset<T, PlatformFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Platform.
+     * @param {PlatformCreateArgs} args - Arguments to create a Platform.
+     * @example
+     * // Create one Platform
+     * const Platform = await prisma.platform.create({
+     *   data: {
+     *     // ... data to create a Platform
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlatformCreateArgs>(args: SelectSubset<T, PlatformCreateArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Platforms.
+     * @param {PlatformCreateManyArgs} args - Arguments to create many Platforms.
+     * @example
+     * // Create many Platforms
+     * const platform = await prisma.platform.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlatformCreateManyArgs>(args?: SelectSubset<T, PlatformCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Platforms and returns the data saved in the database.
+     * @param {PlatformCreateManyAndReturnArgs} args - Arguments to create many Platforms.
+     * @example
+     * // Create many Platforms
+     * const platform = await prisma.platform.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Platforms and only return the `id`
+     * const platformWithIdOnly = await prisma.platform.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlatformCreateManyAndReturnArgs>(args?: SelectSubset<T, PlatformCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Platform.
+     * @param {PlatformDeleteArgs} args - Arguments to delete one Platform.
+     * @example
+     * // Delete one Platform
+     * const Platform = await prisma.platform.delete({
+     *   where: {
+     *     // ... filter to delete one Platform
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlatformDeleteArgs>(args: SelectSubset<T, PlatformDeleteArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Platform.
+     * @param {PlatformUpdateArgs} args - Arguments to update one Platform.
+     * @example
+     * // Update one Platform
+     * const platform = await prisma.platform.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlatformUpdateArgs>(args: SelectSubset<T, PlatformUpdateArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Platforms.
+     * @param {PlatformDeleteManyArgs} args - Arguments to filter Platforms to delete.
+     * @example
+     * // Delete a few Platforms
+     * const { count } = await prisma.platform.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlatformDeleteManyArgs>(args?: SelectSubset<T, PlatformDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Platforms
+     * const platform = await prisma.platform.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlatformUpdateManyArgs>(args: SelectSubset<T, PlatformUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Platforms and returns the data updated in the database.
+     * @param {PlatformUpdateManyAndReturnArgs} args - Arguments to update many Platforms.
+     * @example
+     * // Update many Platforms
+     * const platform = await prisma.platform.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Platforms and only return the `id`
+     * const platformWithIdOnly = await prisma.platform.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlatformUpdateManyAndReturnArgs>(args: SelectSubset<T, PlatformUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Platform.
+     * @param {PlatformUpsertArgs} args - Arguments to update or create a Platform.
+     * @example
+     * // Update or create a Platform
+     * const platform = await prisma.platform.upsert({
+     *   create: {
+     *     // ... data to create a Platform
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Platform we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlatformUpsertArgs>(args: SelectSubset<T, PlatformUpsertArgs<ExtArgs>>): Prisma__PlatformClient<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Platforms.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformCountArgs} args - Arguments to filter Platforms to count.
+     * @example
+     * // Count the number of Platforms
+     * const count = await prisma.platform.count({
+     *   where: {
+     *     // ... the filter for the Platforms we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlatformCountArgs>(
+      args?: Subset<T, PlatformCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlatformCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Platform.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlatformAggregateArgs>(args: Subset<T, PlatformAggregateArgs>): Prisma.PrismaPromise<GetPlatformAggregateType<T>>
+
+    /**
+     * Group by Platform.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlatformGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlatformGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlatformGroupByArgs['orderBy'] }
+        : { orderBy?: PlatformGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlatformGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlatformGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Platform model
+   */
+  readonly fields: PlatformFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Platform.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlatformClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Platform model
+   */ 
+  interface PlatformFieldRefs {
+    readonly id: FieldRef<"Platform", 'Int'>
+    readonly abbreviation: FieldRef<"Platform", 'String'>
+    readonly alternative_name: FieldRef<"Platform", 'String'>
+    readonly checksum: FieldRef<"Platform", 'String'>
+    readonly created_at: FieldRef<"Platform", 'DateTime'>
+    readonly generation: FieldRef<"Platform", 'Int'>
+    readonly name: FieldRef<"Platform", 'String'>
+    readonly platform_family: FieldRef<"Platform", 'Int'>
+    readonly platform_logo: FieldRef<"Platform", 'Int'>
+    readonly platform_type: FieldRef<"Platform", 'Int'>
+    readonly slug: FieldRef<"Platform", 'String'>
+    readonly summary: FieldRef<"Platform", 'String'>
+    readonly updated_at: FieldRef<"Platform", 'DateTime'>
+    readonly url: FieldRef<"Platform", 'String'>
+    readonly versions: FieldRef<"Platform", 'Int[]'>
+    readonly websites: FieldRef<"Platform", 'Int[]'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Platform findUnique
+   */
+  export type PlatformFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter, which Platform to fetch.
+     */
+    where: PlatformWhereUniqueInput
+  }
+
+  /**
+   * Platform findUniqueOrThrow
+   */
+  export type PlatformFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter, which Platform to fetch.
+     */
+    where: PlatformWhereUniqueInput
+  }
+
+  /**
+   * Platform findFirst
+   */
+  export type PlatformFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter, which Platform to fetch.
+     */
+    where?: PlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformOrderByWithRelationInput | PlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Platforms.
+     */
+    cursor?: PlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Platforms.
+     */
+    distinct?: PlatformScalarFieldEnum | PlatformScalarFieldEnum[]
+  }
+
+  /**
+   * Platform findFirstOrThrow
+   */
+  export type PlatformFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter, which Platform to fetch.
+     */
+    where?: PlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformOrderByWithRelationInput | PlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Platforms.
+     */
+    cursor?: PlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Platforms.
+     */
+    distinct?: PlatformScalarFieldEnum | PlatformScalarFieldEnum[]
+  }
+
+  /**
+   * Platform findMany
+   */
+  export type PlatformFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter, which Platforms to fetch.
+     */
+    where?: PlatformWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Platforms to fetch.
+     */
+    orderBy?: PlatformOrderByWithRelationInput | PlatformOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Platforms.
+     */
+    cursor?: PlatformWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Platforms from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Platforms.
+     */
+    skip?: number
+    distinct?: PlatformScalarFieldEnum | PlatformScalarFieldEnum[]
+  }
+
+  /**
+   * Platform create
+   */
+  export type PlatformCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Platform.
+     */
+    data: XOR<PlatformCreateInput, PlatformUncheckedCreateInput>
+  }
+
+  /**
+   * Platform createMany
+   */
+  export type PlatformCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Platforms.
+     */
+    data: PlatformCreateManyInput | PlatformCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Platform createManyAndReturn
+   */
+  export type PlatformCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * The data used to create many Platforms.
+     */
+    data: PlatformCreateManyInput | PlatformCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Platform update
+   */
+  export type PlatformUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Platform.
+     */
+    data: XOR<PlatformUpdateInput, PlatformUncheckedUpdateInput>
+    /**
+     * Choose, which Platform to update.
+     */
+    where: PlatformWhereUniqueInput
+  }
+
+  /**
+   * Platform updateMany
+   */
+  export type PlatformUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Platforms.
+     */
+    data: XOR<PlatformUpdateManyMutationInput, PlatformUncheckedUpdateManyInput>
+    /**
+     * Filter which Platforms to update
+     */
+    where?: PlatformWhereInput
+    /**
+     * Limit how many Platforms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Platform updateManyAndReturn
+   */
+  export type PlatformUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * The data used to update Platforms.
+     */
+    data: XOR<PlatformUpdateManyMutationInput, PlatformUncheckedUpdateManyInput>
+    /**
+     * Filter which Platforms to update
+     */
+    where?: PlatformWhereInput
+    /**
+     * Limit how many Platforms to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Platform upsert
+   */
+  export type PlatformUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Platform to update in case it exists.
+     */
+    where: PlatformWhereUniqueInput
+    /**
+     * In case the Platform found by the `where` argument doesn't exist, create a new Platform with this data.
+     */
+    create: XOR<PlatformCreateInput, PlatformUncheckedCreateInput>
+    /**
+     * In case the Platform was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlatformUpdateInput, PlatformUncheckedUpdateInput>
+  }
+
+  /**
+   * Platform delete
+   */
+  export type PlatformDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Filter which Platform to delete.
+     */
+    where: PlatformWhereUniqueInput
+  }
+
+  /**
+   * Platform deleteMany
+   */
+  export type PlatformDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Platforms to delete
+     */
+    where?: PlatformWhereInput
+    /**
+     * Limit how many Platforms to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Platform without action
+   */
+  export type PlatformDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Game
+   */
+
+  export type AggregateGame = {
+    _count: GameCountAggregateOutputType | null
+    _avg: GameAvgAggregateOutputType | null
+    _sum: GameSumAggregateOutputType | null
+    _min: GameMinAggregateOutputType | null
+    _max: GameMaxAggregateOutputType | null
+  }
+
+  export type GameAvgAggregateOutputType = {
+    id: number | null
+    age_ratings: number | null
+    aggregated_rating: number | null
+    aggregated_rating_count: number | null
+    alternative_names: number | null
+    artworks: number | null
+    bundles: number | null
+    collections: number | null
+    cover: number | null
+    dlcs: number | null
+    expanded_games: number | null
+    expansions: number | null
+    external_games: number | null
+    first_release_date: number | null
+    forks: number | null
+    franchise: number | null
+    franchises: number | null
+    game_engines: number | null
+    game_localizations: number | null
+    game_modes: number | null
+    game_status: number | null
+    game_type: number | null
+    genres: number | null
+    hypes: number | null
+    involved_companies: number | null
+    keywords: number | null
+    language_supports: number | null
+    multiplayer_modes: number | null
+    parent_game: number | null
+    platforms: number | null
+    player_perspectives: number | null
+    ports: number | null
+    rating: number | null
+    rating_count: number | null
+    release_dates: number | null
+    remakes: number | null
+    remasters: number | null
+    screenshots: number | null
+    similar_games: number | null
+    standalone_expansions: number | null
+    tags: number | null
+    themes: number | null
+    total_rating: number | null
+    total_rating_count: number | null
+    version_parent: number | null
+    videos: number | null
+    websites: number | null
+  }
+
+  export type GameSumAggregateOutputType = {
+    id: number | null
+    age_ratings: number[]
+    aggregated_rating: number | null
+    aggregated_rating_count: number | null
+    alternative_names: number[]
+    artworks: number[]
+    bundles: number[]
+    collections: number[]
+    cover: number | null
+    dlcs: number[]
+    expanded_games: number[]
+    expansions: number[]
+    external_games: number[]
+    first_release_date: number | null
+    forks: number[]
+    franchise: number | null
+    franchises: number[]
+    game_engines: number[]
+    game_localizations: number[]
+    game_modes: number[]
+    game_status: number | null
+    game_type: number | null
+    genres: number[]
+    hypes: number | null
+    involved_companies: number[]
+    keywords: number[]
+    language_supports: number[]
+    multiplayer_modes: number[]
+    parent_game: number | null
+    platforms: number[]
+    player_perspectives: number[]
+    ports: number[]
+    rating: number | null
+    rating_count: number | null
+    release_dates: number[]
+    remakes: number[]
+    remasters: number[]
+    screenshots: number[]
+    similar_games: number[]
+    standalone_expansions: number[]
+    tags: number[]
+    themes: number[]
+    total_rating: number | null
+    total_rating_count: number | null
+    version_parent: number[]
+    videos: number[]
+    websites: number[]
+  }
+
+  export type GameMinAggregateOutputType = {
+    id: number | null
+    aggregated_rating: number | null
+    aggregated_rating_count: number | null
+    checksum: string | null
+    cover: number | null
+    created_at: Date | null
+    first_release_date: number | null
+    franchise: number | null
+    game_status: number | null
+    game_type: number | null
+    hypes: number | null
+    name: string | null
+    parent_game: number | null
+    rating: number | null
+    rating_count: number | null
+    slug: string | null
+    storyline: string | null
+    summary: string | null
+    total_rating: number | null
+    total_rating_count: number | null
+    updated_at: Date | null
+    url: string | null
+    version_title: string | null
+  }
+
+  export type GameMaxAggregateOutputType = {
+    id: number | null
+    aggregated_rating: number | null
+    aggregated_rating_count: number | null
+    checksum: string | null
+    cover: number | null
+    created_at: Date | null
+    first_release_date: number | null
+    franchise: number | null
+    game_status: number | null
+    game_type: number | null
+    hypes: number | null
+    name: string | null
+    parent_game: number | null
+    rating: number | null
+    rating_count: number | null
+    slug: string | null
+    storyline: string | null
+    summary: string | null
+    total_rating: number | null
+    total_rating_count: number | null
+    updated_at: Date | null
+    url: string | null
+    version_title: string | null
+  }
+
+  export type GameCountAggregateOutputType = {
+    id: number
+    age_ratings: number
+    aggregated_rating: number
+    aggregated_rating_count: number
+    alternative_names: number
+    artworks: number
+    bundles: number
+    checksum: number
+    collections: number
+    cover: number
+    created_at: number
+    dlcs: number
+    expanded_games: number
+    expansions: number
+    external_games: number
+    first_release_date: number
+    forks: number
+    franchise: number
+    franchises: number
+    game_engines: number
+    game_localizations: number
+    game_modes: number
+    game_status: number
+    game_type: number
+    genres: number
+    hypes: number
+    involved_companies: number
+    keywords: number
+    language_supports: number
+    multiplayer_modes: number
+    name: number
+    parent_game: number
+    platforms: number
+    player_perspectives: number
+    ports: number
+    rating: number
+    rating_count: number
+    release_dates: number
+    remakes: number
+    remasters: number
+    screenshots: number
+    similar_games: number
+    slug: number
+    standalone_expansions: number
+    storyline: number
+    summary: number
+    tags: number
+    themes: number
+    total_rating: number
+    total_rating_count: number
+    updated_at: number
+    url: number
+    version_parent: number
+    version_title: number
+    videos: number
+    websites: number
+    _all: number
+  }
+
+
+  export type GameAvgAggregateInputType = {
+    id?: true
+    age_ratings?: true
+    aggregated_rating?: true
+    aggregated_rating_count?: true
+    alternative_names?: true
+    artworks?: true
+    bundles?: true
+    collections?: true
+    cover?: true
+    dlcs?: true
+    expanded_games?: true
+    expansions?: true
+    external_games?: true
+    first_release_date?: true
+    forks?: true
+    franchise?: true
+    franchises?: true
+    game_engines?: true
+    game_localizations?: true
+    game_modes?: true
+    game_status?: true
+    game_type?: true
+    genres?: true
+    hypes?: true
+    involved_companies?: true
+    keywords?: true
+    language_supports?: true
+    multiplayer_modes?: true
+    parent_game?: true
+    platforms?: true
+    player_perspectives?: true
+    ports?: true
+    rating?: true
+    rating_count?: true
+    release_dates?: true
+    remakes?: true
+    remasters?: true
+    screenshots?: true
+    similar_games?: true
+    standalone_expansions?: true
+    tags?: true
+    themes?: true
+    total_rating?: true
+    total_rating_count?: true
+    version_parent?: true
+    videos?: true
+    websites?: true
+  }
+
+  export type GameSumAggregateInputType = {
+    id?: true
+    age_ratings?: true
+    aggregated_rating?: true
+    aggregated_rating_count?: true
+    alternative_names?: true
+    artworks?: true
+    bundles?: true
+    collections?: true
+    cover?: true
+    dlcs?: true
+    expanded_games?: true
+    expansions?: true
+    external_games?: true
+    first_release_date?: true
+    forks?: true
+    franchise?: true
+    franchises?: true
+    game_engines?: true
+    game_localizations?: true
+    game_modes?: true
+    game_status?: true
+    game_type?: true
+    genres?: true
+    hypes?: true
+    involved_companies?: true
+    keywords?: true
+    language_supports?: true
+    multiplayer_modes?: true
+    parent_game?: true
+    platforms?: true
+    player_perspectives?: true
+    ports?: true
+    rating?: true
+    rating_count?: true
+    release_dates?: true
+    remakes?: true
+    remasters?: true
+    screenshots?: true
+    similar_games?: true
+    standalone_expansions?: true
+    tags?: true
+    themes?: true
+    total_rating?: true
+    total_rating_count?: true
+    version_parent?: true
+    videos?: true
+    websites?: true
+  }
+
+  export type GameMinAggregateInputType = {
+    id?: true
+    aggregated_rating?: true
+    aggregated_rating_count?: true
+    checksum?: true
+    cover?: true
+    created_at?: true
+    first_release_date?: true
+    franchise?: true
+    game_status?: true
+    game_type?: true
+    hypes?: true
+    name?: true
+    parent_game?: true
+    rating?: true
+    rating_count?: true
+    slug?: true
+    storyline?: true
+    summary?: true
+    total_rating?: true
+    total_rating_count?: true
+    updated_at?: true
+    url?: true
+    version_title?: true
+  }
+
+  export type GameMaxAggregateInputType = {
+    id?: true
+    aggregated_rating?: true
+    aggregated_rating_count?: true
+    checksum?: true
+    cover?: true
+    created_at?: true
+    first_release_date?: true
+    franchise?: true
+    game_status?: true
+    game_type?: true
+    hypes?: true
+    name?: true
+    parent_game?: true
+    rating?: true
+    rating_count?: true
+    slug?: true
+    storyline?: true
+    summary?: true
+    total_rating?: true
+    total_rating_count?: true
+    updated_at?: true
+    url?: true
+    version_title?: true
+  }
+
+  export type GameCountAggregateInputType = {
+    id?: true
+    age_ratings?: true
+    aggregated_rating?: true
+    aggregated_rating_count?: true
+    alternative_names?: true
+    artworks?: true
+    bundles?: true
+    checksum?: true
+    collections?: true
+    cover?: true
+    created_at?: true
+    dlcs?: true
+    expanded_games?: true
+    expansions?: true
+    external_games?: true
+    first_release_date?: true
+    forks?: true
+    franchise?: true
+    franchises?: true
+    game_engines?: true
+    game_localizations?: true
+    game_modes?: true
+    game_status?: true
+    game_type?: true
+    genres?: true
+    hypes?: true
+    involved_companies?: true
+    keywords?: true
+    language_supports?: true
+    multiplayer_modes?: true
+    name?: true
+    parent_game?: true
+    platforms?: true
+    player_perspectives?: true
+    ports?: true
+    rating?: true
+    rating_count?: true
+    release_dates?: true
+    remakes?: true
+    remasters?: true
+    screenshots?: true
+    similar_games?: true
+    slug?: true
+    standalone_expansions?: true
+    storyline?: true
+    summary?: true
+    tags?: true
+    themes?: true
+    total_rating?: true
+    total_rating_count?: true
+    updated_at?: true
+    url?: true
+    version_parent?: true
+    version_title?: true
+    videos?: true
+    websites?: true
+    _all?: true
+  }
+
+  export type GameAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Game to aggregate.
+     */
+    where?: GameWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GameWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Games
+    **/
+    _count?: true | GameCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GameAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GameSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GameMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GameMaxAggregateInputType
+  }
+
+  export type GetGameAggregateType<T extends GameAggregateArgs> = {
+        [P in keyof T & keyof AggregateGame]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGame[P]>
+      : GetScalarType<T[P], AggregateGame[P]>
+  }
+
+
+
+
+  export type GameGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameWhereInput
+    orderBy?: GameOrderByWithAggregationInput | GameOrderByWithAggregationInput[]
+    by: GameScalarFieldEnum[] | GameScalarFieldEnum
+    having?: GameScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GameCountAggregateInputType | true
+    _avg?: GameAvgAggregateInputType
+    _sum?: GameSumAggregateInputType
+    _min?: GameMinAggregateInputType
+    _max?: GameMaxAggregateInputType
+  }
+
+  export type GameGroupByOutputType = {
+    id: number
+    age_ratings: number[]
+    aggregated_rating: number | null
+    aggregated_rating_count: number | null
+    alternative_names: number[]
+    artworks: number[]
+    bundles: number[]
+    checksum: string
+    collections: number[]
+    cover: number | null
+    created_at: Date
+    dlcs: number[]
+    expanded_games: number[]
+    expansions: number[]
+    external_games: number[]
+    first_release_date: number | null
+    forks: number[]
+    franchise: number | null
+    franchises: number[]
+    game_engines: number[]
+    game_localizations: number[]
+    game_modes: number[]
+    game_status: number | null
+    game_type: number | null
+    genres: number[]
+    hypes: number | null
+    involved_companies: number[]
+    keywords: number[]
+    language_supports: number[]
+    multiplayer_modes: number[]
+    name: string
+    parent_game: number | null
+    platforms: number[]
+    player_perspectives: number[]
+    ports: number[]
+    rating: number | null
+    rating_count: number | null
+    release_dates: number[]
+    remakes: number[]
+    remasters: number[]
+    screenshots: number[]
+    similar_games: number[]
+    slug: string
+    standalone_expansions: number[]
+    storyline: string | null
+    summary: string | null
+    tags: number[]
+    themes: number[]
+    total_rating: number | null
+    total_rating_count: number | null
+    updated_at: Date
+    url: string | null
+    version_parent: number[]
+    version_title: string | null
+    videos: number[]
+    websites: number[]
+    _count: GameCountAggregateOutputType | null
+    _avg: GameAvgAggregateOutputType | null
+    _sum: GameSumAggregateOutputType | null
+    _min: GameMinAggregateOutputType | null
+    _max: GameMaxAggregateOutputType | null
+  }
+
+  type GetGameGroupByPayload<T extends GameGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GameGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GameGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GameGroupByOutputType[P]>
+            : GetScalarType<T[P], GameGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GameSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    age_ratings?: boolean
+    aggregated_rating?: boolean
+    aggregated_rating_count?: boolean
+    alternative_names?: boolean
+    artworks?: boolean
+    bundles?: boolean
+    checksum?: boolean
+    collections?: boolean
+    cover?: boolean
+    created_at?: boolean
+    dlcs?: boolean
+    expanded_games?: boolean
+    expansions?: boolean
+    external_games?: boolean
+    first_release_date?: boolean
+    forks?: boolean
+    franchise?: boolean
+    franchises?: boolean
+    game_engines?: boolean
+    game_localizations?: boolean
+    game_modes?: boolean
+    game_status?: boolean
+    game_type?: boolean
+    genres?: boolean
+    hypes?: boolean
+    involved_companies?: boolean
+    keywords?: boolean
+    language_supports?: boolean
+    multiplayer_modes?: boolean
+    name?: boolean
+    parent_game?: boolean
+    platforms?: boolean
+    player_perspectives?: boolean
+    ports?: boolean
+    rating?: boolean
+    rating_count?: boolean
+    release_dates?: boolean
+    remakes?: boolean
+    remasters?: boolean
+    screenshots?: boolean
+    similar_games?: boolean
+    slug?: boolean
+    standalone_expansions?: boolean
+    storyline?: boolean
+    summary?: boolean
+    tags?: boolean
+    themes?: boolean
+    total_rating?: boolean
+    total_rating_count?: boolean
+    updated_at?: boolean
+    url?: boolean
+    version_parent?: boolean
+    version_title?: boolean
+    videos?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["game"]>
+
+  export type GameSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    age_ratings?: boolean
+    aggregated_rating?: boolean
+    aggregated_rating_count?: boolean
+    alternative_names?: boolean
+    artworks?: boolean
+    bundles?: boolean
+    checksum?: boolean
+    collections?: boolean
+    cover?: boolean
+    created_at?: boolean
+    dlcs?: boolean
+    expanded_games?: boolean
+    expansions?: boolean
+    external_games?: boolean
+    first_release_date?: boolean
+    forks?: boolean
+    franchise?: boolean
+    franchises?: boolean
+    game_engines?: boolean
+    game_localizations?: boolean
+    game_modes?: boolean
+    game_status?: boolean
+    game_type?: boolean
+    genres?: boolean
+    hypes?: boolean
+    involved_companies?: boolean
+    keywords?: boolean
+    language_supports?: boolean
+    multiplayer_modes?: boolean
+    name?: boolean
+    parent_game?: boolean
+    platforms?: boolean
+    player_perspectives?: boolean
+    ports?: boolean
+    rating?: boolean
+    rating_count?: boolean
+    release_dates?: boolean
+    remakes?: boolean
+    remasters?: boolean
+    screenshots?: boolean
+    similar_games?: boolean
+    slug?: boolean
+    standalone_expansions?: boolean
+    storyline?: boolean
+    summary?: boolean
+    tags?: boolean
+    themes?: boolean
+    total_rating?: boolean
+    total_rating_count?: boolean
+    updated_at?: boolean
+    url?: boolean
+    version_parent?: boolean
+    version_title?: boolean
+    videos?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["game"]>
+
+  export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    age_ratings?: boolean
+    aggregated_rating?: boolean
+    aggregated_rating_count?: boolean
+    alternative_names?: boolean
+    artworks?: boolean
+    bundles?: boolean
+    checksum?: boolean
+    collections?: boolean
+    cover?: boolean
+    created_at?: boolean
+    dlcs?: boolean
+    expanded_games?: boolean
+    expansions?: boolean
+    external_games?: boolean
+    first_release_date?: boolean
+    forks?: boolean
+    franchise?: boolean
+    franchises?: boolean
+    game_engines?: boolean
+    game_localizations?: boolean
+    game_modes?: boolean
+    game_status?: boolean
+    game_type?: boolean
+    genres?: boolean
+    hypes?: boolean
+    involved_companies?: boolean
+    keywords?: boolean
+    language_supports?: boolean
+    multiplayer_modes?: boolean
+    name?: boolean
+    parent_game?: boolean
+    platforms?: boolean
+    player_perspectives?: boolean
+    ports?: boolean
+    rating?: boolean
+    rating_count?: boolean
+    release_dates?: boolean
+    remakes?: boolean
+    remasters?: boolean
+    screenshots?: boolean
+    similar_games?: boolean
+    slug?: boolean
+    standalone_expansions?: boolean
+    storyline?: boolean
+    summary?: boolean
+    tags?: boolean
+    themes?: boolean
+    total_rating?: boolean
+    total_rating_count?: boolean
+    updated_at?: boolean
+    url?: boolean
+    version_parent?: boolean
+    version_title?: boolean
+    videos?: boolean
+    websites?: boolean
+  }, ExtArgs["result"]["game"]>
+
+  export type GameSelectScalar = {
+    id?: boolean
+    age_ratings?: boolean
+    aggregated_rating?: boolean
+    aggregated_rating_count?: boolean
+    alternative_names?: boolean
+    artworks?: boolean
+    bundles?: boolean
+    checksum?: boolean
+    collections?: boolean
+    cover?: boolean
+    created_at?: boolean
+    dlcs?: boolean
+    expanded_games?: boolean
+    expansions?: boolean
+    external_games?: boolean
+    first_release_date?: boolean
+    forks?: boolean
+    franchise?: boolean
+    franchises?: boolean
+    game_engines?: boolean
+    game_localizations?: boolean
+    game_modes?: boolean
+    game_status?: boolean
+    game_type?: boolean
+    genres?: boolean
+    hypes?: boolean
+    involved_companies?: boolean
+    keywords?: boolean
+    language_supports?: boolean
+    multiplayer_modes?: boolean
+    name?: boolean
+    parent_game?: boolean
+    platforms?: boolean
+    player_perspectives?: boolean
+    ports?: boolean
+    rating?: boolean
+    rating_count?: boolean
+    release_dates?: boolean
+    remakes?: boolean
+    remasters?: boolean
+    screenshots?: boolean
+    similar_games?: boolean
+    slug?: boolean
+    standalone_expansions?: boolean
+    storyline?: boolean
+    summary?: boolean
+    tags?: boolean
+    themes?: boolean
+    total_rating?: boolean
+    total_rating_count?: boolean
+    updated_at?: boolean
+    url?: boolean
+    version_parent?: boolean
+    version_title?: boolean
+    videos?: boolean
+    websites?: boolean
+  }
+
+  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "age_ratings" | "aggregated_rating" | "aggregated_rating_count" | "alternative_names" | "artworks" | "bundles" | "checksum" | "collections" | "cover" | "created_at" | "dlcs" | "expanded_games" | "expansions" | "external_games" | "first_release_date" | "forks" | "franchise" | "franchises" | "game_engines" | "game_localizations" | "game_modes" | "game_status" | "game_type" | "genres" | "hypes" | "involved_companies" | "keywords" | "language_supports" | "multiplayer_modes" | "name" | "parent_game" | "platforms" | "player_perspectives" | "ports" | "rating" | "rating_count" | "release_dates" | "remakes" | "remasters" | "screenshots" | "similar_games" | "slug" | "standalone_expansions" | "storyline" | "summary" | "tags" | "themes" | "total_rating" | "total_rating_count" | "updated_at" | "url" | "version_parent" | "version_title" | "videos" | "websites", ExtArgs["result"]["game"]>
+
+  export type $GamePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Game"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      age_ratings: number[]
+      aggregated_rating: number | null
+      aggregated_rating_count: number | null
+      alternative_names: number[]
+      artworks: number[]
+      bundles: number[]
+      checksum: string
+      collections: number[]
+      cover: number | null
+      created_at: Date
+      dlcs: number[]
+      expanded_games: number[]
+      expansions: number[]
+      external_games: number[]
+      first_release_date: number | null
+      forks: number[]
+      franchise: number | null
+      franchises: number[]
+      game_engines: number[]
+      game_localizations: number[]
+      game_modes: number[]
+      game_status: number | null
+      game_type: number | null
+      genres: number[]
+      hypes: number | null
+      involved_companies: number[]
+      keywords: number[]
+      language_supports: number[]
+      multiplayer_modes: number[]
+      name: string
+      parent_game: number | null
+      platforms: number[]
+      player_perspectives: number[]
+      ports: number[]
+      rating: number | null
+      rating_count: number | null
+      release_dates: number[]
+      remakes: number[]
+      remasters: number[]
+      screenshots: number[]
+      similar_games: number[]
+      slug: string
+      standalone_expansions: number[]
+      storyline: string | null
+      summary: string | null
+      tags: number[]
+      themes: number[]
+      total_rating: number | null
+      total_rating_count: number | null
+      updated_at: Date
+      url: string | null
+      version_parent: number[]
+      version_title: string | null
+      videos: number[]
+      websites: number[]
+    }, ExtArgs["result"]["game"]>
+    composites: {}
+  }
+
+  type GameGetPayload<S extends boolean | null | undefined | GameDefaultArgs> = $Result.GetResult<Prisma.$GamePayload, S>
+
+  type GameCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GameFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GameCountAggregateInputType | true
+    }
+
+  export interface GameDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Game'], meta: { name: 'Game' } }
+    /**
+     * Find zero or one Game that matches the filter.
+     * @param {GameFindUniqueArgs} args - Arguments to find a Game
+     * @example
+     * // Get one Game
+     * const game = await prisma.game.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GameFindUniqueArgs>(args: SelectSubset<T, GameFindUniqueArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Game that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GameFindUniqueOrThrowArgs} args - Arguments to find a Game
+     * @example
+     * // Get one Game
+     * const game = await prisma.game.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GameFindUniqueOrThrowArgs>(args: SelectSubset<T, GameFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Game that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameFindFirstArgs} args - Arguments to find a Game
+     * @example
+     * // Get one Game
+     * const game = await prisma.game.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GameFindFirstArgs>(args?: SelectSubset<T, GameFindFirstArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Game that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameFindFirstOrThrowArgs} args - Arguments to find a Game
+     * @example
+     * // Get one Game
+     * const game = await prisma.game.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GameFindFirstOrThrowArgs>(args?: SelectSubset<T, GameFindFirstOrThrowArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Games that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Games
+     * const games = await prisma.game.findMany()
+     * 
+     * // Get first 10 Games
+     * const games = await prisma.game.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gameWithIdOnly = await prisma.game.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GameFindManyArgs>(args?: SelectSubset<T, GameFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Game.
+     * @param {GameCreateArgs} args - Arguments to create a Game.
+     * @example
+     * // Create one Game
+     * const Game = await prisma.game.create({
+     *   data: {
+     *     // ... data to create a Game
+     *   }
+     * })
+     * 
+     */
+    create<T extends GameCreateArgs>(args: SelectSubset<T, GameCreateArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Games.
+     * @param {GameCreateManyArgs} args - Arguments to create many Games.
+     * @example
+     * // Create many Games
+     * const game = await prisma.game.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GameCreateManyArgs>(args?: SelectSubset<T, GameCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Games and returns the data saved in the database.
+     * @param {GameCreateManyAndReturnArgs} args - Arguments to create many Games.
+     * @example
+     * // Create many Games
+     * const game = await prisma.game.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Games and only return the `id`
+     * const gameWithIdOnly = await prisma.game.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GameCreateManyAndReturnArgs>(args?: SelectSubset<T, GameCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Game.
+     * @param {GameDeleteArgs} args - Arguments to delete one Game.
+     * @example
+     * // Delete one Game
+     * const Game = await prisma.game.delete({
+     *   where: {
+     *     // ... filter to delete one Game
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GameDeleteArgs>(args: SelectSubset<T, GameDeleteArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Game.
+     * @param {GameUpdateArgs} args - Arguments to update one Game.
+     * @example
+     * // Update one Game
+     * const game = await prisma.game.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GameUpdateArgs>(args: SelectSubset<T, GameUpdateArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Games.
+     * @param {GameDeleteManyArgs} args - Arguments to filter Games to delete.
+     * @example
+     * // Delete a few Games
+     * const { count } = await prisma.game.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GameDeleteManyArgs>(args?: SelectSubset<T, GameDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Games
+     * const game = await prisma.game.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GameUpdateManyArgs>(args: SelectSubset<T, GameUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Games and returns the data updated in the database.
+     * @param {GameUpdateManyAndReturnArgs} args - Arguments to update many Games.
+     * @example
+     * // Update many Games
+     * const game = await prisma.game.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Games and only return the `id`
+     * const gameWithIdOnly = await prisma.game.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GameUpdateManyAndReturnArgs>(args: SelectSubset<T, GameUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Game.
+     * @param {GameUpsertArgs} args - Arguments to update or create a Game.
+     * @example
+     * // Update or create a Game
+     * const game = await prisma.game.upsert({
+     *   create: {
+     *     // ... data to create a Game
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Game we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GameUpsertArgs>(args: SelectSubset<T, GameUpsertArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Games.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameCountArgs} args - Arguments to filter Games to count.
+     * @example
+     * // Count the number of Games
+     * const count = await prisma.game.count({
+     *   where: {
+     *     // ... the filter for the Games we want to count
+     *   }
+     * })
+    **/
+    count<T extends GameCountArgs>(
+      args?: Subset<T, GameCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GameCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Game.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GameAggregateArgs>(args: Subset<T, GameAggregateArgs>): Prisma.PrismaPromise<GetGameAggregateType<T>>
+
+    /**
+     * Group by Game.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GameGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GameGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GameGroupByArgs['orderBy'] }
+        : { orderBy?: GameGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GameGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGameGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Game model
+   */
+  readonly fields: GameFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Game.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GameClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Game model
+   */ 
+  interface GameFieldRefs {
+    readonly id: FieldRef<"Game", 'Int'>
+    readonly age_ratings: FieldRef<"Game", 'Int[]'>
+    readonly aggregated_rating: FieldRef<"Game", 'Float'>
+    readonly aggregated_rating_count: FieldRef<"Game", 'Int'>
+    readonly alternative_names: FieldRef<"Game", 'Int[]'>
+    readonly artworks: FieldRef<"Game", 'Int[]'>
+    readonly bundles: FieldRef<"Game", 'Int[]'>
+    readonly checksum: FieldRef<"Game", 'String'>
+    readonly collections: FieldRef<"Game", 'Int[]'>
+    readonly cover: FieldRef<"Game", 'Int'>
+    readonly created_at: FieldRef<"Game", 'DateTime'>
+    readonly dlcs: FieldRef<"Game", 'Int[]'>
+    readonly expanded_games: FieldRef<"Game", 'Int[]'>
+    readonly expansions: FieldRef<"Game", 'Int[]'>
+    readonly external_games: FieldRef<"Game", 'Int[]'>
+    readonly first_release_date: FieldRef<"Game", 'Int'>
+    readonly forks: FieldRef<"Game", 'Int[]'>
+    readonly franchise: FieldRef<"Game", 'Int'>
+    readonly franchises: FieldRef<"Game", 'Int[]'>
+    readonly game_engines: FieldRef<"Game", 'Int[]'>
+    readonly game_localizations: FieldRef<"Game", 'Int[]'>
+    readonly game_modes: FieldRef<"Game", 'Int[]'>
+    readonly game_status: FieldRef<"Game", 'Int'>
+    readonly game_type: FieldRef<"Game", 'Int'>
+    readonly genres: FieldRef<"Game", 'Int[]'>
+    readonly hypes: FieldRef<"Game", 'Int'>
+    readonly involved_companies: FieldRef<"Game", 'Int[]'>
+    readonly keywords: FieldRef<"Game", 'Int[]'>
+    readonly language_supports: FieldRef<"Game", 'Int[]'>
+    readonly multiplayer_modes: FieldRef<"Game", 'Int[]'>
+    readonly name: FieldRef<"Game", 'String'>
+    readonly parent_game: FieldRef<"Game", 'Int'>
+    readonly platforms: FieldRef<"Game", 'Int[]'>
+    readonly player_perspectives: FieldRef<"Game", 'Int[]'>
+    readonly ports: FieldRef<"Game", 'Int[]'>
+    readonly rating: FieldRef<"Game", 'Float'>
+    readonly rating_count: FieldRef<"Game", 'Int'>
+    readonly release_dates: FieldRef<"Game", 'Int[]'>
+    readonly remakes: FieldRef<"Game", 'Int[]'>
+    readonly remasters: FieldRef<"Game", 'Int[]'>
+    readonly screenshots: FieldRef<"Game", 'Int[]'>
+    readonly similar_games: FieldRef<"Game", 'Int[]'>
+    readonly slug: FieldRef<"Game", 'String'>
+    readonly standalone_expansions: FieldRef<"Game", 'Int[]'>
+    readonly storyline: FieldRef<"Game", 'String'>
+    readonly summary: FieldRef<"Game", 'String'>
+    readonly tags: FieldRef<"Game", 'Int[]'>
+    readonly themes: FieldRef<"Game", 'Int[]'>
+    readonly total_rating: FieldRef<"Game", 'Float'>
+    readonly total_rating_count: FieldRef<"Game", 'Int'>
+    readonly updated_at: FieldRef<"Game", 'DateTime'>
+    readonly url: FieldRef<"Game", 'String'>
+    readonly version_parent: FieldRef<"Game", 'Int[]'>
+    readonly version_title: FieldRef<"Game", 'String'>
+    readonly videos: FieldRef<"Game", 'Int[]'>
+    readonly websites: FieldRef<"Game", 'Int[]'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Game findUnique
+   */
+  export type GameFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter, which Game to fetch.
+     */
+    where: GameWhereUniqueInput
+  }
+
+  /**
+   * Game findUniqueOrThrow
+   */
+  export type GameFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter, which Game to fetch.
+     */
+    where: GameWhereUniqueInput
+  }
+
+  /**
+   * Game findFirst
+   */
+  export type GameFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter, which Game to fetch.
+     */
+    where?: GameWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Games.
+     */
+    cursor?: GameWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Games.
+     */
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
+   * Game findFirstOrThrow
+   */
+  export type GameFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter, which Game to fetch.
+     */
+    where?: GameWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Games.
+     */
+    cursor?: GameWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Games.
+     */
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
+   * Game findMany
+   */
+  export type GameFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter, which Games to fetch.
+     */
+    where?: GameWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Games to fetch.
+     */
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Games.
+     */
+    cursor?: GameWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Games from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Games.
+     */
+    skip?: number
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
+   * Game create
+   */
+  export type GameCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Game.
+     */
+    data: XOR<GameCreateInput, GameUncheckedCreateInput>
+  }
+
+  /**
+   * Game createMany
+   */
+  export type GameCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Games.
+     */
+    data: GameCreateManyInput | GameCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Game createManyAndReturn
+   */
+  export type GameCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * The data used to create many Games.
+     */
+    data: GameCreateManyInput | GameCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Game update
+   */
+  export type GameUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Game.
+     */
+    data: XOR<GameUpdateInput, GameUncheckedUpdateInput>
+    /**
+     * Choose, which Game to update.
+     */
+    where: GameWhereUniqueInput
+  }
+
+  /**
+   * Game updateMany
+   */
+  export type GameUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Games.
+     */
+    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyInput>
+    /**
+     * Filter which Games to update
+     */
+    where?: GameWhereInput
+    /**
+     * Limit how many Games to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Game updateManyAndReturn
+   */
+  export type GameUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * The data used to update Games.
+     */
+    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyInput>
+    /**
+     * Filter which Games to update
+     */
+    where?: GameWhereInput
+    /**
+     * Limit how many Games to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Game upsert
+   */
+  export type GameUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Game to update in case it exists.
+     */
+    where: GameWhereUniqueInput
+    /**
+     * In case the Game found by the `where` argument doesn't exist, create a new Game with this data.
+     */
+    create: XOR<GameCreateInput, GameUncheckedCreateInput>
+    /**
+     * In case the Game was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GameUpdateInput, GameUncheckedUpdateInput>
+  }
+
+  /**
+   * Game delete
+   */
+  export type GameDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Filter which Game to delete.
+     */
+    where: GameWhereUniqueInput
+  }
+
+  /**
+   * Game deleteMany
+   */
+  export type GameDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Games to delete
+     */
+    where?: GameWhereInput
+    /**
+     * Limit how many Games to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Game without action
+   */
+  export type GameDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
@@ -6089,7 +9203,7 @@ export namespace Prisma {
     objects: {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
-      Game: Prisma.$GamePayload<ExtArgs>[]
+      Game: Prisma.$GameUserPayload<ExtArgs>[]
       UserSettings: Prisma.$UserSettingsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6496,7 +9610,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Game<T extends User$GameArgs<ExtArgs> = {}>(args?: Subset<T, User$GameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Game<T extends User$GameArgs<ExtArgs> = {}>(args?: Subset<T, User$GameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     UserSettings<T extends User$UserSettingsArgs<ExtArgs> = {}>(args?: Subset<T, User$UserSettingsArgs<ExtArgs>>): Prisma__UserSettingsClient<$Result.GetResult<Prisma.$UserSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6974,23 +10088,23 @@ export namespace Prisma {
    */
   export type User$GameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Game
+     * Select specific fields to fetch from the GameUser
      */
-    select?: GameSelect<ExtArgs> | null
+    select?: GameUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Game
+     * Omit specific fields from the GameUser
      */
-    omit?: GameOmit<ExtArgs> | null
+    omit?: GameUserOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GameInclude<ExtArgs> | null
-    where?: GameWhereInput
-    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
-    cursor?: GameWhereUniqueInput
+    include?: GameUserInclude<ExtArgs> | null
+    where?: GameUserWhereInput
+    orderBy?: GameUserOrderByWithRelationInput | GameUserOrderByWithRelationInput[]
+    cursor?: GameUserWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+    distinct?: GameUserScalarFieldEnum | GameUserScalarFieldEnum[]
   }
 
   /**
@@ -10312,7 +13426,7 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const GameScalarFieldEnum: {
+  export const GameUserScalarFieldEnum: {
     id: 'id',
     name: 'name',
     platform: 'platform',
@@ -10323,7 +13437,7 @@ export namespace Prisma {
     userId: 'userId'
   };
 
-  export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+  export type GameUserScalarFieldEnum = (typeof GameUserScalarFieldEnum)[keyof typeof GameUserScalarFieldEnum]
 
 
   export const UserSettingsScalarFieldEnum: {
@@ -10356,6 +13470,90 @@ export namespace Prisma {
   };
 
   export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
+
+
+  export const PlatformScalarFieldEnum: {
+    id: 'id',
+    abbreviation: 'abbreviation',
+    alternative_name: 'alternative_name',
+    checksum: 'checksum',
+    created_at: 'created_at',
+    generation: 'generation',
+    name: 'name',
+    platform_family: 'platform_family',
+    platform_logo: 'platform_logo',
+    platform_type: 'platform_type',
+    slug: 'slug',
+    summary: 'summary',
+    updated_at: 'updated_at',
+    url: 'url',
+    versions: 'versions',
+    websites: 'websites'
+  };
+
+  export type PlatformScalarFieldEnum = (typeof PlatformScalarFieldEnum)[keyof typeof PlatformScalarFieldEnum]
+
+
+  export const GameScalarFieldEnum: {
+    id: 'id',
+    age_ratings: 'age_ratings',
+    aggregated_rating: 'aggregated_rating',
+    aggregated_rating_count: 'aggregated_rating_count',
+    alternative_names: 'alternative_names',
+    artworks: 'artworks',
+    bundles: 'bundles',
+    checksum: 'checksum',
+    collections: 'collections',
+    cover: 'cover',
+    created_at: 'created_at',
+    dlcs: 'dlcs',
+    expanded_games: 'expanded_games',
+    expansions: 'expansions',
+    external_games: 'external_games',
+    first_release_date: 'first_release_date',
+    forks: 'forks',
+    franchise: 'franchise',
+    franchises: 'franchises',
+    game_engines: 'game_engines',
+    game_localizations: 'game_localizations',
+    game_modes: 'game_modes',
+    game_status: 'game_status',
+    game_type: 'game_type',
+    genres: 'genres',
+    hypes: 'hypes',
+    involved_companies: 'involved_companies',
+    keywords: 'keywords',
+    language_supports: 'language_supports',
+    multiplayer_modes: 'multiplayer_modes',
+    name: 'name',
+    parent_game: 'parent_game',
+    platforms: 'platforms',
+    player_perspectives: 'player_perspectives',
+    ports: 'ports',
+    rating: 'rating',
+    rating_count: 'rating_count',
+    release_dates: 'release_dates',
+    remakes: 'remakes',
+    remasters: 'remasters',
+    screenshots: 'screenshots',
+    similar_games: 'similar_games',
+    slug: 'slug',
+    standalone_expansions: 'standalone_expansions',
+    storyline: 'storyline',
+    summary: 'summary',
+    tags: 'tags',
+    themes: 'themes',
+    total_rating: 'total_rating',
+    total_rating_count: 'total_rating_count',
+    updated_at: 'updated_at',
+    url: 'url',
+    version_parent: 'version_parent',
+    version_title: 'version_title',
+    videos: 'videos',
+    websites: 'websites'
+  };
+
+  export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -10516,13 +13714,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10534,27 +13725,34 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
   /**
    * Deep Input Types
    */
 
 
-  export type GameWhereInput = {
-    AND?: GameWhereInput | GameWhereInput[]
-    OR?: GameWhereInput[]
-    NOT?: GameWhereInput | GameWhereInput[]
-    id?: IntFilter<"Game"> | number
-    name?: StringFilter<"Game"> | string
-    platform?: StringFilter<"Game"> | string
-    status?: EnumStatusFilter<"Game"> | $Enums.Status
-    genre?: StringNullableFilter<"Game"> | string | null
-    releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
-    notes?: StringNullableFilter<"Game"> | string | null
-    userId?: StringFilter<"Game"> | string
+  export type GameUserWhereInput = {
+    AND?: GameUserWhereInput | GameUserWhereInput[]
+    OR?: GameUserWhereInput[]
+    NOT?: GameUserWhereInput | GameUserWhereInput[]
+    id?: IntFilter<"GameUser"> | number
+    name?: StringFilter<"GameUser"> | string
+    platform?: StringFilter<"GameUser"> | string
+    status?: EnumStatusFilter<"GameUser"> | $Enums.Status
+    genre?: StringNullableFilter<"GameUser"> | string | null
+    releaseDate?: DateTimeNullableFilter<"GameUser"> | Date | string | null
+    notes?: StringNullableFilter<"GameUser"> | string | null
+    userId?: StringFilter<"GameUser"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type GameOrderByWithRelationInput = {
+  export type GameUserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     platform?: SortOrder
@@ -10566,22 +13764,22 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type GameWhereUniqueInput = Prisma.AtLeast<{
+  export type GameUserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: GameWhereInput | GameWhereInput[]
-    OR?: GameWhereInput[]
-    NOT?: GameWhereInput | GameWhereInput[]
-    name?: StringFilter<"Game"> | string
-    platform?: StringFilter<"Game"> | string
-    status?: EnumStatusFilter<"Game"> | $Enums.Status
-    genre?: StringNullableFilter<"Game"> | string | null
-    releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
-    notes?: StringNullableFilter<"Game"> | string | null
-    userId?: StringFilter<"Game"> | string
+    AND?: GameUserWhereInput | GameUserWhereInput[]
+    OR?: GameUserWhereInput[]
+    NOT?: GameUserWhereInput | GameUserWhereInput[]
+    name?: StringFilter<"GameUser"> | string
+    platform?: StringFilter<"GameUser"> | string
+    status?: EnumStatusFilter<"GameUser"> | $Enums.Status
+    genre?: StringNullableFilter<"GameUser"> | string | null
+    releaseDate?: DateTimeNullableFilter<"GameUser"> | Date | string | null
+    notes?: StringNullableFilter<"GameUser"> | string | null
+    userId?: StringFilter<"GameUser"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type GameOrderByWithAggregationInput = {
+  export type GameUserOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     platform?: SortOrder
@@ -10590,25 +13788,25 @@ export namespace Prisma {
     releaseDate?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     userId?: SortOrder
-    _count?: GameCountOrderByAggregateInput
-    _avg?: GameAvgOrderByAggregateInput
-    _max?: GameMaxOrderByAggregateInput
-    _min?: GameMinOrderByAggregateInput
-    _sum?: GameSumOrderByAggregateInput
+    _count?: GameUserCountOrderByAggregateInput
+    _avg?: GameUserAvgOrderByAggregateInput
+    _max?: GameUserMaxOrderByAggregateInput
+    _min?: GameUserMinOrderByAggregateInput
+    _sum?: GameUserSumOrderByAggregateInput
   }
 
-  export type GameScalarWhereWithAggregatesInput = {
-    AND?: GameScalarWhereWithAggregatesInput | GameScalarWhereWithAggregatesInput[]
-    OR?: GameScalarWhereWithAggregatesInput[]
-    NOT?: GameScalarWhereWithAggregatesInput | GameScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Game"> | number
-    name?: StringWithAggregatesFilter<"Game"> | string
-    platform?: StringWithAggregatesFilter<"Game"> | string
-    status?: EnumStatusWithAggregatesFilter<"Game"> | $Enums.Status
-    genre?: StringNullableWithAggregatesFilter<"Game"> | string | null
-    releaseDate?: DateTimeNullableWithAggregatesFilter<"Game"> | Date | string | null
-    notes?: StringNullableWithAggregatesFilter<"Game"> | string | null
-    userId?: StringWithAggregatesFilter<"Game"> | string
+  export type GameUserScalarWhereWithAggregatesInput = {
+    AND?: GameUserScalarWhereWithAggregatesInput | GameUserScalarWhereWithAggregatesInput[]
+    OR?: GameUserScalarWhereWithAggregatesInput[]
+    NOT?: GameUserScalarWhereWithAggregatesInput | GameUserScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"GameUser"> | number
+    name?: StringWithAggregatesFilter<"GameUser"> | string
+    platform?: StringWithAggregatesFilter<"GameUser"> | string
+    status?: EnumStatusWithAggregatesFilter<"GameUser"> | $Enums.Status
+    genre?: StringNullableWithAggregatesFilter<"GameUser"> | string | null
+    releaseDate?: DateTimeNullableWithAggregatesFilter<"GameUser"> | Date | string | null
+    notes?: StringNullableWithAggregatesFilter<"GameUser"> | string | null
+    userId?: StringWithAggregatesFilter<"GameUser"> | string
   }
 
   export type UserSettingsWhereInput = {
@@ -10771,6 +13969,424 @@ export namespace Prisma {
     url?: StringWithAggregatesFilter<"Genre"> | string
   }
 
+  export type PlatformWhereInput = {
+    AND?: PlatformWhereInput | PlatformWhereInput[]
+    OR?: PlatformWhereInput[]
+    NOT?: PlatformWhereInput | PlatformWhereInput[]
+    id?: IntFilter<"Platform"> | number
+    abbreviation?: StringNullableFilter<"Platform"> | string | null
+    alternative_name?: StringNullableFilter<"Platform"> | string | null
+    checksum?: StringNullableFilter<"Platform"> | string | null
+    created_at?: DateTimeFilter<"Platform"> | Date | string
+    generation?: IntNullableFilter<"Platform"> | number | null
+    name?: StringNullableFilter<"Platform"> | string | null
+    platform_family?: IntNullableFilter<"Platform"> | number | null
+    platform_logo?: IntNullableFilter<"Platform"> | number | null
+    platform_type?: IntNullableFilter<"Platform"> | number | null
+    slug?: StringNullableFilter<"Platform"> | string | null
+    summary?: StringNullableFilter<"Platform"> | string | null
+    updated_at?: DateTimeFilter<"Platform"> | Date | string
+    url?: StringNullableFilter<"Platform"> | string | null
+    versions?: IntNullableListFilter<"Platform">
+    websites?: IntNullableListFilter<"Platform">
+  }
+
+  export type PlatformOrderByWithRelationInput = {
+    id?: SortOrder
+    abbreviation?: SortOrderInput | SortOrder
+    alternative_name?: SortOrderInput | SortOrder
+    checksum?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    generation?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    platform_family?: SortOrderInput | SortOrder
+    platform_logo?: SortOrderInput | SortOrder
+    platform_type?: SortOrderInput | SortOrder
+    slug?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    updated_at?: SortOrder
+    url?: SortOrderInput | SortOrder
+    versions?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type PlatformWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PlatformWhereInput | PlatformWhereInput[]
+    OR?: PlatformWhereInput[]
+    NOT?: PlatformWhereInput | PlatformWhereInput[]
+    abbreviation?: StringNullableFilter<"Platform"> | string | null
+    alternative_name?: StringNullableFilter<"Platform"> | string | null
+    checksum?: StringNullableFilter<"Platform"> | string | null
+    created_at?: DateTimeFilter<"Platform"> | Date | string
+    generation?: IntNullableFilter<"Platform"> | number | null
+    name?: StringNullableFilter<"Platform"> | string | null
+    platform_family?: IntNullableFilter<"Platform"> | number | null
+    platform_logo?: IntNullableFilter<"Platform"> | number | null
+    platform_type?: IntNullableFilter<"Platform"> | number | null
+    slug?: StringNullableFilter<"Platform"> | string | null
+    summary?: StringNullableFilter<"Platform"> | string | null
+    updated_at?: DateTimeFilter<"Platform"> | Date | string
+    url?: StringNullableFilter<"Platform"> | string | null
+    versions?: IntNullableListFilter<"Platform">
+    websites?: IntNullableListFilter<"Platform">
+  }, "id">
+
+  export type PlatformOrderByWithAggregationInput = {
+    id?: SortOrder
+    abbreviation?: SortOrderInput | SortOrder
+    alternative_name?: SortOrderInput | SortOrder
+    checksum?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    generation?: SortOrderInput | SortOrder
+    name?: SortOrderInput | SortOrder
+    platform_family?: SortOrderInput | SortOrder
+    platform_logo?: SortOrderInput | SortOrder
+    platform_type?: SortOrderInput | SortOrder
+    slug?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    updated_at?: SortOrder
+    url?: SortOrderInput | SortOrder
+    versions?: SortOrder
+    websites?: SortOrder
+    _count?: PlatformCountOrderByAggregateInput
+    _avg?: PlatformAvgOrderByAggregateInput
+    _max?: PlatformMaxOrderByAggregateInput
+    _min?: PlatformMinOrderByAggregateInput
+    _sum?: PlatformSumOrderByAggregateInput
+  }
+
+  export type PlatformScalarWhereWithAggregatesInput = {
+    AND?: PlatformScalarWhereWithAggregatesInput | PlatformScalarWhereWithAggregatesInput[]
+    OR?: PlatformScalarWhereWithAggregatesInput[]
+    NOT?: PlatformScalarWhereWithAggregatesInput | PlatformScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Platform"> | number
+    abbreviation?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    alternative_name?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    checksum?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Platform"> | Date | string
+    generation?: IntNullableWithAggregatesFilter<"Platform"> | number | null
+    name?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    platform_family?: IntNullableWithAggregatesFilter<"Platform"> | number | null
+    platform_logo?: IntNullableWithAggregatesFilter<"Platform"> | number | null
+    platform_type?: IntNullableWithAggregatesFilter<"Platform"> | number | null
+    slug?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    summary?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    updated_at?: DateTimeWithAggregatesFilter<"Platform"> | Date | string
+    url?: StringNullableWithAggregatesFilter<"Platform"> | string | null
+    versions?: IntNullableListFilter<"Platform">
+    websites?: IntNullableListFilter<"Platform">
+  }
+
+  export type GameWhereInput = {
+    AND?: GameWhereInput | GameWhereInput[]
+    OR?: GameWhereInput[]
+    NOT?: GameWhereInput | GameWhereInput[]
+    id?: IntFilter<"Game"> | number
+    age_ratings?: IntNullableListFilter<"Game">
+    aggregated_rating?: FloatNullableFilter<"Game"> | number | null
+    aggregated_rating_count?: IntNullableFilter<"Game"> | number | null
+    alternative_names?: IntNullableListFilter<"Game">
+    artworks?: IntNullableListFilter<"Game">
+    bundles?: IntNullableListFilter<"Game">
+    checksum?: StringFilter<"Game"> | string
+    collections?: IntNullableListFilter<"Game">
+    cover?: IntNullableFilter<"Game"> | number | null
+    created_at?: DateTimeFilter<"Game"> | Date | string
+    dlcs?: IntNullableListFilter<"Game">
+    expanded_games?: IntNullableListFilter<"Game">
+    expansions?: IntNullableListFilter<"Game">
+    external_games?: IntNullableListFilter<"Game">
+    first_release_date?: IntNullableFilter<"Game"> | number | null
+    forks?: IntNullableListFilter<"Game">
+    franchise?: IntNullableFilter<"Game"> | number | null
+    franchises?: IntNullableListFilter<"Game">
+    game_engines?: IntNullableListFilter<"Game">
+    game_localizations?: IntNullableListFilter<"Game">
+    game_modes?: IntNullableListFilter<"Game">
+    game_status?: IntNullableFilter<"Game"> | number | null
+    game_type?: IntNullableFilter<"Game"> | number | null
+    genres?: IntNullableListFilter<"Game">
+    hypes?: IntNullableFilter<"Game"> | number | null
+    involved_companies?: IntNullableListFilter<"Game">
+    keywords?: IntNullableListFilter<"Game">
+    language_supports?: IntNullableListFilter<"Game">
+    multiplayer_modes?: IntNullableListFilter<"Game">
+    name?: StringFilter<"Game"> | string
+    parent_game?: IntNullableFilter<"Game"> | number | null
+    platforms?: IntNullableListFilter<"Game">
+    player_perspectives?: IntNullableListFilter<"Game">
+    ports?: IntNullableListFilter<"Game">
+    rating?: FloatNullableFilter<"Game"> | number | null
+    rating_count?: IntNullableFilter<"Game"> | number | null
+    release_dates?: IntNullableListFilter<"Game">
+    remakes?: IntNullableListFilter<"Game">
+    remasters?: IntNullableListFilter<"Game">
+    screenshots?: IntNullableListFilter<"Game">
+    similar_games?: IntNullableListFilter<"Game">
+    slug?: StringFilter<"Game"> | string
+    standalone_expansions?: IntNullableListFilter<"Game">
+    storyline?: StringNullableFilter<"Game"> | string | null
+    summary?: StringNullableFilter<"Game"> | string | null
+    tags?: IntNullableListFilter<"Game">
+    themes?: IntNullableListFilter<"Game">
+    total_rating?: FloatNullableFilter<"Game"> | number | null
+    total_rating_count?: IntNullableFilter<"Game"> | number | null
+    updated_at?: DateTimeFilter<"Game"> | Date | string
+    url?: StringNullableFilter<"Game"> | string | null
+    version_parent?: IntNullableListFilter<"Game">
+    version_title?: StringNullableFilter<"Game"> | string | null
+    videos?: IntNullableListFilter<"Game">
+    websites?: IntNullableListFilter<"Game">
+  }
+
+  export type GameOrderByWithRelationInput = {
+    id?: SortOrder
+    age_ratings?: SortOrder
+    aggregated_rating?: SortOrderInput | SortOrder
+    aggregated_rating_count?: SortOrderInput | SortOrder
+    alternative_names?: SortOrder
+    artworks?: SortOrder
+    bundles?: SortOrder
+    checksum?: SortOrder
+    collections?: SortOrder
+    cover?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    dlcs?: SortOrder
+    expanded_games?: SortOrder
+    expansions?: SortOrder
+    external_games?: SortOrder
+    first_release_date?: SortOrderInput | SortOrder
+    forks?: SortOrder
+    franchise?: SortOrderInput | SortOrder
+    franchises?: SortOrder
+    game_engines?: SortOrder
+    game_localizations?: SortOrder
+    game_modes?: SortOrder
+    game_status?: SortOrderInput | SortOrder
+    game_type?: SortOrderInput | SortOrder
+    genres?: SortOrder
+    hypes?: SortOrderInput | SortOrder
+    involved_companies?: SortOrder
+    keywords?: SortOrder
+    language_supports?: SortOrder
+    multiplayer_modes?: SortOrder
+    name?: SortOrder
+    parent_game?: SortOrderInput | SortOrder
+    platforms?: SortOrder
+    player_perspectives?: SortOrder
+    ports?: SortOrder
+    rating?: SortOrderInput | SortOrder
+    rating_count?: SortOrderInput | SortOrder
+    release_dates?: SortOrder
+    remakes?: SortOrder
+    remasters?: SortOrder
+    screenshots?: SortOrder
+    similar_games?: SortOrder
+    slug?: SortOrder
+    standalone_expansions?: SortOrder
+    storyline?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    themes?: SortOrder
+    total_rating?: SortOrderInput | SortOrder
+    total_rating_count?: SortOrderInput | SortOrder
+    updated_at?: SortOrder
+    url?: SortOrderInput | SortOrder
+    version_parent?: SortOrder
+    version_title?: SortOrderInput | SortOrder
+    videos?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type GameWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: GameWhereInput | GameWhereInput[]
+    OR?: GameWhereInput[]
+    NOT?: GameWhereInput | GameWhereInput[]
+    age_ratings?: IntNullableListFilter<"Game">
+    aggregated_rating?: FloatNullableFilter<"Game"> | number | null
+    aggregated_rating_count?: IntNullableFilter<"Game"> | number | null
+    alternative_names?: IntNullableListFilter<"Game">
+    artworks?: IntNullableListFilter<"Game">
+    bundles?: IntNullableListFilter<"Game">
+    checksum?: StringFilter<"Game"> | string
+    collections?: IntNullableListFilter<"Game">
+    cover?: IntNullableFilter<"Game"> | number | null
+    created_at?: DateTimeFilter<"Game"> | Date | string
+    dlcs?: IntNullableListFilter<"Game">
+    expanded_games?: IntNullableListFilter<"Game">
+    expansions?: IntNullableListFilter<"Game">
+    external_games?: IntNullableListFilter<"Game">
+    first_release_date?: IntNullableFilter<"Game"> | number | null
+    forks?: IntNullableListFilter<"Game">
+    franchise?: IntNullableFilter<"Game"> | number | null
+    franchises?: IntNullableListFilter<"Game">
+    game_engines?: IntNullableListFilter<"Game">
+    game_localizations?: IntNullableListFilter<"Game">
+    game_modes?: IntNullableListFilter<"Game">
+    game_status?: IntNullableFilter<"Game"> | number | null
+    game_type?: IntNullableFilter<"Game"> | number | null
+    genres?: IntNullableListFilter<"Game">
+    hypes?: IntNullableFilter<"Game"> | number | null
+    involved_companies?: IntNullableListFilter<"Game">
+    keywords?: IntNullableListFilter<"Game">
+    language_supports?: IntNullableListFilter<"Game">
+    multiplayer_modes?: IntNullableListFilter<"Game">
+    name?: StringFilter<"Game"> | string
+    parent_game?: IntNullableFilter<"Game"> | number | null
+    platforms?: IntNullableListFilter<"Game">
+    player_perspectives?: IntNullableListFilter<"Game">
+    ports?: IntNullableListFilter<"Game">
+    rating?: FloatNullableFilter<"Game"> | number | null
+    rating_count?: IntNullableFilter<"Game"> | number | null
+    release_dates?: IntNullableListFilter<"Game">
+    remakes?: IntNullableListFilter<"Game">
+    remasters?: IntNullableListFilter<"Game">
+    screenshots?: IntNullableListFilter<"Game">
+    similar_games?: IntNullableListFilter<"Game">
+    slug?: StringFilter<"Game"> | string
+    standalone_expansions?: IntNullableListFilter<"Game">
+    storyline?: StringNullableFilter<"Game"> | string | null
+    summary?: StringNullableFilter<"Game"> | string | null
+    tags?: IntNullableListFilter<"Game">
+    themes?: IntNullableListFilter<"Game">
+    total_rating?: FloatNullableFilter<"Game"> | number | null
+    total_rating_count?: IntNullableFilter<"Game"> | number | null
+    updated_at?: DateTimeFilter<"Game"> | Date | string
+    url?: StringNullableFilter<"Game"> | string | null
+    version_parent?: IntNullableListFilter<"Game">
+    version_title?: StringNullableFilter<"Game"> | string | null
+    videos?: IntNullableListFilter<"Game">
+    websites?: IntNullableListFilter<"Game">
+  }, "id">
+
+  export type GameOrderByWithAggregationInput = {
+    id?: SortOrder
+    age_ratings?: SortOrder
+    aggregated_rating?: SortOrderInput | SortOrder
+    aggregated_rating_count?: SortOrderInput | SortOrder
+    alternative_names?: SortOrder
+    artworks?: SortOrder
+    bundles?: SortOrder
+    checksum?: SortOrder
+    collections?: SortOrder
+    cover?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    dlcs?: SortOrder
+    expanded_games?: SortOrder
+    expansions?: SortOrder
+    external_games?: SortOrder
+    first_release_date?: SortOrderInput | SortOrder
+    forks?: SortOrder
+    franchise?: SortOrderInput | SortOrder
+    franchises?: SortOrder
+    game_engines?: SortOrder
+    game_localizations?: SortOrder
+    game_modes?: SortOrder
+    game_status?: SortOrderInput | SortOrder
+    game_type?: SortOrderInput | SortOrder
+    genres?: SortOrder
+    hypes?: SortOrderInput | SortOrder
+    involved_companies?: SortOrder
+    keywords?: SortOrder
+    language_supports?: SortOrder
+    multiplayer_modes?: SortOrder
+    name?: SortOrder
+    parent_game?: SortOrderInput | SortOrder
+    platforms?: SortOrder
+    player_perspectives?: SortOrder
+    ports?: SortOrder
+    rating?: SortOrderInput | SortOrder
+    rating_count?: SortOrderInput | SortOrder
+    release_dates?: SortOrder
+    remakes?: SortOrder
+    remasters?: SortOrder
+    screenshots?: SortOrder
+    similar_games?: SortOrder
+    slug?: SortOrder
+    standalone_expansions?: SortOrder
+    storyline?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    themes?: SortOrder
+    total_rating?: SortOrderInput | SortOrder
+    total_rating_count?: SortOrderInput | SortOrder
+    updated_at?: SortOrder
+    url?: SortOrderInput | SortOrder
+    version_parent?: SortOrder
+    version_title?: SortOrderInput | SortOrder
+    videos?: SortOrder
+    websites?: SortOrder
+    _count?: GameCountOrderByAggregateInput
+    _avg?: GameAvgOrderByAggregateInput
+    _max?: GameMaxOrderByAggregateInput
+    _min?: GameMinOrderByAggregateInput
+    _sum?: GameSumOrderByAggregateInput
+  }
+
+  export type GameScalarWhereWithAggregatesInput = {
+    AND?: GameScalarWhereWithAggregatesInput | GameScalarWhereWithAggregatesInput[]
+    OR?: GameScalarWhereWithAggregatesInput[]
+    NOT?: GameScalarWhereWithAggregatesInput | GameScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Game"> | number
+    age_ratings?: IntNullableListFilter<"Game">
+    aggregated_rating?: FloatNullableWithAggregatesFilter<"Game"> | number | null
+    aggregated_rating_count?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    alternative_names?: IntNullableListFilter<"Game">
+    artworks?: IntNullableListFilter<"Game">
+    bundles?: IntNullableListFilter<"Game">
+    checksum?: StringWithAggregatesFilter<"Game"> | string
+    collections?: IntNullableListFilter<"Game">
+    cover?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    created_at?: DateTimeWithAggregatesFilter<"Game"> | Date | string
+    dlcs?: IntNullableListFilter<"Game">
+    expanded_games?: IntNullableListFilter<"Game">
+    expansions?: IntNullableListFilter<"Game">
+    external_games?: IntNullableListFilter<"Game">
+    first_release_date?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    forks?: IntNullableListFilter<"Game">
+    franchise?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    franchises?: IntNullableListFilter<"Game">
+    game_engines?: IntNullableListFilter<"Game">
+    game_localizations?: IntNullableListFilter<"Game">
+    game_modes?: IntNullableListFilter<"Game">
+    game_status?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    game_type?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    genres?: IntNullableListFilter<"Game">
+    hypes?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    involved_companies?: IntNullableListFilter<"Game">
+    keywords?: IntNullableListFilter<"Game">
+    language_supports?: IntNullableListFilter<"Game">
+    multiplayer_modes?: IntNullableListFilter<"Game">
+    name?: StringWithAggregatesFilter<"Game"> | string
+    parent_game?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    platforms?: IntNullableListFilter<"Game">
+    player_perspectives?: IntNullableListFilter<"Game">
+    ports?: IntNullableListFilter<"Game">
+    rating?: FloatNullableWithAggregatesFilter<"Game"> | number | null
+    rating_count?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    release_dates?: IntNullableListFilter<"Game">
+    remakes?: IntNullableListFilter<"Game">
+    remasters?: IntNullableListFilter<"Game">
+    screenshots?: IntNullableListFilter<"Game">
+    similar_games?: IntNullableListFilter<"Game">
+    slug?: StringWithAggregatesFilter<"Game"> | string
+    standalone_expansions?: IntNullableListFilter<"Game">
+    storyline?: StringNullableWithAggregatesFilter<"Game"> | string | null
+    summary?: StringNullableWithAggregatesFilter<"Game"> | string | null
+    tags?: IntNullableListFilter<"Game">
+    themes?: IntNullableListFilter<"Game">
+    total_rating?: FloatNullableWithAggregatesFilter<"Game"> | number | null
+    total_rating_count?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    updated_at?: DateTimeWithAggregatesFilter<"Game"> | Date | string
+    url?: StringNullableWithAggregatesFilter<"Game"> | string | null
+    version_parent?: IntNullableListFilter<"Game">
+    version_title?: StringNullableWithAggregatesFilter<"Game"> | string | null
+    videos?: IntNullableListFilter<"Game">
+    websites?: IntNullableListFilter<"Game">
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -10784,7 +14400,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
-    Game?: GameListRelationFilter
+    Game?: GameUserListRelationFilter
     UserSettings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
   }
 
@@ -10798,7 +14414,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
-    Game?: GameOrderByRelationAggregateInput
+    Game?: GameUserOrderByRelationAggregateInput
     UserSettings?: UserSettingsOrderByWithRelationInput
   }
 
@@ -10815,7 +14431,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     accounts?: AccountListRelationFilter
-    Game?: GameListRelationFilter
+    Game?: GameUserListRelationFilter
     UserSettings?: XOR<UserSettingsNullableScalarRelationFilter, UserSettingsWhereInput> | null
   }, "id" | "email">
 
@@ -11067,7 +14683,7 @@ export namespace Prisma {
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
-  export type GameCreateInput = {
+  export type GameUserCreateInput = {
     name: string
     platform: string
     status?: $Enums.Status
@@ -11077,7 +14693,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutGameInput
   }
 
-  export type GameUncheckedCreateInput = {
+  export type GameUserUncheckedCreateInput = {
     id?: number
     name: string
     platform: string
@@ -11088,7 +14704,7 @@ export namespace Prisma {
     userId: string
   }
 
-  export type GameUpdateInput = {
+  export type GameUserUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -11098,7 +14714,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutGameNestedInput
   }
 
-  export type GameUncheckedUpdateInput = {
+  export type GameUserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
@@ -11109,7 +14725,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type GameCreateManyInput = {
+  export type GameUserCreateManyInput = {
     id?: number
     name: string
     platform: string
@@ -11120,7 +14736,7 @@ export namespace Prisma {
     userId: string
   }
 
-  export type GameUpdateManyMutationInput = {
+  export type GameUserUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -11129,7 +14745,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type GameUncheckedUpdateManyInput = {
+  export type GameUserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
@@ -11294,6 +14910,552 @@ export namespace Prisma {
     url?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PlatformCreateInput = {
+    id: number
+    abbreviation?: string | null
+    alternative_name?: string | null
+    checksum?: string | null
+    created_at: Date | string
+    generation?: number | null
+    name?: string | null
+    platform_family?: number | null
+    platform_logo?: number | null
+    platform_type?: number | null
+    slug?: string | null
+    summary?: string | null
+    updated_at: Date | string
+    url?: string | null
+    versions?: PlatformCreateversionsInput | number[]
+    websites?: PlatformCreatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedCreateInput = {
+    id: number
+    abbreviation?: string | null
+    alternative_name?: string | null
+    checksum?: string | null
+    created_at: Date | string
+    generation?: number | null
+    name?: string | null
+    platform_family?: number | null
+    platform_logo?: number | null
+    platform_type?: number | null
+    slug?: string | null
+    summary?: string | null
+    updated_at: Date | string
+    url?: string | null
+    versions?: PlatformCreateversionsInput | number[]
+    websites?: PlatformCreatewebsitesInput | number[]
+  }
+
+  export type PlatformUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type PlatformCreateManyInput = {
+    id: number
+    abbreviation?: string | null
+    alternative_name?: string | null
+    checksum?: string | null
+    created_at: Date | string
+    generation?: number | null
+    name?: string | null
+    platform_family?: number | null
+    platform_logo?: number | null
+    platform_type?: number | null
+    slug?: string | null
+    summary?: string | null
+    updated_at: Date | string
+    url?: string | null
+    versions?: PlatformCreateversionsInput | number[]
+    websites?: PlatformCreatewebsitesInput | number[]
+  }
+
+  export type PlatformUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type GameCreateInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    cover?: number | null
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    genres?: GameCreategenresInput | number[]
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    platforms?: GameCreateplatformsInput | number[]
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+  }
+
+  export type GameUncheckedCreateInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    cover?: number | null
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    genres?: GameCreategenresInput | number[]
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    platforms?: GameCreateplatformsInput | number[]
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+  }
+
+  export type GameUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    genres?: GameUpdategenresInput | number[]
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    platforms?: GameUpdateplatformsInput | number[]
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
+  export type GameUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    genres?: GameUpdategenresInput | number[]
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    platforms?: GameUpdateplatformsInput | number[]
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
+  export type GameCreateManyInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    cover?: number | null
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    genres?: GameCreategenresInput | number[]
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    platforms?: GameCreateplatformsInput | number[]
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+  }
+
+  export type GameUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    genres?: GameUpdategenresInput | number[]
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    platforms?: GameUpdateplatformsInput | number[]
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
+  export type GameUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    genres?: GameUpdategenresInput | number[]
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    platforms?: GameUpdateplatformsInput | number[]
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
   export type UserCreateInput = {
     id: string
     name: string
@@ -11304,7 +15466,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    Game?: GameCreateNestedManyWithoutUserInput
+    Game?: GameUserCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
@@ -11318,7 +15480,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Game?: GameUncheckedCreateNestedManyWithoutUserInput
+    Game?: GameUserUncheckedCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -11332,7 +15494,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    Game?: GameUpdateManyWithoutUserNestedInput
+    Game?: GameUserUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
@@ -11346,7 +15508,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Game?: GameUncheckedUpdateManyWithoutUserNestedInput
+    Game?: GameUserUncheckedUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -11699,7 +15861,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type GameCountOrderByAggregateInput = {
+  export type GameUserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     platform?: SortOrder
@@ -11710,22 +15872,11 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type GameAvgOrderByAggregateInput = {
+  export type GameUserAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type GameMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    platform?: SortOrder
-    status?: SortOrder
-    genre?: SortOrder
-    releaseDate?: SortOrder
-    notes?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type GameMinOrderByAggregateInput = {
+  export type GameUserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     platform?: SortOrder
@@ -11736,7 +15887,18 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
-  export type GameSumOrderByAggregateInput = {
+  export type GameUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    platform?: SortOrder
+    status?: SortOrder
+    genre?: SortOrder
+    releaseDate?: SortOrder
+    notes?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type GameUserSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -11951,6 +16113,352 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type PlatformCountOrderByAggregateInput = {
+    id?: SortOrder
+    abbreviation?: SortOrder
+    alternative_name?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    generation?: SortOrder
+    name?: SortOrder
+    platform_family?: SortOrder
+    platform_logo?: SortOrder
+    platform_type?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+    versions?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type PlatformAvgOrderByAggregateInput = {
+    id?: SortOrder
+    generation?: SortOrder
+    platform_family?: SortOrder
+    platform_logo?: SortOrder
+    platform_type?: SortOrder
+    versions?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type PlatformMaxOrderByAggregateInput = {
+    id?: SortOrder
+    abbreviation?: SortOrder
+    alternative_name?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    generation?: SortOrder
+    name?: SortOrder
+    platform_family?: SortOrder
+    platform_logo?: SortOrder
+    platform_type?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type PlatformMinOrderByAggregateInput = {
+    id?: SortOrder
+    abbreviation?: SortOrder
+    alternative_name?: SortOrder
+    checksum?: SortOrder
+    created_at?: SortOrder
+    generation?: SortOrder
+    name?: SortOrder
+    platform_family?: SortOrder
+    platform_logo?: SortOrder
+    platform_type?: SortOrder
+    slug?: SortOrder
+    summary?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+  }
+
+  export type PlatformSumOrderByAggregateInput = {
+    id?: SortOrder
+    generation?: SortOrder
+    platform_family?: SortOrder
+    platform_logo?: SortOrder
+    platform_type?: SortOrder
+    versions?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type GameCountOrderByAggregateInput = {
+    id?: SortOrder
+    age_ratings?: SortOrder
+    aggregated_rating?: SortOrder
+    aggregated_rating_count?: SortOrder
+    alternative_names?: SortOrder
+    artworks?: SortOrder
+    bundles?: SortOrder
+    checksum?: SortOrder
+    collections?: SortOrder
+    cover?: SortOrder
+    created_at?: SortOrder
+    dlcs?: SortOrder
+    expanded_games?: SortOrder
+    expansions?: SortOrder
+    external_games?: SortOrder
+    first_release_date?: SortOrder
+    forks?: SortOrder
+    franchise?: SortOrder
+    franchises?: SortOrder
+    game_engines?: SortOrder
+    game_localizations?: SortOrder
+    game_modes?: SortOrder
+    game_status?: SortOrder
+    game_type?: SortOrder
+    genres?: SortOrder
+    hypes?: SortOrder
+    involved_companies?: SortOrder
+    keywords?: SortOrder
+    language_supports?: SortOrder
+    multiplayer_modes?: SortOrder
+    name?: SortOrder
+    parent_game?: SortOrder
+    platforms?: SortOrder
+    player_perspectives?: SortOrder
+    ports?: SortOrder
+    rating?: SortOrder
+    rating_count?: SortOrder
+    release_dates?: SortOrder
+    remakes?: SortOrder
+    remasters?: SortOrder
+    screenshots?: SortOrder
+    similar_games?: SortOrder
+    slug?: SortOrder
+    standalone_expansions?: SortOrder
+    storyline?: SortOrder
+    summary?: SortOrder
+    tags?: SortOrder
+    themes?: SortOrder
+    total_rating?: SortOrder
+    total_rating_count?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+    version_parent?: SortOrder
+    version_title?: SortOrder
+    videos?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type GameAvgOrderByAggregateInput = {
+    id?: SortOrder
+    age_ratings?: SortOrder
+    aggregated_rating?: SortOrder
+    aggregated_rating_count?: SortOrder
+    alternative_names?: SortOrder
+    artworks?: SortOrder
+    bundles?: SortOrder
+    collections?: SortOrder
+    cover?: SortOrder
+    dlcs?: SortOrder
+    expanded_games?: SortOrder
+    expansions?: SortOrder
+    external_games?: SortOrder
+    first_release_date?: SortOrder
+    forks?: SortOrder
+    franchise?: SortOrder
+    franchises?: SortOrder
+    game_engines?: SortOrder
+    game_localizations?: SortOrder
+    game_modes?: SortOrder
+    game_status?: SortOrder
+    game_type?: SortOrder
+    genres?: SortOrder
+    hypes?: SortOrder
+    involved_companies?: SortOrder
+    keywords?: SortOrder
+    language_supports?: SortOrder
+    multiplayer_modes?: SortOrder
+    parent_game?: SortOrder
+    platforms?: SortOrder
+    player_perspectives?: SortOrder
+    ports?: SortOrder
+    rating?: SortOrder
+    rating_count?: SortOrder
+    release_dates?: SortOrder
+    remakes?: SortOrder
+    remasters?: SortOrder
+    screenshots?: SortOrder
+    similar_games?: SortOrder
+    standalone_expansions?: SortOrder
+    tags?: SortOrder
+    themes?: SortOrder
+    total_rating?: SortOrder
+    total_rating_count?: SortOrder
+    version_parent?: SortOrder
+    videos?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type GameMaxOrderByAggregateInput = {
+    id?: SortOrder
+    aggregated_rating?: SortOrder
+    aggregated_rating_count?: SortOrder
+    checksum?: SortOrder
+    cover?: SortOrder
+    created_at?: SortOrder
+    first_release_date?: SortOrder
+    franchise?: SortOrder
+    game_status?: SortOrder
+    game_type?: SortOrder
+    hypes?: SortOrder
+    name?: SortOrder
+    parent_game?: SortOrder
+    rating?: SortOrder
+    rating_count?: SortOrder
+    slug?: SortOrder
+    storyline?: SortOrder
+    summary?: SortOrder
+    total_rating?: SortOrder
+    total_rating_count?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+    version_title?: SortOrder
+  }
+
+  export type GameMinOrderByAggregateInput = {
+    id?: SortOrder
+    aggregated_rating?: SortOrder
+    aggregated_rating_count?: SortOrder
+    checksum?: SortOrder
+    cover?: SortOrder
+    created_at?: SortOrder
+    first_release_date?: SortOrder
+    franchise?: SortOrder
+    game_status?: SortOrder
+    game_type?: SortOrder
+    hypes?: SortOrder
+    name?: SortOrder
+    parent_game?: SortOrder
+    rating?: SortOrder
+    rating_count?: SortOrder
+    slug?: SortOrder
+    storyline?: SortOrder
+    summary?: SortOrder
+    total_rating?: SortOrder
+    total_rating_count?: SortOrder
+    updated_at?: SortOrder
+    url?: SortOrder
+    version_title?: SortOrder
+  }
+
+  export type GameSumOrderByAggregateInput = {
+    id?: SortOrder
+    age_ratings?: SortOrder
+    aggregated_rating?: SortOrder
+    aggregated_rating_count?: SortOrder
+    alternative_names?: SortOrder
+    artworks?: SortOrder
+    bundles?: SortOrder
+    collections?: SortOrder
+    cover?: SortOrder
+    dlcs?: SortOrder
+    expanded_games?: SortOrder
+    expansions?: SortOrder
+    external_games?: SortOrder
+    first_release_date?: SortOrder
+    forks?: SortOrder
+    franchise?: SortOrder
+    franchises?: SortOrder
+    game_engines?: SortOrder
+    game_localizations?: SortOrder
+    game_modes?: SortOrder
+    game_status?: SortOrder
+    game_type?: SortOrder
+    genres?: SortOrder
+    hypes?: SortOrder
+    involved_companies?: SortOrder
+    keywords?: SortOrder
+    language_supports?: SortOrder
+    multiplayer_modes?: SortOrder
+    parent_game?: SortOrder
+    platforms?: SortOrder
+    player_perspectives?: SortOrder
+    ports?: SortOrder
+    rating?: SortOrder
+    rating_count?: SortOrder
+    release_dates?: SortOrder
+    remakes?: SortOrder
+    remasters?: SortOrder
+    screenshots?: SortOrder
+    similar_games?: SortOrder
+    standalone_expansions?: SortOrder
+    tags?: SortOrder
+    themes?: SortOrder
+    total_rating?: SortOrder
+    total_rating_count?: SortOrder
+    version_parent?: SortOrder
+    videos?: SortOrder
+    websites?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -11968,10 +16476,10 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
-  export type GameListRelationFilter = {
-    every?: GameWhereInput
-    some?: GameWhereInput
-    none?: GameWhereInput
+  export type GameUserListRelationFilter = {
+    every?: GameUserWhereInput
+    some?: GameUserWhereInput
+    none?: GameUserWhereInput
   }
 
   export type UserSettingsNullableScalarRelationFilter = {
@@ -11987,7 +16495,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type GameOrderByRelationAggregateInput = {
+  export type GameUserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12197,6 +16705,337 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type PlatformCreateversionsInput = {
+    set: number[]
+  }
+
+  export type PlatformCreatewebsitesInput = {
+    set: number[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type PlatformUpdateversionsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type PlatformUpdatewebsitesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameCreateage_ratingsInput = {
+    set: number[]
+  }
+
+  export type GameCreatealternative_namesInput = {
+    set: number[]
+  }
+
+  export type GameCreateartworksInput = {
+    set: number[]
+  }
+
+  export type GameCreatebundlesInput = {
+    set: number[]
+  }
+
+  export type GameCreatecollectionsInput = {
+    set: number[]
+  }
+
+  export type GameCreatedlcsInput = {
+    set: number[]
+  }
+
+  export type GameCreateexpanded_gamesInput = {
+    set: number[]
+  }
+
+  export type GameCreateexpansionsInput = {
+    set: number[]
+  }
+
+  export type GameCreateexternal_gamesInput = {
+    set: number[]
+  }
+
+  export type GameCreateforksInput = {
+    set: number[]
+  }
+
+  export type GameCreatefranchisesInput = {
+    set: number[]
+  }
+
+  export type GameCreategame_enginesInput = {
+    set: number[]
+  }
+
+  export type GameCreategame_localizationsInput = {
+    set: number[]
+  }
+
+  export type GameCreategame_modesInput = {
+    set: number[]
+  }
+
+  export type GameCreategenresInput = {
+    set: number[]
+  }
+
+  export type GameCreateinvolved_companiesInput = {
+    set: number[]
+  }
+
+  export type GameCreatekeywordsInput = {
+    set: number[]
+  }
+
+  export type GameCreatelanguage_supportsInput = {
+    set: number[]
+  }
+
+  export type GameCreatemultiplayer_modesInput = {
+    set: number[]
+  }
+
+  export type GameCreateplatformsInput = {
+    set: number[]
+  }
+
+  export type GameCreateplayer_perspectivesInput = {
+    set: number[]
+  }
+
+  export type GameCreateportsInput = {
+    set: number[]
+  }
+
+  export type GameCreaterelease_datesInput = {
+    set: number[]
+  }
+
+  export type GameCreateremakesInput = {
+    set: number[]
+  }
+
+  export type GameCreateremastersInput = {
+    set: number[]
+  }
+
+  export type GameCreatescreenshotsInput = {
+    set: number[]
+  }
+
+  export type GameCreatesimilar_gamesInput = {
+    set: number[]
+  }
+
+  export type GameCreatestandalone_expansionsInput = {
+    set: number[]
+  }
+
+  export type GameCreatetagsInput = {
+    set: number[]
+  }
+
+  export type GameCreatethemesInput = {
+    set: number[]
+  }
+
+  export type GameCreateversion_parentInput = {
+    set: number[]
+  }
+
+  export type GameCreatevideosInput = {
+    set: number[]
+  }
+
+  export type GameCreatewebsitesInput = {
+    set: number[]
+  }
+
+  export type GameUpdateage_ratingsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type GameUpdatealternative_namesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateartworksInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatebundlesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatecollectionsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatedlcsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateexpanded_gamesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateexpansionsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateexternal_gamesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateforksInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatefranchisesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdategame_enginesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdategame_localizationsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdategame_modesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdategenresInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateinvolved_companiesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatekeywordsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatelanguage_supportsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatemultiplayer_modesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateplatformsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateplayer_perspectivesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateportsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdaterelease_datesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateremakesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateremastersInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatescreenshotsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatesimilar_gamesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatestandalone_expansionsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatetagsInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatethemesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdateversion_parentInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatevideosInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type GameUpdatewebsitesInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
   export type SessionCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
@@ -12211,11 +17050,11 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type GameCreateNestedManyWithoutUserInput = {
-    create?: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput> | GameCreateWithoutUserInput[] | GameUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GameCreateOrConnectWithoutUserInput | GameCreateOrConnectWithoutUserInput[]
-    createMany?: GameCreateManyUserInputEnvelope
-    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  export type GameUserCreateNestedManyWithoutUserInput = {
+    create?: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput> | GameUserCreateWithoutUserInput[] | GameUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GameUserCreateOrConnectWithoutUserInput | GameUserCreateOrConnectWithoutUserInput[]
+    createMany?: GameUserCreateManyUserInputEnvelope
+    connect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
   }
 
   export type UserSettingsCreateNestedOneWithoutUserInput = {
@@ -12238,11 +17077,11 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type GameUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput> | GameCreateWithoutUserInput[] | GameUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GameCreateOrConnectWithoutUserInput | GameCreateOrConnectWithoutUserInput[]
-    createMany?: GameCreateManyUserInputEnvelope
-    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  export type GameUserUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput> | GameUserCreateWithoutUserInput[] | GameUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GameUserCreateOrConnectWithoutUserInput | GameUserCreateOrConnectWithoutUserInput[]
+    createMany?: GameUserCreateManyUserInputEnvelope
+    connect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
   }
 
   export type UserSettingsUncheckedCreateNestedOneWithoutUserInput = {
@@ -12283,18 +17122,18 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type GameUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput> | GameCreateWithoutUserInput[] | GameUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GameCreateOrConnectWithoutUserInput | GameCreateOrConnectWithoutUserInput[]
-    upsert?: GameUpsertWithWhereUniqueWithoutUserInput | GameUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GameCreateManyUserInputEnvelope
-    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    update?: GameUpdateWithWhereUniqueWithoutUserInput | GameUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GameUpdateManyWithWhereWithoutUserInput | GameUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  export type GameUserUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput> | GameUserCreateWithoutUserInput[] | GameUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GameUserCreateOrConnectWithoutUserInput | GameUserCreateOrConnectWithoutUserInput[]
+    upsert?: GameUserUpsertWithWhereUniqueWithoutUserInput | GameUserUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GameUserCreateManyUserInputEnvelope
+    set?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    disconnect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    delete?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    connect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    update?: GameUserUpdateWithWhereUniqueWithoutUserInput | GameUserUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GameUserUpdateManyWithWhereWithoutUserInput | GameUserUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GameUserScalarWhereInput | GameUserScalarWhereInput[]
   }
 
   export type UserSettingsUpdateOneWithoutUserNestedInput = {
@@ -12335,18 +17174,18 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type GameUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput> | GameCreateWithoutUserInput[] | GameUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: GameCreateOrConnectWithoutUserInput | GameCreateOrConnectWithoutUserInput[]
-    upsert?: GameUpsertWithWhereUniqueWithoutUserInput | GameUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: GameCreateManyUserInputEnvelope
-    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
-    update?: GameUpdateWithWhereUniqueWithoutUserInput | GameUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: GameUpdateManyWithWhereWithoutUserInput | GameUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  export type GameUserUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput> | GameUserCreateWithoutUserInput[] | GameUserUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: GameUserCreateOrConnectWithoutUserInput | GameUserCreateOrConnectWithoutUserInput[]
+    upsert?: GameUserUpsertWithWhereUniqueWithoutUserInput | GameUserUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: GameUserCreateManyUserInputEnvelope
+    set?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    disconnect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    delete?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    connect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+    update?: GameUserUpdateWithWhereUniqueWithoutUserInput | GameUserUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: GameUserUpdateManyWithWhereWithoutUserInput | GameUserUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: GameUserScalarWhereInput | GameUserScalarWhereInput[]
   }
 
   export type UserSettingsUncheckedUpdateOneWithoutUserNestedInput = {
@@ -12582,6 +17421,49 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -12673,7 +17555,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
-    Game?: GameCreateNestedManyWithoutUserInput
+    Game?: GameUserCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserSettingsInput = {
@@ -12686,7 +17568,7 @@ export namespace Prisma {
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Game?: GameUncheckedCreateNestedManyWithoutUserInput
+    Game?: GameUserUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserSettingsInput = {
@@ -12715,7 +17597,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    Game?: GameUpdateManyWithoutUserNestedInput
+    Game?: GameUserUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserSettingsInput = {
@@ -12728,7 +17610,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Game?: GameUncheckedUpdateManyWithoutUserNestedInput
+    Game?: GameUserUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SessionCreateWithoutUserInput = {
@@ -12801,7 +17683,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type GameCreateWithoutUserInput = {
+  export type GameUserCreateWithoutUserInput = {
     name: string
     platform: string
     status?: $Enums.Status
@@ -12810,7 +17692,7 @@ export namespace Prisma {
     notes?: string | null
   }
 
-  export type GameUncheckedCreateWithoutUserInput = {
+  export type GameUserUncheckedCreateWithoutUserInput = {
     id?: number
     name: string
     platform: string
@@ -12820,13 +17702,13 @@ export namespace Prisma {
     notes?: string | null
   }
 
-  export type GameCreateOrConnectWithoutUserInput = {
-    where: GameWhereUniqueInput
-    create: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput>
+  export type GameUserCreateOrConnectWithoutUserInput = {
+    where: GameUserWhereUniqueInput
+    create: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput>
   }
 
-  export type GameCreateManyUserInputEnvelope = {
-    data: GameCreateManyUserInput | GameCreateManyUserInput[]
+  export type GameUserCreateManyUserInputEnvelope = {
+    data: GameUserCreateManyUserInput | GameUserCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -12909,34 +17791,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
-  export type GameUpsertWithWhereUniqueWithoutUserInput = {
-    where: GameWhereUniqueInput
-    update: XOR<GameUpdateWithoutUserInput, GameUncheckedUpdateWithoutUserInput>
-    create: XOR<GameCreateWithoutUserInput, GameUncheckedCreateWithoutUserInput>
+  export type GameUserUpsertWithWhereUniqueWithoutUserInput = {
+    where: GameUserWhereUniqueInput
+    update: XOR<GameUserUpdateWithoutUserInput, GameUserUncheckedUpdateWithoutUserInput>
+    create: XOR<GameUserCreateWithoutUserInput, GameUserUncheckedCreateWithoutUserInput>
   }
 
-  export type GameUpdateWithWhereUniqueWithoutUserInput = {
-    where: GameWhereUniqueInput
-    data: XOR<GameUpdateWithoutUserInput, GameUncheckedUpdateWithoutUserInput>
+  export type GameUserUpdateWithWhereUniqueWithoutUserInput = {
+    where: GameUserWhereUniqueInput
+    data: XOR<GameUserUpdateWithoutUserInput, GameUserUncheckedUpdateWithoutUserInput>
   }
 
-  export type GameUpdateManyWithWhereWithoutUserInput = {
-    where: GameScalarWhereInput
-    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyWithoutUserInput>
+  export type GameUserUpdateManyWithWhereWithoutUserInput = {
+    where: GameUserScalarWhereInput
+    data: XOR<GameUserUpdateManyMutationInput, GameUserUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type GameScalarWhereInput = {
-    AND?: GameScalarWhereInput | GameScalarWhereInput[]
-    OR?: GameScalarWhereInput[]
-    NOT?: GameScalarWhereInput | GameScalarWhereInput[]
-    id?: IntFilter<"Game"> | number
-    name?: StringFilter<"Game"> | string
-    platform?: StringFilter<"Game"> | string
-    status?: EnumStatusFilter<"Game"> | $Enums.Status
-    genre?: StringNullableFilter<"Game"> | string | null
-    releaseDate?: DateTimeNullableFilter<"Game"> | Date | string | null
-    notes?: StringNullableFilter<"Game"> | string | null
-    userId?: StringFilter<"Game"> | string
+  export type GameUserScalarWhereInput = {
+    AND?: GameUserScalarWhereInput | GameUserScalarWhereInput[]
+    OR?: GameUserScalarWhereInput[]
+    NOT?: GameUserScalarWhereInput | GameUserScalarWhereInput[]
+    id?: IntFilter<"GameUser"> | number
+    name?: StringFilter<"GameUser"> | string
+    platform?: StringFilter<"GameUser"> | string
+    status?: EnumStatusFilter<"GameUser"> | $Enums.Status
+    genre?: StringNullableFilter<"GameUser"> | string | null
+    releaseDate?: DateTimeNullableFilter<"GameUser"> | Date | string | null
+    notes?: StringNullableFilter<"GameUser"> | string | null
+    userId?: StringFilter<"GameUser"> | string
   }
 
   export type UserSettingsUpsertWithoutUserInput = {
@@ -12968,7 +17850,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    Game?: GameCreateNestedManyWithoutUserInput
+    Game?: GameUserCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
@@ -12981,7 +17863,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Game?: GameUncheckedCreateNestedManyWithoutUserInput
+    Game?: GameUserUncheckedCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -13010,7 +17892,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    Game?: GameUpdateManyWithoutUserNestedInput
+    Game?: GameUserUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
@@ -13023,7 +17905,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Game?: GameUncheckedUpdateManyWithoutUserNestedInput
+    Game?: GameUserUncheckedUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -13036,7 +17918,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    Game?: GameCreateNestedManyWithoutUserInput
+    Game?: GameUserCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsCreateNestedOneWithoutUserInput
   }
 
@@ -13049,7 +17931,7 @@ export namespace Prisma {
     createdAt: Date | string
     updatedAt: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    Game?: GameUncheckedCreateNestedManyWithoutUserInput
+    Game?: GameUserUncheckedCreateNestedManyWithoutUserInput
     UserSettings?: UserSettingsUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -13078,7 +17960,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    Game?: GameUpdateManyWithoutUserNestedInput
+    Game?: GameUserUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUpdateOneWithoutUserNestedInput
   }
 
@@ -13091,7 +17973,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    Game?: GameUncheckedUpdateManyWithoutUserNestedInput
+    Game?: GameUserUncheckedUpdateManyWithoutUserNestedInput
     UserSettings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -13120,7 +18002,7 @@ export namespace Prisma {
     updatedAt: Date | string
   }
 
-  export type GameCreateManyUserInput = {
+  export type GameUserCreateManyUserInput = {
     id?: number
     name: string
     platform: string
@@ -13205,7 +18087,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type GameUpdateWithoutUserInput = {
+  export type GameUserUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -13214,7 +18096,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type GameUncheckedUpdateWithoutUserInput = {
+  export type GameUserUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
@@ -13224,7 +18106,7 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type GameUncheckedUpdateManyWithoutUserInput = {
+  export type GameUserUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string

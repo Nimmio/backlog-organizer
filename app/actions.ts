@@ -4,6 +4,7 @@ import { auth } from "@/auth";
 import { Game } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { getGenres } from "@/lib/igdb/genre";
+import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
 import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -16,7 +17,7 @@ interface createGameProps {
 
 export const createGame = async (props: createGameProps): Promise<Game> => {
   const userId = await getCurrentUserId();
-  return await prisma.game.create({
+  return await prisma.gameUser.create({
     data: {
       ...props,
       userId,
@@ -30,7 +31,7 @@ interface editGameProps extends createGameProps {
 
 export const editGame = async (props: editGameProps): Promise<Game> => {
   const { id } = props;
-  return await prisma.game.update({
+  return await prisma.gameUser.update({
     data: {
       ...props,
     },
@@ -46,7 +47,7 @@ interface deleteGameProps {
 
 export const deleteGame = async (props: deleteGameProps): Promise<Game> => {
   const { id } = props;
-  const game = await prisma.game.delete({
+  const game = await prisma.gameUser.delete({
     where: {
       id,
     },
@@ -88,22 +89,26 @@ export const searchGame = async (params: searchGameParams) => {
 export const getGameDetails = async (id: number) => {
   const { access_token } = await getAuthentication();
 
-  const fields: GameField[] = ["genres", "platforms"];
+  const game = (await getIGDBCachedOrExtern({ ids: [id], type: "game" }))[0];
 
-  const games = await queryBuilder({
-    access_token: access_token || undefined,
-    requestUrl: RequestUrls.game,
-    fields: fields,
-    where: `id =${id}`,
-  });
-  const data = games[0];
-
-  const genres = await getGenresForIds(data.genres);
-  return {
-    genres: genres,
-  };
+  return game;
 };
 
-export const getGenresForIds = async (ids: number[]) => {
-  return await getGenres(ids);
+export const getGenresForIdsAsStrings = async (
+  ids: number[]
+): Promise<string[]> => {
+  const genreObjects = await getIGDBCachedOrExtern({ ids, type: "genre" });
+  return genreObjects.map((genreObject) => genreObject.name) as string[];
+};
+
+export const getPlatformsForIdsAsStrings = async (
+  ids: number[]
+): Promise<string[]> => {
+  const platformObjects = await getIGDBCachedOrExtern({
+    ids,
+    type: "platform",
+  });
+  return platformObjects.map(
+    (platformObject) => platformObject.name
+  ) as string[];
 };
