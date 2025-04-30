@@ -22,7 +22,7 @@ export const getIGDBCachedOrExtern = async (
   params: getIGDBCachedOrExternParams
 ): Promise<IGDBMeta[]> => {
   const { ids, type } = params;
-
+  if (!ids || ids.length === 0) return [];
   const { cachedData, missing } = await getCached({ ids, type });
   let data: IGDBMeta[] = cachedData;
   if (missing.length) {
