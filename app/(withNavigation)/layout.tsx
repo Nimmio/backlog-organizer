@@ -4,7 +4,7 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar, {
   ISidebarLinks,
 } from "@/components/layout/sidebar/app-sidebar";
-import { Home, User } from "lucide-react";
+import { Home } from "lucide-react";
 import AppHeader from "@/components/layout/header/app-header";
 import AppMain from "@/components/layout/main/app-main";
 import { BreadcrumStoreProvider } from "@/providers/breadcrum-store-provider";
@@ -40,8 +40,6 @@ export default async function RootLayout({
         headers: await headers(),
       })
       .then(redirect("/sign-in"));
-
-  const theme = (await getCurrentUserSettings())?.theme || "SYSTEM";
 
   return (
     <html lang="en" suppressHydrationWarning>
