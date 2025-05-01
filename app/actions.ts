@@ -5,7 +5,7 @@ import { Game } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { getGenres } from "@/lib/igdb/genre";
 import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
-import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
+import { downloadImage, queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
 import { GameField } from "@/types/igdb/game";
 import { revalidatePath } from "next/cache";
@@ -92,6 +92,7 @@ export const getGameDetails = async (id: number) => {
     platforms: (await getPlatformsForIdsAsStrings(game.platforms)) as string[],
     genres: (await getGenresForIdsAsStrings(game.genres)) as string[],
   };
+  getCoverForId(game.cover);
   return game;
 };
 
@@ -112,4 +113,18 @@ export const getPlatformsForIdsAsStrings = async (
   return platformObjects.map(
     (platformObject) => platformObject.name
   ) as string[];
+};
+
+export const getCoverForId = async (id: number) => {
+  const cover = await getIGDBCachedOrExtern({
+    ids: [id],
+    type: "cover",
+  });
+  const url = cover[0].url;
+  console.log("url", url);
+  if (url) {
+    const filename = /(([^\/]+$))/.exec(url);
+    console.log(filename[0]);
+    downloadImage("https:" + url, filename[0]);
+  }
 };

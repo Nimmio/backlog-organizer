@@ -80,11 +80,23 @@ const getFromExternal = async (
     fields: "*",
     where: `id =${getIdString(ids)}`,
   });
-  return response.map((entry: IGDBExternMeta) => ({
-    ...entry,
-    created_at: fromUnixTime(entry.created_at),
-    updated_at: fromUnixTime(entry.updated_at),
-  }));
+
+  return response.map((entry: IGDBExternMeta) => {
+    let newEntry = { ...entry };
+    if (entry.hasOwnProperty("created_at")) {
+      newEntry = {
+        ...entry,
+        created_at: fromUnixTime(entry.created_at),
+      };
+    }
+    if (entry.hasOwnProperty("updated_at")) {
+      newEntry = {
+        ...entry,
+        updated_at: fromUnixTime(entry.updated_at),
+      };
+    }
+    return newEntry;
+  });
 };
 
 interface saveToCacheParams {

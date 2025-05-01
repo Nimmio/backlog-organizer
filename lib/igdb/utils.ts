@@ -1,6 +1,8 @@
 import { IGDBFields } from "@/types/igdb/fields";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 const rootUrl = "https://api.igdb.com/v4/";
 export const RequestUrls: {
@@ -8,11 +10,13 @@ export const RequestUrls: {
   release_date: string;
   genre: string;
   platform: string;
+  cover: string;
 } = {
   game: rootUrl + "games",
   release_date: rootUrl + "release_dates",
   genre: rootUrl + "genres",
   platform: rootUrl + "platforms",
+  cover: rootUrl + "covers",
 };
 
 export const getRequestOptions = (access_token: string) => {
@@ -93,4 +97,24 @@ export const queryBuilder = async (params: queryBuilderParams) => {
 
   const data = await response.json();
   return data;
+};
+
+export const downloadImage = (url: string, filename: string) => {
+  fetch(url, { mode: "no-cors" })
+    .then((response) => response.blob())
+    .then((blob) => {
+      saveImage(blob, filename);
+    });
+};
+
+export const saveImage = async (blob: Blob, filename: string) => {
+  const buffer = Buffer.from(await blob.arrayBuffer());
+  try {
+    await writeFile(
+      path.join(process.cwd(), "public/covercache/" + filename),
+      buffer
+    );
+  } catch (error) {
+    console.log("Error occured ", error);
+  }
 };
