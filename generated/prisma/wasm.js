@@ -151,6 +151,19 @@ exports.Prisma.GenreScalarFieldEnum = {
   url: 'url'
 };
 
+exports.Prisma.CoverScalarFieldEnum = {
+  id: 'id',
+  alpha_channel: 'alpha_channel',
+  animated: 'animated',
+  checksum: 'checksum',
+  game: 'game',
+  game_localization: 'game_localization',
+  height: 'height',
+  image_id: 'image_id',
+  url: 'url',
+  width: 'width'
+};
+
 exports.Prisma.PlatformScalarFieldEnum = {
   id: 'id',
   abbreviation: 'abbreviation',
@@ -309,6 +322,7 @@ exports.Prisma.ModelName = {
   UserSettings: 'UserSettings',
   IGDBAuth: 'IGDBAuth',
   Genre: 'Genre',
+  Cover: 'Cover',
   Platform: 'Platform',
   Game: 'Game',
   User: 'User',

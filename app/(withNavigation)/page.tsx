@@ -1,4 +1,3 @@
-import AddGameDialog from "@/components/addGameDialog/add-game-dialog";
 import GameTable from "@/components/gameTable/game-table";
 import BreadcrumbSetter from "@/components/layout/header/breadcrumbs/breadcrum-setter";
 import SearchInput from "@/components/searchInput/searchInput";
@@ -66,11 +65,9 @@ const Home = async ({
     },
   });
 
-  console.log("typeof", typeof prisma.genre);
   return (
     <main>
       <Card className="p-4">
-        <AddGameDialog />
         <IgdbGameDialog />
         <BreadcrumbSetter newBreadcrumbs={[{ title: "Games" }]} />
         <div className="flex mb-4 justify-between">

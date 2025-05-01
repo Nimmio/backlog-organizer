@@ -5,15 +5,9 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Input } from "../ui/input";
 import AppDialog from "../Dialog/app-dialog";
-import {
-  getGameDetails,
-  getGenresForIdsAsStrings,
-  getPlatformsForIdsAsStrings,
-  searchGame,
-} from "@/app/actions";
+import { getGameDetails, searchGame } from "@/app/actions";
 import { format, formatDate, fromUnixTime } from "date-fns";
 import { Button } from "../ui/button";
-import { Genre } from "@/generated/prisma";
 import GameDetailsCard from "./igdb-game-dialog-details";
 
 interface Game {
@@ -23,8 +17,9 @@ interface Game {
 }
 
 interface GameDetails {
-  genres: Genre[];
-  platform: string[];
+  genres: string[];
+  platforms: string[];
+  summary: string;
 }
 
 const IgdbGameDialog = () => {
@@ -40,14 +35,11 @@ const IgdbGameDialog = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails | undefined>(
     undefined
   );
-  const [gameGenres, setGameGenres] = useState<string[] | undefined>(undefined);
-  const [platforms, setPlatforms] = useState<string[] | undefined>(undefined);
   const [debouncedInput] = useDebounce(input, 500);
 
   useEffect(() => {
     if (debouncedInput !== "") {
       searchGame({
-        fields: ["name", "first_release_date"],
         search: debouncedInput,
         filterEditions: true,
       }).then((response) => {
@@ -90,28 +82,10 @@ const IgdbGameDialog = () => {
     };
   }, [selectedGame]);
 
-  useEffect(() => {
-    if (gameDetails) {
-      getGenresForIdsAsStrings(gameDetails.genres).then((genres) => {
-        setGameGenres(genres);
-      });
-      getPlatformsForIdsAsStrings(gameDetails.platforms).then((platforms) => {
-        setPlatforms(platforms);
-      });
-    }
-
-    return () => {
-      setGameGenres(undefined);
-      setPlatforms(undefined);
-    };
-  }, [gameDetails]);
-
   const handleOpenChange = (open: boolean) => {
     setInput("");
     setSelectedGame(undefined);
     setGameDetails(undefined);
-    setGameGenres(undefined);
-    setPlatforms(undefined);
     router.push(
       `${pathname}?${createQueryString(
         "addGameDialogOpen",
@@ -127,8 +101,6 @@ const IgdbGameDialog = () => {
   const handleBackButtonClick = () => {
     setSelectedGame(undefined);
     setGameDetails(undefined);
-    setGameGenres(undefined);
-    setPlatforms(undefined);
   };
 
   const contentSearch = (
@@ -167,9 +139,9 @@ const IgdbGameDialog = () => {
               : ""
           }
           description={gameDetails?.summary || ""}
-          genres={gameGenres || undefined}
+          genres={gameDetails?.genres || undefined}
           onBack={() => handleBackButtonClick()}
-          platforms={platforms}
+          platforms={gameDetails?.platforms || undefined}
         />
       )}
     </>

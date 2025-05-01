@@ -34,6 +34,11 @@ export type IGDBAuth = $Result.DefaultSelection<Prisma.$IGDBAuthPayload>
  */
 export type Genre = $Result.DefaultSelection<Prisma.$GenrePayload>
 /**
+ * Model Cover
+ * 
+ */
+export type Cover = $Result.DefaultSelection<Prisma.$CoverPayload>
+/**
  * Model Platform
  * 
  */
@@ -262,6 +267,16 @@ export class PrismaClient<
     * ```
     */
   get genre(): Prisma.GenreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cover`: Exposes CRUD operations for the **Cover** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Covers
+    * const covers = await prisma.cover.findMany()
+    * ```
+    */
+  get cover(): Prisma.CoverDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.platform`: Exposes CRUD operations for the **Platform** model.
@@ -766,6 +781,7 @@ export namespace Prisma {
     UserSettings: 'UserSettings',
     IGDBAuth: 'IGDBAuth',
     Genre: 'Genre',
+    Cover: 'Cover',
     Platform: 'Platform',
     Game: 'Game',
     User: 'User',
@@ -790,7 +806,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "gameUser" | "userSettings" | "iGDBAuth" | "genre" | "platform" | "game" | "user" | "session" | "account" | "verification"
+      modelProps: "gameUser" | "userSettings" | "iGDBAuth" | "genre" | "cover" | "platform" | "game" | "user" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1087,6 +1103,80 @@ export namespace Prisma {
           count: {
             args: Prisma.GenreCountArgs<ExtArgs>
             result: $Utils.Optional<GenreCountAggregateOutputType> | number
+          }
+        }
+      }
+      Cover: {
+        payload: Prisma.$CoverPayload<ExtArgs>
+        fields: Prisma.CoverFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CoverFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CoverFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          findFirst: {
+            args: Prisma.CoverFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CoverFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          findMany: {
+            args: Prisma.CoverFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>[]
+          }
+          create: {
+            args: Prisma.CoverCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          createMany: {
+            args: Prisma.CoverCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CoverCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>[]
+          }
+          delete: {
+            args: Prisma.CoverDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          update: {
+            args: Prisma.CoverUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          deleteMany: {
+            args: Prisma.CoverDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CoverUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CoverUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>[]
+          }
+          upsert: {
+            args: Prisma.CoverUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CoverPayload>
+          }
+          aggregate: {
+            args: Prisma.CoverAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCover>
+          }
+          groupBy: {
+            args: Prisma.CoverGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CoverGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CoverCountArgs<ExtArgs>
+            result: $Utils.Optional<CoverCountAggregateOutputType> | number
           }
         }
       }
@@ -1622,6 +1712,7 @@ export namespace Prisma {
     userSettings?: UserSettingsOmit
     iGDBAuth?: IGDBAuthOmit
     genre?: GenreOmit
+    cover?: CoverOmit
     platform?: PlatformOmit
     game?: GameOmit
     user?: UserOmit
@@ -6035,6 +6126,1112 @@ export namespace Prisma {
      * Omit specific fields from the Genre
      */
     omit?: GenreOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Cover
+   */
+
+  export type AggregateCover = {
+    _count: CoverCountAggregateOutputType | null
+    _avg: CoverAvgAggregateOutputType | null
+    _sum: CoverSumAggregateOutputType | null
+    _min: CoverMinAggregateOutputType | null
+    _max: CoverMaxAggregateOutputType | null
+  }
+
+  export type CoverAvgAggregateOutputType = {
+    id: number | null
+    game: number | null
+    game_localization: number | null
+    height: number | null
+    width: number | null
+  }
+
+  export type CoverSumAggregateOutputType = {
+    id: number | null
+    game: number | null
+    game_localization: number[]
+    height: number | null
+    width: number | null
+  }
+
+  export type CoverMinAggregateOutputType = {
+    id: number | null
+    alpha_channel: boolean | null
+    animated: boolean | null
+    checksum: string | null
+    game: number | null
+    height: number | null
+    image_id: string | null
+    url: string | null
+    width: number | null
+  }
+
+  export type CoverMaxAggregateOutputType = {
+    id: number | null
+    alpha_channel: boolean | null
+    animated: boolean | null
+    checksum: string | null
+    game: number | null
+    height: number | null
+    image_id: string | null
+    url: string | null
+    width: number | null
+  }
+
+  export type CoverCountAggregateOutputType = {
+    id: number
+    alpha_channel: number
+    animated: number
+    checksum: number
+    game: number
+    game_localization: number
+    height: number
+    image_id: number
+    url: number
+    width: number
+    _all: number
+  }
+
+
+  export type CoverAvgAggregateInputType = {
+    id?: true
+    game?: true
+    game_localization?: true
+    height?: true
+    width?: true
+  }
+
+  export type CoverSumAggregateInputType = {
+    id?: true
+    game?: true
+    game_localization?: true
+    height?: true
+    width?: true
+  }
+
+  export type CoverMinAggregateInputType = {
+    id?: true
+    alpha_channel?: true
+    animated?: true
+    checksum?: true
+    game?: true
+    height?: true
+    image_id?: true
+    url?: true
+    width?: true
+  }
+
+  export type CoverMaxAggregateInputType = {
+    id?: true
+    alpha_channel?: true
+    animated?: true
+    checksum?: true
+    game?: true
+    height?: true
+    image_id?: true
+    url?: true
+    width?: true
+  }
+
+  export type CoverCountAggregateInputType = {
+    id?: true
+    alpha_channel?: true
+    animated?: true
+    checksum?: true
+    game?: true
+    game_localization?: true
+    height?: true
+    image_id?: true
+    url?: true
+    width?: true
+    _all?: true
+  }
+
+  export type CoverAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Cover to aggregate.
+     */
+    where?: CoverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Covers to fetch.
+     */
+    orderBy?: CoverOrderByWithRelationInput | CoverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CoverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Covers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Covers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Covers
+    **/
+    _count?: true | CoverCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CoverAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CoverSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CoverMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CoverMaxAggregateInputType
+  }
+
+  export type GetCoverAggregateType<T extends CoverAggregateArgs> = {
+        [P in keyof T & keyof AggregateCover]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCover[P]>
+      : GetScalarType<T[P], AggregateCover[P]>
+  }
+
+
+
+
+  export type CoverGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CoverWhereInput
+    orderBy?: CoverOrderByWithAggregationInput | CoverOrderByWithAggregationInput[]
+    by: CoverScalarFieldEnum[] | CoverScalarFieldEnum
+    having?: CoverScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CoverCountAggregateInputType | true
+    _avg?: CoverAvgAggregateInputType
+    _sum?: CoverSumAggregateInputType
+    _min?: CoverMinAggregateInputType
+    _max?: CoverMaxAggregateInputType
+  }
+
+  export type CoverGroupByOutputType = {
+    id: number
+    alpha_channel: boolean | null
+    animated: boolean | null
+    checksum: string | null
+    game: number | null
+    game_localization: number[]
+    height: number | null
+    image_id: string | null
+    url: string | null
+    width: number | null
+    _count: CoverCountAggregateOutputType | null
+    _avg: CoverAvgAggregateOutputType | null
+    _sum: CoverSumAggregateOutputType | null
+    _min: CoverMinAggregateOutputType | null
+    _max: CoverMaxAggregateOutputType | null
+  }
+
+  type GetCoverGroupByPayload<T extends CoverGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CoverGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CoverGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CoverGroupByOutputType[P]>
+            : GetScalarType<T[P], CoverGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CoverSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    alpha_channel?: boolean
+    animated?: boolean
+    checksum?: boolean
+    game?: boolean
+    game_localization?: boolean
+    height?: boolean
+    image_id?: boolean
+    url?: boolean
+    width?: boolean
+  }, ExtArgs["result"]["cover"]>
+
+  export type CoverSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    alpha_channel?: boolean
+    animated?: boolean
+    checksum?: boolean
+    game?: boolean
+    game_localization?: boolean
+    height?: boolean
+    image_id?: boolean
+    url?: boolean
+    width?: boolean
+  }, ExtArgs["result"]["cover"]>
+
+  export type CoverSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    alpha_channel?: boolean
+    animated?: boolean
+    checksum?: boolean
+    game?: boolean
+    game_localization?: boolean
+    height?: boolean
+    image_id?: boolean
+    url?: boolean
+    width?: boolean
+  }, ExtArgs["result"]["cover"]>
+
+  export type CoverSelectScalar = {
+    id?: boolean
+    alpha_channel?: boolean
+    animated?: boolean
+    checksum?: boolean
+    game?: boolean
+    game_localization?: boolean
+    height?: boolean
+    image_id?: boolean
+    url?: boolean
+    width?: boolean
+  }
+
+  export type CoverOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "alpha_channel" | "animated" | "checksum" | "game" | "game_localization" | "height" | "image_id" | "url" | "width", ExtArgs["result"]["cover"]>
+
+  export type $CoverPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Cover"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      alpha_channel: boolean | null
+      animated: boolean | null
+      checksum: string | null
+      game: number | null
+      game_localization: number[]
+      height: number | null
+      image_id: string | null
+      url: string | null
+      width: number | null
+    }, ExtArgs["result"]["cover"]>
+    composites: {}
+  }
+
+  type CoverGetPayload<S extends boolean | null | undefined | CoverDefaultArgs> = $Result.GetResult<Prisma.$CoverPayload, S>
+
+  type CoverCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CoverFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CoverCountAggregateInputType | true
+    }
+
+  export interface CoverDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Cover'], meta: { name: 'Cover' } }
+    /**
+     * Find zero or one Cover that matches the filter.
+     * @param {CoverFindUniqueArgs} args - Arguments to find a Cover
+     * @example
+     * // Get one Cover
+     * const cover = await prisma.cover.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CoverFindUniqueArgs>(args: SelectSubset<T, CoverFindUniqueArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Cover that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CoverFindUniqueOrThrowArgs} args - Arguments to find a Cover
+     * @example
+     * // Get one Cover
+     * const cover = await prisma.cover.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CoverFindUniqueOrThrowArgs>(args: SelectSubset<T, CoverFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Cover that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverFindFirstArgs} args - Arguments to find a Cover
+     * @example
+     * // Get one Cover
+     * const cover = await prisma.cover.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CoverFindFirstArgs>(args?: SelectSubset<T, CoverFindFirstArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Cover that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverFindFirstOrThrowArgs} args - Arguments to find a Cover
+     * @example
+     * // Get one Cover
+     * const cover = await prisma.cover.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CoverFindFirstOrThrowArgs>(args?: SelectSubset<T, CoverFindFirstOrThrowArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Covers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Covers
+     * const covers = await prisma.cover.findMany()
+     * 
+     * // Get first 10 Covers
+     * const covers = await prisma.cover.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const coverWithIdOnly = await prisma.cover.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CoverFindManyArgs>(args?: SelectSubset<T, CoverFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Cover.
+     * @param {CoverCreateArgs} args - Arguments to create a Cover.
+     * @example
+     * // Create one Cover
+     * const Cover = await prisma.cover.create({
+     *   data: {
+     *     // ... data to create a Cover
+     *   }
+     * })
+     * 
+     */
+    create<T extends CoverCreateArgs>(args: SelectSubset<T, CoverCreateArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Covers.
+     * @param {CoverCreateManyArgs} args - Arguments to create many Covers.
+     * @example
+     * // Create many Covers
+     * const cover = await prisma.cover.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CoverCreateManyArgs>(args?: SelectSubset<T, CoverCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Covers and returns the data saved in the database.
+     * @param {CoverCreateManyAndReturnArgs} args - Arguments to create many Covers.
+     * @example
+     * // Create many Covers
+     * const cover = await prisma.cover.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Covers and only return the `id`
+     * const coverWithIdOnly = await prisma.cover.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CoverCreateManyAndReturnArgs>(args?: SelectSubset<T, CoverCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Cover.
+     * @param {CoverDeleteArgs} args - Arguments to delete one Cover.
+     * @example
+     * // Delete one Cover
+     * const Cover = await prisma.cover.delete({
+     *   where: {
+     *     // ... filter to delete one Cover
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CoverDeleteArgs>(args: SelectSubset<T, CoverDeleteArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Cover.
+     * @param {CoverUpdateArgs} args - Arguments to update one Cover.
+     * @example
+     * // Update one Cover
+     * const cover = await prisma.cover.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CoverUpdateArgs>(args: SelectSubset<T, CoverUpdateArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Covers.
+     * @param {CoverDeleteManyArgs} args - Arguments to filter Covers to delete.
+     * @example
+     * // Delete a few Covers
+     * const { count } = await prisma.cover.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CoverDeleteManyArgs>(args?: SelectSubset<T, CoverDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Covers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Covers
+     * const cover = await prisma.cover.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CoverUpdateManyArgs>(args: SelectSubset<T, CoverUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Covers and returns the data updated in the database.
+     * @param {CoverUpdateManyAndReturnArgs} args - Arguments to update many Covers.
+     * @example
+     * // Update many Covers
+     * const cover = await prisma.cover.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Covers and only return the `id`
+     * const coverWithIdOnly = await prisma.cover.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CoverUpdateManyAndReturnArgs>(args: SelectSubset<T, CoverUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Cover.
+     * @param {CoverUpsertArgs} args - Arguments to update or create a Cover.
+     * @example
+     * // Update or create a Cover
+     * const cover = await prisma.cover.upsert({
+     *   create: {
+     *     // ... data to create a Cover
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Cover we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CoverUpsertArgs>(args: SelectSubset<T, CoverUpsertArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Covers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverCountArgs} args - Arguments to filter Covers to count.
+     * @example
+     * // Count the number of Covers
+     * const count = await prisma.cover.count({
+     *   where: {
+     *     // ... the filter for the Covers we want to count
+     *   }
+     * })
+    **/
+    count<T extends CoverCountArgs>(
+      args?: Subset<T, CoverCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CoverCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Cover.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CoverAggregateArgs>(args: Subset<T, CoverAggregateArgs>): Prisma.PrismaPromise<GetCoverAggregateType<T>>
+
+    /**
+     * Group by Cover.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CoverGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CoverGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CoverGroupByArgs['orderBy'] }
+        : { orderBy?: CoverGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CoverGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCoverGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Cover model
+   */
+  readonly fields: CoverFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Cover.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CoverClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Cover model
+   */ 
+  interface CoverFieldRefs {
+    readonly id: FieldRef<"Cover", 'Int'>
+    readonly alpha_channel: FieldRef<"Cover", 'Boolean'>
+    readonly animated: FieldRef<"Cover", 'Boolean'>
+    readonly checksum: FieldRef<"Cover", 'String'>
+    readonly game: FieldRef<"Cover", 'Int'>
+    readonly game_localization: FieldRef<"Cover", 'Int[]'>
+    readonly height: FieldRef<"Cover", 'Int'>
+    readonly image_id: FieldRef<"Cover", 'String'>
+    readonly url: FieldRef<"Cover", 'String'>
+    readonly width: FieldRef<"Cover", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Cover findUnique
+   */
+  export type CoverFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter, which Cover to fetch.
+     */
+    where: CoverWhereUniqueInput
+  }
+
+  /**
+   * Cover findUniqueOrThrow
+   */
+  export type CoverFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter, which Cover to fetch.
+     */
+    where: CoverWhereUniqueInput
+  }
+
+  /**
+   * Cover findFirst
+   */
+  export type CoverFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter, which Cover to fetch.
+     */
+    where?: CoverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Covers to fetch.
+     */
+    orderBy?: CoverOrderByWithRelationInput | CoverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Covers.
+     */
+    cursor?: CoverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Covers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Covers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Covers.
+     */
+    distinct?: CoverScalarFieldEnum | CoverScalarFieldEnum[]
+  }
+
+  /**
+   * Cover findFirstOrThrow
+   */
+  export type CoverFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter, which Cover to fetch.
+     */
+    where?: CoverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Covers to fetch.
+     */
+    orderBy?: CoverOrderByWithRelationInput | CoverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Covers.
+     */
+    cursor?: CoverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Covers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Covers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Covers.
+     */
+    distinct?: CoverScalarFieldEnum | CoverScalarFieldEnum[]
+  }
+
+  /**
+   * Cover findMany
+   */
+  export type CoverFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter, which Covers to fetch.
+     */
+    where?: CoverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Covers to fetch.
+     */
+    orderBy?: CoverOrderByWithRelationInput | CoverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Covers.
+     */
+    cursor?: CoverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Covers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Covers.
+     */
+    skip?: number
+    distinct?: CoverScalarFieldEnum | CoverScalarFieldEnum[]
+  }
+
+  /**
+   * Cover create
+   */
+  export type CoverCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Cover.
+     */
+    data: XOR<CoverCreateInput, CoverUncheckedCreateInput>
+  }
+
+  /**
+   * Cover createMany
+   */
+  export type CoverCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Covers.
+     */
+    data: CoverCreateManyInput | CoverCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Cover createManyAndReturn
+   */
+  export type CoverCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * The data used to create many Covers.
+     */
+    data: CoverCreateManyInput | CoverCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Cover update
+   */
+  export type CoverUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Cover.
+     */
+    data: XOR<CoverUpdateInput, CoverUncheckedUpdateInput>
+    /**
+     * Choose, which Cover to update.
+     */
+    where: CoverWhereUniqueInput
+  }
+
+  /**
+   * Cover updateMany
+   */
+  export type CoverUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Covers.
+     */
+    data: XOR<CoverUpdateManyMutationInput, CoverUncheckedUpdateManyInput>
+    /**
+     * Filter which Covers to update
+     */
+    where?: CoverWhereInput
+    /**
+     * Limit how many Covers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Cover updateManyAndReturn
+   */
+  export type CoverUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * The data used to update Covers.
+     */
+    data: XOR<CoverUpdateManyMutationInput, CoverUncheckedUpdateManyInput>
+    /**
+     * Filter which Covers to update
+     */
+    where?: CoverWhereInput
+    /**
+     * Limit how many Covers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Cover upsert
+   */
+  export type CoverUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Cover to update in case it exists.
+     */
+    where: CoverWhereUniqueInput
+    /**
+     * In case the Cover found by the `where` argument doesn't exist, create a new Cover with this data.
+     */
+    create: XOR<CoverCreateInput, CoverUncheckedCreateInput>
+    /**
+     * In case the Cover was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CoverUpdateInput, CoverUncheckedUpdateInput>
+  }
+
+  /**
+   * Cover delete
+   */
+  export type CoverDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Filter which Cover to delete.
+     */
+    where: CoverWhereUniqueInput
+  }
+
+  /**
+   * Cover deleteMany
+   */
+  export type CoverDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Covers to delete
+     */
+    where?: CoverWhereInput
+    /**
+     * Limit how many Covers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Cover without action
+   */
+  export type CoverDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
   }
 
 
@@ -13472,6 +14669,22 @@ export namespace Prisma {
   export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
 
 
+  export const CoverScalarFieldEnum: {
+    id: 'id',
+    alpha_channel: 'alpha_channel',
+    animated: 'animated',
+    checksum: 'checksum',
+    game: 'game',
+    game_localization: 'game_localization',
+    height: 'height',
+    image_id: 'image_id',
+    url: 'url',
+    width: 'width'
+  };
+
+  export type CoverScalarFieldEnum = (typeof CoverScalarFieldEnum)[keyof typeof CoverScalarFieldEnum]
+
+
   export const PlatformScalarFieldEnum: {
     id: 'id',
     abbreviation: 'abbreviation',
@@ -13714,6 +14927,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -13724,13 +14944,6 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -13967,6 +15180,85 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Genre"> | string
     updated_at?: DateTimeWithAggregatesFilter<"Genre"> | Date | string
     url?: StringWithAggregatesFilter<"Genre"> | string
+  }
+
+  export type CoverWhereInput = {
+    AND?: CoverWhereInput | CoverWhereInput[]
+    OR?: CoverWhereInput[]
+    NOT?: CoverWhereInput | CoverWhereInput[]
+    id?: IntFilter<"Cover"> | number
+    alpha_channel?: BoolNullableFilter<"Cover"> | boolean | null
+    animated?: BoolNullableFilter<"Cover"> | boolean | null
+    checksum?: StringNullableFilter<"Cover"> | string | null
+    game?: IntNullableFilter<"Cover"> | number | null
+    game_localization?: IntNullableListFilter<"Cover">
+    height?: IntNullableFilter<"Cover"> | number | null
+    image_id?: StringNullableFilter<"Cover"> | string | null
+    url?: StringNullableFilter<"Cover"> | string | null
+    width?: IntNullableFilter<"Cover"> | number | null
+  }
+
+  export type CoverOrderByWithRelationInput = {
+    id?: SortOrder
+    alpha_channel?: SortOrderInput | SortOrder
+    animated?: SortOrderInput | SortOrder
+    checksum?: SortOrderInput | SortOrder
+    game?: SortOrderInput | SortOrder
+    game_localization?: SortOrder
+    height?: SortOrderInput | SortOrder
+    image_id?: SortOrderInput | SortOrder
+    url?: SortOrderInput | SortOrder
+    width?: SortOrderInput | SortOrder
+  }
+
+  export type CoverWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: CoverWhereInput | CoverWhereInput[]
+    OR?: CoverWhereInput[]
+    NOT?: CoverWhereInput | CoverWhereInput[]
+    alpha_channel?: BoolNullableFilter<"Cover"> | boolean | null
+    animated?: BoolNullableFilter<"Cover"> | boolean | null
+    checksum?: StringNullableFilter<"Cover"> | string | null
+    game?: IntNullableFilter<"Cover"> | number | null
+    game_localization?: IntNullableListFilter<"Cover">
+    height?: IntNullableFilter<"Cover"> | number | null
+    image_id?: StringNullableFilter<"Cover"> | string | null
+    url?: StringNullableFilter<"Cover"> | string | null
+    width?: IntNullableFilter<"Cover"> | number | null
+  }, "id">
+
+  export type CoverOrderByWithAggregationInput = {
+    id?: SortOrder
+    alpha_channel?: SortOrderInput | SortOrder
+    animated?: SortOrderInput | SortOrder
+    checksum?: SortOrderInput | SortOrder
+    game?: SortOrderInput | SortOrder
+    game_localization?: SortOrder
+    height?: SortOrderInput | SortOrder
+    image_id?: SortOrderInput | SortOrder
+    url?: SortOrderInput | SortOrder
+    width?: SortOrderInput | SortOrder
+    _count?: CoverCountOrderByAggregateInput
+    _avg?: CoverAvgOrderByAggregateInput
+    _max?: CoverMaxOrderByAggregateInput
+    _min?: CoverMinOrderByAggregateInput
+    _sum?: CoverSumOrderByAggregateInput
+  }
+
+  export type CoverScalarWhereWithAggregatesInput = {
+    AND?: CoverScalarWhereWithAggregatesInput | CoverScalarWhereWithAggregatesInput[]
+    OR?: CoverScalarWhereWithAggregatesInput[]
+    NOT?: CoverScalarWhereWithAggregatesInput | CoverScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Cover"> | number
+    alpha_channel?: BoolNullableWithAggregatesFilter<"Cover"> | boolean | null
+    animated?: BoolNullableWithAggregatesFilter<"Cover"> | boolean | null
+    checksum?: StringNullableWithAggregatesFilter<"Cover"> | string | null
+    game?: IntNullableWithAggregatesFilter<"Cover"> | number | null
+    game_localization?: IntNullableListFilter<"Cover">
+    height?: IntNullableWithAggregatesFilter<"Cover"> | number | null
+    image_id?: StringNullableWithAggregatesFilter<"Cover"> | string | null
+    url?: StringNullableWithAggregatesFilter<"Cover"> | string | null
+    width?: IntNullableWithAggregatesFilter<"Cover"> | number | null
   }
 
   export type PlatformWhereInput = {
@@ -14908,6 +16200,97 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CoverCreateInput = {
+    id: number
+    alpha_channel?: boolean | null
+    animated?: boolean | null
+    checksum?: string | null
+    game?: number | null
+    game_localization?: CoverCreategame_localizationInput | number[]
+    height?: number | null
+    image_id?: string | null
+    url?: string | null
+    width?: number | null
+  }
+
+  export type CoverUncheckedCreateInput = {
+    id: number
+    alpha_channel?: boolean | null
+    animated?: boolean | null
+    checksum?: string | null
+    game?: number | null
+    game_localization?: CoverCreategame_localizationInput | number[]
+    height?: number | null
+    image_id?: string | null
+    url?: string | null
+    width?: number | null
+  }
+
+  export type CoverUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: NullableIntFieldUpdateOperationsInput | number | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CoverUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: NullableIntFieldUpdateOperationsInput | number | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CoverCreateManyInput = {
+    id: number
+    alpha_channel?: boolean | null
+    animated?: boolean | null
+    checksum?: string | null
+    game?: number | null
+    game_localization?: CoverCreategame_localizationInput | number[]
+    height?: number | null
+    image_id?: string | null
+    url?: string | null
+    width?: number | null
+  }
+
+  export type CoverUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: NullableIntFieldUpdateOperationsInput | number | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CoverUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: NullableIntFieldUpdateOperationsInput | number | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PlatformCreateInput = {
@@ -16113,6 +17496,11 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -16130,6 +17518,83 @@ export namespace Prisma {
     hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
     hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
     isEmpty?: boolean
+  }
+
+  export type CoverCountOrderByAggregateInput = {
+    id?: SortOrder
+    alpha_channel?: SortOrder
+    animated?: SortOrder
+    checksum?: SortOrder
+    game?: SortOrder
+    game_localization?: SortOrder
+    height?: SortOrder
+    image_id?: SortOrder
+    url?: SortOrder
+    width?: SortOrder
+  }
+
+  export type CoverAvgOrderByAggregateInput = {
+    id?: SortOrder
+    game?: SortOrder
+    game_localization?: SortOrder
+    height?: SortOrder
+    width?: SortOrder
+  }
+
+  export type CoverMaxOrderByAggregateInput = {
+    id?: SortOrder
+    alpha_channel?: SortOrder
+    animated?: SortOrder
+    checksum?: SortOrder
+    game?: SortOrder
+    height?: SortOrder
+    image_id?: SortOrder
+    url?: SortOrder
+    width?: SortOrder
+  }
+
+  export type CoverMinOrderByAggregateInput = {
+    id?: SortOrder
+    alpha_channel?: SortOrder
+    animated?: SortOrder
+    checksum?: SortOrder
+    game?: SortOrder
+    height?: SortOrder
+    image_id?: SortOrder
+    url?: SortOrder
+    width?: SortOrder
+  }
+
+  export type CoverSumOrderByAggregateInput = {
+    id?: SortOrder
+    game?: SortOrder
+    game_localization?: SortOrder
+    height?: SortOrder
+    width?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type PlatformCountOrderByAggregateInput = {
@@ -16203,22 +17668,6 @@ export namespace Prisma {
     platform_type?: SortOrder
     versions?: SortOrder
     websites?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -16705,12 +18154,12 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type PlatformCreateversionsInput = {
+  export type CoverCreategame_localizationInput = {
     set: number[]
   }
 
-  export type PlatformCreatewebsitesInput = {
-    set: number[]
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -16719,6 +18168,19 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type CoverUpdategame_localizationInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type PlatformCreateversionsInput = {
+    set: number[]
+  }
+
+  export type PlatformCreatewebsitesInput = {
+    set: number[]
   }
 
   export type PlatformUpdateversionsInput = {
@@ -17419,6 +18881,19 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {

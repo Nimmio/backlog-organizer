@@ -65,6 +65,19 @@ model Genre {
   url        String
 }
 
+model Cover {
+  id                Int      @id
+  alpha_channel     Boolean?
+  animated          Boolean?
+  checksum          String?
+  game              Int?
+  game_localization Int[]
+  height            Int?
+  image_id          String?
+  url               String?
+  width             Int?
+}
+
 model Platform {
   id               Int      @id
   abbreviation     String?

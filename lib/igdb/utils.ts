@@ -1,3 +1,4 @@
+import { IGDBFields } from "@/types/igdb/fields";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
 
@@ -59,7 +60,7 @@ const getWhereBody = (where: string | string[]) => {
 };
 interface queryBuilderParams {
   access_token?: string;
-  fields?: IGDBFields[] | string;
+  fields?: IGDBFields | string;
   limit?: number;
   search?: string;
   where?: string | string[];

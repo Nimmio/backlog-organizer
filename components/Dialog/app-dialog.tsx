@@ -21,7 +21,7 @@ const AppDialog = (props: AppDialogProps) => {
   const { open, onOpenChange, content, description, title, footer } = props;
   return (
     <Dialog open={open} onOpenChange={(open) => onOpenChange(open)}>
-      <DialogContent className="w-200">
+      <DialogContent className="min-w-full">
         {(description || title) && (
           <DialogHeader>
             {title && <DialogTitle>{title}</DialogTitle>}
