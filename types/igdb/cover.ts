@@ -1,0 +1,17 @@
+import { Cover } from "@/generated/prisma";
+
+export type CoverField =
+  | "alpha_channel"
+  | "animated"
+  | "checksum"
+  | "game"
+  | "game_localization"
+  | "height"
+  | "image_id"
+  | "url"
+  | "width";
+
+export interface CoverGenre extends Omit<Cover, "created_at" | "updated_at"> {
+  created_at: number;
+  updated_at: number;
+}

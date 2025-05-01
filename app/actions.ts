@@ -7,12 +7,14 @@ import { getGenres } from "@/lib/igdb/genre";
 import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
 import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
+import { GameField } from "@/types/igdb/game";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { platform } from "os";
 
 interface createGameProps {
-  name: string;
-  platform: string;
+  name: string[] | number[];
+  platform: string[] | number[];
 }
 
 export const createGame = async (props: createGameProps): Promise<Game> => {
@@ -66,31 +68,30 @@ export const getCurrentUserId = async (): Promise<string> => {
 
 interface searchGameParams {
   search: string;
-  fields: GameField[];
   filterEditions?: boolean;
 }
 
 export const searchGame = async (params: searchGameParams) => {
-  const { search, fields, filterEditions = false } = params;
+  const { search, filterEditions = false } = params;
   const { access_token } = await getAuthentication();
 
   const filter = filterEditions ? ["version_parent = null"] : undefined;
-  const response = await queryBuilder({
+  return await queryBuilder({
     access_token: access_token || undefined,
     requestUrl: RequestUrls.game,
     search: search,
-    fields: fields,
+    fields: ["name", "first_release_date"] as GameField[],
     where: filter,
   });
-
-  return response;
 };
 
 export const getGameDetails = async (id: number) => {
-  const { access_token } = await getAuthentication();
-
-  const game = (await getIGDBCachedOrExtern({ ids: [id], type: "game" }))[0];
-
+  let game = (await getIGDBCachedOrExtern({ ids: [id], type: "game" }))[0];
+  game = {
+    ...game,
+    platforms: (await getPlatformsForIdsAsStrings(game.platforms)) as string[],
+    genres: (await getGenresForIdsAsStrings(game.genres)) as string[],
+  };
   return game;
 };
 
