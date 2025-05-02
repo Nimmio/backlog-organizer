@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { Input } from "../ui/input";
 import AppDialog from "../Dialog/app-dialog";
-import { getGameDetails, searchGame } from "@/app/actions";
+import { createGame, getGameDetails, searchGame } from "@/app/actions";
 import { format, formatDate, fromUnixTime } from "date-fns";
 import { Button } from "../ui/button";
 import GameDetailsCard from "./igdb-game-dialog-details";
@@ -104,7 +104,11 @@ const IgdbGameDialog = () => {
     setGameDetails(undefined);
   };
 
-  const handleAdd = () => {};
+  const handleAdd = (id: number) => {
+    createGame({
+      igdbId: selectedGame?.id,
+    });
+  };
 
   const contentSearch = (
     <>

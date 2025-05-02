@@ -1,9 +1,8 @@
 "use server";
 
 import { auth } from "@/auth";
-import { Cover, Game } from "@/generated/prisma";
+import { Cover, Game, GameUser, Genre, Platform } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
-import { getGenres } from "@/lib/igdb/genre";
 import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
 import {
   downloadImage,
@@ -21,10 +20,61 @@ interface createGameProps {
   igdbId: number;
 }
 
-export const createGame = async (props: createGameProps): Promise<Game> => {
+export const createGame = async (props: createGameProps): Promise<GameUser> => {
   const { igdbId } = props;
   const userId = await getCurrentUserId();
-  return await prisma.gameUser.create({});
+
+  const igdbGame = (
+    await getIGDBCachedOrExtern({ ids: [igdbId], type: "game" })
+  )[0] as Game;
+
+  const igdbPlatforms = (await getIGDBCachedOrExtern({
+    ids: igdbGame.platforms,
+    type: "platform",
+  })) as Platform[];
+
+  const igdbGenres = (await getIGDBCachedOrExtern({
+    ids: igdbGame.genres,
+    type: "genre",
+  })) as Genre[];
+
+  const dbGenres: Genre[] = [];
+  for (const index in igdbGenres) {
+    const genre = igdbGenres[index];
+    const { id } = genre;
+    const dbGenre = await prisma.genre.findFirst({ where: { id } });
+    if (dbGenre) dbGenres.push(dbGenre);
+    else {
+      const createdGenre = await prisma.genre.create({ data: genre });
+      dbGenres.push(createdGenre);
+    }
+  }
+
+  const dbPlatforms: Platform[] = [];
+  for (const index in igdbPlatforms) {
+    const platform = igdbPlatforms[index];
+    const { id } = platform;
+    const dbPlatform = await prisma.platform.findFirst({ where: { id } });
+    if (dbPlatform) dbPlatforms.push(dbPlatform);
+    else {
+      const createdPlatform = await prisma.platform.create({ data: platform });
+      dbPlatforms.push(createdPlatform);
+    }
+  }
+  await prisma.game.create({
+    data: {
+      ...igdbGame,
+      platforms: { connect: dbPlatforms },
+      genres: { connect: dbGenres },
+    },
+  });
+  // return await prisma.gameUser.create({
+  //   data: {
+  //     platform: "?",
+  //     igdbGameId: igdbId,
+  //     userId,
+  //   },
+  // });
 };
 
 interface editGameProps extends createGameProps {
@@ -122,7 +172,7 @@ export const getCoverForId = async (id: number) => {
   })) as Cover[];
   const url = cover[0].url;
   if (cover[0].downloaded_filename) return cover[0].downloaded_filename;
-  if (url) {
+  if (false && url) {
     const filename = /(([^\/]+$))/.exec(url);
     const blob = await downloadImage("https:" + url);
     const saveImageResponse = await saveImage(blob, filename[0]);

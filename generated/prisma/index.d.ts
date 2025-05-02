@@ -1809,14 +1809,111 @@ export namespace Prisma {
 
 
   /**
+   * Count Type GenreCountOutputType
+   */
+
+  export type GenreCountOutputType = {
+    game: number
+  }
+
+  export type GenreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | GenreCountOutputTypeCountGameArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GenreCountOutputType
+     */
+    select?: GenreCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeCountGameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameWhereInput
+  }
+
+
+  /**
+   * Count Type CoverCountOutputType
+   */
+
+  export type CoverCountOutputType = {
+    game: number
+  }
+
+  export type CoverCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | CoverCountOutputTypeCountGameArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CoverCountOutputType without action
+   */
+  export type CoverCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CoverCountOutputType
+     */
+    select?: CoverCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CoverCountOutputType without action
+   */
+  export type CoverCountOutputTypeCountGameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameWhereInput
+  }
+
+
+  /**
+   * Count Type PlatformCountOutputType
+   */
+
+  export type PlatformCountOutputType = {
+    game: number
+  }
+
+  export type PlatformCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | PlatformCountOutputTypeCountGameArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PlatformCountOutputType without action
+   */
+  export type PlatformCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlatformCountOutputType
+     */
+    select?: PlatformCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PlatformCountOutputType without action
+   */
+  export type PlatformCountOutputTypeCountGameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GameWhereInput
+  }
+
+
+  /**
    * Count Type GameCountOutputType
    */
 
   export type GameCountOutputType = {
+    genres: number
+    platforms: number
     gameUser: number
   }
 
   export type GameCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genres?: boolean | GameCountOutputTypeCountGenresArgs
+    platforms?: boolean | GameCountOutputTypeCountPlatformsArgs
     gameUser?: boolean | GameCountOutputTypeCountGameUserArgs
   }
 
@@ -1829,6 +1926,20 @@ export namespace Prisma {
      * Select specific fields to fetch from the GameCountOutputType
      */
     select?: GameCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GameCountOutputType without action
+   */
+  export type GameCountOutputTypeCountGenresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GenreWhereInput
+  }
+
+  /**
+   * GameCountOutputType without action
+   */
+  export type GameCountOutputTypeCountPlatformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlatformWhereInput
   }
 
   /**
@@ -5324,6 +5435,8 @@ export namespace Prisma {
     slug?: boolean
     updated_at?: boolean
     url?: boolean
+    game?: boolean | Genre$gameArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["genre"]>
 
   export type GenreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5357,10 +5470,18 @@ export namespace Prisma {
   }
 
   export type GenreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "checksum" | "created_at" | "name" | "slug" | "updated_at" | "url", ExtArgs["result"]["genre"]>
+  export type GenreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | Genre$gameArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GenreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GenreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $GenrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Genre"
-    objects: {}
+    objects: {
+      game: Prisma.$GamePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       checksum: string
@@ -5763,6 +5884,7 @@ export namespace Prisma {
    */
   export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    game<T extends Genre$gameArgs<ExtArgs> = {}>(args?: Subset<T, Genre$gameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5816,6 +5938,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * Filter, which Genre to fetch.
      */
     where: GenreWhereUniqueInput
@@ -5834,6 +5960,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * Filter, which Genre to fetch.
      */
     where: GenreWhereUniqueInput
@@ -5851,6 +5981,10 @@ export namespace Prisma {
      * Omit specific fields from the Genre
      */
     omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
     /**
      * Filter, which Genre to fetch.
      */
@@ -5900,6 +6034,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * Filter, which Genre to fetch.
      */
     where?: GenreWhereInput
@@ -5948,6 +6086,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * Filter, which Genres to fetch.
      */
     where?: GenreWhereInput
@@ -5990,6 +6132,10 @@ export namespace Prisma {
      * Omit specific fields from the Genre
      */
     omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
     /**
      * The data needed to create a Genre.
      */
@@ -6038,6 +6184,10 @@ export namespace Prisma {
      * Omit specific fields from the Genre
      */
     omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
     /**
      * The data needed to update a Genre.
      */
@@ -6105,6 +6255,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * The filter to search for the Genre to update in case it exists.
      */
     where: GenreWhereUniqueInput
@@ -6131,6 +6285,10 @@ export namespace Prisma {
      */
     omit?: GenreOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
      * Filter which Genre to delete.
      */
     where: GenreWhereUniqueInput
@@ -6151,6 +6309,30 @@ export namespace Prisma {
   }
 
   /**
+   * Genre.game
+   */
+  export type Genre$gameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameInclude<ExtArgs> | null
+    where?: GameWhereInput
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    cursor?: GameWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
    * Genre without action
    */
   export type GenreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6162,6 +6344,10 @@ export namespace Prisma {
      * Omit specific fields from the Genre
      */
     omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
   }
 
 
@@ -6179,7 +6365,6 @@ export namespace Prisma {
 
   export type CoverAvgAggregateOutputType = {
     id: number | null
-    game: number | null
     game_localization: number | null
     height: number | null
     width: number | null
@@ -6187,7 +6372,6 @@ export namespace Prisma {
 
   export type CoverSumAggregateOutputType = {
     id: number | null
-    game: number | null
     game_localization: number[]
     height: number | null
     width: number | null
@@ -6198,7 +6382,6 @@ export namespace Prisma {
     alpha_channel: boolean | null
     animated: boolean | null
     checksum: string | null
-    game: number | null
     height: number | null
     image_id: string | null
     url: string | null
@@ -6211,7 +6394,6 @@ export namespace Prisma {
     alpha_channel: boolean | null
     animated: boolean | null
     checksum: string | null
-    game: number | null
     height: number | null
     image_id: string | null
     url: string | null
@@ -6224,7 +6406,6 @@ export namespace Prisma {
     alpha_channel: number
     animated: number
     checksum: number
-    game: number
     game_localization: number
     height: number
     image_id: number
@@ -6237,7 +6418,6 @@ export namespace Prisma {
 
   export type CoverAvgAggregateInputType = {
     id?: true
-    game?: true
     game_localization?: true
     height?: true
     width?: true
@@ -6245,7 +6425,6 @@ export namespace Prisma {
 
   export type CoverSumAggregateInputType = {
     id?: true
-    game?: true
     game_localization?: true
     height?: true
     width?: true
@@ -6256,7 +6435,6 @@ export namespace Prisma {
     alpha_channel?: true
     animated?: true
     checksum?: true
-    game?: true
     height?: true
     image_id?: true
     url?: true
@@ -6269,7 +6447,6 @@ export namespace Prisma {
     alpha_channel?: true
     animated?: true
     checksum?: true
-    game?: true
     height?: true
     image_id?: true
     url?: true
@@ -6282,7 +6459,6 @@ export namespace Prisma {
     alpha_channel?: true
     animated?: true
     checksum?: true
-    game?: true
     game_localization?: true
     height?: true
     image_id?: true
@@ -6383,7 +6559,6 @@ export namespace Prisma {
     alpha_channel: boolean | null
     animated: boolean | null
     checksum: string | null
-    game: number | null
     game_localization: number[]
     height: number | null
     image_id: string | null
@@ -6416,13 +6591,14 @@ export namespace Prisma {
     alpha_channel?: boolean
     animated?: boolean
     checksum?: boolean
-    game?: boolean
     game_localization?: boolean
     height?: boolean
     image_id?: boolean
     url?: boolean
     width?: boolean
     downloaded_filename?: boolean
+    game?: boolean | Cover$gameArgs<ExtArgs>
+    _count?: boolean | CoverCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cover"]>
 
   export type CoverSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6430,7 +6606,6 @@ export namespace Prisma {
     alpha_channel?: boolean
     animated?: boolean
     checksum?: boolean
-    game?: boolean
     game_localization?: boolean
     height?: boolean
     image_id?: boolean
@@ -6444,7 +6619,6 @@ export namespace Prisma {
     alpha_channel?: boolean
     animated?: boolean
     checksum?: boolean
-    game?: boolean
     game_localization?: boolean
     height?: boolean
     image_id?: boolean
@@ -6458,7 +6632,6 @@ export namespace Prisma {
     alpha_channel?: boolean
     animated?: boolean
     checksum?: boolean
-    game?: boolean
     game_localization?: boolean
     height?: boolean
     image_id?: boolean
@@ -6467,17 +6640,24 @@ export namespace Prisma {
     downloaded_filename?: boolean
   }
 
-  export type CoverOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "alpha_channel" | "animated" | "checksum" | "game" | "game_localization" | "height" | "image_id" | "url" | "width" | "downloaded_filename", ExtArgs["result"]["cover"]>
+  export type CoverOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "alpha_channel" | "animated" | "checksum" | "game_localization" | "height" | "image_id" | "url" | "width" | "downloaded_filename", ExtArgs["result"]["cover"]>
+  export type CoverInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | Cover$gameArgs<ExtArgs>
+    _count?: boolean | CoverCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CoverIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CoverIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $CoverPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cover"
-    objects: {}
+    objects: {
+      game: Prisma.$GamePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       alpha_channel: boolean | null
       animated: boolean | null
       checksum: string | null
-      game: number | null
       game_localization: number[]
       height: number | null
       image_id: string | null
@@ -6878,6 +7058,7 @@ export namespace Prisma {
    */
   export interface Prisma__CoverClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    game<T extends Cover$gameArgs<ExtArgs> = {}>(args?: Subset<T, Cover$gameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6911,7 +7092,6 @@ export namespace Prisma {
     readonly alpha_channel: FieldRef<"Cover", 'Boolean'>
     readonly animated: FieldRef<"Cover", 'Boolean'>
     readonly checksum: FieldRef<"Cover", 'String'>
-    readonly game: FieldRef<"Cover", 'Int'>
     readonly game_localization: FieldRef<"Cover", 'Int[]'>
     readonly height: FieldRef<"Cover", 'Int'>
     readonly image_id: FieldRef<"Cover", 'String'>
@@ -6935,6 +7115,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * Filter, which Cover to fetch.
      */
     where: CoverWhereUniqueInput
@@ -6953,6 +7137,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * Filter, which Cover to fetch.
      */
     where: CoverWhereUniqueInput
@@ -6970,6 +7158,10 @@ export namespace Prisma {
      * Omit specific fields from the Cover
      */
     omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
     /**
      * Filter, which Cover to fetch.
      */
@@ -7019,6 +7211,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * Filter, which Cover to fetch.
      */
     where?: CoverWhereInput
@@ -7067,6 +7263,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * Filter, which Covers to fetch.
      */
     where?: CoverWhereInput
@@ -7109,6 +7309,10 @@ export namespace Prisma {
      * Omit specific fields from the Cover
      */
     omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
     /**
      * The data needed to create a Cover.
      */
@@ -7157,6 +7361,10 @@ export namespace Prisma {
      * Omit specific fields from the Cover
      */
     omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
     /**
      * The data needed to update a Cover.
      */
@@ -7224,6 +7432,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * The filter to search for the Cover to update in case it exists.
      */
     where: CoverWhereUniqueInput
@@ -7250,6 +7462,10 @@ export namespace Prisma {
      */
     omit?: CoverOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    /**
      * Filter which Cover to delete.
      */
     where: CoverWhereUniqueInput
@@ -7270,6 +7486,30 @@ export namespace Prisma {
   }
 
   /**
+   * Cover.game
+   */
+  export type Cover$gameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameInclude<ExtArgs> | null
+    where?: GameWhereInput
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    cursor?: GameWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
    * Cover without action
    */
   export type CoverDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7281,6 +7521,10 @@ export namespace Prisma {
      * Omit specific fields from the Cover
      */
     omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
   }
 
 
@@ -7586,6 +7830,8 @@ export namespace Prisma {
     url?: boolean
     versions?: boolean
     websites?: boolean
+    game?: boolean | Platform$gameArgs<ExtArgs>
+    _count?: boolean | PlatformCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["platform"]>
 
   export type PlatformSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7646,10 +7892,18 @@ export namespace Prisma {
   }
 
   export type PlatformOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "abbreviation" | "alternative_name" | "checksum" | "created_at" | "generation" | "name" | "platform_family" | "platform_logo" | "platform_type" | "slug" | "summary" | "updated_at" | "url" | "versions" | "websites", ExtArgs["result"]["platform"]>
+  export type PlatformInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    game?: boolean | Platform$gameArgs<ExtArgs>
+    _count?: boolean | PlatformCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PlatformIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PlatformIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $PlatformPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Platform"
-    objects: {}
+    objects: {
+      game: Prisma.$GamePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       abbreviation: string | null
@@ -8061,6 +8315,7 @@ export namespace Prisma {
    */
   export interface Prisma__PlatformClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    game<T extends Platform$gameArgs<ExtArgs> = {}>(args?: Subset<T, Platform$gameArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8123,6 +8378,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * Filter, which Platform to fetch.
      */
     where: PlatformWhereUniqueInput
@@ -8141,6 +8400,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * Filter, which Platform to fetch.
      */
     where: PlatformWhereUniqueInput
@@ -8158,6 +8421,10 @@ export namespace Prisma {
      * Omit specific fields from the Platform
      */
     omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
     /**
      * Filter, which Platform to fetch.
      */
@@ -8207,6 +8474,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * Filter, which Platform to fetch.
      */
     where?: PlatformWhereInput
@@ -8255,6 +8526,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * Filter, which Platforms to fetch.
      */
     where?: PlatformWhereInput
@@ -8297,6 +8572,10 @@ export namespace Prisma {
      * Omit specific fields from the Platform
      */
     omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
     /**
      * The data needed to create a Platform.
      */
@@ -8345,6 +8624,10 @@ export namespace Prisma {
      * Omit specific fields from the Platform
      */
     omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
     /**
      * The data needed to update a Platform.
      */
@@ -8412,6 +8695,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * The filter to search for the Platform to update in case it exists.
      */
     where: PlatformWhereUniqueInput
@@ -8438,6 +8725,10 @@ export namespace Prisma {
      */
     omit?: PlatformOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    /**
      * Filter which Platform to delete.
      */
     where: PlatformWhereUniqueInput
@@ -8458,6 +8749,30 @@ export namespace Prisma {
   }
 
   /**
+   * Platform.game
+   */
+  export type Platform$gameArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Game
+     */
+    select?: GameSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Game
+     */
+    omit?: GameOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameInclude<ExtArgs> | null
+    where?: GameWhereInput
+    orderBy?: GameOrderByWithRelationInput | GameOrderByWithRelationInput[]
+    cursor?: GameWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GameScalarFieldEnum | GameScalarFieldEnum[]
+  }
+
+  /**
    * Platform without action
    */
   export type PlatformDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8469,6 +8784,10 @@ export namespace Prisma {
      * Omit specific fields from the Platform
      */
     omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
   }
 
 
@@ -8493,7 +8812,7 @@ export namespace Prisma {
     artworks: number | null
     bundles: number | null
     collections: number | null
-    cover: number | null
+    coverId: number | null
     dlcs: number | null
     expanded_games: number | null
     expansions: number | null
@@ -8507,14 +8826,12 @@ export namespace Prisma {
     game_modes: number | null
     game_status: number | null
     game_type: number | null
-    genres: number | null
     hypes: number | null
     involved_companies: number | null
     keywords: number | null
     language_supports: number | null
     multiplayer_modes: number | null
     parent_game: number | null
-    platforms: number | null
     player_perspectives: number | null
     ports: number | null
     rating: number | null
@@ -8543,7 +8860,7 @@ export namespace Prisma {
     artworks: number[]
     bundles: number[]
     collections: number[]
-    cover: number | null
+    coverId: number | null
     dlcs: number[]
     expanded_games: number[]
     expansions: number[]
@@ -8557,14 +8874,12 @@ export namespace Prisma {
     game_modes: number[]
     game_status: number | null
     game_type: number | null
-    genres: number[]
     hypes: number | null
     involved_companies: number[]
     keywords: number[]
     language_supports: number[]
     multiplayer_modes: number[]
     parent_game: number | null
-    platforms: number[]
     player_perspectives: number[]
     ports: number[]
     rating: number | null
@@ -8589,7 +8904,7 @@ export namespace Prisma {
     aggregated_rating: number | null
     aggregated_rating_count: number | null
     checksum: string | null
-    cover: number | null
+    coverId: number | null
     created_at: Date | null
     first_release_date: number | null
     franchise: number | null
@@ -8615,7 +8930,7 @@ export namespace Prisma {
     aggregated_rating: number | null
     aggregated_rating_count: number | null
     checksum: string | null
-    cover: number | null
+    coverId: number | null
     created_at: Date | null
     first_release_date: number | null
     franchise: number | null
@@ -8646,7 +8961,7 @@ export namespace Prisma {
     bundles: number
     checksum: number
     collections: number
-    cover: number
+    coverId: number
     created_at: number
     dlcs: number
     expanded_games: number
@@ -8661,7 +8976,6 @@ export namespace Prisma {
     game_modes: number
     game_status: number
     game_type: number
-    genres: number
     hypes: number
     involved_companies: number
     keywords: number
@@ -8669,7 +8983,6 @@ export namespace Prisma {
     multiplayer_modes: number
     name: number
     parent_game: number
-    platforms: number
     player_perspectives: number
     ports: number
     rating: number
@@ -8706,7 +9019,7 @@ export namespace Prisma {
     artworks?: true
     bundles?: true
     collections?: true
-    cover?: true
+    coverId?: true
     dlcs?: true
     expanded_games?: true
     expansions?: true
@@ -8720,14 +9033,12 @@ export namespace Prisma {
     game_modes?: true
     game_status?: true
     game_type?: true
-    genres?: true
     hypes?: true
     involved_companies?: true
     keywords?: true
     language_supports?: true
     multiplayer_modes?: true
     parent_game?: true
-    platforms?: true
     player_perspectives?: true
     ports?: true
     rating?: true
@@ -8756,7 +9067,7 @@ export namespace Prisma {
     artworks?: true
     bundles?: true
     collections?: true
-    cover?: true
+    coverId?: true
     dlcs?: true
     expanded_games?: true
     expansions?: true
@@ -8770,14 +9081,12 @@ export namespace Prisma {
     game_modes?: true
     game_status?: true
     game_type?: true
-    genres?: true
     hypes?: true
     involved_companies?: true
     keywords?: true
     language_supports?: true
     multiplayer_modes?: true
     parent_game?: true
-    platforms?: true
     player_perspectives?: true
     ports?: true
     rating?: true
@@ -8802,7 +9111,7 @@ export namespace Prisma {
     aggregated_rating?: true
     aggregated_rating_count?: true
     checksum?: true
-    cover?: true
+    coverId?: true
     created_at?: true
     first_release_date?: true
     franchise?: true
@@ -8828,7 +9137,7 @@ export namespace Prisma {
     aggregated_rating?: true
     aggregated_rating_count?: true
     checksum?: true
-    cover?: true
+    coverId?: true
     created_at?: true
     first_release_date?: true
     franchise?: true
@@ -8859,7 +9168,7 @@ export namespace Prisma {
     bundles?: true
     checksum?: true
     collections?: true
-    cover?: true
+    coverId?: true
     created_at?: true
     dlcs?: true
     expanded_games?: true
@@ -8874,7 +9183,6 @@ export namespace Prisma {
     game_modes?: true
     game_status?: true
     game_type?: true
-    genres?: true
     hypes?: true
     involved_companies?: true
     keywords?: true
@@ -8882,7 +9190,6 @@ export namespace Prisma {
     multiplayer_modes?: true
     name?: true
     parent_game?: true
-    platforms?: true
     player_perspectives?: true
     ports?: true
     rating?: true
@@ -9005,7 +9312,7 @@ export namespace Prisma {
     bundles: number[]
     checksum: string
     collections: number[]
-    cover: number | null
+    coverId: number | null
     created_at: Date
     dlcs: number[]
     expanded_games: number[]
@@ -9020,7 +9327,6 @@ export namespace Prisma {
     game_modes: number[]
     game_status: number | null
     game_type: number | null
-    genres: number[]
     hypes: number | null
     involved_companies: number[]
     keywords: number[]
@@ -9028,7 +9334,6 @@ export namespace Prisma {
     multiplayer_modes: number[]
     name: string
     parent_game: number | null
-    platforms: number[]
     player_perspectives: number[]
     ports: number[]
     rating: number | null
@@ -9083,7 +9388,7 @@ export namespace Prisma {
     bundles?: boolean
     checksum?: boolean
     collections?: boolean
-    cover?: boolean
+    coverId?: boolean
     created_at?: boolean
     dlcs?: boolean
     expanded_games?: boolean
@@ -9098,7 +9403,6 @@ export namespace Prisma {
     game_modes?: boolean
     game_status?: boolean
     game_type?: boolean
-    genres?: boolean
     hypes?: boolean
     involved_companies?: boolean
     keywords?: boolean
@@ -9106,7 +9410,6 @@ export namespace Prisma {
     multiplayer_modes?: boolean
     name?: boolean
     parent_game?: boolean
-    platforms?: boolean
     player_perspectives?: boolean
     ports?: boolean
     rating?: boolean
@@ -9130,6 +9433,9 @@ export namespace Prisma {
     version_title?: boolean
     videos?: boolean
     websites?: boolean
+    cover?: boolean | Game$coverArgs<ExtArgs>
+    genres?: boolean | Game$genresArgs<ExtArgs>
+    platforms?: boolean | Game$platformsArgs<ExtArgs>
     gameUser?: boolean | Game$gameUserArgs<ExtArgs>
     _count?: boolean | GameCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["game"]>
@@ -9144,7 +9450,7 @@ export namespace Prisma {
     bundles?: boolean
     checksum?: boolean
     collections?: boolean
-    cover?: boolean
+    coverId?: boolean
     created_at?: boolean
     dlcs?: boolean
     expanded_games?: boolean
@@ -9159,7 +9465,6 @@ export namespace Prisma {
     game_modes?: boolean
     game_status?: boolean
     game_type?: boolean
-    genres?: boolean
     hypes?: boolean
     involved_companies?: boolean
     keywords?: boolean
@@ -9167,7 +9472,6 @@ export namespace Prisma {
     multiplayer_modes?: boolean
     name?: boolean
     parent_game?: boolean
-    platforms?: boolean
     player_perspectives?: boolean
     ports?: boolean
     rating?: boolean
@@ -9191,6 +9495,7 @@ export namespace Prisma {
     version_title?: boolean
     videos?: boolean
     websites?: boolean
+    cover?: boolean | Game$coverArgs<ExtArgs>
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9203,7 +9508,7 @@ export namespace Prisma {
     bundles?: boolean
     checksum?: boolean
     collections?: boolean
-    cover?: boolean
+    coverId?: boolean
     created_at?: boolean
     dlcs?: boolean
     expanded_games?: boolean
@@ -9218,7 +9523,6 @@ export namespace Prisma {
     game_modes?: boolean
     game_status?: boolean
     game_type?: boolean
-    genres?: boolean
     hypes?: boolean
     involved_companies?: boolean
     keywords?: boolean
@@ -9226,7 +9530,6 @@ export namespace Prisma {
     multiplayer_modes?: boolean
     name?: boolean
     parent_game?: boolean
-    platforms?: boolean
     player_perspectives?: boolean
     ports?: boolean
     rating?: boolean
@@ -9250,6 +9553,7 @@ export namespace Prisma {
     version_title?: boolean
     videos?: boolean
     websites?: boolean
+    cover?: boolean | Game$coverArgs<ExtArgs>
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectScalar = {
@@ -9262,7 +9566,7 @@ export namespace Prisma {
     bundles?: boolean
     checksum?: boolean
     collections?: boolean
-    cover?: boolean
+    coverId?: boolean
     created_at?: boolean
     dlcs?: boolean
     expanded_games?: boolean
@@ -9277,7 +9581,6 @@ export namespace Prisma {
     game_modes?: boolean
     game_status?: boolean
     game_type?: boolean
-    genres?: boolean
     hypes?: boolean
     involved_companies?: boolean
     keywords?: boolean
@@ -9285,7 +9588,6 @@ export namespace Prisma {
     multiplayer_modes?: boolean
     name?: boolean
     parent_game?: boolean
-    platforms?: boolean
     player_perspectives?: boolean
     ports?: boolean
     rating?: boolean
@@ -9311,17 +9613,27 @@ export namespace Prisma {
     websites?: boolean
   }
 
-  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "age_ratings" | "aggregated_rating" | "aggregated_rating_count" | "alternative_names" | "artworks" | "bundles" | "checksum" | "collections" | "cover" | "created_at" | "dlcs" | "expanded_games" | "expansions" | "external_games" | "first_release_date" | "forks" | "franchise" | "franchises" | "game_engines" | "game_localizations" | "game_modes" | "game_status" | "game_type" | "genres" | "hypes" | "involved_companies" | "keywords" | "language_supports" | "multiplayer_modes" | "name" | "parent_game" | "platforms" | "player_perspectives" | "ports" | "rating" | "rating_count" | "release_dates" | "remakes" | "remasters" | "screenshots" | "similar_games" | "slug" | "standalone_expansions" | "storyline" | "summary" | "tags" | "themes" | "total_rating" | "total_rating_count" | "updated_at" | "url" | "version_parent" | "version_title" | "videos" | "websites", ExtArgs["result"]["game"]>
+  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "age_ratings" | "aggregated_rating" | "aggregated_rating_count" | "alternative_names" | "artworks" | "bundles" | "checksum" | "collections" | "coverId" | "created_at" | "dlcs" | "expanded_games" | "expansions" | "external_games" | "first_release_date" | "forks" | "franchise" | "franchises" | "game_engines" | "game_localizations" | "game_modes" | "game_status" | "game_type" | "hypes" | "involved_companies" | "keywords" | "language_supports" | "multiplayer_modes" | "name" | "parent_game" | "player_perspectives" | "ports" | "rating" | "rating_count" | "release_dates" | "remakes" | "remasters" | "screenshots" | "similar_games" | "slug" | "standalone_expansions" | "storyline" | "summary" | "tags" | "themes" | "total_rating" | "total_rating_count" | "updated_at" | "url" | "version_parent" | "version_title" | "videos" | "websites", ExtArgs["result"]["game"]>
   export type GameInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cover?: boolean | Game$coverArgs<ExtArgs>
+    genres?: boolean | Game$genresArgs<ExtArgs>
+    platforms?: boolean | Game$platformsArgs<ExtArgs>
     gameUser?: boolean | Game$gameUserArgs<ExtArgs>
     _count?: boolean | GameCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type GameIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type GameIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GameIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cover?: boolean | Game$coverArgs<ExtArgs>
+  }
+  export type GameIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cover?: boolean | Game$coverArgs<ExtArgs>
+  }
 
   export type $GamePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Game"
     objects: {
+      cover: Prisma.$CoverPayload<ExtArgs> | null
+      genres: Prisma.$GenrePayload<ExtArgs>[]
+      platforms: Prisma.$PlatformPayload<ExtArgs>[]
       gameUser: Prisma.$GameUserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -9334,7 +9646,7 @@ export namespace Prisma {
       bundles: number[]
       checksum: string
       collections: number[]
-      cover: number | null
+      coverId: number | null
       created_at: Date
       dlcs: number[]
       expanded_games: number[]
@@ -9349,7 +9661,6 @@ export namespace Prisma {
       game_modes: number[]
       game_status: number | null
       game_type: number | null
-      genres: number[]
       hypes: number | null
       involved_companies: number[]
       keywords: number[]
@@ -9357,7 +9668,6 @@ export namespace Prisma {
       multiplayer_modes: number[]
       name: string
       parent_game: number | null
-      platforms: number[]
       player_perspectives: number[]
       ports: number[]
       rating: number | null
@@ -9775,6 +10085,9 @@ export namespace Prisma {
    */
   export interface Prisma__GameClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    cover<T extends Game$coverArgs<ExtArgs> = {}>(args?: Subset<T, Game$coverArgs<ExtArgs>>): Prisma__CoverClient<$Result.GetResult<Prisma.$CoverPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    genres<T extends Game$genresArgs<ExtArgs> = {}>(args?: Subset<T, Game$genresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    platforms<T extends Game$platformsArgs<ExtArgs> = {}>(args?: Subset<T, Game$platformsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlatformPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gameUser<T extends Game$gameUserArgs<ExtArgs> = {}>(args?: Subset<T, Game$gameUserArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9814,7 +10127,7 @@ export namespace Prisma {
     readonly bundles: FieldRef<"Game", 'Int[]'>
     readonly checksum: FieldRef<"Game", 'String'>
     readonly collections: FieldRef<"Game", 'Int[]'>
-    readonly cover: FieldRef<"Game", 'Int'>
+    readonly coverId: FieldRef<"Game", 'Int'>
     readonly created_at: FieldRef<"Game", 'DateTime'>
     readonly dlcs: FieldRef<"Game", 'Int[]'>
     readonly expanded_games: FieldRef<"Game", 'Int[]'>
@@ -9829,7 +10142,6 @@ export namespace Prisma {
     readonly game_modes: FieldRef<"Game", 'Int[]'>
     readonly game_status: FieldRef<"Game", 'Int'>
     readonly game_type: FieldRef<"Game", 'Int'>
-    readonly genres: FieldRef<"Game", 'Int[]'>
     readonly hypes: FieldRef<"Game", 'Int'>
     readonly involved_companies: FieldRef<"Game", 'Int[]'>
     readonly keywords: FieldRef<"Game", 'Int[]'>
@@ -9837,7 +10149,6 @@ export namespace Prisma {
     readonly multiplayer_modes: FieldRef<"Game", 'Int[]'>
     readonly name: FieldRef<"Game", 'String'>
     readonly parent_game: FieldRef<"Game", 'Int'>
-    readonly platforms: FieldRef<"Game", 'Int[]'>
     readonly player_perspectives: FieldRef<"Game", 'Int[]'>
     readonly ports: FieldRef<"Game", 'Int[]'>
     readonly rating: FieldRef<"Game", 'Float'>
@@ -10110,6 +10421,10 @@ export namespace Prisma {
      */
     data: GameCreateManyInput | GameCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10180,6 +10495,10 @@ export namespace Prisma {
      * Limit how many Games to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GameIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10246,6 +10565,73 @@ export namespace Prisma {
      * Limit how many Games to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Game.cover
+   */
+  export type Game$coverArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cover
+     */
+    select?: CoverSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Cover
+     */
+    omit?: CoverOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CoverInclude<ExtArgs> | null
+    where?: CoverWhereInput
+  }
+
+  /**
+   * Game.genres
+   */
+  export type Game$genresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    where?: GenreWhereInput
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    cursor?: GenreWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Game.platforms
+   */
+  export type Game$platformsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Platform
+     */
+    select?: PlatformSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Platform
+     */
+    omit?: PlatformOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlatformInclude<ExtArgs> | null
+    where?: PlatformWhereInput
+    orderBy?: PlatformOrderByWithRelationInput | PlatformOrderByWithRelationInput[]
+    cursor?: PlatformWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlatformScalarFieldEnum | PlatformScalarFieldEnum[]
   }
 
   /**
@@ -14796,7 +15182,6 @@ export namespace Prisma {
     alpha_channel: 'alpha_channel',
     animated: 'animated',
     checksum: 'checksum',
-    game: 'game',
     game_localization: 'game_localization',
     height: 'height',
     image_id: 'image_id',
@@ -14840,7 +15225,7 @@ export namespace Prisma {
     bundles: 'bundles',
     checksum: 'checksum',
     collections: 'collections',
-    cover: 'cover',
+    coverId: 'coverId',
     created_at: 'created_at',
     dlcs: 'dlcs',
     expanded_games: 'expanded_games',
@@ -14855,7 +15240,6 @@ export namespace Prisma {
     game_modes: 'game_modes',
     game_status: 'game_status',
     game_type: 'game_type',
-    genres: 'genres',
     hypes: 'hypes',
     involved_companies: 'involved_companies',
     keywords: 'keywords',
@@ -14863,7 +15247,6 @@ export namespace Prisma {
     multiplayer_modes: 'multiplayer_modes',
     name: 'name',
     parent_game: 'parent_game',
-    platforms: 'platforms',
     player_perspectives: 'player_perspectives',
     ports: 'ports',
     rating: 'rating',
@@ -15245,6 +15628,7 @@ export namespace Prisma {
     slug?: StringFilter<"Genre"> | string
     updated_at?: DateTimeFilter<"Genre"> | Date | string
     url?: StringFilter<"Genre"> | string
+    game?: GameListRelationFilter
   }
 
   export type GenreOrderByWithRelationInput = {
@@ -15255,6 +15639,7 @@ export namespace Prisma {
     slug?: SortOrder
     updated_at?: SortOrder
     url?: SortOrder
+    game?: GameOrderByRelationAggregateInput
   }
 
   export type GenreWhereUniqueInput = Prisma.AtLeast<{
@@ -15268,6 +15653,7 @@ export namespace Prisma {
     slug?: StringFilter<"Genre"> | string
     updated_at?: DateTimeFilter<"Genre"> | Date | string
     url?: StringFilter<"Genre"> | string
+    game?: GameListRelationFilter
   }, "id" | "id">
 
   export type GenreOrderByWithAggregationInput = {
@@ -15306,13 +15692,13 @@ export namespace Prisma {
     alpha_channel?: BoolNullableFilter<"Cover"> | boolean | null
     animated?: BoolNullableFilter<"Cover"> | boolean | null
     checksum?: StringNullableFilter<"Cover"> | string | null
-    game?: IntNullableFilter<"Cover"> | number | null
     game_localization?: IntNullableListFilter<"Cover">
     height?: IntNullableFilter<"Cover"> | number | null
     image_id?: StringNullableFilter<"Cover"> | string | null
     url?: StringNullableFilter<"Cover"> | string | null
     width?: IntNullableFilter<"Cover"> | number | null
     downloaded_filename?: StringNullableFilter<"Cover"> | string | null
+    game?: GameListRelationFilter
   }
 
   export type CoverOrderByWithRelationInput = {
@@ -15320,13 +15706,13 @@ export namespace Prisma {
     alpha_channel?: SortOrderInput | SortOrder
     animated?: SortOrderInput | SortOrder
     checksum?: SortOrderInput | SortOrder
-    game?: SortOrderInput | SortOrder
     game_localization?: SortOrder
     height?: SortOrderInput | SortOrder
     image_id?: SortOrderInput | SortOrder
     url?: SortOrderInput | SortOrder
     width?: SortOrderInput | SortOrder
     downloaded_filename?: SortOrderInput | SortOrder
+    game?: GameOrderByRelationAggregateInput
   }
 
   export type CoverWhereUniqueInput = Prisma.AtLeast<{
@@ -15337,13 +15723,13 @@ export namespace Prisma {
     alpha_channel?: BoolNullableFilter<"Cover"> | boolean | null
     animated?: BoolNullableFilter<"Cover"> | boolean | null
     checksum?: StringNullableFilter<"Cover"> | string | null
-    game?: IntNullableFilter<"Cover"> | number | null
     game_localization?: IntNullableListFilter<"Cover">
     height?: IntNullableFilter<"Cover"> | number | null
     image_id?: StringNullableFilter<"Cover"> | string | null
     url?: StringNullableFilter<"Cover"> | string | null
     width?: IntNullableFilter<"Cover"> | number | null
     downloaded_filename?: StringNullableFilter<"Cover"> | string | null
+    game?: GameListRelationFilter
   }, "id" | "id">
 
   export type CoverOrderByWithAggregationInput = {
@@ -15351,7 +15737,6 @@ export namespace Prisma {
     alpha_channel?: SortOrderInput | SortOrder
     animated?: SortOrderInput | SortOrder
     checksum?: SortOrderInput | SortOrder
-    game?: SortOrderInput | SortOrder
     game_localization?: SortOrder
     height?: SortOrderInput | SortOrder
     image_id?: SortOrderInput | SortOrder
@@ -15373,7 +15758,6 @@ export namespace Prisma {
     alpha_channel?: BoolNullableWithAggregatesFilter<"Cover"> | boolean | null
     animated?: BoolNullableWithAggregatesFilter<"Cover"> | boolean | null
     checksum?: StringNullableWithAggregatesFilter<"Cover"> | string | null
-    game?: IntNullableWithAggregatesFilter<"Cover"> | number | null
     game_localization?: IntNullableListFilter<"Cover">
     height?: IntNullableWithAggregatesFilter<"Cover"> | number | null
     image_id?: StringNullableWithAggregatesFilter<"Cover"> | string | null
@@ -15402,6 +15786,7 @@ export namespace Prisma {
     url?: StringNullableFilter<"Platform"> | string | null
     versions?: IntNullableListFilter<"Platform">
     websites?: IntNullableListFilter<"Platform">
+    game?: GameListRelationFilter
   }
 
   export type PlatformOrderByWithRelationInput = {
@@ -15421,6 +15806,7 @@ export namespace Prisma {
     url?: SortOrderInput | SortOrder
     versions?: SortOrder
     websites?: SortOrder
+    game?: GameOrderByRelationAggregateInput
   }
 
   export type PlatformWhereUniqueInput = Prisma.AtLeast<{
@@ -15443,6 +15829,7 @@ export namespace Prisma {
     url?: StringNullableFilter<"Platform"> | string | null
     versions?: IntNullableListFilter<"Platform">
     websites?: IntNullableListFilter<"Platform">
+    game?: GameListRelationFilter
   }, "id" | "id">
 
   export type PlatformOrderByWithAggregationInput = {
@@ -15504,7 +15891,7 @@ export namespace Prisma {
     bundles?: IntNullableListFilter<"Game">
     checksum?: StringFilter<"Game"> | string
     collections?: IntNullableListFilter<"Game">
-    cover?: IntNullableFilter<"Game"> | number | null
+    coverId?: IntNullableFilter<"Game"> | number | null
     created_at?: DateTimeFilter<"Game"> | Date | string
     dlcs?: IntNullableListFilter<"Game">
     expanded_games?: IntNullableListFilter<"Game">
@@ -15519,7 +15906,6 @@ export namespace Prisma {
     game_modes?: IntNullableListFilter<"Game">
     game_status?: IntNullableFilter<"Game"> | number | null
     game_type?: IntNullableFilter<"Game"> | number | null
-    genres?: IntNullableListFilter<"Game">
     hypes?: IntNullableFilter<"Game"> | number | null
     involved_companies?: IntNullableListFilter<"Game">
     keywords?: IntNullableListFilter<"Game">
@@ -15527,7 +15913,6 @@ export namespace Prisma {
     multiplayer_modes?: IntNullableListFilter<"Game">
     name?: StringFilter<"Game"> | string
     parent_game?: IntNullableFilter<"Game"> | number | null
-    platforms?: IntNullableListFilter<"Game">
     player_perspectives?: IntNullableListFilter<"Game">
     ports?: IntNullableListFilter<"Game">
     rating?: FloatNullableFilter<"Game"> | number | null
@@ -15551,6 +15936,9 @@ export namespace Prisma {
     version_title?: StringNullableFilter<"Game"> | string | null
     videos?: IntNullableListFilter<"Game">
     websites?: IntNullableListFilter<"Game">
+    cover?: XOR<CoverNullableScalarRelationFilter, CoverWhereInput> | null
+    genres?: GenreListRelationFilter
+    platforms?: PlatformListRelationFilter
     gameUser?: GameUserListRelationFilter
   }
 
@@ -15564,7 +15952,7 @@ export namespace Prisma {
     bundles?: SortOrder
     checksum?: SortOrder
     collections?: SortOrder
-    cover?: SortOrderInput | SortOrder
+    coverId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     dlcs?: SortOrder
     expanded_games?: SortOrder
@@ -15579,7 +15967,6 @@ export namespace Prisma {
     game_modes?: SortOrder
     game_status?: SortOrderInput | SortOrder
     game_type?: SortOrderInput | SortOrder
-    genres?: SortOrder
     hypes?: SortOrderInput | SortOrder
     involved_companies?: SortOrder
     keywords?: SortOrder
@@ -15587,7 +15974,6 @@ export namespace Prisma {
     multiplayer_modes?: SortOrder
     name?: SortOrder
     parent_game?: SortOrderInput | SortOrder
-    platforms?: SortOrder
     player_perspectives?: SortOrder
     ports?: SortOrder
     rating?: SortOrderInput | SortOrder
@@ -15611,6 +15997,9 @@ export namespace Prisma {
     version_title?: SortOrderInput | SortOrder
     videos?: SortOrder
     websites?: SortOrder
+    cover?: CoverOrderByWithRelationInput
+    genres?: GenreOrderByRelationAggregateInput
+    platforms?: PlatformOrderByRelationAggregateInput
     gameUser?: GameUserOrderByRelationAggregateInput
   }
 
@@ -15627,7 +16016,7 @@ export namespace Prisma {
     bundles?: IntNullableListFilter<"Game">
     checksum?: StringFilter<"Game"> | string
     collections?: IntNullableListFilter<"Game">
-    cover?: IntNullableFilter<"Game"> | number | null
+    coverId?: IntNullableFilter<"Game"> | number | null
     created_at?: DateTimeFilter<"Game"> | Date | string
     dlcs?: IntNullableListFilter<"Game">
     expanded_games?: IntNullableListFilter<"Game">
@@ -15642,7 +16031,6 @@ export namespace Prisma {
     game_modes?: IntNullableListFilter<"Game">
     game_status?: IntNullableFilter<"Game"> | number | null
     game_type?: IntNullableFilter<"Game"> | number | null
-    genres?: IntNullableListFilter<"Game">
     hypes?: IntNullableFilter<"Game"> | number | null
     involved_companies?: IntNullableListFilter<"Game">
     keywords?: IntNullableListFilter<"Game">
@@ -15650,7 +16038,6 @@ export namespace Prisma {
     multiplayer_modes?: IntNullableListFilter<"Game">
     name?: StringFilter<"Game"> | string
     parent_game?: IntNullableFilter<"Game"> | number | null
-    platforms?: IntNullableListFilter<"Game">
     player_perspectives?: IntNullableListFilter<"Game">
     ports?: IntNullableListFilter<"Game">
     rating?: FloatNullableFilter<"Game"> | number | null
@@ -15674,6 +16061,9 @@ export namespace Prisma {
     version_title?: StringNullableFilter<"Game"> | string | null
     videos?: IntNullableListFilter<"Game">
     websites?: IntNullableListFilter<"Game">
+    cover?: XOR<CoverNullableScalarRelationFilter, CoverWhereInput> | null
+    genres?: GenreListRelationFilter
+    platforms?: PlatformListRelationFilter
     gameUser?: GameUserListRelationFilter
   }, "id" | "id">
 
@@ -15687,7 +16077,7 @@ export namespace Prisma {
     bundles?: SortOrder
     checksum?: SortOrder
     collections?: SortOrder
-    cover?: SortOrderInput | SortOrder
+    coverId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     dlcs?: SortOrder
     expanded_games?: SortOrder
@@ -15702,7 +16092,6 @@ export namespace Prisma {
     game_modes?: SortOrder
     game_status?: SortOrderInput | SortOrder
     game_type?: SortOrderInput | SortOrder
-    genres?: SortOrder
     hypes?: SortOrderInput | SortOrder
     involved_companies?: SortOrder
     keywords?: SortOrder
@@ -15710,7 +16099,6 @@ export namespace Prisma {
     multiplayer_modes?: SortOrder
     name?: SortOrder
     parent_game?: SortOrderInput | SortOrder
-    platforms?: SortOrder
     player_perspectives?: SortOrder
     ports?: SortOrder
     rating?: SortOrderInput | SortOrder
@@ -15754,7 +16142,7 @@ export namespace Prisma {
     bundles?: IntNullableListFilter<"Game">
     checksum?: StringWithAggregatesFilter<"Game"> | string
     collections?: IntNullableListFilter<"Game">
-    cover?: IntNullableWithAggregatesFilter<"Game"> | number | null
+    coverId?: IntNullableWithAggregatesFilter<"Game"> | number | null
     created_at?: DateTimeWithAggregatesFilter<"Game"> | Date | string
     dlcs?: IntNullableListFilter<"Game">
     expanded_games?: IntNullableListFilter<"Game">
@@ -15769,7 +16157,6 @@ export namespace Prisma {
     game_modes?: IntNullableListFilter<"Game">
     game_status?: IntNullableWithAggregatesFilter<"Game"> | number | null
     game_type?: IntNullableWithAggregatesFilter<"Game"> | number | null
-    genres?: IntNullableListFilter<"Game">
     hypes?: IntNullableWithAggregatesFilter<"Game"> | number | null
     involved_companies?: IntNullableListFilter<"Game">
     keywords?: IntNullableListFilter<"Game">
@@ -15777,7 +16164,6 @@ export namespace Prisma {
     multiplayer_modes?: IntNullableListFilter<"Game">
     name?: StringWithAggregatesFilter<"Game"> | string
     parent_game?: IntNullableWithAggregatesFilter<"Game"> | number | null
-    platforms?: IntNullableListFilter<"Game">
     player_perspectives?: IntNullableListFilter<"Game">
     ports?: IntNullableListFilter<"Game">
     rating?: FloatNullableWithAggregatesFilter<"Game"> | number | null
@@ -16249,6 +16635,7 @@ export namespace Prisma {
     slug: string
     updated_at: Date | string
     url: string
+    game?: GameCreateNestedManyWithoutGenresInput
   }
 
   export type GenreUncheckedCreateInput = {
@@ -16259,6 +16646,7 @@ export namespace Prisma {
     slug: string
     updated_at: Date | string
     url: string
+    game?: GameUncheckedCreateNestedManyWithoutGenresInput
   }
 
   export type GenreUpdateInput = {
@@ -16269,6 +16657,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: StringFieldUpdateOperationsInput | string
+    game?: GameUpdateManyWithoutGenresNestedInput
   }
 
   export type GenreUncheckedUpdateInput = {
@@ -16279,6 +16668,7 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: StringFieldUpdateOperationsInput | string
+    game?: GameUncheckedUpdateManyWithoutGenresNestedInput
   }
 
   export type GenreCreateManyInput = {
@@ -16316,13 +16706,13 @@ export namespace Prisma {
     alpha_channel?: boolean | null
     animated?: boolean | null
     checksum?: string | null
-    game?: number | null
     game_localization?: CoverCreategame_localizationInput | number[]
     height?: number | null
     image_id?: string | null
     url?: string | null
     width?: number | null
     downloaded_filename?: string | null
+    game?: GameCreateNestedManyWithoutCoverInput
   }
 
   export type CoverUncheckedCreateInput = {
@@ -16330,13 +16720,13 @@ export namespace Prisma {
     alpha_channel?: boolean | null
     animated?: boolean | null
     checksum?: string | null
-    game?: number | null
     game_localization?: CoverCreategame_localizationInput | number[]
     height?: number | null
     image_id?: string | null
     url?: string | null
     width?: number | null
     downloaded_filename?: string | null
+    game?: GameUncheckedCreateNestedManyWithoutCoverInput
   }
 
   export type CoverUpdateInput = {
@@ -16344,13 +16734,13 @@ export namespace Prisma {
     alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
     checksum?: NullableStringFieldUpdateOperationsInput | string | null
-    game?: NullableIntFieldUpdateOperationsInput | number | null
     game_localization?: CoverUpdategame_localizationInput | number[]
     height?: NullableIntFieldUpdateOperationsInput | number | null
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
     downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: GameUpdateManyWithoutCoverNestedInput
   }
 
   export type CoverUncheckedUpdateInput = {
@@ -16358,13 +16748,13 @@ export namespace Prisma {
     alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
     checksum?: NullableStringFieldUpdateOperationsInput | string | null
-    game?: NullableIntFieldUpdateOperationsInput | number | null
     game_localization?: CoverUpdategame_localizationInput | number[]
     height?: NullableIntFieldUpdateOperationsInput | number | null
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
     downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
+    game?: GameUncheckedUpdateManyWithoutCoverNestedInput
   }
 
   export type CoverCreateManyInput = {
@@ -16372,7 +16762,6 @@ export namespace Prisma {
     alpha_channel?: boolean | null
     animated?: boolean | null
     checksum?: string | null
-    game?: number | null
     game_localization?: CoverCreategame_localizationInput | number[]
     height?: number | null
     image_id?: string | null
@@ -16386,7 +16775,6 @@ export namespace Prisma {
     alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
     checksum?: NullableStringFieldUpdateOperationsInput | string | null
-    game?: NullableIntFieldUpdateOperationsInput | number | null
     game_localization?: CoverUpdategame_localizationInput | number[]
     height?: NullableIntFieldUpdateOperationsInput | number | null
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16400,7 +16788,6 @@ export namespace Prisma {
     alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
     animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
     checksum?: NullableStringFieldUpdateOperationsInput | string | null
-    game?: NullableIntFieldUpdateOperationsInput | number | null
     game_localization?: CoverUpdategame_localizationInput | number[]
     height?: NullableIntFieldUpdateOperationsInput | number | null
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16426,6 +16813,7 @@ export namespace Prisma {
     url?: string | null
     versions?: PlatformCreateversionsInput | number[]
     websites?: PlatformCreatewebsitesInput | number[]
+    game?: GameCreateNestedManyWithoutPlatformsInput
   }
 
   export type PlatformUncheckedCreateInput = {
@@ -16445,6 +16833,7 @@ export namespace Prisma {
     url?: string | null
     versions?: PlatformCreateversionsInput | number[]
     websites?: PlatformCreatewebsitesInput | number[]
+    game?: GameUncheckedCreateNestedManyWithoutPlatformsInput
   }
 
   export type PlatformUpdateInput = {
@@ -16464,6 +16853,7 @@ export namespace Prisma {
     url?: NullableStringFieldUpdateOperationsInput | string | null
     versions?: PlatformUpdateversionsInput | number[]
     websites?: PlatformUpdatewebsitesInput | number[]
+    game?: GameUpdateManyWithoutPlatformsNestedInput
   }
 
   export type PlatformUncheckedUpdateInput = {
@@ -16483,6 +16873,7 @@ export namespace Prisma {
     url?: NullableStringFieldUpdateOperationsInput | string | null
     versions?: PlatformUpdateversionsInput | number[]
     websites?: PlatformUpdatewebsitesInput | number[]
+    game?: GameUncheckedUpdateManyWithoutPlatformsNestedInput
   }
 
   export type PlatformCreateManyInput = {
@@ -16552,7 +16943,6 @@ export namespace Prisma {
     bundles?: GameCreatebundlesInput | number[]
     checksum: string
     collections?: GameCreatecollectionsInput | number[]
-    cover?: number | null
     created_at: Date | string
     dlcs?: GameCreatedlcsInput | number[]
     expanded_games?: GameCreateexpanded_gamesInput | number[]
@@ -16567,7 +16957,6 @@ export namespace Prisma {
     game_modes?: GameCreategame_modesInput | number[]
     game_status?: number | null
     game_type?: number | null
-    genres?: GameCreategenresInput | number[]
     hypes?: number | null
     involved_companies?: GameCreateinvolved_companiesInput | number[]
     keywords?: GameCreatekeywordsInput | number[]
@@ -16575,7 +16964,6 @@ export namespace Prisma {
     multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
     name: string
     parent_game?: number | null
-    platforms?: GameCreateplatformsInput | number[]
     player_perspectives?: GameCreateplayer_perspectivesInput | number[]
     ports?: GameCreateportsInput | number[]
     rating?: number | null
@@ -16599,6 +16987,9 @@ export namespace Prisma {
     version_title?: string | null
     videos?: GameCreatevideosInput | number[]
     websites?: GameCreatewebsitesInput | number[]
+    cover?: CoverCreateNestedOneWithoutGameInput
+    genres?: GenreCreateNestedManyWithoutGameInput
+    platforms?: PlatformCreateNestedManyWithoutGameInput
     gameUser?: GameUserCreateNestedManyWithoutIgdbGameInput
   }
 
@@ -16612,7 +17003,7 @@ export namespace Prisma {
     bundles?: GameCreatebundlesInput | number[]
     checksum: string
     collections?: GameCreatecollectionsInput | number[]
-    cover?: number | null
+    coverId?: number | null
     created_at: Date | string
     dlcs?: GameCreatedlcsInput | number[]
     expanded_games?: GameCreateexpanded_gamesInput | number[]
@@ -16627,7 +17018,6 @@ export namespace Prisma {
     game_modes?: GameCreategame_modesInput | number[]
     game_status?: number | null
     game_type?: number | null
-    genres?: GameCreategenresInput | number[]
     hypes?: number | null
     involved_companies?: GameCreateinvolved_companiesInput | number[]
     keywords?: GameCreatekeywordsInput | number[]
@@ -16635,7 +17025,6 @@ export namespace Prisma {
     multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
     name: string
     parent_game?: number | null
-    platforms?: GameCreateplatformsInput | number[]
     player_perspectives?: GameCreateplayer_perspectivesInput | number[]
     ports?: GameCreateportsInput | number[]
     rating?: number | null
@@ -16659,6 +17048,8 @@ export namespace Prisma {
     version_title?: string | null
     videos?: GameCreatevideosInput | number[]
     websites?: GameCreatewebsitesInput | number[]
+    genres?: GenreUncheckedCreateNestedManyWithoutGameInput
+    platforms?: PlatformUncheckedCreateNestedManyWithoutGameInput
     gameUser?: GameUserUncheckedCreateNestedManyWithoutIgdbGameInput
   }
 
@@ -16672,7 +17063,6 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -16687,7 +17077,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -16695,7 +17084,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16719,6 +17107,9 @@ export namespace Prisma {
     version_title?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: GameUpdatevideosInput | number[]
     websites?: GameUpdatewebsitesInput | number[]
+    cover?: CoverUpdateOneWithoutGameNestedInput
+    genres?: GenreUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUpdateManyWithoutGameNestedInput
     gameUser?: GameUserUpdateManyWithoutIgdbGameNestedInput
   }
 
@@ -16732,7 +17123,7 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -16747,7 +17138,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -16755,7 +17145,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16779,6 +17168,8 @@ export namespace Prisma {
     version_title?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: GameUpdatevideosInput | number[]
     websites?: GameUpdatewebsitesInput | number[]
+    genres?: GenreUncheckedUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUncheckedUpdateManyWithoutGameNestedInput
     gameUser?: GameUserUncheckedUpdateManyWithoutIgdbGameNestedInput
   }
 
@@ -16792,7 +17183,7 @@ export namespace Prisma {
     bundles?: GameCreatebundlesInput | number[]
     checksum: string
     collections?: GameCreatecollectionsInput | number[]
-    cover?: number | null
+    coverId?: number | null
     created_at: Date | string
     dlcs?: GameCreatedlcsInput | number[]
     expanded_games?: GameCreateexpanded_gamesInput | number[]
@@ -16807,7 +17198,6 @@ export namespace Prisma {
     game_modes?: GameCreategame_modesInput | number[]
     game_status?: number | null
     game_type?: number | null
-    genres?: GameCreategenresInput | number[]
     hypes?: number | null
     involved_companies?: GameCreateinvolved_companiesInput | number[]
     keywords?: GameCreatekeywordsInput | number[]
@@ -16815,7 +17205,6 @@ export namespace Prisma {
     multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
     name: string
     parent_game?: number | null
-    platforms?: GameCreateplatformsInput | number[]
     player_perspectives?: GameCreateplayer_perspectivesInput | number[]
     ports?: GameCreateportsInput | number[]
     rating?: number | null
@@ -16851,7 +17240,6 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -16866,7 +17254,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -16874,7 +17261,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16910,7 +17296,7 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -16925,7 +17311,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -16933,7 +17318,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -17606,6 +17990,16 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type GameListRelationFilter = {
+    every?: GameWhereInput
+    some?: GameWhereInput
+    none?: GameWhereInput
+  }
+
+  export type GameOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type GenreCountOrderByAggregateInput = {
     id?: SortOrder
     checksum?: SortOrder
@@ -17662,7 +18056,6 @@ export namespace Prisma {
     alpha_channel?: SortOrder
     animated?: SortOrder
     checksum?: SortOrder
-    game?: SortOrder
     game_localization?: SortOrder
     height?: SortOrder
     image_id?: SortOrder
@@ -17673,7 +18066,6 @@ export namespace Prisma {
 
   export type CoverAvgOrderByAggregateInput = {
     id?: SortOrder
-    game?: SortOrder
     game_localization?: SortOrder
     height?: SortOrder
     width?: SortOrder
@@ -17684,7 +18076,6 @@ export namespace Prisma {
     alpha_channel?: SortOrder
     animated?: SortOrder
     checksum?: SortOrder
-    game?: SortOrder
     height?: SortOrder
     image_id?: SortOrder
     url?: SortOrder
@@ -17697,7 +18088,6 @@ export namespace Prisma {
     alpha_channel?: SortOrder
     animated?: SortOrder
     checksum?: SortOrder
-    game?: SortOrder
     height?: SortOrder
     image_id?: SortOrder
     url?: SortOrder
@@ -17707,7 +18097,6 @@ export namespace Prisma {
 
   export type CoverSumOrderByAggregateInput = {
     id?: SortOrder
-    game?: SortOrder
     game_localization?: SortOrder
     height?: SortOrder
     width?: SortOrder
@@ -17805,10 +18194,35 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type CoverNullableScalarRelationFilter = {
+    is?: CoverWhereInput | null
+    isNot?: CoverWhereInput | null
+  }
+
+  export type GenreListRelationFilter = {
+    every?: GenreWhereInput
+    some?: GenreWhereInput
+    none?: GenreWhereInput
+  }
+
+  export type PlatformListRelationFilter = {
+    every?: PlatformWhereInput
+    some?: PlatformWhereInput
+    none?: PlatformWhereInput
+  }
+
   export type GameUserListRelationFilter = {
     every?: GameUserWhereInput
     some?: GameUserWhereInput
     none?: GameUserWhereInput
+  }
+
+  export type GenreOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PlatformOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type GameUserOrderByRelationAggregateInput = {
@@ -17825,7 +18239,7 @@ export namespace Prisma {
     bundles?: SortOrder
     checksum?: SortOrder
     collections?: SortOrder
-    cover?: SortOrder
+    coverId?: SortOrder
     created_at?: SortOrder
     dlcs?: SortOrder
     expanded_games?: SortOrder
@@ -17840,7 +18254,6 @@ export namespace Prisma {
     game_modes?: SortOrder
     game_status?: SortOrder
     game_type?: SortOrder
-    genres?: SortOrder
     hypes?: SortOrder
     involved_companies?: SortOrder
     keywords?: SortOrder
@@ -17848,7 +18261,6 @@ export namespace Prisma {
     multiplayer_modes?: SortOrder
     name?: SortOrder
     parent_game?: SortOrder
-    platforms?: SortOrder
     player_perspectives?: SortOrder
     ports?: SortOrder
     rating?: SortOrder
@@ -17883,7 +18295,7 @@ export namespace Prisma {
     artworks?: SortOrder
     bundles?: SortOrder
     collections?: SortOrder
-    cover?: SortOrder
+    coverId?: SortOrder
     dlcs?: SortOrder
     expanded_games?: SortOrder
     expansions?: SortOrder
@@ -17897,14 +18309,12 @@ export namespace Prisma {
     game_modes?: SortOrder
     game_status?: SortOrder
     game_type?: SortOrder
-    genres?: SortOrder
     hypes?: SortOrder
     involved_companies?: SortOrder
     keywords?: SortOrder
     language_supports?: SortOrder
     multiplayer_modes?: SortOrder
     parent_game?: SortOrder
-    platforms?: SortOrder
     player_perspectives?: SortOrder
     ports?: SortOrder
     rating?: SortOrder
@@ -17929,7 +18339,7 @@ export namespace Prisma {
     aggregated_rating?: SortOrder
     aggregated_rating_count?: SortOrder
     checksum?: SortOrder
-    cover?: SortOrder
+    coverId?: SortOrder
     created_at?: SortOrder
     first_release_date?: SortOrder
     franchise?: SortOrder
@@ -17955,7 +18365,7 @@ export namespace Prisma {
     aggregated_rating?: SortOrder
     aggregated_rating_count?: SortOrder
     checksum?: SortOrder
-    cover?: SortOrder
+    coverId?: SortOrder
     created_at?: SortOrder
     first_release_date?: SortOrder
     franchise?: SortOrder
@@ -17985,7 +18395,7 @@ export namespace Prisma {
     artworks?: SortOrder
     bundles?: SortOrder
     collections?: SortOrder
-    cover?: SortOrder
+    coverId?: SortOrder
     dlcs?: SortOrder
     expanded_games?: SortOrder
     expansions?: SortOrder
@@ -17999,14 +18409,12 @@ export namespace Prisma {
     game_modes?: SortOrder
     game_status?: SortOrder
     game_type?: SortOrder
-    genres?: SortOrder
     hypes?: SortOrder
     involved_companies?: SortOrder
     keywords?: SortOrder
     language_supports?: SortOrder
     multiplayer_modes?: SortOrder
     parent_game?: SortOrder
-    platforms?: SortOrder
     player_perspectives?: SortOrder
     ports?: SortOrder
     rating?: SortOrder
@@ -18302,8 +18710,60 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type GameCreateNestedManyWithoutGenresInput = {
+    create?: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput> | GameCreateWithoutGenresInput[] | GameUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutGenresInput | GameCreateOrConnectWithoutGenresInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  }
+
+  export type GameUncheckedCreateNestedManyWithoutGenresInput = {
+    create?: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput> | GameCreateWithoutGenresInput[] | GameUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutGenresInput | GameCreateOrConnectWithoutGenresInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  }
+
+  export type GameUpdateManyWithoutGenresNestedInput = {
+    create?: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput> | GameCreateWithoutGenresInput[] | GameUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutGenresInput | GameCreateOrConnectWithoutGenresInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutGenresInput | GameUpsertWithWhereUniqueWithoutGenresInput[]
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutGenresInput | GameUpdateWithWhereUniqueWithoutGenresInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutGenresInput | GameUpdateManyWithWhereWithoutGenresInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  }
+
+  export type GameUncheckedUpdateManyWithoutGenresNestedInput = {
+    create?: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput> | GameCreateWithoutGenresInput[] | GameUncheckedCreateWithoutGenresInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutGenresInput | GameCreateOrConnectWithoutGenresInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutGenresInput | GameUpsertWithWhereUniqueWithoutGenresInput[]
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutGenresInput | GameUpdateWithWhereUniqueWithoutGenresInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutGenresInput | GameUpdateManyWithWhereWithoutGenresInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  }
+
   export type CoverCreategame_localizationInput = {
     set: number[]
+  }
+
+  export type GameCreateNestedManyWithoutCoverInput = {
+    create?: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput> | GameCreateWithoutCoverInput[] | GameUncheckedCreateWithoutCoverInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutCoverInput | GameCreateOrConnectWithoutCoverInput[]
+    createMany?: GameCreateManyCoverInputEnvelope
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  }
+
+  export type GameUncheckedCreateNestedManyWithoutCoverInput = {
+    create?: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput> | GameCreateWithoutCoverInput[] | GameUncheckedCreateWithoutCoverInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutCoverInput | GameCreateOrConnectWithoutCoverInput[]
+    createMany?: GameCreateManyCoverInputEnvelope
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -18315,12 +18775,52 @@ export namespace Prisma {
     push?: number | number[]
   }
 
+  export type GameUpdateManyWithoutCoverNestedInput = {
+    create?: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput> | GameCreateWithoutCoverInput[] | GameUncheckedCreateWithoutCoverInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutCoverInput | GameCreateOrConnectWithoutCoverInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutCoverInput | GameUpsertWithWhereUniqueWithoutCoverInput[]
+    createMany?: GameCreateManyCoverInputEnvelope
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutCoverInput | GameUpdateWithWhereUniqueWithoutCoverInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutCoverInput | GameUpdateManyWithWhereWithoutCoverInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  }
+
+  export type GameUncheckedUpdateManyWithoutCoverNestedInput = {
+    create?: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput> | GameCreateWithoutCoverInput[] | GameUncheckedCreateWithoutCoverInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutCoverInput | GameCreateOrConnectWithoutCoverInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutCoverInput | GameUpsertWithWhereUniqueWithoutCoverInput[]
+    createMany?: GameCreateManyCoverInputEnvelope
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutCoverInput | GameUpdateWithWhereUniqueWithoutCoverInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutCoverInput | GameUpdateManyWithWhereWithoutCoverInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  }
+
   export type PlatformCreateversionsInput = {
     set: number[]
   }
 
   export type PlatformCreatewebsitesInput = {
     set: number[]
+  }
+
+  export type GameCreateNestedManyWithoutPlatformsInput = {
+    create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+  }
+
+  export type GameUncheckedCreateNestedManyWithoutPlatformsInput = {
+    create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
   }
 
   export type PlatformUpdateversionsInput = {
@@ -18331,6 +18831,32 @@ export namespace Prisma {
   export type PlatformUpdatewebsitesInput = {
     set?: number[]
     push?: number | number[]
+  }
+
+  export type GameUpdateManyWithoutPlatformsNestedInput = {
+    create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutPlatformsInput | GameUpsertWithWhereUniqueWithoutPlatformsInput[]
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutPlatformsInput | GameUpdateWithWhereUniqueWithoutPlatformsInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutPlatformsInput | GameUpdateManyWithWhereWithoutPlatformsInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
+  }
+
+  export type GameUncheckedUpdateManyWithoutPlatformsNestedInput = {
+    create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
+    connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
+    upsert?: GameUpsertWithWhereUniqueWithoutPlatformsInput | GameUpsertWithWhereUniqueWithoutPlatformsInput[]
+    set?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    disconnect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    delete?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
+    update?: GameUpdateWithWhereUniqueWithoutPlatformsInput | GameUpdateWithWhereUniqueWithoutPlatformsInput[]
+    updateMany?: GameUpdateManyWithWhereWithoutPlatformsInput | GameUpdateManyWithWhereWithoutPlatformsInput[]
+    deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
   }
 
   export type GameCreateage_ratingsInput = {
@@ -18389,10 +18915,6 @@ export namespace Prisma {
     set: number[]
   }
 
-  export type GameCreategenresInput = {
-    set: number[]
-  }
-
   export type GameCreateinvolved_companiesInput = {
     set: number[]
   }
@@ -18406,10 +18928,6 @@ export namespace Prisma {
   }
 
   export type GameCreatemultiplayer_modesInput = {
-    set: number[]
-  }
-
-  export type GameCreateplatformsInput = {
     set: number[]
   }
 
@@ -18465,11 +18983,41 @@ export namespace Prisma {
     set: number[]
   }
 
+  export type CoverCreateNestedOneWithoutGameInput = {
+    create?: XOR<CoverCreateWithoutGameInput, CoverUncheckedCreateWithoutGameInput>
+    connectOrCreate?: CoverCreateOrConnectWithoutGameInput
+    connect?: CoverWhereUniqueInput
+  }
+
+  export type GenreCreateNestedManyWithoutGameInput = {
+    create?: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput> | GenreCreateWithoutGameInput[] | GenreUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: GenreCreateOrConnectWithoutGameInput | GenreCreateOrConnectWithoutGameInput[]
+    connect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+  }
+
+  export type PlatformCreateNestedManyWithoutGameInput = {
+    create?: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput> | PlatformCreateWithoutGameInput[] | PlatformUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: PlatformCreateOrConnectWithoutGameInput | PlatformCreateOrConnectWithoutGameInput[]
+    connect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+  }
+
   export type GameUserCreateNestedManyWithoutIgdbGameInput = {
     create?: XOR<GameUserCreateWithoutIgdbGameInput, GameUserUncheckedCreateWithoutIgdbGameInput> | GameUserCreateWithoutIgdbGameInput[] | GameUserUncheckedCreateWithoutIgdbGameInput[]
     connectOrCreate?: GameUserCreateOrConnectWithoutIgdbGameInput | GameUserCreateOrConnectWithoutIgdbGameInput[]
     createMany?: GameUserCreateManyIgdbGameInputEnvelope
     connect?: GameUserWhereUniqueInput | GameUserWhereUniqueInput[]
+  }
+
+  export type GenreUncheckedCreateNestedManyWithoutGameInput = {
+    create?: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput> | GenreCreateWithoutGameInput[] | GenreUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: GenreCreateOrConnectWithoutGameInput | GenreCreateOrConnectWithoutGameInput[]
+    connect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+  }
+
+  export type PlatformUncheckedCreateNestedManyWithoutGameInput = {
+    create?: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput> | PlatformCreateWithoutGameInput[] | PlatformUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: PlatformCreateOrConnectWithoutGameInput | PlatformCreateOrConnectWithoutGameInput[]
+    connect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
   }
 
   export type GameUserUncheckedCreateNestedManyWithoutIgdbGameInput = {
@@ -18557,11 +19105,6 @@ export namespace Prisma {
     push?: number | number[]
   }
 
-  export type GameUpdategenresInput = {
-    set?: number[]
-    push?: number | number[]
-  }
-
   export type GameUpdateinvolved_companiesInput = {
     set?: number[]
     push?: number | number[]
@@ -18578,11 +19121,6 @@ export namespace Prisma {
   }
 
   export type GameUpdatemultiplayer_modesInput = {
-    set?: number[]
-    push?: number | number[]
-  }
-
-  export type GameUpdateplatformsInput = {
     set?: number[]
     push?: number | number[]
   }
@@ -18652,6 +19190,42 @@ export namespace Prisma {
     push?: number | number[]
   }
 
+  export type CoverUpdateOneWithoutGameNestedInput = {
+    create?: XOR<CoverCreateWithoutGameInput, CoverUncheckedCreateWithoutGameInput>
+    connectOrCreate?: CoverCreateOrConnectWithoutGameInput
+    upsert?: CoverUpsertWithoutGameInput
+    disconnect?: CoverWhereInput | boolean
+    delete?: CoverWhereInput | boolean
+    connect?: CoverWhereUniqueInput
+    update?: XOR<XOR<CoverUpdateToOneWithWhereWithoutGameInput, CoverUpdateWithoutGameInput>, CoverUncheckedUpdateWithoutGameInput>
+  }
+
+  export type GenreUpdateManyWithoutGameNestedInput = {
+    create?: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput> | GenreCreateWithoutGameInput[] | GenreUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: GenreCreateOrConnectWithoutGameInput | GenreCreateOrConnectWithoutGameInput[]
+    upsert?: GenreUpsertWithWhereUniqueWithoutGameInput | GenreUpsertWithWhereUniqueWithoutGameInput[]
+    set?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    disconnect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    delete?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    connect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    update?: GenreUpdateWithWhereUniqueWithoutGameInput | GenreUpdateWithWhereUniqueWithoutGameInput[]
+    updateMany?: GenreUpdateManyWithWhereWithoutGameInput | GenreUpdateManyWithWhereWithoutGameInput[]
+    deleteMany?: GenreScalarWhereInput | GenreScalarWhereInput[]
+  }
+
+  export type PlatformUpdateManyWithoutGameNestedInput = {
+    create?: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput> | PlatformCreateWithoutGameInput[] | PlatformUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: PlatformCreateOrConnectWithoutGameInput | PlatformCreateOrConnectWithoutGameInput[]
+    upsert?: PlatformUpsertWithWhereUniqueWithoutGameInput | PlatformUpsertWithWhereUniqueWithoutGameInput[]
+    set?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    disconnect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    delete?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    connect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    update?: PlatformUpdateWithWhereUniqueWithoutGameInput | PlatformUpdateWithWhereUniqueWithoutGameInput[]
+    updateMany?: PlatformUpdateManyWithWhereWithoutGameInput | PlatformUpdateManyWithWhereWithoutGameInput[]
+    deleteMany?: PlatformScalarWhereInput | PlatformScalarWhereInput[]
+  }
+
   export type GameUserUpdateManyWithoutIgdbGameNestedInput = {
     create?: XOR<GameUserCreateWithoutIgdbGameInput, GameUserUncheckedCreateWithoutIgdbGameInput> | GameUserCreateWithoutIgdbGameInput[] | GameUserUncheckedCreateWithoutIgdbGameInput[]
     connectOrCreate?: GameUserCreateOrConnectWithoutIgdbGameInput | GameUserCreateOrConnectWithoutIgdbGameInput[]
@@ -18664,6 +19238,32 @@ export namespace Prisma {
     update?: GameUserUpdateWithWhereUniqueWithoutIgdbGameInput | GameUserUpdateWithWhereUniqueWithoutIgdbGameInput[]
     updateMany?: GameUserUpdateManyWithWhereWithoutIgdbGameInput | GameUserUpdateManyWithWhereWithoutIgdbGameInput[]
     deleteMany?: GameUserScalarWhereInput | GameUserScalarWhereInput[]
+  }
+
+  export type GenreUncheckedUpdateManyWithoutGameNestedInput = {
+    create?: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput> | GenreCreateWithoutGameInput[] | GenreUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: GenreCreateOrConnectWithoutGameInput | GenreCreateOrConnectWithoutGameInput[]
+    upsert?: GenreUpsertWithWhereUniqueWithoutGameInput | GenreUpsertWithWhereUniqueWithoutGameInput[]
+    set?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    disconnect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    delete?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    connect?: GenreWhereUniqueInput | GenreWhereUniqueInput[]
+    update?: GenreUpdateWithWhereUniqueWithoutGameInput | GenreUpdateWithWhereUniqueWithoutGameInput[]
+    updateMany?: GenreUpdateManyWithWhereWithoutGameInput | GenreUpdateManyWithWhereWithoutGameInput[]
+    deleteMany?: GenreScalarWhereInput | GenreScalarWhereInput[]
+  }
+
+  export type PlatformUncheckedUpdateManyWithoutGameNestedInput = {
+    create?: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput> | PlatformCreateWithoutGameInput[] | PlatformUncheckedCreateWithoutGameInput[]
+    connectOrCreate?: PlatformCreateOrConnectWithoutGameInput | PlatformCreateOrConnectWithoutGameInput[]
+    upsert?: PlatformUpsertWithWhereUniqueWithoutGameInput | PlatformUpsertWithWhereUniqueWithoutGameInput[]
+    set?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    disconnect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    delete?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    connect?: PlatformWhereUniqueInput | PlatformWhereUniqueInput[]
+    update?: PlatformUpdateWithWhereUniqueWithoutGameInput | PlatformUpdateWithWhereUniqueWithoutGameInput[]
+    updateMany?: PlatformUpdateManyWithWhereWithoutGameInput | PlatformUpdateManyWithWhereWithoutGameInput[]
+    deleteMany?: PlatformScalarWhereInput | PlatformScalarWhereInput[]
   }
 
   export type GameUserUncheckedUpdateManyWithoutIgdbGameNestedInput = {
@@ -19175,7 +19775,6 @@ export namespace Prisma {
     bundles?: GameCreatebundlesInput | number[]
     checksum: string
     collections?: GameCreatecollectionsInput | number[]
-    cover?: number | null
     created_at: Date | string
     dlcs?: GameCreatedlcsInput | number[]
     expanded_games?: GameCreateexpanded_gamesInput | number[]
@@ -19190,7 +19789,6 @@ export namespace Prisma {
     game_modes?: GameCreategame_modesInput | number[]
     game_status?: number | null
     game_type?: number | null
-    genres?: GameCreategenresInput | number[]
     hypes?: number | null
     involved_companies?: GameCreateinvolved_companiesInput | number[]
     keywords?: GameCreatekeywordsInput | number[]
@@ -19198,7 +19796,6 @@ export namespace Prisma {
     multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
     name: string
     parent_game?: number | null
-    platforms?: GameCreateplatformsInput | number[]
     player_perspectives?: GameCreateplayer_perspectivesInput | number[]
     ports?: GameCreateportsInput | number[]
     rating?: number | null
@@ -19222,6 +19819,9 @@ export namespace Prisma {
     version_title?: string | null
     videos?: GameCreatevideosInput | number[]
     websites?: GameCreatewebsitesInput | number[]
+    cover?: CoverCreateNestedOneWithoutGameInput
+    genres?: GenreCreateNestedManyWithoutGameInput
+    platforms?: PlatformCreateNestedManyWithoutGameInput
   }
 
   export type GameUncheckedCreateWithoutGameUserInput = {
@@ -19234,7 +19834,7 @@ export namespace Prisma {
     bundles?: GameCreatebundlesInput | number[]
     checksum: string
     collections?: GameCreatecollectionsInput | number[]
-    cover?: number | null
+    coverId?: number | null
     created_at: Date | string
     dlcs?: GameCreatedlcsInput | number[]
     expanded_games?: GameCreateexpanded_gamesInput | number[]
@@ -19249,7 +19849,6 @@ export namespace Prisma {
     game_modes?: GameCreategame_modesInput | number[]
     game_status?: number | null
     game_type?: number | null
-    genres?: GameCreategenresInput | number[]
     hypes?: number | null
     involved_companies?: GameCreateinvolved_companiesInput | number[]
     keywords?: GameCreatekeywordsInput | number[]
@@ -19257,7 +19856,6 @@ export namespace Prisma {
     multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
     name: string
     parent_game?: number | null
-    platforms?: GameCreateplatformsInput | number[]
     player_perspectives?: GameCreateplayer_perspectivesInput | number[]
     ports?: GameCreateportsInput | number[]
     rating?: number | null
@@ -19281,6 +19879,8 @@ export namespace Prisma {
     version_title?: string | null
     videos?: GameCreatevideosInput | number[]
     websites?: GameCreatewebsitesInput | number[]
+    genres?: GenreUncheckedCreateNestedManyWithoutGameInput
+    platforms?: PlatformUncheckedCreateNestedManyWithoutGameInput
   }
 
   export type GameCreateOrConnectWithoutGameUserInput = {
@@ -19346,7 +19946,6 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -19361,7 +19960,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -19369,7 +19967,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -19393,6 +19990,9 @@ export namespace Prisma {
     version_title?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: GameUpdatevideosInput | number[]
     websites?: GameUpdatewebsitesInput | number[]
+    cover?: CoverUpdateOneWithoutGameNestedInput
+    genres?: GenreUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUpdateManyWithoutGameNestedInput
   }
 
   export type GameUncheckedUpdateWithoutGameUserInput = {
@@ -19405,7 +20005,7 @@ export namespace Prisma {
     bundles?: GameUpdatebundlesInput | number[]
     checksum?: StringFieldUpdateOperationsInput | string
     collections?: GameUpdatecollectionsInput | number[]
-    cover?: NullableIntFieldUpdateOperationsInput | number | null
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     dlcs?: GameUpdatedlcsInput | number[]
     expanded_games?: GameUpdateexpanded_gamesInput | number[]
@@ -19420,7 +20020,6 @@ export namespace Prisma {
     game_modes?: GameUpdategame_modesInput | number[]
     game_status?: NullableIntFieldUpdateOperationsInput | number | null
     game_type?: NullableIntFieldUpdateOperationsInput | number | null
-    genres?: GameUpdategenresInput | number[]
     hypes?: NullableIntFieldUpdateOperationsInput | number | null
     involved_companies?: GameUpdateinvolved_companiesInput | number[]
     keywords?: GameUpdatekeywordsInput | number[]
@@ -19428,7 +20027,6 @@ export namespace Prisma {
     multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
     name?: StringFieldUpdateOperationsInput | string
     parent_game?: NullableIntFieldUpdateOperationsInput | number | null
-    platforms?: GameUpdateplatformsInput | number[]
     player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
     ports?: GameUpdateportsInput | number[]
     rating?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -19452,6 +20050,8 @@ export namespace Prisma {
     version_title?: NullableStringFieldUpdateOperationsInput | string | null
     videos?: GameUpdatevideosInput | number[]
     websites?: GameUpdatewebsitesInput | number[]
+    genres?: GenreUncheckedUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUncheckedUpdateManyWithoutGameNestedInput
   }
 
   export type UserCreateWithoutUserSettingsInput = {
@@ -19522,6 +20122,587 @@ export namespace Prisma {
     Game?: GameUserUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type GameCreateWithoutGenresInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    cover?: CoverCreateNestedOneWithoutGameInput
+    platforms?: PlatformCreateNestedManyWithoutGameInput
+    gameUser?: GameUserCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameUncheckedCreateWithoutGenresInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    coverId?: number | null
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    platforms?: PlatformUncheckedCreateNestedManyWithoutGameInput
+    gameUser?: GameUserUncheckedCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameCreateOrConnectWithoutGenresInput = {
+    where: GameWhereUniqueInput
+    create: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput>
+  }
+
+  export type GameUpsertWithWhereUniqueWithoutGenresInput = {
+    where: GameWhereUniqueInput
+    update: XOR<GameUpdateWithoutGenresInput, GameUncheckedUpdateWithoutGenresInput>
+    create: XOR<GameCreateWithoutGenresInput, GameUncheckedCreateWithoutGenresInput>
+  }
+
+  export type GameUpdateWithWhereUniqueWithoutGenresInput = {
+    where: GameWhereUniqueInput
+    data: XOR<GameUpdateWithoutGenresInput, GameUncheckedUpdateWithoutGenresInput>
+  }
+
+  export type GameUpdateManyWithWhereWithoutGenresInput = {
+    where: GameScalarWhereInput
+    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyWithoutGenresInput>
+  }
+
+  export type GameScalarWhereInput = {
+    AND?: GameScalarWhereInput | GameScalarWhereInput[]
+    OR?: GameScalarWhereInput[]
+    NOT?: GameScalarWhereInput | GameScalarWhereInput[]
+    id?: IntFilter<"Game"> | number
+    age_ratings?: IntNullableListFilter<"Game">
+    aggregated_rating?: FloatNullableFilter<"Game"> | number | null
+    aggregated_rating_count?: IntNullableFilter<"Game"> | number | null
+    alternative_names?: IntNullableListFilter<"Game">
+    artworks?: IntNullableListFilter<"Game">
+    bundles?: IntNullableListFilter<"Game">
+    checksum?: StringFilter<"Game"> | string
+    collections?: IntNullableListFilter<"Game">
+    coverId?: IntNullableFilter<"Game"> | number | null
+    created_at?: DateTimeFilter<"Game"> | Date | string
+    dlcs?: IntNullableListFilter<"Game">
+    expanded_games?: IntNullableListFilter<"Game">
+    expansions?: IntNullableListFilter<"Game">
+    external_games?: IntNullableListFilter<"Game">
+    first_release_date?: IntNullableFilter<"Game"> | number | null
+    forks?: IntNullableListFilter<"Game">
+    franchise?: IntNullableFilter<"Game"> | number | null
+    franchises?: IntNullableListFilter<"Game">
+    game_engines?: IntNullableListFilter<"Game">
+    game_localizations?: IntNullableListFilter<"Game">
+    game_modes?: IntNullableListFilter<"Game">
+    game_status?: IntNullableFilter<"Game"> | number | null
+    game_type?: IntNullableFilter<"Game"> | number | null
+    hypes?: IntNullableFilter<"Game"> | number | null
+    involved_companies?: IntNullableListFilter<"Game">
+    keywords?: IntNullableListFilter<"Game">
+    language_supports?: IntNullableListFilter<"Game">
+    multiplayer_modes?: IntNullableListFilter<"Game">
+    name?: StringFilter<"Game"> | string
+    parent_game?: IntNullableFilter<"Game"> | number | null
+    player_perspectives?: IntNullableListFilter<"Game">
+    ports?: IntNullableListFilter<"Game">
+    rating?: FloatNullableFilter<"Game"> | number | null
+    rating_count?: IntNullableFilter<"Game"> | number | null
+    release_dates?: IntNullableListFilter<"Game">
+    remakes?: IntNullableListFilter<"Game">
+    remasters?: IntNullableListFilter<"Game">
+    screenshots?: IntNullableListFilter<"Game">
+    similar_games?: IntNullableListFilter<"Game">
+    slug?: StringFilter<"Game"> | string
+    standalone_expansions?: IntNullableListFilter<"Game">
+    storyline?: StringNullableFilter<"Game"> | string | null
+    summary?: StringNullableFilter<"Game"> | string | null
+    tags?: IntNullableListFilter<"Game">
+    themes?: IntNullableListFilter<"Game">
+    total_rating?: FloatNullableFilter<"Game"> | number | null
+    total_rating_count?: IntNullableFilter<"Game"> | number | null
+    updated_at?: DateTimeFilter<"Game"> | Date | string
+    url?: StringNullableFilter<"Game"> | string | null
+    version_parent?: IntNullableListFilter<"Game">
+    version_title?: StringNullableFilter<"Game"> | string | null
+    videos?: IntNullableListFilter<"Game">
+    websites?: IntNullableListFilter<"Game">
+  }
+
+  export type GameCreateWithoutCoverInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    genres?: GenreCreateNestedManyWithoutGameInput
+    platforms?: PlatformCreateNestedManyWithoutGameInput
+    gameUser?: GameUserCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameUncheckedCreateWithoutCoverInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    genres?: GenreUncheckedCreateNestedManyWithoutGameInput
+    platforms?: PlatformUncheckedCreateNestedManyWithoutGameInput
+    gameUser?: GameUserUncheckedCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameCreateOrConnectWithoutCoverInput = {
+    where: GameWhereUniqueInput
+    create: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput>
+  }
+
+  export type GameCreateManyCoverInputEnvelope = {
+    data: GameCreateManyCoverInput | GameCreateManyCoverInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GameUpsertWithWhereUniqueWithoutCoverInput = {
+    where: GameWhereUniqueInput
+    update: XOR<GameUpdateWithoutCoverInput, GameUncheckedUpdateWithoutCoverInput>
+    create: XOR<GameCreateWithoutCoverInput, GameUncheckedCreateWithoutCoverInput>
+  }
+
+  export type GameUpdateWithWhereUniqueWithoutCoverInput = {
+    where: GameWhereUniqueInput
+    data: XOR<GameUpdateWithoutCoverInput, GameUncheckedUpdateWithoutCoverInput>
+  }
+
+  export type GameUpdateManyWithWhereWithoutCoverInput = {
+    where: GameScalarWhereInput
+    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyWithoutCoverInput>
+  }
+
+  export type GameCreateWithoutPlatformsInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    cover?: CoverCreateNestedOneWithoutGameInput
+    genres?: GenreCreateNestedManyWithoutGameInput
+    gameUser?: GameUserCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameUncheckedCreateWithoutPlatformsInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    coverId?: number | null
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+    genres?: GenreUncheckedCreateNestedManyWithoutGameInput
+    gameUser?: GameUserUncheckedCreateNestedManyWithoutIgdbGameInput
+  }
+
+  export type GameCreateOrConnectWithoutPlatformsInput = {
+    where: GameWhereUniqueInput
+    create: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput>
+  }
+
+  export type GameUpsertWithWhereUniqueWithoutPlatformsInput = {
+    where: GameWhereUniqueInput
+    update: XOR<GameUpdateWithoutPlatformsInput, GameUncheckedUpdateWithoutPlatformsInput>
+    create: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput>
+  }
+
+  export type GameUpdateWithWhereUniqueWithoutPlatformsInput = {
+    where: GameWhereUniqueInput
+    data: XOR<GameUpdateWithoutPlatformsInput, GameUncheckedUpdateWithoutPlatformsInput>
+  }
+
+  export type GameUpdateManyWithWhereWithoutPlatformsInput = {
+    where: GameScalarWhereInput
+    data: XOR<GameUpdateManyMutationInput, GameUncheckedUpdateManyWithoutPlatformsInput>
+  }
+
+  export type CoverCreateWithoutGameInput = {
+    id: number
+    alpha_channel?: boolean | null
+    animated?: boolean | null
+    checksum?: string | null
+    game_localization?: CoverCreategame_localizationInput | number[]
+    height?: number | null
+    image_id?: string | null
+    url?: string | null
+    width?: number | null
+    downloaded_filename?: string | null
+  }
+
+  export type CoverUncheckedCreateWithoutGameInput = {
+    id: number
+    alpha_channel?: boolean | null
+    animated?: boolean | null
+    checksum?: string | null
+    game_localization?: CoverCreategame_localizationInput | number[]
+    height?: number | null
+    image_id?: string | null
+    url?: string | null
+    width?: number | null
+    downloaded_filename?: string | null
+  }
+
+  export type CoverCreateOrConnectWithoutGameInput = {
+    where: CoverWhereUniqueInput
+    create: XOR<CoverCreateWithoutGameInput, CoverUncheckedCreateWithoutGameInput>
+  }
+
+  export type GenreCreateWithoutGameInput = {
+    id: number
+    checksum: string
+    created_at: Date | string
+    name: string
+    slug: string
+    updated_at: Date | string
+    url: string
+  }
+
+  export type GenreUncheckedCreateWithoutGameInput = {
+    id: number
+    checksum: string
+    created_at: Date | string
+    name: string
+    slug: string
+    updated_at: Date | string
+    url: string
+  }
+
+  export type GenreCreateOrConnectWithoutGameInput = {
+    where: GenreWhereUniqueInput
+    create: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput>
+  }
+
+  export type PlatformCreateWithoutGameInput = {
+    id: number
+    abbreviation?: string | null
+    alternative_name?: string | null
+    checksum?: string | null
+    created_at: Date | string
+    generation?: number | null
+    name?: string | null
+    platform_family?: number | null
+    platform_logo?: number | null
+    platform_type?: number | null
+    slug?: string | null
+    summary?: string | null
+    updated_at: Date | string
+    url?: string | null
+    versions?: PlatformCreateversionsInput | number[]
+    websites?: PlatformCreatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedCreateWithoutGameInput = {
+    id: number
+    abbreviation?: string | null
+    alternative_name?: string | null
+    checksum?: string | null
+    created_at: Date | string
+    generation?: number | null
+    name?: string | null
+    platform_family?: number | null
+    platform_logo?: number | null
+    platform_type?: number | null
+    slug?: string | null
+    summary?: string | null
+    updated_at: Date | string
+    url?: string | null
+    versions?: PlatformCreateversionsInput | number[]
+    websites?: PlatformCreatewebsitesInput | number[]
+  }
+
+  export type PlatformCreateOrConnectWithoutGameInput = {
+    where: PlatformWhereUniqueInput
+    create: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput>
+  }
+
   export type GameUserCreateWithoutIgdbGameInput = {
     platform: string
     status?: $Enums.Status
@@ -19545,6 +20726,110 @@ export namespace Prisma {
   export type GameUserCreateManyIgdbGameInputEnvelope = {
     data: GameUserCreateManyIgdbGameInput | GameUserCreateManyIgdbGameInput[]
     skipDuplicates?: boolean
+  }
+
+  export type CoverUpsertWithoutGameInput = {
+    update: XOR<CoverUpdateWithoutGameInput, CoverUncheckedUpdateWithoutGameInput>
+    create: XOR<CoverCreateWithoutGameInput, CoverUncheckedCreateWithoutGameInput>
+    where?: CoverWhereInput
+  }
+
+  export type CoverUpdateToOneWithWhereWithoutGameInput = {
+    where?: CoverWhereInput
+    data: XOR<CoverUpdateWithoutGameInput, CoverUncheckedUpdateWithoutGameInput>
+  }
+
+  export type CoverUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CoverUncheckedUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    alpha_channel?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    animated?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    game_localization?: CoverUpdategame_localizationInput | number[]
+    height?: NullableIntFieldUpdateOperationsInput | number | null
+    image_id?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type GenreUpsertWithWhereUniqueWithoutGameInput = {
+    where: GenreWhereUniqueInput
+    update: XOR<GenreUpdateWithoutGameInput, GenreUncheckedUpdateWithoutGameInput>
+    create: XOR<GenreCreateWithoutGameInput, GenreUncheckedCreateWithoutGameInput>
+  }
+
+  export type GenreUpdateWithWhereUniqueWithoutGameInput = {
+    where: GenreWhereUniqueInput
+    data: XOR<GenreUpdateWithoutGameInput, GenreUncheckedUpdateWithoutGameInput>
+  }
+
+  export type GenreUpdateManyWithWhereWithoutGameInput = {
+    where: GenreScalarWhereInput
+    data: XOR<GenreUpdateManyMutationInput, GenreUncheckedUpdateManyWithoutGameInput>
+  }
+
+  export type GenreScalarWhereInput = {
+    AND?: GenreScalarWhereInput | GenreScalarWhereInput[]
+    OR?: GenreScalarWhereInput[]
+    NOT?: GenreScalarWhereInput | GenreScalarWhereInput[]
+    id?: IntFilter<"Genre"> | number
+    checksum?: StringFilter<"Genre"> | string
+    created_at?: DateTimeFilter<"Genre"> | Date | string
+    name?: StringFilter<"Genre"> | string
+    slug?: StringFilter<"Genre"> | string
+    updated_at?: DateTimeFilter<"Genre"> | Date | string
+    url?: StringFilter<"Genre"> | string
+  }
+
+  export type PlatformUpsertWithWhereUniqueWithoutGameInput = {
+    where: PlatformWhereUniqueInput
+    update: XOR<PlatformUpdateWithoutGameInput, PlatformUncheckedUpdateWithoutGameInput>
+    create: XOR<PlatformCreateWithoutGameInput, PlatformUncheckedCreateWithoutGameInput>
+  }
+
+  export type PlatformUpdateWithWhereUniqueWithoutGameInput = {
+    where: PlatformWhereUniqueInput
+    data: XOR<PlatformUpdateWithoutGameInput, PlatformUncheckedUpdateWithoutGameInput>
+  }
+
+  export type PlatformUpdateManyWithWhereWithoutGameInput = {
+    where: PlatformScalarWhereInput
+    data: XOR<PlatformUpdateManyMutationInput, PlatformUncheckedUpdateManyWithoutGameInput>
+  }
+
+  export type PlatformScalarWhereInput = {
+    AND?: PlatformScalarWhereInput | PlatformScalarWhereInput[]
+    OR?: PlatformScalarWhereInput[]
+    NOT?: PlatformScalarWhereInput | PlatformScalarWhereInput[]
+    id?: IntFilter<"Platform"> | number
+    abbreviation?: StringNullableFilter<"Platform"> | string | null
+    alternative_name?: StringNullableFilter<"Platform"> | string | null
+    checksum?: StringNullableFilter<"Platform"> | string | null
+    created_at?: DateTimeFilter<"Platform"> | Date | string
+    generation?: IntNullableFilter<"Platform"> | number | null
+    name?: StringNullableFilter<"Platform"> | string | null
+    platform_family?: IntNullableFilter<"Platform"> | number | null
+    platform_logo?: IntNullableFilter<"Platform"> | number | null
+    platform_type?: IntNullableFilter<"Platform"> | number | null
+    slug?: StringNullableFilter<"Platform"> | string | null
+    summary?: StringNullableFilter<"Platform"> | string | null
+    updated_at?: DateTimeFilter<"Platform"> | Date | string
+    url?: StringNullableFilter<"Platform"> | string | null
+    versions?: IntNullableListFilter<"Platform">
+    websites?: IntNullableListFilter<"Platform">
   }
 
   export type GameUserUpsertWithWhereUniqueWithoutIgdbGameInput = {
@@ -19921,12 +21206,679 @@ export namespace Prisma {
     UserSettings?: UserSettingsUncheckedUpdateOneWithoutUserNestedInput
   }
 
+  export type GameUpdateWithoutGenresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    cover?: CoverUpdateOneWithoutGameNestedInput
+    platforms?: PlatformUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateWithoutGenresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    platforms?: PlatformUncheckedUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUncheckedUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateManyWithoutGenresInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
+  export type GameCreateManyCoverInput = {
+    id: number
+    age_ratings?: GameCreateage_ratingsInput | number[]
+    aggregated_rating?: number | null
+    aggregated_rating_count?: number | null
+    alternative_names?: GameCreatealternative_namesInput | number[]
+    artworks?: GameCreateartworksInput | number[]
+    bundles?: GameCreatebundlesInput | number[]
+    checksum: string
+    collections?: GameCreatecollectionsInput | number[]
+    created_at: Date | string
+    dlcs?: GameCreatedlcsInput | number[]
+    expanded_games?: GameCreateexpanded_gamesInput | number[]
+    expansions?: GameCreateexpansionsInput | number[]
+    external_games?: GameCreateexternal_gamesInput | number[]
+    first_release_date?: number | null
+    forks?: GameCreateforksInput | number[]
+    franchise?: number | null
+    franchises?: GameCreatefranchisesInput | number[]
+    game_engines?: GameCreategame_enginesInput | number[]
+    game_localizations?: GameCreategame_localizationsInput | number[]
+    game_modes?: GameCreategame_modesInput | number[]
+    game_status?: number | null
+    game_type?: number | null
+    hypes?: number | null
+    involved_companies?: GameCreateinvolved_companiesInput | number[]
+    keywords?: GameCreatekeywordsInput | number[]
+    language_supports?: GameCreatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameCreatemultiplayer_modesInput | number[]
+    name: string
+    parent_game?: number | null
+    player_perspectives?: GameCreateplayer_perspectivesInput | number[]
+    ports?: GameCreateportsInput | number[]
+    rating?: number | null
+    rating_count?: number | null
+    release_dates?: GameCreaterelease_datesInput | number[]
+    remakes?: GameCreateremakesInput | number[]
+    remasters?: GameCreateremastersInput | number[]
+    screenshots?: GameCreatescreenshotsInput | number[]
+    similar_games?: GameCreatesimilar_gamesInput | number[]
+    slug: string
+    standalone_expansions?: GameCreatestandalone_expansionsInput | number[]
+    storyline?: string | null
+    summary?: string | null
+    tags?: GameCreatetagsInput | number[]
+    themes?: GameCreatethemesInput | number[]
+    total_rating?: number | null
+    total_rating_count?: number | null
+    updated_at: Date | string
+    url?: string | null
+    version_parent?: GameCreateversion_parentInput | number[]
+    version_title?: string | null
+    videos?: GameCreatevideosInput | number[]
+    websites?: GameCreatewebsitesInput | number[]
+  }
+
+  export type GameUpdateWithoutCoverInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    genres?: GenreUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateWithoutCoverInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    genres?: GenreUncheckedUpdateManyWithoutGameNestedInput
+    platforms?: PlatformUncheckedUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUncheckedUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateManyWithoutCoverInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
+  export type GameUpdateWithoutPlatformsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    cover?: CoverUpdateOneWithoutGameNestedInput
+    genres?: GenreUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateWithoutPlatformsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+    genres?: GenreUncheckedUpdateManyWithoutGameNestedInput
+    gameUser?: GameUserUncheckedUpdateManyWithoutIgdbGameNestedInput
+  }
+
+  export type GameUncheckedUpdateManyWithoutPlatformsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    age_ratings?: GameUpdateage_ratingsInput | number[]
+    aggregated_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    aggregated_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    alternative_names?: GameUpdatealternative_namesInput | number[]
+    artworks?: GameUpdateartworksInput | number[]
+    bundles?: GameUpdatebundlesInput | number[]
+    checksum?: StringFieldUpdateOperationsInput | string
+    collections?: GameUpdatecollectionsInput | number[]
+    coverId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    dlcs?: GameUpdatedlcsInput | number[]
+    expanded_games?: GameUpdateexpanded_gamesInput | number[]
+    expansions?: GameUpdateexpansionsInput | number[]
+    external_games?: GameUpdateexternal_gamesInput | number[]
+    first_release_date?: NullableIntFieldUpdateOperationsInput | number | null
+    forks?: GameUpdateforksInput | number[]
+    franchise?: NullableIntFieldUpdateOperationsInput | number | null
+    franchises?: GameUpdatefranchisesInput | number[]
+    game_engines?: GameUpdategame_enginesInput | number[]
+    game_localizations?: GameUpdategame_localizationsInput | number[]
+    game_modes?: GameUpdategame_modesInput | number[]
+    game_status?: NullableIntFieldUpdateOperationsInput | number | null
+    game_type?: NullableIntFieldUpdateOperationsInput | number | null
+    hypes?: NullableIntFieldUpdateOperationsInput | number | null
+    involved_companies?: GameUpdateinvolved_companiesInput | number[]
+    keywords?: GameUpdatekeywordsInput | number[]
+    language_supports?: GameUpdatelanguage_supportsInput | number[]
+    multiplayer_modes?: GameUpdatemultiplayer_modesInput | number[]
+    name?: StringFieldUpdateOperationsInput | string
+    parent_game?: NullableIntFieldUpdateOperationsInput | number | null
+    player_perspectives?: GameUpdateplayer_perspectivesInput | number[]
+    ports?: GameUpdateportsInput | number[]
+    rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    release_dates?: GameUpdaterelease_datesInput | number[]
+    remakes?: GameUpdateremakesInput | number[]
+    remasters?: GameUpdateremastersInput | number[]
+    screenshots?: GameUpdatescreenshotsInput | number[]
+    similar_games?: GameUpdatesimilar_gamesInput | number[]
+    slug?: StringFieldUpdateOperationsInput | string
+    standalone_expansions?: GameUpdatestandalone_expansionsInput | number[]
+    storyline?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: GameUpdatetagsInput | number[]
+    themes?: GameUpdatethemesInput | number[]
+    total_rating?: NullableFloatFieldUpdateOperationsInput | number | null
+    total_rating_count?: NullableIntFieldUpdateOperationsInput | number | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    version_parent?: GameUpdateversion_parentInput | number[]
+    version_title?: NullableStringFieldUpdateOperationsInput | string | null
+    videos?: GameUpdatevideosInput | number[]
+    websites?: GameUpdatewebsitesInput | number[]
+  }
+
   export type GameUserCreateManyIgdbGameInput = {
     id?: number
     platform: string
     status?: $Enums.Status
     notes?: string | null
     userId: string
+  }
+
+  export type GenreUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GenreUncheckedUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GenreUncheckedUpdateManyWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    checksum?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PlatformUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedUpdateWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
+  }
+
+  export type PlatformUncheckedUpdateManyWithoutGameInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_name?: NullableStringFieldUpdateOperationsInput | string | null
+    checksum?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    generation?: NullableIntFieldUpdateOperationsInput | number | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    platform_family?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_logo?: NullableIntFieldUpdateOperationsInput | number | null
+    platform_type?: NullableIntFieldUpdateOperationsInput | number | null
+    slug?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+    versions?: PlatformUpdateversionsInput | number[]
+    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type GameUserUpdateWithoutIgdbGameInput = {

@@ -16,12 +16,13 @@ const IGDBDeprecated: IGDBMappingType = {
 interface getIGDBCachedOrExternParams {
   ids: number[];
   type: IGDBMetaType;
+  mode?: "save" | "read";
 }
 
 export const getIGDBCachedOrExtern = async (
   params: getIGDBCachedOrExternParams
 ): Promise<IGDBMeta[]> => {
-  const { ids, type } = params;
+  const { ids, type, mode = "read" } = params;
   if (!ids || ids.length === 0) return [];
   const { cachedData, missing } = await getCached({ ids, type });
   let data: IGDBMeta[] = cachedData;
@@ -30,7 +31,9 @@ export const getIGDBCachedOrExtern = async (
       ids: missing,
       type,
     });
-    await saveToCache({ data: fetcheddata, type });
+    if (mode === "save") {
+      await saveToCache({ data: fetcheddata, type });
+    }
     data = data.concat(fetcheddata);
   }
   return data;

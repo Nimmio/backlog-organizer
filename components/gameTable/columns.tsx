@@ -1,19 +1,22 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { Edit, Eye } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
-import { Game } from "@/generated/prisma";
+import { Game, GameUser } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
 import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
 import SortIconButton from "../sortIconButton/sort-icon-button";
 import ColumnButton from "./columnButton";
 
-export const columns: ColumnDef<Game>[] = [
+type GameUserWithIgdb = GameUser & {
+  igdbGame: Game;
+};
+
+export const columns: ColumnDef<GameUserWithIgdb>[] = [
   {
     accessorKey: "name",
+    accessorFn: (row) => row.igdbGame.name,
     header: () => (
       <>
         Name
@@ -45,7 +48,8 @@ export const columns: ColumnDef<Game>[] = [
     },
   },
   {
-    accessorKey: "genre",
+    accessorKey: "genres",
+    accessorFn: (row) => row.igdbGame.genres,
     header: () => (
       <>
         Genre

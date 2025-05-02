@@ -4,7 +4,7 @@ import SearchInput from "@/components/searchInput/searchInput";
 import { Button } from "@/components/ui/button";
 import { Status } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
-import { ensureString, getValueFromSearchParamsOrNull } from "@/lib/utils";
+import { getValueFromSearchParamsOrNull } from "@/lib/utils";
 import Link from "next/link";
 import { getCurrentUserId } from "../actions";
 import { Plus } from "lucide-react";
@@ -57,11 +57,18 @@ const Home = async ({
   };
   const currentUserId = await getCurrentUserId();
   const games = await prisma.gameUser.findMany({
-    orderBy: validateSortObjectOrEmptyObject(sort),
+    include: {
+      igdbGame: true,
+    },
     where: {
       status: { in: getFilterArray() as Status[] },
-      name: { contains: ensureString(search) || "" },
       userId: currentUserId || "",
+      igdbGame: {
+        name: {
+          contains: (search as string) || "",
+          mode: "insensitive",
+        },
+      },
     },
   });
 

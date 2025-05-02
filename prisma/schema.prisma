@@ -63,6 +63,7 @@ model Genre {
   slug       String
   updated_at DateTime
   url        String
+  game Game[]
 }
 
 model Cover {
@@ -70,13 +71,13 @@ model Cover {
   alpha_channel       Boolean?
   animated            Boolean?
   checksum            String?
-  game                Int?
   game_localization   Int[]
   height              Int?
   image_id            String?
   url                 String?
   width               Int?
   downloaded_filename String?
+  game Game[]
 }
 
 model Platform {
@@ -96,6 +97,7 @@ model Platform {
   url              String?
   versions         Int[]
   websites         Int[]
+  game Game[]
 }
 
 model Game {
@@ -109,7 +111,8 @@ model Game {
   bundles                 Int[]
   checksum                String
   collections             Int[]
-  cover                   Int?
+  cover                   Cover? @relation(fields:[coverId], references: [id])
+  coverId                 Int?
   created_at              DateTime
   dlcs                    Int[]
   expanded_games          Int[]
@@ -124,7 +127,7 @@ model Game {
   game_modes              Int[]
   game_status             Int?
   game_type               Int?
-  genres                  Int[]
+  genres                  Genre[]
   hypes                   Int?
   involved_companies      Int[]
   keywords                Int[]
@@ -132,7 +135,7 @@ model Game {
   multiplayer_modes       Int[]
   name                    String
   parent_game             Int?
-  platforms               Int[]
+  platforms               Platform[]
   player_perspectives     Int[]
   ports                   Int[]
   rating                  Float?
