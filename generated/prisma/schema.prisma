@@ -66,16 +66,17 @@ model Genre {
 }
 
 model Cover {
-  id                Int      @id
-  alpha_channel     Boolean?
-  animated          Boolean?
-  checksum          String?
-  game              Int?
-  game_localization Int[]
-  height            Int?
-  image_id          String?
-  url               String?
-  width             Int?
+  id                  Int      @id
+  alpha_channel       Boolean?
+  animated            Boolean?
+  checksum            String?
+  game                Int?
+  game_localization   Int[]
+  height              Int?
+  image_id            String?
+  url                 String?
+  width               Int?
+  downloaded_filename String?
 }
 
 model Platform {

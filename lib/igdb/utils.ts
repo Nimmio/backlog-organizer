@@ -99,22 +99,36 @@ export const queryBuilder = async (params: queryBuilderParams) => {
   return data;
 };
 
-export const downloadImage = (url: string, filename: string) => {
-  fetch(url, { mode: "no-cors" })
-    .then((response) => response.blob())
-    .then((blob) => {
-      saveImage(blob, filename);
-    });
+export const downloadImage = async (url: string): Promise<Blob> => {
+  console.log("url", url);
+
+  const newURl = url.replace("t_thumb", "t_cover_big_2x");
+
+  const response = await fetch(newURl, { mode: "no-cors" });
+  return await response.blob();
 };
 
-export const saveImage = async (blob: Blob, filename: string) => {
+interface SaveImageResponse {
+  success: boolean;
+  error?: string;
+}
+
+export const saveImage = async (
+  blob: Blob,
+  filename: string
+): Promise<SaveImageResponse> => {
   const buffer = Buffer.from(await blob.arrayBuffer());
   try {
     await writeFile(
       path.join(process.cwd(), "public/covercache/" + filename),
       buffer
     );
+    return { success: true };
   } catch (error) {
     console.log("Error occured ", error);
+    return {
+      success: false,
+      error: error as string,
+    };
   }
 };

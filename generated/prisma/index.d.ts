@@ -6167,6 +6167,7 @@ export namespace Prisma {
     image_id: string | null
     url: string | null
     width: number | null
+    downloaded_filename: string | null
   }
 
   export type CoverMaxAggregateOutputType = {
@@ -6179,6 +6180,7 @@ export namespace Prisma {
     image_id: string | null
     url: string | null
     width: number | null
+    downloaded_filename: string | null
   }
 
   export type CoverCountAggregateOutputType = {
@@ -6192,6 +6194,7 @@ export namespace Prisma {
     image_id: number
     url: number
     width: number
+    downloaded_filename: number
     _all: number
   }
 
@@ -6222,6 +6225,7 @@ export namespace Prisma {
     image_id?: true
     url?: true
     width?: true
+    downloaded_filename?: true
   }
 
   export type CoverMaxAggregateInputType = {
@@ -6234,6 +6238,7 @@ export namespace Prisma {
     image_id?: true
     url?: true
     width?: true
+    downloaded_filename?: true
   }
 
   export type CoverCountAggregateInputType = {
@@ -6247,6 +6252,7 @@ export namespace Prisma {
     image_id?: true
     url?: true
     width?: true
+    downloaded_filename?: true
     _all?: true
   }
 
@@ -6347,6 +6353,7 @@ export namespace Prisma {
     image_id: string | null
     url: string | null
     width: number | null
+    downloaded_filename: string | null
     _count: CoverCountAggregateOutputType | null
     _avg: CoverAvgAggregateOutputType | null
     _sum: CoverSumAggregateOutputType | null
@@ -6379,6 +6386,7 @@ export namespace Prisma {
     image_id?: boolean
     url?: boolean
     width?: boolean
+    downloaded_filename?: boolean
   }, ExtArgs["result"]["cover"]>
 
   export type CoverSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6392,6 +6400,7 @@ export namespace Prisma {
     image_id?: boolean
     url?: boolean
     width?: boolean
+    downloaded_filename?: boolean
   }, ExtArgs["result"]["cover"]>
 
   export type CoverSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6405,6 +6414,7 @@ export namespace Prisma {
     image_id?: boolean
     url?: boolean
     width?: boolean
+    downloaded_filename?: boolean
   }, ExtArgs["result"]["cover"]>
 
   export type CoverSelectScalar = {
@@ -6418,9 +6428,10 @@ export namespace Prisma {
     image_id?: boolean
     url?: boolean
     width?: boolean
+    downloaded_filename?: boolean
   }
 
-  export type CoverOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "alpha_channel" | "animated" | "checksum" | "game" | "game_localization" | "height" | "image_id" | "url" | "width", ExtArgs["result"]["cover"]>
+  export type CoverOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "alpha_channel" | "animated" | "checksum" | "game" | "game_localization" | "height" | "image_id" | "url" | "width" | "downloaded_filename", ExtArgs["result"]["cover"]>
 
   export type $CoverPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Cover"
@@ -6436,6 +6447,7 @@ export namespace Prisma {
       image_id: string | null
       url: string | null
       width: number | null
+      downloaded_filename: string | null
     }, ExtArgs["result"]["cover"]>
     composites: {}
   }
@@ -6869,6 +6881,7 @@ export namespace Prisma {
     readonly image_id: FieldRef<"Cover", 'String'>
     readonly url: FieldRef<"Cover", 'String'>
     readonly width: FieldRef<"Cover", 'Int'>
+    readonly downloaded_filename: FieldRef<"Cover", 'String'>
   }
     
 
@@ -14679,7 +14692,8 @@ export namespace Prisma {
     height: 'height',
     image_id: 'image_id',
     url: 'url',
-    width: 'width'
+    width: 'width',
+    downloaded_filename: 'downloaded_filename'
   };
 
   export type CoverScalarFieldEnum = (typeof CoverScalarFieldEnum)[keyof typeof CoverScalarFieldEnum]
@@ -15196,6 +15210,7 @@ export namespace Prisma {
     image_id?: StringNullableFilter<"Cover"> | string | null
     url?: StringNullableFilter<"Cover"> | string | null
     width?: IntNullableFilter<"Cover"> | number | null
+    downloaded_filename?: StringNullableFilter<"Cover"> | string | null
   }
 
   export type CoverOrderByWithRelationInput = {
@@ -15209,6 +15224,7 @@ export namespace Prisma {
     image_id?: SortOrderInput | SortOrder
     url?: SortOrderInput | SortOrder
     width?: SortOrderInput | SortOrder
+    downloaded_filename?: SortOrderInput | SortOrder
   }
 
   export type CoverWhereUniqueInput = Prisma.AtLeast<{
@@ -15225,6 +15241,7 @@ export namespace Prisma {
     image_id?: StringNullableFilter<"Cover"> | string | null
     url?: StringNullableFilter<"Cover"> | string | null
     width?: IntNullableFilter<"Cover"> | number | null
+    downloaded_filename?: StringNullableFilter<"Cover"> | string | null
   }, "id">
 
   export type CoverOrderByWithAggregationInput = {
@@ -15238,6 +15255,7 @@ export namespace Prisma {
     image_id?: SortOrderInput | SortOrder
     url?: SortOrderInput | SortOrder
     width?: SortOrderInput | SortOrder
+    downloaded_filename?: SortOrderInput | SortOrder
     _count?: CoverCountOrderByAggregateInput
     _avg?: CoverAvgOrderByAggregateInput
     _max?: CoverMaxOrderByAggregateInput
@@ -15259,6 +15277,7 @@ export namespace Prisma {
     image_id?: StringNullableWithAggregatesFilter<"Cover"> | string | null
     url?: StringNullableWithAggregatesFilter<"Cover"> | string | null
     width?: IntNullableWithAggregatesFilter<"Cover"> | number | null
+    downloaded_filename?: StringNullableWithAggregatesFilter<"Cover"> | string | null
   }
 
   export type PlatformWhereInput = {
@@ -16213,6 +16232,7 @@ export namespace Prisma {
     image_id?: string | null
     url?: string | null
     width?: number | null
+    downloaded_filename?: string | null
   }
 
   export type CoverUncheckedCreateInput = {
@@ -16226,6 +16246,7 @@ export namespace Prisma {
     image_id?: string | null
     url?: string | null
     width?: number | null
+    downloaded_filename?: string | null
   }
 
   export type CoverUpdateInput = {
@@ -16239,6 +16260,7 @@ export namespace Prisma {
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CoverUncheckedUpdateInput = {
@@ -16252,6 +16274,7 @@ export namespace Prisma {
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CoverCreateManyInput = {
@@ -16265,6 +16288,7 @@ export namespace Prisma {
     image_id?: string | null
     url?: string | null
     width?: number | null
+    downloaded_filename?: string | null
   }
 
   export type CoverUpdateManyMutationInput = {
@@ -16278,6 +16302,7 @@ export namespace Prisma {
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CoverUncheckedUpdateManyInput = {
@@ -16291,6 +16316,7 @@ export namespace Prisma {
     image_id?: NullableStringFieldUpdateOperationsInput | string | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
     width?: NullableIntFieldUpdateOperationsInput | number | null
+    downloaded_filename?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PlatformCreateInput = {
@@ -17531,6 +17557,7 @@ export namespace Prisma {
     image_id?: SortOrder
     url?: SortOrder
     width?: SortOrder
+    downloaded_filename?: SortOrder
   }
 
   export type CoverAvgOrderByAggregateInput = {
@@ -17551,6 +17578,7 @@ export namespace Prisma {
     image_id?: SortOrder
     url?: SortOrder
     width?: SortOrder
+    downloaded_filename?: SortOrder
   }
 
   export type CoverMinOrderByAggregateInput = {
@@ -17563,6 +17591,7 @@ export namespace Prisma {
     image_id?: SortOrder
     url?: SortOrder
     width?: SortOrder
+    downloaded_filename?: SortOrder
   }
 
   export type CoverSumOrderByAggregateInput = {

@@ -85,13 +85,13 @@ const getFromExternal = async (
     let newEntry = { ...entry };
     if (entry.hasOwnProperty("created_at")) {
       newEntry = {
-        ...entry,
+        ...newEntry,
         created_at: fromUnixTime(entry.created_at),
       };
     }
     if (entry.hasOwnProperty("updated_at")) {
       newEntry = {
-        ...entry,
+        ...newEntry,
         updated_at: fromUnixTime(entry.updated_at),
       };
     }

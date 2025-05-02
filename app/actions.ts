@@ -1,11 +1,16 @@
 "use server";
 
 import { auth } from "@/auth";
-import { Game } from "@/generated/prisma";
+import { Cover, Game } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { getGenres } from "@/lib/igdb/genre";
 import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
-import { downloadImage, queryBuilder, RequestUrls } from "@/lib/igdb/utils";
+import {
+  downloadImage,
+  queryBuilder,
+  RequestUrls,
+  saveImage,
+} from "@/lib/igdb/utils";
 import prisma from "@/lib/prisma";
 import { GameField } from "@/types/igdb/game";
 import { revalidatePath } from "next/cache";
@@ -91,8 +96,8 @@ export const getGameDetails = async (id: number) => {
     ...game,
     platforms: (await getPlatformsForIdsAsStrings(game.platforms)) as string[],
     genres: (await getGenresForIdsAsStrings(game.genres)) as string[],
+    cover: await getCoverForId(game.cover),
   };
-  getCoverForId(game.cover);
   return game;
 };
 
@@ -116,15 +121,26 @@ export const getPlatformsForIdsAsStrings = async (
 };
 
 export const getCoverForId = async (id: number) => {
-  const cover = await getIGDBCachedOrExtern({
+  const cover = (await getIGDBCachedOrExtern({
     ids: [id],
     type: "cover",
-  });
+  })) as Cover[];
   const url = cover[0].url;
-  console.log("url", url);
+  if (cover[0].downloaded_filename) return cover[0].downloaded_filename;
   if (url) {
     const filename = /(([^\/]+$))/.exec(url);
-    console.log(filename[0]);
-    downloadImage("https:" + url, filename[0]);
+    const blob = await downloadImage("https:" + url);
+    const saveImageResponse = await saveImage(blob, filename[0]);
+    if (saveImageResponse.success) {
+      const updatedCover = await prisma.cover.update({
+        where: {
+          id: id,
+        },
+        data: {
+          downloaded_filename: filename[0],
+        },
+      });
+      return updatedCover.downloaded_filename;
+    }
   }
 };

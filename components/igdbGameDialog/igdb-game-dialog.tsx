@@ -20,6 +20,7 @@ interface GameDetails {
   genres: string[];
   platforms: string[];
   summary: string;
+  cover: string;
 }
 
 const IgdbGameDialog = () => {
@@ -142,6 +143,9 @@ const IgdbGameDialog = () => {
           genres={gameDetails?.genres || undefined}
           onBack={() => handleBackButtonClick()}
           platforms={gameDetails?.platforms || undefined}
+          coverImage={
+            gameDetails?.cover ? "/covercache/" + gameDetails?.cover : undefined
+          }
         />
       )}
     </>

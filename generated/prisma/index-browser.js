@@ -161,7 +161,8 @@ exports.Prisma.CoverScalarFieldEnum = {
   height: 'height',
   image_id: 'image_id',
   url: 'url',
-  width: 'width'
+  width: 'width',
+  downloaded_filename: 'downloaded_filename'
 };
 
 exports.Prisma.PlatformScalarFieldEnum = {
