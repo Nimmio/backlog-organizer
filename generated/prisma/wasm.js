@@ -119,13 +119,11 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.GameUserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   platform: 'platform',
   status: 'status',
-  genre: 'genre',
-  releaseDate: 'releaseDate',
   notes: 'notes',
-  userId: 'userId'
+  userId: 'userId',
+  igdbGameId: 'igdbGameId'
 };
 
 exports.Prisma.UserSettingsScalarFieldEnum = {

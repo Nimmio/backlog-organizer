@@ -3,7 +3,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import Image from "next/image";
 
 interface GameProps {
@@ -14,6 +14,7 @@ interface GameProps {
   description: string | undefined;
   onBack?: () => void;
   coverImage?: string;
+  onAdd?: () => void;
 }
 
 export default function GameDetails(params: GameProps) {
@@ -25,6 +26,7 @@ export default function GameDetails(params: GameProps) {
     releaseDate,
     onBack,
     coverImage,
+    onAdd,
   } = params;
   return (
     <div className="w-full bg-background">
@@ -39,7 +41,6 @@ export default function GameDetails(params: GameProps) {
           Back
         </Button>
       </div>
-
       <div className="flex flex-col md:flex-row gap-6 p-6">
         {/* Game Cover Image */}
         <div className="w-full md:w-1/3 flex-shrink-0">
@@ -103,6 +104,9 @@ export default function GameDetails(params: GameProps) {
           </div>
         </div>
       </div>
+      <Button className="w-full" size="lg" onClick={onAdd}>
+        <Plus className="mr-2 h-4 w-4" /> Add Game
+      </Button>
     </div>
   );
 }

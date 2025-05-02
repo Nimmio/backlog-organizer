@@ -18,18 +18,13 @@ import { headers } from "next/headers";
 import { platform } from "os";
 
 interface createGameProps {
-  name: string[] | number[];
-  platform: string[] | number[];
+  igdbId: number;
 }
 
 export const createGame = async (props: createGameProps): Promise<Game> => {
+  const { igdbId } = props;
   const userId = await getCurrentUserId();
-  return await prisma.gameUser.create({
-    data: {
-      ...props,
-      userId,
-    },
-  });
+  return await prisma.gameUser.create({});
 };
 
 interface editGameProps extends createGameProps {

@@ -104,6 +104,8 @@ const IgdbGameDialog = () => {
     setGameDetails(undefined);
   };
 
+  const handleAdd = () => {};
+
   const contentSearch = (
     <>
       <Input
@@ -143,6 +145,7 @@ const IgdbGameDialog = () => {
           genres={gameDetails?.genres || undefined}
           onBack={() => handleBackButtonClick()}
           platforms={gameDetails?.platforms || undefined}
+          onAdd={() => handleAdd()}
           coverImage={
             gameDetails?.cover ? "/covercache/" + gameDetails?.cover : undefined
           }
