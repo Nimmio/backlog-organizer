@@ -104,7 +104,7 @@ const IgdbGameDialog = () => {
     setGameDetails(undefined);
   };
 
-  const handleAdd = (id: number) => {
+  const handleAdd = () => {
     createGame({
       igdbId: selectedGame?.id,
     });

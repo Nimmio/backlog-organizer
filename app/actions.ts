@@ -20,13 +20,12 @@ interface createGameProps {
 }
 
 interface IConnectOrCreate {
-  create: any;
-  where: any;
+  create: unknown;
+  where: unknown;
 }
 
 export const createGame = async (props: createGameProps): Promise<GameUser> => {
   const { igdbId } = props;
-  const userId = await getCurrentUserId();
 
   const igdbGame = (
     await getIGDBCachedOrExtern({ ids: [igdbId], type: "game" })

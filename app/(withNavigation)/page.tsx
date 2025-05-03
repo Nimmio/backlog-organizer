@@ -11,10 +11,6 @@ import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import IgdbGameDialog from "@/components/igdbGameDialog/igdb-game-dialog";
 
-interface KeyStringObject {
-  [key: string]: string;
-}
-
 const Home = async ({
   searchParams,
 }: {
@@ -34,27 +30,16 @@ const Home = async ({
     return returnArray;
   };
 
-  const sort = (await getValueFromSearchParamsOrNull({
-    searchParams: searchParams,
-    key: "sort",
-  })) as KeyStringObject;
+  // const sort = (await getValueFromSearchParamsOrNull({
+  //   searchParams: searchParams,
+  //   key: "sort",
+  // })) as KeyStringObject;
 
   const search = await getValueFromSearchParamsOrNull({
     searchParams: searchParams,
     key: "gameSearch",
   });
 
-  const validateSortObjectOrEmptyObject = (
-    input: KeyStringObject | null
-  ): object => {
-    if (!input) return {};
-    if (
-      Object.keys(input).some((key) => !["asc", "desc"].includes(input[key]))
-    ) {
-      return {};
-    }
-    return input;
-  };
   const currentUserId = await getCurrentUserId();
   const games = await prisma.gameUser.findMany({
     include: {

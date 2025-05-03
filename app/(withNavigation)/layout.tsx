@@ -13,7 +13,6 @@ import { auth } from "@/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { getCurrentUserSettings } from "@/lib/user";
 import ThemeSetter from "@/components/themeSetter/ThemeSetter";
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -114,7 +114,7 @@ interface saveToCacheParams {
 }
 
 const saveToCache = async (params: saveToCacheParams) => {
-  const { data, type } = params;
+  const { type } = params;
   const model = prisma[type];
   await model.createMany({
     data: cleanedData,

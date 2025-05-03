@@ -1,12 +1,10 @@
 "use client";
 
 import React from "react";
-import { Button } from "../ui/button";
 import ConfirmPopover from "../confirmPopover/confirm-popover";
 import { deleteGame } from "@/app/actions";
 import { useRouter } from "next/navigation";
 import { Trash } from "lucide-react";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 import AppTooltip from "../tooltip/tooltip";
 
 interface DeleteGamePopoverProps {
