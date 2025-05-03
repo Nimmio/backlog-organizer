@@ -3,17 +3,17 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye } from "lucide-react";
 import DeleteGamePopover from "../deleteGamePopover/delete-game-popover";
-import { Game, GameUser } from "@/generated/prisma";
+import { Game, GameStatus } from "@/generated/prisma";
 import { statusTranslation } from "@/lib/game";
 import GameStatusFilterDropdown from "../gameStatusFilterDropdown/game-status-filter-dropdown";
 import SortIconButton from "../sortIconButton/sort-icon-button";
 import ColumnButton from "./columnButton";
 
-type GameUserWithIgdb = GameUser & {
+type GameStatusWithIgdb = GameStatus & {
   igdbGame: Game;
 };
 
-export const columns: ColumnDef<GameUserWithIgdb>[] = [
+export const columns: ColumnDef<GameStatusWithIgdb>[] = [
   {
     accessorKey: "name",
     accessorFn: (row) => row.igdbGame.name,

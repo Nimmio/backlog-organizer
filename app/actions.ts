@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/auth";
-import { Cover, Game, GameUser, Genre, Platform } from "@/generated/prisma";
+import { Cover, Game, GameStatus, Genre, Platform } from "@/generated/prisma";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { getIGDBCachedOrExtern } from "@/lib/igdb/meta";
 import {
@@ -20,8 +20,8 @@ interface createGameProps {
 }
 
 interface IConnectOrCreate {
-  create: unknown;
-  where: unknown;
+  create: any;
+  where: any;
 }
 
 export const createGame = async (props: createGameProps): Promise<Game> => {
@@ -71,7 +71,7 @@ export const createGame = async (props: createGameProps): Promise<Game> => {
       ...igdbGame,
       genres: { connectOrCreate: genresConnectOrCreate },
       platforms: { connectOrCreate: platformConnectOrCreate },
-      gameUser: {
+      gameStatus: {
         create: {
           platform: "?",
           userId: await getCurrentUserId(),
@@ -79,7 +79,7 @@ export const createGame = async (props: createGameProps): Promise<Game> => {
       },
     },
     update: {
-      gameUser: {
+      gameStatus: {
         create: {
           platform: "!",
           userId: await getCurrentUserId(),
@@ -90,23 +90,15 @@ export const createGame = async (props: createGameProps): Promise<Game> => {
       id: igdbGame.id,
     },
   });
-
-  // return await prisma.gameUser.create({
-  //   data: {
-  //     platform: "?",
-  //     igdbGameId: igdbId,
-  //     userId,
-  //   },
-  // });
 };
 
 interface editGameProps extends createGameProps {
   id: number;
 }
 
-export const editGame = async (props: editGameProps): Promise<Game> => {
+export const editGame = async (props: editGameProps): Promise<GameStatus> => {
   const { id } = props;
-  return await prisma.gameUser.update({
+  return await prisma.gameStatus.update({
     data: {
       ...props,
     },
@@ -120,9 +112,11 @@ interface deleteGameProps {
   id: number;
 }
 
-export const deleteGame = async (props: deleteGameProps): Promise<Game> => {
+export const deleteGame = async (
+  props: deleteGameProps
+): Promise<GameStatus> => {
   const { id } = props;
-  const game = await prisma.gameUser.delete({
+  const game = await prisma.gameStatus.delete({
     where: {
       id,
     },

@@ -117,7 +117,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.GameUserScalarFieldEnum = {
+exports.Prisma.GameStatusScalarFieldEnum = {
   id: 'id',
   platform: 'platform',
   status: 'status',
@@ -312,7 +312,7 @@ exports.Theme = exports.$Enums.Theme = {
 };
 
 exports.Prisma.ModelName = {
-  GameUser: 'GameUser',
+  GameStatus: 'GameStatus',
   UserSettings: 'UserSettings',
   IGDBAuth: 'IGDBAuth',
   Genre: 'Genre',

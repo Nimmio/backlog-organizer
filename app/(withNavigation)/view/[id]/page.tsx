@@ -14,7 +14,7 @@ import Link from "next/link";
 const View = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
-  const game = await prisma.gameUser.findFirst({
+  const game = await prisma.gameStatus.findFirst({
     where: { id: +id },
   });
 
