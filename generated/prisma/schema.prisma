@@ -17,7 +17,7 @@ datasource db {
 model GameStatus {
   id         Int     @id @default(autoincrement())
   platform   String
-  status     Status  @default(TO_PLAY)
+  status     Status  @default(BACKLOG)
   notes      String?
   user       User    @relation(fields: [userId], references: [id])
   userId     String
@@ -28,10 +28,11 @@ model GameStatus {
 enum Status {
   WANT_TO_BUY
   PREORDER
-  TO_PLAY
+  BACKLOG
   PLAYING
   COMPLETED
   DROPPED
+  ON_HOLD
 }
 
 model UserSettings {

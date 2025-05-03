@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import AppPage from "@/components/layout/page/app-page";
 import { getGamesForDashboard } from "./actions";
 import GameDashboard from "@/components/gameDashboard/game-dashboard";
+import { GameDashboardStoreProvider } from "@/providers/gamedashboard-store-provider";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -22,7 +23,9 @@ const Home = async ({
   return (
     <AppPage titel="Dashboard" breadcrumbs={[{ title: "Games" }]}>
       <IgdbGameDialog />
-      <GameDashboard />
+      <GameDashboardStoreProvider>
+        <GameDashboard />
+      </GameDashboardStoreProvider>
     </AppPage>
   );
 };

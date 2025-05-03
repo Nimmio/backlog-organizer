@@ -40,6 +40,7 @@ const Status = {
 type TStatus = typeof Status;
 
 export type TStatusKey = keyof TStatus;
+export type TStatusKeyWithAll = TStatusKey | "All";
 
 export const getMultipleStatusKeysTranslated = (): string[] => {
   return Object.keys(Status).map((key) =>

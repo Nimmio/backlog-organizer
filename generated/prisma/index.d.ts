@@ -76,10 +76,11 @@ export namespace $Enums {
   export const Status: {
   WANT_TO_BUY: 'WANT_TO_BUY',
   PREORDER: 'PREORDER',
-  TO_PLAY: 'TO_PLAY',
+  BACKLOG: 'BACKLOG',
   PLAYING: 'PLAYING',
   COMPLETED: 'COMPLETED',
-  DROPPED: 'DROPPED'
+  DROPPED: 'DROPPED',
+  ON_HOLD: 'ON_HOLD'
 };
 
 export type Status = (typeof Status)[keyof typeof Status]

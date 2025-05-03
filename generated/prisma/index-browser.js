@@ -299,10 +299,11 @@ exports.Prisma.NullsOrder = {
 exports.Status = exports.$Enums.Status = {
   WANT_TO_BUY: 'WANT_TO_BUY',
   PREORDER: 'PREORDER',
-  TO_PLAY: 'TO_PLAY',
+  BACKLOG: 'BACKLOG',
   PLAYING: 'PLAYING',
   COMPLETED: 'COMPLETED',
-  DROPPED: 'DROPPED'
+  DROPPED: 'DROPPED',
+  ON_HOLD: 'ON_HOLD'
 };
 
 exports.Theme = exports.$Enums.Theme = {
