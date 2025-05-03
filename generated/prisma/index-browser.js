@@ -117,21 +117,123 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.GameScalarFieldEnum = {
+exports.Prisma.GameUserScalarFieldEnum = {
   id: 'id',
-  name: 'name',
   platform: 'platform',
   status: 'status',
-  genre: 'genre',
-  releaseDate: 'releaseDate',
   notes: 'notes',
-  userId: 'userId'
+  userId: 'userId',
+  igdbGameId: 'igdbGameId'
 };
 
 exports.Prisma.UserSettingsScalarFieldEnum = {
   id: 'id',
   theme: 'theme',
   userId: 'userId'
+};
+
+exports.Prisma.IGDBAuthScalarFieldEnum = {
+  id: 'id',
+  access_token: 'access_token',
+  expires: 'expires',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GenreScalarFieldEnum = {
+  id: 'id',
+  checksum: 'checksum',
+  created_at: 'created_at',
+  name: 'name',
+  slug: 'slug',
+  updated_at: 'updated_at',
+  url: 'url'
+};
+
+exports.Prisma.CoverScalarFieldEnum = {
+  id: 'id',
+  alpha_channel: 'alpha_channel',
+  animated: 'animated',
+  checksum: 'checksum',
+  game_localization: 'game_localization',
+  height: 'height',
+  image_id: 'image_id',
+  url: 'url',
+  width: 'width',
+  downloaded_filename: 'downloaded_filename'
+};
+
+exports.Prisma.PlatformScalarFieldEnum = {
+  id: 'id',
+  abbreviation: 'abbreviation',
+  alternative_name: 'alternative_name',
+  checksum: 'checksum',
+  created_at: 'created_at',
+  generation: 'generation',
+  name: 'name',
+  platform_family: 'platform_family',
+  platform_logo: 'platform_logo',
+  platform_type: 'platform_type',
+  slug: 'slug',
+  summary: 'summary',
+  updated_at: 'updated_at',
+  url: 'url'
+};
+
+exports.Prisma.GameScalarFieldEnum = {
+  id: 'id',
+  age_ratings: 'age_ratings',
+  aggregated_rating: 'aggregated_rating',
+  aggregated_rating_count: 'aggregated_rating_count',
+  alternative_names: 'alternative_names',
+  artworks: 'artworks',
+  bundles: 'bundles',
+  checksum: 'checksum',
+  collections: 'collections',
+  coverId: 'coverId',
+  created_at: 'created_at',
+  dlcs: 'dlcs',
+  expanded_games: 'expanded_games',
+  expansions: 'expansions',
+  external_games: 'external_games',
+  first_release_date: 'first_release_date',
+  forks: 'forks',
+  franchise: 'franchise',
+  franchises: 'franchises',
+  game_engines: 'game_engines',
+  game_localizations: 'game_localizations',
+  game_modes: 'game_modes',
+  game_status: 'game_status',
+  game_type: 'game_type',
+  hypes: 'hypes',
+  involved_companies: 'involved_companies',
+  keywords: 'keywords',
+  language_supports: 'language_supports',
+  multiplayer_modes: 'multiplayer_modes',
+  name: 'name',
+  parent_game: 'parent_game',
+  player_perspectives: 'player_perspectives',
+  ports: 'ports',
+  rating: 'rating',
+  rating_count: 'rating_count',
+  release_dates: 'release_dates',
+  remakes: 'remakes',
+  remasters: 'remasters',
+  screenshots: 'screenshots',
+  similar_games: 'similar_games',
+  slug: 'slug',
+  standalone_expansions: 'standalone_expansions',
+  storyline: 'storyline',
+  summary: 'summary',
+  tags: 'tags',
+  themes: 'themes',
+  total_rating: 'total_rating',
+  total_rating_count: 'total_rating_count',
+  updated_at: 'updated_at',
+  url: 'url',
+  version_parent: 'version_parent',
+  version_title: 'version_title',
+  videos: 'videos',
+  websites: 'websites'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -210,8 +312,13 @@ exports.Theme = exports.$Enums.Theme = {
 };
 
 exports.Prisma.ModelName = {
-  Game: 'Game',
+  GameUser: 'GameUser',
   UserSettings: 'UserSettings',
+  IGDBAuth: 'IGDBAuth',
+  Genre: 'Genre',
+  Cover: 'Cover',
+  Platform: 'Platform',
+  Game: 'Game',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

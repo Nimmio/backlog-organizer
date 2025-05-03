@@ -14,16 +14,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Game {
-  id          Int       @id @default(autoincrement())
-  name        String
-  platform    String
-  status      Status    @default(TO_PLAY)
-  genre       String?
-  releaseDate DateTime?
-  notes       String?
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
+model GameUser {
+  id         Int     @id @default(autoincrement())
+  platform   String
+  status     Status  @default(TO_PLAY)
+  notes      String?
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  igdbGame   Game?   @relation(fields: [igdbGameId], references: [id])
+  igdbGameId Int?
 }
 
 enum Status {
@@ -37,7 +36,7 @@ enum Status {
 
 model UserSettings {
   id     Int    @id @default(autoincrement())
-  theme  Theme
+  theme  Theme  @default(SYSTEM)
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
 }
@@ -46,6 +45,118 @@ enum Theme {
   LIGHT
   DARK
   SYSTEM
+}
+
+model IGDBAuth {
+  id           Int       @id @default(autoincrement())
+  access_token String?
+  expires      DateTime?
+  updatedAt    DateTime
+}
+
+model Genre {
+  id         Int      @id @unique
+  checksum   String
+  created_at DateTime
+  name       String
+  slug       String
+  updated_at DateTime
+  url        String
+  game       Game[]
+}
+
+model Cover {
+  id                  Int      @id @unique
+  alpha_channel       Boolean?
+  animated            Boolean?
+  checksum            String?
+  game_localization   Int[]
+  height              Int?
+  image_id            String?
+  url                 String?
+  width               Int?
+  downloaded_filename String?
+  game                Game[]
+}
+
+model Platform {
+  id               Int      @id @unique
+  abbreviation     String?
+  alternative_name String?
+  checksum         String?
+  created_at       DateTime
+  generation       Int?
+  name             String?
+  platform_family  Int?
+  platform_logo    Int?
+  platform_type    Int?
+  slug             String?
+  summary          String?
+  updated_at       DateTime
+  url              String?
+  game             Game[]
+}
+
+model Game {
+  id Int @id @unique
+
+  age_ratings             Int[]
+  aggregated_rating       Float?
+  aggregated_rating_count Int?
+  alternative_names       Int[]
+  artworks                Int[]
+  bundles                 Int[]
+  checksum                String
+  collections             Int[]
+  cover                   Cover?     @relation(fields: [coverId], references: [id])
+  coverId                 Int?
+  created_at              DateTime
+  dlcs                    Int[]
+  expanded_games          Int[]
+  expansions              Int[]
+  external_games          Int[]
+  first_release_date      Int?
+  forks                   Int[]
+  franchise               Int?
+  franchises              Int[]
+  game_engines            Int[]
+  game_localizations      Int[]
+  game_modes              Int[]
+  game_status             Int?
+  game_type               Int?
+  genres                  Genre[]
+  hypes                   Int?
+  involved_companies      Int[]
+  keywords                Int[]
+  language_supports       Int[]
+  multiplayer_modes       Int[]
+  name                    String
+  parent_game             Int?
+  platforms               Platform[]
+  player_perspectives     Int[]
+  ports                   Int[]
+  rating                  Float?
+  rating_count            Int?
+  release_dates           Int[]
+  remakes                 Int[]
+  remasters               Int[]
+  screenshots             Int[]
+  similar_games           Int[]
+  slug                    String
+  standalone_expansions   Int[]
+  storyline               String?
+  summary                 String?
+  tags                    Int[]
+  themes                  Int[]
+  total_rating            Float?
+  total_rating_count      Int?
+  updated_at              DateTime
+  url                     String?
+  version_parent          Int[]
+  version_title           String?
+  videos                  Int[]
+  websites                Int[]
+  gameUser                GameUser[]
 }
 
 model User {
@@ -58,7 +169,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
-  Game          Game[]
+  Game          GameUser[]
   UserSettings  UserSettings?
 
   @@unique([email])

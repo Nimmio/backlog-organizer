@@ -41,6 +41,11 @@ export const getValueFromSearchParamsOrNull = async (
 
 export const ensureString = (input: unknown): string => {
   if (!input) return "";
-  if (typeof input === "string") return input;
+  if (isString(input)) return input as string;
   else return (input as any).toString();
+};
+
+export const isString = (input: unknown): boolean => {
+  if (typeof input === "string" || input instanceof String) return true;
+  return false;
 };
