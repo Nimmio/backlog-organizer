@@ -176,9 +176,7 @@ exports.Prisma.PlatformScalarFieldEnum = {
   slug: 'slug',
   summary: 'summary',
   updated_at: 'updated_at',
-  url: 'url',
-  versions: 'versions',
-  websites: 'websites'
+  url: 'url'
 };
 
 exports.Prisma.GameScalarFieldEnum = {

@@ -7546,8 +7546,6 @@ export namespace Prisma {
     platform_family: number | null
     platform_logo: number | null
     platform_type: number | null
-    versions: number | null
-    websites: number | null
   }
 
   export type PlatformSumAggregateOutputType = {
@@ -7556,8 +7554,6 @@ export namespace Prisma {
     platform_family: number | null
     platform_logo: number | null
     platform_type: number | null
-    versions: number[]
-    websites: number[]
   }
 
   export type PlatformMinAggregateOutputType = {
@@ -7609,8 +7605,6 @@ export namespace Prisma {
     summary: number
     updated_at: number
     url: number
-    versions: number
-    websites: number
     _all: number
   }
 
@@ -7621,8 +7615,6 @@ export namespace Prisma {
     platform_family?: true
     platform_logo?: true
     platform_type?: true
-    versions?: true
-    websites?: true
   }
 
   export type PlatformSumAggregateInputType = {
@@ -7631,8 +7623,6 @@ export namespace Prisma {
     platform_family?: true
     platform_logo?: true
     platform_type?: true
-    versions?: true
-    websites?: true
   }
 
   export type PlatformMinAggregateInputType = {
@@ -7684,8 +7674,6 @@ export namespace Prisma {
     summary?: true
     updated_at?: true
     url?: true
-    versions?: true
-    websites?: true
     _all?: true
   }
 
@@ -7790,8 +7778,6 @@ export namespace Prisma {
     summary: string | null
     updated_at: Date
     url: string | null
-    versions: number[]
-    websites: number[]
     _count: PlatformCountAggregateOutputType | null
     _avg: PlatformAvgAggregateOutputType | null
     _sum: PlatformSumAggregateOutputType | null
@@ -7828,8 +7814,6 @@ export namespace Prisma {
     summary?: boolean
     updated_at?: boolean
     url?: boolean
-    versions?: boolean
-    websites?: boolean
     game?: boolean | Platform$gameArgs<ExtArgs>
     _count?: boolean | PlatformCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["platform"]>
@@ -7849,8 +7833,6 @@ export namespace Prisma {
     summary?: boolean
     updated_at?: boolean
     url?: boolean
-    versions?: boolean
-    websites?: boolean
   }, ExtArgs["result"]["platform"]>
 
   export type PlatformSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7868,8 +7850,6 @@ export namespace Prisma {
     summary?: boolean
     updated_at?: boolean
     url?: boolean
-    versions?: boolean
-    websites?: boolean
   }, ExtArgs["result"]["platform"]>
 
   export type PlatformSelectScalar = {
@@ -7887,11 +7867,9 @@ export namespace Prisma {
     summary?: boolean
     updated_at?: boolean
     url?: boolean
-    versions?: boolean
-    websites?: boolean
   }
 
-  export type PlatformOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "abbreviation" | "alternative_name" | "checksum" | "created_at" | "generation" | "name" | "platform_family" | "platform_logo" | "platform_type" | "slug" | "summary" | "updated_at" | "url" | "versions" | "websites", ExtArgs["result"]["platform"]>
+  export type PlatformOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "abbreviation" | "alternative_name" | "checksum" | "created_at" | "generation" | "name" | "platform_family" | "platform_logo" | "platform_type" | "slug" | "summary" | "updated_at" | "url", ExtArgs["result"]["platform"]>
   export type PlatformInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     game?: boolean | Platform$gameArgs<ExtArgs>
     _count?: boolean | PlatformCountOutputTypeDefaultArgs<ExtArgs>
@@ -7919,8 +7897,6 @@ export namespace Prisma {
       summary: string | null
       updated_at: Date
       url: string | null
-      versions: number[]
-      websites: number[]
     }, ExtArgs["result"]["platform"]>
     composites: {}
   }
@@ -8359,8 +8335,6 @@ export namespace Prisma {
     readonly summary: FieldRef<"Platform", 'String'>
     readonly updated_at: FieldRef<"Platform", 'DateTime'>
     readonly url: FieldRef<"Platform", 'String'>
-    readonly versions: FieldRef<"Platform", 'Int[]'>
-    readonly websites: FieldRef<"Platform", 'Int[]'>
   }
     
 
@@ -15207,9 +15181,7 @@ export namespace Prisma {
     slug: 'slug',
     summary: 'summary',
     updated_at: 'updated_at',
-    url: 'url',
-    versions: 'versions',
-    websites: 'websites'
+    url: 'url'
   };
 
   export type PlatformScalarFieldEnum = (typeof PlatformScalarFieldEnum)[keyof typeof PlatformScalarFieldEnum]
@@ -15784,8 +15756,6 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Platform"> | string | null
     updated_at?: DateTimeFilter<"Platform"> | Date | string
     url?: StringNullableFilter<"Platform"> | string | null
-    versions?: IntNullableListFilter<"Platform">
-    websites?: IntNullableListFilter<"Platform">
     game?: GameListRelationFilter
   }
 
@@ -15804,8 +15774,6 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     updated_at?: SortOrder
     url?: SortOrderInput | SortOrder
-    versions?: SortOrder
-    websites?: SortOrder
     game?: GameOrderByRelationAggregateInput
   }
 
@@ -15827,8 +15795,6 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Platform"> | string | null
     updated_at?: DateTimeFilter<"Platform"> | Date | string
     url?: StringNullableFilter<"Platform"> | string | null
-    versions?: IntNullableListFilter<"Platform">
-    websites?: IntNullableListFilter<"Platform">
     game?: GameListRelationFilter
   }, "id" | "id">
 
@@ -15847,8 +15813,6 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     updated_at?: SortOrder
     url?: SortOrderInput | SortOrder
-    versions?: SortOrder
-    websites?: SortOrder
     _count?: PlatformCountOrderByAggregateInput
     _avg?: PlatformAvgOrderByAggregateInput
     _max?: PlatformMaxOrderByAggregateInput
@@ -15874,8 +15838,6 @@ export namespace Prisma {
     summary?: StringNullableWithAggregatesFilter<"Platform"> | string | null
     updated_at?: DateTimeWithAggregatesFilter<"Platform"> | Date | string
     url?: StringNullableWithAggregatesFilter<"Platform"> | string | null
-    versions?: IntNullableListFilter<"Platform">
-    websites?: IntNullableListFilter<"Platform">
   }
 
   export type GameWhereInput = {
@@ -16811,8 +16773,6 @@ export namespace Prisma {
     summary?: string | null
     updated_at: Date | string
     url?: string | null
-    versions?: PlatformCreateversionsInput | number[]
-    websites?: PlatformCreatewebsitesInput | number[]
     game?: GameCreateNestedManyWithoutPlatformsInput
   }
 
@@ -16831,8 +16791,6 @@ export namespace Prisma {
     summary?: string | null
     updated_at: Date | string
     url?: string | null
-    versions?: PlatformCreateversionsInput | number[]
-    websites?: PlatformCreatewebsitesInput | number[]
     game?: GameUncheckedCreateNestedManyWithoutPlatformsInput
   }
 
@@ -16851,8 +16809,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
     game?: GameUpdateManyWithoutPlatformsNestedInput
   }
 
@@ -16871,8 +16827,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
     game?: GameUncheckedUpdateManyWithoutPlatformsNestedInput
   }
 
@@ -16891,8 +16845,6 @@ export namespace Prisma {
     summary?: string | null
     updated_at: Date | string
     url?: string | null
-    versions?: PlatformCreateversionsInput | number[]
-    websites?: PlatformCreatewebsitesInput | number[]
   }
 
   export type PlatformUpdateManyMutationInput = {
@@ -16910,8 +16862,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type PlatformUncheckedUpdateManyInput = {
@@ -16929,8 +16879,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type GameCreateInput = {
@@ -18125,8 +18073,6 @@ export namespace Prisma {
     summary?: SortOrder
     updated_at?: SortOrder
     url?: SortOrder
-    versions?: SortOrder
-    websites?: SortOrder
   }
 
   export type PlatformAvgOrderByAggregateInput = {
@@ -18135,8 +18081,6 @@ export namespace Prisma {
     platform_family?: SortOrder
     platform_logo?: SortOrder
     platform_type?: SortOrder
-    versions?: SortOrder
-    websites?: SortOrder
   }
 
   export type PlatformMaxOrderByAggregateInput = {
@@ -18179,8 +18123,6 @@ export namespace Prisma {
     platform_family?: SortOrder
     platform_logo?: SortOrder
     platform_type?: SortOrder
-    versions?: SortOrder
-    websites?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -18803,14 +18745,6 @@ export namespace Prisma {
     deleteMany?: GameScalarWhereInput | GameScalarWhereInput[]
   }
 
-  export type PlatformCreateversionsInput = {
-    set: number[]
-  }
-
-  export type PlatformCreatewebsitesInput = {
-    set: number[]
-  }
-
   export type GameCreateNestedManyWithoutPlatformsInput = {
     create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
     connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
@@ -18821,16 +18755,6 @@ export namespace Prisma {
     create?: XOR<GameCreateWithoutPlatformsInput, GameUncheckedCreateWithoutPlatformsInput> | GameCreateWithoutPlatformsInput[] | GameUncheckedCreateWithoutPlatformsInput[]
     connectOrCreate?: GameCreateOrConnectWithoutPlatformsInput | GameCreateOrConnectWithoutPlatformsInput[]
     connect?: GameWhereUniqueInput | GameWhereUniqueInput[]
-  }
-
-  export type PlatformUpdateversionsInput = {
-    set?: number[]
-    push?: number | number[]
-  }
-
-  export type PlatformUpdatewebsitesInput = {
-    set?: number[]
-    push?: number | number[]
   }
 
   export type GameUpdateManyWithoutPlatformsNestedInput = {
@@ -20675,8 +20599,6 @@ export namespace Prisma {
     summary?: string | null
     updated_at: Date | string
     url?: string | null
-    versions?: PlatformCreateversionsInput | number[]
-    websites?: PlatformCreatewebsitesInput | number[]
   }
 
   export type PlatformUncheckedCreateWithoutGameInput = {
@@ -20694,8 +20616,6 @@ export namespace Prisma {
     summary?: string | null
     updated_at: Date | string
     url?: string | null
-    versions?: PlatformCreateversionsInput | number[]
-    websites?: PlatformCreatewebsitesInput | number[]
   }
 
   export type PlatformCreateOrConnectWithoutGameInput = {
@@ -20828,8 +20748,6 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Platform"> | string | null
     updated_at?: DateTimeFilter<"Platform"> | Date | string
     url?: StringNullableFilter<"Platform"> | string | null
-    versions?: IntNullableListFilter<"Platform">
-    websites?: IntNullableListFilter<"Platform">
   }
 
   export type GameUserUpsertWithWhereUniqueWithoutIgdbGameInput = {
@@ -21839,8 +21757,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type PlatformUncheckedUpdateWithoutGameInput = {
@@ -21858,8 +21774,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type PlatformUncheckedUpdateManyWithoutGameInput = {
@@ -21877,8 +21791,6 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    versions?: PlatformUpdateversionsInput | number[]
-    websites?: PlatformUpdatewebsitesInput | number[]
   }
 
   export type GameUserUpdateWithoutIgdbGameInput = {

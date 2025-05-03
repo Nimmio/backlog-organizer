@@ -10,7 +10,7 @@ type IGDBMappingType = {
 
 const IGDBDeprecated: IGDBMappingType = {
   game: ["category", "collection", "follows", "status"],
-  platform: ["category"],
+  platform: ["category", "versions", "websites"],
 };
 
 interface getIGDBCachedOrExternParams {
@@ -31,10 +31,16 @@ export const getIGDBCachedOrExtern = async (
       ids: missing,
       type,
     });
+
+    const cleanedData = removeDeprecatedFields({
+      data: fetcheddata,
+      deprecatedFields: IGDBDeprecated[type],
+    });
+
     if (mode === "save") {
-      await saveToCache({ data: fetcheddata, type });
+      await saveToCache({ data: cleanedData, type });
     }
-    data = data.concat(fetcheddata);
+    data = data.concat(cleanedData);
   }
   return data;
 };
@@ -110,10 +116,6 @@ interface saveToCacheParams {
 const saveToCache = async (params: saveToCacheParams) => {
   const { data, type } = params;
   const model = prisma[type];
-  const cleanedData = removeDeprecatedFields({
-    data,
-    deprecatedFields: IGDBDeprecated[type],
-  });
   await model.createMany({
     data: cleanedData,
   });

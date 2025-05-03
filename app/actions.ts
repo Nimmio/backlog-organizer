@@ -14,10 +14,14 @@ import prisma from "@/lib/prisma";
 import { GameField } from "@/types/igdb/game";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
-import { platform } from "os";
 
 interface createGameProps {
   igdbId: number;
+}
+
+interface IConnectOrCreate {
+  create: any;
+  where: any;
 }
 
 export const createGame = async (props: createGameProps): Promise<GameUser> => {
@@ -27,7 +31,7 @@ export const createGame = async (props: createGameProps): Promise<GameUser> => {
   const igdbGame = (
     await getIGDBCachedOrExtern({ ids: [igdbId], type: "game" })
   )[0] as Game;
-
+  delete igdbGame.cover;
   const igdbPlatforms = (await getIGDBCachedOrExtern({
     ids: igdbGame.platforms,
     type: "platform",
@@ -38,34 +42,44 @@ export const createGame = async (props: createGameProps): Promise<GameUser> => {
     type: "genre",
   })) as Genre[];
 
-  const dbGenres: Genre[] = [];
-  for (const index in igdbGenres) {
-    const genre = igdbGenres[index];
-    const { id } = genre;
-    const dbGenre = await prisma.genre.findFirst({ where: { id } });
-    if (dbGenre) dbGenres.push(dbGenre);
-    else {
-      const createdGenre = await prisma.genre.create({ data: genre });
-      dbGenres.push(createdGenre);
-    }
-  }
+  const genresConnectOrCreate: IConnectOrCreate[] = [];
+  igdbGenres.forEach((igdbGenre) => {
+    const connectOrCreateEntry: IConnectOrCreate = {
+      create: {
+        ...igdbGenre,
+      },
+      where: {
+        id: igdbGenre.id,
+      },
+    };
+    genresConnectOrCreate.push(connectOrCreateEntry);
+  });
 
-  const dbPlatforms: Platform[] = [];
-  for (const index in igdbPlatforms) {
-    const platform = igdbPlatforms[index];
-    const { id } = platform;
-    const dbPlatform = await prisma.platform.findFirst({ where: { id } });
-    if (dbPlatform) dbPlatforms.push(dbPlatform);
-    else {
-      const createdPlatform = await prisma.platform.create({ data: platform });
-      dbPlatforms.push(createdPlatform);
-    }
-  }
+  const platformConnectOrCreate: IConnectOrCreate[] = [];
+  igdbPlatforms.forEach((igdbPlatform) => {
+    const connectOrCreateEntry: IConnectOrCreate = {
+      create: {
+        ...igdbPlatform,
+      },
+      where: {
+        id: igdbPlatform.id,
+      },
+    };
+    platformConnectOrCreate.push(connectOrCreateEntry);
+  });
+
   await prisma.game.create({
     data: {
       ...igdbGame,
-      platforms: { connect: dbPlatforms },
-      genres: { connect: dbGenres },
+
+      genres: { connectOrCreate: genresConnectOrCreate },
+      platforms: { connectOrCreate: platformConnectOrCreate },
+      gameUser: {
+        create: {
+          platform: "?",
+          userId: await getCurrentUserId(),
+        },
+      },
     },
   });
   // return await prisma.gameUser.create({
@@ -141,7 +155,7 @@ export const getGameDetails = async (id: number) => {
     ...game,
     platforms: (await getPlatformsForIdsAsStrings(game.platforms)) as string[],
     genres: (await getGenresForIdsAsStrings(game.genres)) as string[],
-    cover: await getCoverForId(game.cover),
+    //cover: await getCoverForId(game.cover),
   };
   return game;
 };

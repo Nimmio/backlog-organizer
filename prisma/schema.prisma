@@ -95,8 +95,6 @@ model Platform {
   summary          String?
   updated_at       DateTime
   url              String?
-  versions         Int[]
-  websites         Int[]
   game Game[]
 }
 
