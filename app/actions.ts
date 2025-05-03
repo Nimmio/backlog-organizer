@@ -24,13 +24,12 @@ interface IConnectOrCreate {
   where: unknown;
 }
 
-export const createGame = async (props: createGameProps): Promise<GameUser> => {
+export const createGame = async (props: createGameProps): Promise<Game> => {
   const { igdbId } = props;
 
   const igdbGame = (
     await getIGDBCachedOrExtern({ ids: [igdbId], type: "game" })
   )[0] as Game;
-  delete igdbGame.cover;
   const igdbPlatforms = (await getIGDBCachedOrExtern({
     ids: igdbGame.platforms,
     type: "platform",
@@ -67,10 +66,9 @@ export const createGame = async (props: createGameProps): Promise<GameUser> => {
     platformConnectOrCreate.push(connectOrCreateEntry);
   });
 
-  await prisma.game.create({
-    data: {
+  return await prisma.game.upsert({
+    create: {
       ...igdbGame,
-
       genres: { connectOrCreate: genresConnectOrCreate },
       platforms: { connectOrCreate: platformConnectOrCreate },
       gameUser: {
@@ -80,7 +78,19 @@ export const createGame = async (props: createGameProps): Promise<GameUser> => {
         },
       },
     },
+    update: {
+      gameUser: {
+        create: {
+          platform: "!",
+          userId: await getCurrentUserId(),
+        },
+      },
+    },
+    where: {
+      id: igdbGame.id,
+    },
   });
+
   // return await prisma.gameUser.create({
   //   data: {
   //     platform: "?",

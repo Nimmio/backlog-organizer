@@ -10,8 +10,3 @@ export type CoverField =
   | "image_id"
   | "url"
   | "width";
-
-export interface CoverGenre extends Omit<Cover, "created_at" | "updated_at"> {
-  created_at: number;
-  updated_at: number;
-}
