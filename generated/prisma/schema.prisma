@@ -31,7 +31,6 @@ enum Status {
   BACKLOG
   PLAYING
   COMPLETED
-  DROPPED
   ON_HOLD
 }
 

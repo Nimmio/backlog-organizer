@@ -1,4 +1,4 @@
-import { Game } from "@/generated/prisma";
+import { Game, GameStatus } from "@/generated/prisma";
 
 export type GameField =
   | "age_ratings"
@@ -60,4 +60,8 @@ export type GameField =
 export interface ExternalGame extends Omit<Game, "created_at" | "updated_at"> {
   created_at: number;
   updated_at: number;
+}
+
+export interface GameStatusWithIgdbGame extends GameStatus {
+  igdbGame: Game;
 }

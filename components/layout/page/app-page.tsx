@@ -14,9 +14,6 @@ const AppPage = (props: AppPageProps) => {
   return (
     <main>
       <BreadcrumbSetter newBreadcrumbs={breadcrumbs} />
-
-      <h1 className="text-3xl font-bold mb-4">{titel}</h1>
-
       <Card className="p-4">{children}</Card>
     </main>
   );

@@ -12,6 +12,9 @@ import { useEffect } from "react";
 import { useQueryString } from "@/hooks/use-query-string,";
 import { usePathname, useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
+import { Button } from "../ui/button";
+import { PlusCircle } from "lucide-react";
+import { GameStatus } from "@/generated/prisma";
 
 // Status and platform options for filters
 const platformOptions = [
@@ -22,54 +25,12 @@ const platformOptions = [
   "Nintendo Switch",
 ];
 
-const DEMOGAMES = [
-  {
-    id: 1,
-    name: "The Legend of Zelda: Breath of the Wild",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "BACKLOG" as TStatusKey,
-    platform: "Nintendo Switch",
-  },
-  {
-    id: 2,
-    name: "God of War Ragnarök",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "COMPLETED" as TStatusKey,
-    platform: "PlayStation 5",
-  },
-  {
-    id: 3,
-    name: "Elden Ring",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "ON_HOLD" as TStatusKey,
-    platform: "PC",
-  },
-  {
-    id: 4,
-    name: "Halo Infinite",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "PLAYING" as TStatusKey,
-    platform: "Xbox Series X",
-  },
-  {
-    id: 5,
-    name: "Cyberpunk 2077",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "PREORDER" as TStatusKey,
-    platform: "PC",
-  },
-  {
-    id: 6,
-    name: "Animal Crossing: New Horizons",
-    cover: "/placeholder.svg?height=150&width=120",
-    status: "WANT_TO_BUY" as TStatusKey,
-    platform: "Nintendo Switch",
-  },
-];
+interface GameDashboardProps {
+  games: GameStatus;
+}
 
-export default function GameDashboard() {
-  const games = DEMOGAMES;
-
+export default function GameDashboard(props: GameDashboardProps) {
+  const { games } = props;
   const {
     searchValue,
     platformState,
@@ -109,24 +70,38 @@ export default function GameDashboard() {
     });
   }, [debouncedSearchValue, platformState, filterState]);
 
+  const handleAddButtonClick = () => {
+    router.push(
+      `${pathname}?${createQueryString("addGameDialogOpen", "true")}`
+    );
+  };
+
   return (
-    <div className="container mx-auto py-6">
-      <h1 className="text-3xl font-bold mb-6">Video Game Library</h1>
-      <GameDashboardControls
-        search={{ value: searchValue, onChange: setSearchValue }}
-        platformFilter={{
-          value: platformState,
-          onChange: setPlatformState,
-          options: platformOptions,
-        }}
-        statusFilter={{
-          value: filterState,
-          onChange: (value: string) =>
-            setFilterState(value as TStatusKeyWithAll),
-          options: getMultipleStatusKeysTranslatedWithAll(),
-        }}
-      />
-      <GameDasbhoardGrid games={games} />
+    <div className="container mx-auto ">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Video Game Library</h1>
+        <Button className="gap-2" onClick={handleAddButtonClick}>
+          <PlusCircle className="h-4 w-4" />
+          Add Game
+        </Button>
+      </div>
+      <div>
+        <GameDashboardControls
+          search={{ value: searchValue, onChange: setSearchValue }}
+          platformFilter={{
+            value: platformState,
+            onChange: setPlatformState,
+            options: platformOptions,
+          }}
+          statusFilter={{
+            value: filterState,
+            onChange: (value: string) =>
+              setFilterState(value as TStatusKeyWithAll),
+            options: getMultipleStatusKeysTranslatedWithAll(),
+          }}
+        />
+        <GameDasbhoardGrid games={games} />
+      </div>
     </div>
   );
 }

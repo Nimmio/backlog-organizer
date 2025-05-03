@@ -2,19 +2,10 @@ import React from "react";
 import GameDashboardGridEmpty from "./game-dashboard-empty";
 import GameDashboardGridCard from "./game-dasbhoard-grid-card";
 import { TStatusKey } from "@/lib/status";
-
-//DELETELATER
-
-interface Game {
-  id: number;
-  name: string;
-  cover: string;
-  status: TStatusKey;
-  platform: string;
-}
+import { GameStatus } from "@/generated/prisma";
 
 interface GameDasbhoardGridProps {
-  games: Game[];
+  games: GameStatus[];
 }
 
 const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {

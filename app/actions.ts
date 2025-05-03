@@ -71,10 +71,12 @@ export const createGame = async (props: createGameProps): Promise<Game> => {
       ...igdbGame,
       genres: { connectOrCreate: genresConnectOrCreate },
       platforms: { connectOrCreate: platformConnectOrCreate },
+      cover: undefined,
       gameStatus: {
         create: {
           platform: "?",
           userId: await getCurrentUserId(),
+          status: "BACKLOG",
         },
       },
     },

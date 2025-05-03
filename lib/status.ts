@@ -14,7 +14,7 @@ const Status = {
   BACKLOG: {
     color: "bg-amber-500",
     translation: {
-      en: "To play",
+      en: "Backlog",
     },
   },
   PLAYING: {
@@ -61,4 +61,12 @@ export const getStatusTranslation = (
   lang: "en" = "en"
 ): string => {
   return Status[key].translation[lang];
+};
+
+export const getStatusKeyForTranslation = (
+  input: string
+): TStatusKey | undefined => {
+  return Object.keys(Status).find(
+    (statusKey) => Status[statusKey as TStatusKey].translation.en === input
+  ) as TStatusKey;
 };

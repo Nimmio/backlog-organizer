@@ -1,23 +1,19 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { GameStatus } from "@/generated/prisma";
 import { getStatusColor, getStatusTranslation, TStatusKey } from "@/lib/status";
+import { GameStatusWithIgdbGame } from "@/types/igdb/game";
 import React from "react";
 
-interface Game {
-  id: number;
-  name: string;
-  cover: string;
-  status: TStatusKey;
-  platform: string;
-}
-
 interface GameDashboardGridCardProps {
-  game: Game;
+  game: GameStatusWithIgdbGame;
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game } = props;
-  const { id, cover, name, platform, status } = game;
+  const { id, platform, status, igdbGame } = game;
+  const { name } = igdbGame;
+  const cover = null;
   return (
     <Card key={id} className="overflow-hidden p-2">
       <div className="flex h-full">

@@ -79,7 +79,6 @@ export namespace $Enums {
   BACKLOG: 'BACKLOG',
   PLAYING: 'PLAYING',
   COMPLETED: 'COMPLETED',
-  DROPPED: 'DROPPED',
   ON_HOLD: 'ON_HOLD'
 };
 

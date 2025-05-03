@@ -2,17 +2,29 @@
 
 import prisma from "@/lib/prisma";
 import { getCurrentUserId } from "../actions";
-import { TypeOf } from "zod";
+import { TStatusKeyWithAll } from "@/lib/status";
+import { getWhereString } from "@/lib/game";
 
-export const getGamesForDashboard = async (): Promise<typeof games> => {
+interface getGamesForDashboardParams {
+  search: string;
+  status: TStatusKeyWithAll;
+  platform: string;
+}
+
+export const getGamesForDashboard = async (
+  params: getGamesForDashboardParams
+): Promise<typeof games> => {
+  const { search, status, platform } = params;
   const currentUserId = await getCurrentUserId();
+  console.log(
+    getWhereString({ userId: currentUserId, status, search, platform })
+  );
   const games = await prisma.gameStatus.findMany({
     include: {
       igdbGame: true,
     },
-    where: {
-      userId: currentUserId || "",
-    },
+
+    where: getWhereString({ userId: currentUserId, status, search, platform }),
   });
   return games;
 };
