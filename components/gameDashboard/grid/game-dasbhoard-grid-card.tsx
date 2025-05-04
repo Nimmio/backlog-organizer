@@ -12,7 +12,6 @@ interface GameDashboardGridCardProps {
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game } = props;
   const { id, platform, status, igdbGame } = game;
-  const { name, hasCover, id: igdbId } = igdbGame;
   return (
     <Card key={id} className="overflow-hidden p-5">
       <div className="flex h-full">
@@ -20,14 +19,18 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
           <Image
             width={120}
             height={160}
-            src={hasCover ? "/covers/" + igdbId + ".jpg" : "/placeholder.jpg"}
+            src={
+              igdbGame?.hasCover
+                ? "/covers/" + igdbGame?.id + ".jpg"
+                : "/placeholder.jpg"
+            }
             alt={`${name} cover`}
             className="h-full w-full object-cover"
           />
         </div>
         <CardContent className=" flex flex-col justify-between">
           <div>
-            <h3 className="font-semibold line-clamp-2">{name}</h3>
+            <h3 className="font-semibold line-clamp-2">{igdbGame?.name}</h3>
             <p className="text-sm text-muted-foreground mt-1">
               {platform ? platform.name : ""}
             </p>

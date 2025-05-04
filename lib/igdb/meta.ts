@@ -17,13 +17,12 @@ const IGDBDeprecated: IGDBMappingType = {
 interface getIGDBCachedOrExternParams {
   ids: number[];
   type: IGDBMetaType;
-  mode?: "save" | "read";
 }
 
 export const getIGDBCachedOrExtern = async (
   params: getIGDBCachedOrExternParams
 ): Promise<IGDBMeta[]> => {
-  const { ids, type, mode = "read" } = params;
+  const { ids, type } = params;
   if (!ids || ids.length === 0) return [];
   const { cachedData, missing } = await getCached({ ids, type });
   let data: IGDBMeta[] = cachedData;
@@ -38,9 +37,6 @@ export const getIGDBCachedOrExtern = async (
       deprecatedFields: IGDBDeprecated[type],
     });
 
-    if (mode === "save") {
-      await saveToCache({ data: cleanedData, type });
-    }
     data = data.concat(cleanedData);
   }
   return data;
@@ -55,6 +51,7 @@ const getCached = async (
   params: getCachedParams
 ): Promise<{ cachedData: IGDBMeta[]; missing: number[] }> => {
   const { ids, type } = params;
+  // @ts-expect-error Cannot get generic prisma work without error
 
   const model: PrismaClient[typeof type] = prisma[type];
 
@@ -110,19 +107,6 @@ const getFromExternal = async (
       };
     }
     return newEntry;
-  });
-};
-
-interface saveToCacheParams {
-  data: IGDBMeta[];
-  type: IGDBMetaType;
-}
-
-const saveToCache = async (params: saveToCacheParams) => {
-  const { type, data } = params;
-  const model: PrismaClient[typeof type] = prisma[type];
-  await model.createMany({
-    data: data,
   });
 };
 

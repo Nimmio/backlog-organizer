@@ -222,12 +222,12 @@ export const createGameStatus = async (params: createGameStatusParams) => {
       ? getPlatformsConnectOrCreate(
           await getPlatformsForCreate(createGame.platforms)
         )
-      : [];
+      : undefined;
 
   const genresConnectOrCreate =
     createGame.genres && createGame.genres.length > 0
       ? getGenresConnectOrCreate(await getGenresForCreate(createGame.genres))
-      : [];
+      : undefined;
 
   const userId = await getCurrentUserId();
 
