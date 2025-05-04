@@ -15,15 +15,16 @@ datasource db {
 }
 
 model GameStatus {
-  id          Int       @id @default(autoincrement())
-  platform    String
-  status      Status    @default(BACKLOG)
-  notes       String?
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
-  igdbGame Game?  @relation(fields: [igdbGameId],references: [id])
-  igdbGameId Int?
+  id         Int       @id @default(autoincrement())
+  platform   Platform? @relation(fields: [platformId], references: [id])
+  platformId Int?
 
+  status     Status  @default(BACKLOG)
+  notes      String?
+  user       User    @relation(fields: [userId], references: [id])
+  userId     String
+  igdbGame   Game    @relation(fields: [igdbGameId], references: [id])
+  igdbGameId Int
 }
 
 enum Status {
@@ -60,104 +61,32 @@ model Genre {
   checksum   String
   created_at DateTime
   name       String
-  slug       String
   updated_at DateTime
-  url        String
-  game Game[]
-}
-
-model Cover {
-  id                  Int      @id @unique
-  alpha_channel       Boolean?
-  animated            Boolean?
-  checksum            String?
-  game_localization   Int[]
-  height              Int?
-  image_id            String?
-  url                 String?
-  width               Int?
-  downloaded_filename String?
-  game Game[]
+  game       Game[]
 }
 
 model Platform {
-  id               Int      @id @unique
-  abbreviation     String?
-  alternative_name String?
-  checksum         String?
-  created_at       DateTime
-  generation       Int?
-  name             String?
-  platform_family  Int?
-  platform_logo    Int?
-  platform_type    Int?
-  slug             String?
-  summary          String?
-  updated_at       DateTime
-  url              String?
-  game Game[]
+  id         Int          @id @unique
+  checksum   String
+  created_at DateTime
+  name       String
+  updated_at DateTime
+  games       Game[]
+  gameStatus GameStatus[]
 }
 
 model Game {
   id Int @id @unique
-
-  age_ratings             Int[]
-  aggregated_rating       Float?
-  aggregated_rating_count Int?
-  alternative_names       Int[]
-  artworks                Int[]
-  bundles                 Int[]
-  checksum                String
-  collections             Int[]
-  cover                   Cover? @relation(fields:[coverId], references: [id])
-  coverId                 Int?
-  created_at              DateTime
-  dlcs                    Int[]
-  expanded_games          Int[]
-  expansions              Int[]
-  external_games          Int[]
-  first_release_date      Int?
-  forks                   Int[]
-  franchise               Int?
-  franchises              Int[]
-  game_engines            Int[]
-  game_localizations      Int[]
-  game_modes              Int[]
-  game_status             Int?
-  game_type               Int?
-  genres                  Genre[]
-  hypes                   Int?
-  involved_companies      Int[]
-  keywords                Int[]
-  language_supports       Int[]
-  multiplayer_modes       Int[]
-  name                    String
-  parent_game             Int?
-  platforms               Platform[]
-  player_perspectives     Int[]
-  ports                   Int[]
-  rating                  Float?
-  rating_count            Int?
-  release_dates           Int[]
-  remakes                 Int[]
-  remasters               Int[]
-  screenshots             Int[]
-  similar_games           Int[]
-  slug                    String
-  standalone_expansions   Int[]
-  storyline               String?
-  summary                 String?
-  tags                    Int[]
-  themes                  Int[]
-  total_rating            Float?
-  total_rating_count      Int?
-  updated_at              DateTime
-  url                     String?
-  version_parent          Int[]
-  version_title           String?
-  videos                  Int[]
-  websites                Int[]
-  gameStatus  GameStatus[]
+  checksum String?
+  hasCover Boolean @default(false)
+  created_at DateTime?
+  first_release_date Int?
+  genres Genre[]
+  name String
+  platforms Platform[]
+  summary String?
+  updated_at DateTime?
+  gameStatus GameStatus[]
 }
 
 model User {

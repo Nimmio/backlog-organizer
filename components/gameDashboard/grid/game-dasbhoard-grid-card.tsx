@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { GameStatus } from "@/generated/prisma";
 import { getStatusColor, getStatusTranslation, TStatusKey } from "@/lib/status";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
+import Image from "next/image";
 import React from "react";
 
 interface GameDashboardGridCardProps {
@@ -12,22 +12,25 @@ interface GameDashboardGridCardProps {
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game } = props;
   const { id, platform, status, igdbGame } = game;
-  const { name } = igdbGame;
-  const cover = null;
+  const { name, hasCover, id: igdbId } = igdbGame;
   return (
-    <Card key={id} className="overflow-hidden p-2">
+    <Card key={id} className="overflow-hidden p-5">
       <div className="flex h-full">
-        <div className="w-[120px] bg-muted flex-shrink-0">
-          <img
-            src={cover || "/placeholder.svg"}
+        <div className="w-[120px] bg-muted flex-shrink-0 mt-1">
+          <Image
+            width={120}
+            height={160}
+            src={hasCover ? "/covers/" + igdbId + ".jpg" : "/placeholder.jpg"}
             alt={`${name} cover`}
             className="h-full w-full object-cover"
           />
         </div>
-        <CardContent className="p-4 flex flex-col justify-between">
+        <CardContent className=" flex flex-col justify-between">
           <div>
             <h3 className="font-semibold line-clamp-2">{name}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{platform}</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              {platform ? platform.name : ""}
+            </p>
           </div>
           <Badge
             className={`mt-2 ${

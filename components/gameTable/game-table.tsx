@@ -1,4 +1,4 @@
-import { Game, GameStatus } from "@/generated/prisma";
+import { GameStatus } from "@/generated/prisma";
 import { DataTable } from "../dataTable/data-table";
 import { columns } from "./columns";
 

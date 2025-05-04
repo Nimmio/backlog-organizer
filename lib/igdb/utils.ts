@@ -100,9 +100,7 @@ export const queryBuilder = async (params: queryBuilderParams) => {
 };
 
 export const downloadImage = async (url: string): Promise<Blob> => {
-  console.log("url", url);
-
-  const newURl = url.replace("t_thumb", "t_cover_big_2x");
+  const newURl = url.replace("t_thumb", "t_cover_big");
 
   const response = await fetch(newURl, { mode: "no-cors" });
   return await response.blob();
@@ -120,12 +118,11 @@ export const saveImage = async (
   const buffer = Buffer.from(await blob.arrayBuffer());
   try {
     await writeFile(
-      path.join(process.cwd(), "public/covercache/" + filename),
+      path.join(process.cwd(), "public/covers/" + filename),
       buffer
     );
     return { success: true };
   } catch (error) {
-    console.log("Error occured ", error);
     return {
       success: false,
       error: error as string,

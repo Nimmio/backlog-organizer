@@ -1,7 +1,6 @@
 import React from "react";
 import GameDashboardGridEmpty from "./game-dashboard-empty";
 import GameDashboardGridCard from "./game-dasbhoard-grid-card";
-import { TStatusKey } from "@/lib/status";
 import { GameStatus } from "@/generated/prisma";
 
 interface GameDasbhoardGridProps {
