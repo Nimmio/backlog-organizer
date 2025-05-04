@@ -2,13 +2,12 @@
 
 import {
   getMultipleStatusKeysTranslatedWithAll,
-  TStatusKey,
   TStatusKeyWithAll,
 } from "@/lib/status";
 import GameDashboardControls from "./controls/game-dashboard-controls";
 import { useGameDashboardStore } from "@/providers/gamedashboard-store-provider";
 import GameDasbhoardGrid from "./grid/game-dashboard-grid";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useQueryString } from "@/hooks/use-query-string,";
 import { usePathname, useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
@@ -26,7 +25,7 @@ const platformOptions = [
 ];
 
 interface GameDashboardProps {
-  games: GameStatus;
+  games: GameStatus[];
 }
 
 export default function GameDashboard(props: GameDashboardProps) {
@@ -45,22 +44,25 @@ export default function GameDashboard(props: GameDashboardProps) {
   const pathname = usePathname();
   const router = useRouter();
   const createQueryString = useQueryString();
-  const syncStateWithSearchparams = ({
-    search,
-    platform,
-    status,
-  }: {
-    search: string;
-    platform: string;
-    status: string;
-  }) => {
-    router.push(
-      `${pathname}?${createQueryString(
-        "dashboardControls",
-        JSON.stringify({ search, platform, status })
-      )}`
-    );
-  };
+  const syncStateWithSearchparams = useCallback(
+    ({
+      search,
+      platform,
+      status,
+    }: {
+      search: string;
+      platform: string;
+      status: string;
+    }) => {
+      router.push(
+        `${pathname}?${createQueryString(
+          "dashboardControls",
+          JSON.stringify({ search, platform, status })
+        )}`
+      );
+    },
+    [createQueryString, pathname, router]
+  );
 
   useEffect(() => {
     syncStateWithSearchparams({
@@ -68,7 +70,12 @@ export default function GameDashboard(props: GameDashboardProps) {
       platform: platformState,
       status: filterState,
     });
-  }, [debouncedSearchValue, platformState, filterState]);
+  }, [
+    debouncedSearchValue,
+    platformState,
+    filterState,
+    syncStateWithSearchparams,
+  ]);
 
   const handleAddButtonClick = () => {
     router.push(

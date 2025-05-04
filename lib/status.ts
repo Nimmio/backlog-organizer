@@ -37,10 +37,26 @@ const Status = {
   },
 };
 
+type TSingleStatus = {
+  color: string;
+  translation: {
+    en: string;
+  };
+};
+
+type StatusArray = Array<TSingleStatus & { key: string }>;
+
 type TStatus = typeof Status;
 
 export type TStatusKey = keyof TStatus;
 export type TStatusKeyWithAll = TStatusKey | "All";
+
+export const getStatusAsArray = (): StatusArray => {
+  return Object.keys(Status).map((key) => ({
+    ...Status[key as TStatusKey],
+    key,
+  }));
+};
 
 export const getMultipleStatusKeysTranslated = (): string[] => {
   return Object.keys(Status).map((key) =>

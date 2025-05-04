@@ -1,4 +1,3 @@
-import IgdbGameDialog from "@/components/igdbGameDialog/igdb-game-dialog";
 import { ensureLogin } from "@/lib/user";
 import { Metadata } from "next";
 import AppPage from "@/components/layout/page/app-page";
@@ -7,6 +6,7 @@ import GameDashboard from "@/components/gameDashboard/game-dashboard";
 import { GameDashboardStoreProvider } from "@/providers/gamedashboard-store-provider";
 import { TStatusKeyWithAll } from "@/lib/status";
 import { getJsonParsedStringOrNull } from "@/lib/utils";
+import AddGameDialog from "@/components/add-game-dialog/add-game-dialog";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -44,7 +44,7 @@ const Home = async ({
   const games = await getGamesForDashboard({ search, status, platform });
   return (
     <AppPage titel="Dashboard" breadcrumbs={[{ title: "Games" }]}>
-      <IgdbGameDialog />
+      <AddGameDialog />
       <GameDashboardStoreProvider>
         <GameDashboard games={games} />
       </GameDashboardStoreProvider>

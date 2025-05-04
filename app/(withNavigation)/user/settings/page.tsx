@@ -1,9 +1,9 @@
-import { getCurrentUserId } from "@/app/actions";
 import BreadcrumbSetter from "@/components/layout/header/breadcrumbs/breadcrum-setter";
 import AppTitel from "@/components/title/title";
 import { Card } from "@/components/ui/card";
 import UserSettingsForm from "@/components/userSettingsForm/user-settings-form";
 import prisma from "@/lib/prisma";
+import { getCurrentUserId } from "@/lib/user";
 import React from "react";
 
 const Page = async () => {
