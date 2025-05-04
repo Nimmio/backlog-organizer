@@ -1,20 +1,31 @@
-const Mapping = {
-  WANT_TO_BUY: "Want to buy",
-  PREORDER: "Preorder",
-  TO_PLAY: "To play",
-  PLAYING: "Playing",
-  COMPLETED: "Completed",
-  DROPPED: "Dropped",
-};
+import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 
-export const statusTranslation = (
-  status:
-    | "WANT_TO_BUY"
-    | "PREORDER"
-    | "TO_PLAY"
-    | "PLAYING"
-    | "COMPLETED"
-    | "DROPPED"
-): string => {
-  return Mapping[status];
+interface getGamesForDashboardParams {
+  search?: string;
+  status?: TStatusKeyWithAll;
+  platform?: string;
+  userId: string;
+}
+
+export const getWhereString = (params: getGamesForDashboardParams) => {
+  const { userId, search, status, platform } = params;
+  let where = {
+    userId: userId,
+  };
+  if (search)
+    where = Object.assign(where, {
+      igdbGame: {
+        name: { contains: search, mode: "insensitive" },
+      },
+    });
+  if (status && status !== "All")
+    where = Object.assign(where, {
+      status: getStatusKeyForTranslation(status),
+    });
+  if (platform && platform !== "All")
+    where = Object.assign(where, {
+      platform,
+    });
+
+  return where;
 };

@@ -3,6 +3,7 @@ import prisma from "../prisma";
 import { getAuthentication } from "./auth";
 import { queryBuilder, RequestUrls } from "./utils";
 import { IGDBExternMeta, IGDBMeta, IGDBMetaType } from "@/types/igdb/meta";
+import { PrismaClient } from "@prisma/client/scripts/default-index.js";
 
 type IGDBMappingType = {
   [key: string]: string[];
@@ -55,7 +56,7 @@ const getCached = async (
 ): Promise<{ cachedData: IGDBMeta[]; missing: number[] }> => {
   const { ids, type } = params;
 
-  const model = prisma[type];
+  const model: PrismaClient[typeof type] = prisma[type];
 
   const cachedData = await model.findMany({
     where: {
@@ -91,17 +92,21 @@ const getFromExternal = async (
   });
 
   return response.map((entry: IGDBExternMeta) => {
-    let newEntry = { ...entry };
+    let newEntry: IGDBMeta = {
+      ...entry,
+      created_at: entry.created_at as unknown as Date,
+      updated_at: entry.updated_at as unknown as Date,
+    };
     if (entry.hasOwnProperty("created_at")) {
       newEntry = {
         ...newEntry,
-        created_at: fromUnixTime(entry.created_at),
+        created_at: fromUnixTime(entry.created_at as number),
       };
     }
     if (entry.hasOwnProperty("updated_at")) {
       newEntry = {
         ...newEntry,
-        updated_at: fromUnixTime(entry.updated_at),
+        updated_at: fromUnixTime(entry.updated_at as number) as Date,
       };
     }
     return newEntry;
@@ -114,10 +119,10 @@ interface saveToCacheParams {
 }
 
 const saveToCache = async (params: saveToCacheParams) => {
-  const { data, type } = params;
-  const model = prisma[type];
+  const { type, data } = params;
+  const model: PrismaClient[typeof type] = prisma[type];
   await model.createMany({
-    data: cleanedData,
+    data: data,
   });
 };
 
@@ -144,7 +149,7 @@ const removeDeprecatedFields = (
   data.forEach((entry) => {
     deprecatedFields.forEach((deprecatedField) => {
       if (entry.hasOwnProperty(deprecatedField)) {
-        delete entry[deprecatedField];
+        delete entry[deprecatedField as keyof IGDBMeta];
       }
     });
   });

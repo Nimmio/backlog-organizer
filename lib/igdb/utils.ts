@@ -38,7 +38,7 @@ const isNonEmptyArrayOrString = (
   return false;
 };
 
-const getFieldsBody = (fields: IGDBFields): string => {
+const getFieldsBody = (fields: IGDBFields | string): string => {
   if (isNonEmptyArrayOrString(fields)) {
     return `fields ${fields.toString()} ;`;
   }

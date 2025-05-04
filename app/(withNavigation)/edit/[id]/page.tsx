@@ -8,7 +8,7 @@ import prisma from "@/lib/prisma";
 const Edit = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
-  const game = await prisma.gameUser.findFirst({
+  const game = await prisma.gameStatus.findFirst({
     where: { id: +id },
   });
 

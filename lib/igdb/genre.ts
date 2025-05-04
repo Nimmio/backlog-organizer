@@ -35,8 +35,6 @@ const getCached = async (
 
 const getFromExternal = async (ids: number[]): Promise<Genre[]> => {
   const { access_token } = await getAuthentication();
-  const fields: GameField[] = ["genres", "platforms"];
-  const idString = getIdString(ids);
   const response = await queryBuilder({
     access_token: access_token || undefined,
     requestUrl: RequestUrls.genre,
