@@ -39,14 +39,14 @@ export async function saveFileInBucket({
 
   // check if file exists - optional.
   // Without this check, the file will be overwritten if it exists
-  const fileExists = await checkFileExistsInBucket({
-    bucketName,
-    fileName,
-  });
+  // const fileExists = await checkFileExistsInBucket({
+  //   bucketName,
+  //   fileName,
+  // });
 
-  if (fileExists) {
-    throw new Error("File already exists");
-  }
+  // if (fileExists) {
+  //   throw new Error("File already exists");
+  // }
   // Upload image to S3 bucket
   await s3Client.putObject(bucketName, fileName, file);
 }
