@@ -10,7 +10,7 @@ interface AppPageProps {
 }
 
 const AppPage = (props: AppPageProps) => {
-  const { children, titel, breadcrumbs = [] } = props;
+  const { children, breadcrumbs = [] } = props;
   return (
     <main>
       <BreadcrumbSetter newBreadcrumbs={breadcrumbs} />

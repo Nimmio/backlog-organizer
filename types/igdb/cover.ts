@@ -1,5 +1,3 @@
-import { Cover } from "@/generated/prisma";
-
 export type CoverField =
   | "alpha_channel"
   | "animated"

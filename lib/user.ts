@@ -1,7 +1,5 @@
-import { getCurrentUserId } from "@/app/actions";
 import prisma from "./prisma";
 import { UserSettings } from "@/generated/prisma";
-import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 import { headers } from "next/headers";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -40,4 +38,11 @@ export const getCurrentUser = async (): Promise<User> => {
   const user = sessionResponse?.user || null;
   if (!user) throw new Error("User not Found");
   return user;
+};
+
+export const getCurrentUserId = async (): Promise<string> => {
+  const sessionResponse = await auth.api.getSession({
+    headers: await headers(),
+  });
+  return sessionResponse?.user.id as string;
 };
