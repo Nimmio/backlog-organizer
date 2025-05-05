@@ -7,3 +7,7 @@ export type IGDBMetaType = "game" | "genre" | "platform" | "cover";
 export type IGDBMeta = Game | Genre | Platform | Cover;
 
 export type IGDBExternMeta = ExternalGenre | ExternalGame | ExternalPlatform;
+
+postgresql://postgres:O7YVVxapn9o1cUApykS0s9l1Ve8tcfnOCdJylxzfHL0T0cjkAQ6G3DlKCUAskknG@postgres:5432/mydb?schema=public
+
+postgresql://postgres:O7YVVxapn9o1cUApykS0s9l1Ve8tcfnOCdJylxzfHL0T0cjkAQ6G3DlKCUAskknG@postgres:5432/mydb?schema=public
