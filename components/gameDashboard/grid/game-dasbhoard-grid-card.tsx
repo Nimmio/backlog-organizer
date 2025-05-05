@@ -1,9 +1,10 @@
+import { getCoverFromStoreForId } from "@/app/(withNavigation)/actions";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { getStatusColor, getStatusTranslation, TStatusKey } from "@/lib/status";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface GameDashboardGridCardProps {
   game: GameStatusWithIgdbGame;
@@ -12,6 +13,19 @@ interface GameDashboardGridCardProps {
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game } = props;
   const { id, platform, status, igdbGame } = game;
+  const [cover, setCover] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (igdbGame?.coverId) {
+      getCoverFromStoreForId(igdbGame?.coverId).then((url) => {
+        setCover(url);
+      });
+    }
+    return () => {
+      setCover(undefined);
+    };
+  }, [igdbGame?.coverId]);
+
   return (
     <Card key={id} className="overflow-hidden p-5">
       <div className="flex h-full">
@@ -19,12 +33,8 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
           <Image
             width={120}
             height={160}
-            src={
-              igdbGame?.hasCover
-                ? "/covers/" + igdbGame?.id + ".jpg"
-                : "/placeholder.jpg"
-            }
-            alt={`${name} cover`}
+            src={cover ? cover : "/placeholder.jpg"}
+            alt={`${igdbGame?.name} cover`}
             className="h-full w-full object-cover"
           />
         </div>

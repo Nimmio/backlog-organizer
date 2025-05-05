@@ -22,6 +22,7 @@ import { fromUnixTime } from "date-fns";
 import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
 import { CoverField } from "@/types/igdb/cover";
+import { createPresignedUrlToDownload } from "@/lib/file-managment";
 
 interface getGamesForDashboardParams {
   search: string;
@@ -43,6 +44,7 @@ export const getGamesForDashboard = async (
 
     where: getWhereString({ userId: currentUserId, status, search, platform }),
   });
+
   return games;
 };
 
@@ -278,23 +280,13 @@ export const createGameStatus = async (params: createGameStatusParams) => {
     },
   });
 
-  const igdbGame = await prisma.game.findFirst({
-    where: {
-      id: createdGameStatus.igdbGameId,
-    },
-  });
-
-  if (createGame.cover && !igdbGame?.hasCover) {
+  if (createGame.cover) {
     const getUrl = await getCoverUrl(createGame.cover);
     const blob = await downloadImage("https:" + getUrl);
-    await saveImage(blob, createGame.id.toString() + ".jpg");
-    await prisma.game.update({
-      where: {
-        id: createdGameStatus.igdbGameId,
-      },
-      data: {
-        hasCover: true,
-      },
+    await saveImage({
+      blob,
+      filename: createGame.id.toString() + ".jpg",
+      gameId: createGame.id,
     });
   }
 
@@ -347,4 +339,22 @@ const getCoverForIds = async (ids: number[]) => {
     fields: ["url"] as CoverField[],
     limit: ids.length,
   })) as Array<{ url: string; id: number }>;
+};
+
+export const getCoverFromStoreForId = async (id: string) => {
+  const cover = await prisma.file.findFirstOrThrow({
+    select: {
+      bucket: true,
+      fileName: true,
+    },
+    where: {
+      id: id,
+    },
+  });
+
+  const url = await createPresignedUrlToDownload({
+    bucketName: cover.bucket,
+    fileName: cover.fileName,
+  });
+  return url;
 };

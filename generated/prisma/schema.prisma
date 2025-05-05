@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x", "rhel-openssl-1.0.x"]
+  output        = "../generated/prisma"
 }
 
 datasource db {
@@ -78,7 +79,8 @@ model Platform {
 model Game {
   id                 Int          @id @unique
   checksum           String?
-  hasCover           Boolean      @default(false)
+  cover              File?        @relation(fields: [coverId], references: [id])
+  coverId            String?      @unique
   created_at         DateTime?
   first_release_date Int?
   genres             Genre[]
@@ -149,4 +151,14 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model File {
+  id           String   @id @default(uuid())
+  bucket       String
+  fileName     String   @unique
+  originalName String
+  createdAt    DateTime @default(now())
+  size         Int
+  Game         Game?
 }

@@ -1,8 +1,8 @@
 import { IGDBFields } from "@/types/igdb/fields";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
-import { writeFile } from "fs/promises";
-import path from "path";
+import { saveFileInBucket } from "../file-managment";
+import prisma from "../prisma";
 
 const rootUrl = "https://api.igdb.com/v4/";
 export const RequestUrls: {
@@ -111,17 +111,42 @@ interface SaveImageResponse {
   error?: string;
 }
 
+interface saveImageParams {
+  blob: Blob;
+  filename: string;
+  gameId: number;
+}
+
 export const saveImage = async (
-  blob: Blob,
-  filename: string
+  params: saveImageParams
 ): Promise<SaveImageResponse> => {
+  const { blob, filename, gameId } = params;
   const buffer = Buffer.from(await blob.arrayBuffer());
+
   try {
-    await writeFile(
-      path.join(process.cwd(), "public/covers/" + filename),
-      buffer
-    );
-    return { success: true };
+    await saveFileInBucket({
+      bucketName: "covers",
+      file: buffer,
+      fileName: "cache-" + filename,
+    });
+    await prisma.game.update({
+      where: {
+        id: gameId,
+      },
+      data: {
+        cover: {
+          create: {
+            bucket: "covers",
+            fileName: "cache-" + filename,
+            size: blob.size,
+            originalName: filename,
+          },
+        },
+      },
+    });
+    return {
+      success: true,
+    };
   } catch (error) {
     return {
       success: false,
