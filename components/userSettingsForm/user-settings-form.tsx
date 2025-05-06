@@ -20,7 +20,10 @@ import {
 } from "../ui/select";
 import { Button } from "../ui/button";
 import { UserSettings } from "@/generated/prisma";
-import { upsertSettings } from "@/app/(withNavigation)/user/settings/actions";
+import {
+  cleanDB,
+  upsertSettings,
+} from "@/app/(withNavigation)/user/settings/actions";
 import { useTheme } from "next-themes";
 
 interface UserSettingsFormProps {
@@ -49,33 +52,41 @@ const UserSettingsForm = (props: UserSettingsFormProps) => {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="theme"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Theme</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="SYSTEM">System</SelectItem>
-                  <SelectItem value="LIGHT">Light</SelectItem>
-                  <SelectItem value="DARK">Dark</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button className="mt-4">Submit</Button>
-      </form>
-    </Form>
+    <>
+      <Button variant="destructive" onClick={() => cleanDB()}>
+        Nuke All
+      </Button>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="theme"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Theme</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a verified email to display" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="SYSTEM">System</SelectItem>
+                    <SelectItem value="LIGHT">Light</SelectItem>
+                    <SelectItem value="DARK">Dark</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button className="mt-4">Submit</Button>
+        </form>
+      </Form>
+    </>
   );
 };
 

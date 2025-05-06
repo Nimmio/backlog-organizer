@@ -39,3 +39,11 @@ export const getUserTheme = async (id: string): Promise<Theme | undefined> => {
     })
   )?.theme;
 };
+
+export const cleanDB = async () => {
+  await prisma.gameStatus.deleteMany();
+  await prisma.game.deleteMany();
+  await prisma.file.deleteMany();
+  await prisma.genre.deleteMany();
+  await prisma.platform.deleteMany();
+};
