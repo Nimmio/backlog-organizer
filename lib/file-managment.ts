@@ -105,3 +105,23 @@ export async function createPresignedUrlToDownload({
 }) {
   return await s3Client.presignedGetObject(bucketName, fileName, expiry);
 }
+
+export const getBlobFromBucket = async ({
+  bucketName,
+  fileName,
+}: {
+  bucketName: string;
+  fileName: string;
+}) => {
+  try {
+    const test = await createPresignedUrlToDownload({
+      bucketName,
+      fileName,
+    });
+    let blob = await fetch(test).then((response) => response.blob());
+    return blob;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};

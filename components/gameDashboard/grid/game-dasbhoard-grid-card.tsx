@@ -17,8 +17,9 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
 
   useEffect(() => {
     if (igdbGame?.coverId) {
-      getCoverFromStoreForId(igdbGame?.coverId).then((url) => {
-        setCover(url);
+      getCoverFromStoreForId(igdbGame?.coverId).then((blob) => {
+        console.log(blob);
+        setCover(URL.createObjectURL(blob as Blob));
       });
     }
     return () => {

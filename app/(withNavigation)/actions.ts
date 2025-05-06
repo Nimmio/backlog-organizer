@@ -22,7 +22,10 @@ import { fromUnixTime } from "date-fns";
 import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
 import { CoverField } from "@/types/igdb/cover";
-import { createPresignedUrlToDownload } from "@/lib/file-managment";
+import {
+  createPresignedUrlToDownload,
+  getBlobFromBucket,
+} from "@/lib/file-managment";
 
 interface getGamesForDashboardParams {
   search: string;
@@ -351,10 +354,14 @@ export const getCoverFromStoreForId = async (id: string) => {
       id: id,
     },
   });
+  const test = await getBlobFromBucket({
+    bucketName: cover.bucket,
+    fileName: cover.fileName,
+  });
 
   const url = await createPresignedUrlToDownload({
     bucketName: cover.bucket,
     fileName: cover.fileName,
   });
-  return url;
+  return test;
 };
