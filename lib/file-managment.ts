@@ -118,8 +118,7 @@ export const getBlobFromBucket = async ({
       bucketName,
       fileName,
     });
-    let blob = await fetch(test).then((response) => response.blob());
-    return blob;
+    return await fetch(test).then((response) => response.blob());
   } catch (error) {
     console.error(error);
     return null;
