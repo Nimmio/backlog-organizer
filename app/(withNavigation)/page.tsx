@@ -36,7 +36,7 @@ const Home = async ({
   let parsedControls = getJsonParsedStringOrNull(
     dashboardControls as string
   ) as DashboardControlsParsed | null;
-  let addGameDialogOpenParsed = getJsonParsedStringOrNull(
+  const addGameDialogOpenParsed = getJsonParsedStringOrNull(
     addGameDialogOpen as string
   );
 

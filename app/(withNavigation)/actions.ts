@@ -12,12 +12,7 @@ import {
 } from "@/lib/igdb/utils";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { ExternalPlatform, platformFields } from "@/types/igdb/platform";
-import {
-  ExternalGame,
-  GameField,
-  SearchGame,
-  SearchGameDetails,
-} from "@/types/igdb/game";
+import { ExternalGame, GameField, SearchGameDetails } from "@/types/igdb/game";
 import { fromUnixTime } from "date-fns";
 import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
@@ -297,18 +292,6 @@ export const createGameStatus = async (params: createGameStatusParams) => {
   }
   revalidatePath("/");
   return createdGameStatus;
-};
-
-const getCoverForIds = async (ids: number[]) => {
-  const { access_token } = await getAuthentication();
-
-  return (await queryBuilder({
-    access_token: access_token || undefined,
-    requestUrl: RequestUrls.cover,
-    where: `id = (${ids.toString()})`,
-    fields: ["url"] as CoverField[],
-    limit: ids.length,
-  })) as Array<{ url: string; id: number }>;
 };
 
 export const getCoverFromStoreForId = async (id: string) => {

@@ -1,6 +1,6 @@
-import { SearchGame, SearchGameDetails } from "@/types/igdb/game";
+import { SearchGame } from "@/types/igdb/game";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Badge } from "../ui/badge";
 import { Label } from "../ui/label";
 import {

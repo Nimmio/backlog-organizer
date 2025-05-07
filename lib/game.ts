@@ -5,9 +5,6 @@ import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 import { getCurrentUserId } from "./user";
 import { deleteFileFromBucket } from "./file-managment";
-import { getAuthentication } from "./igdb/auth";
-import { queryBuilder, RequestUrls } from "./igdb/utils";
-import { GenreField } from "@/types/igdb/genre";
 
 interface getGamesForDashboardParams {
   search?: string;

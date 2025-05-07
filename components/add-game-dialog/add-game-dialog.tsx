@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import AppDialog from "../Dialog/app-dialog";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useQueryString } from "@/hooks/use-query-string,";
 import AddGameDialogSearch from "./add-game-dialog-search";
 import AddGameDialogDetailView from "./add-game-dialog-detai-view";

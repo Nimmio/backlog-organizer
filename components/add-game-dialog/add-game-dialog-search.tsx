@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Input } from "../ui/input";
 import { SearchGame } from "@/types/igdb/game";
 import AddGameDialogSearchGameCard from "./add-game-dialog-search-game-card";

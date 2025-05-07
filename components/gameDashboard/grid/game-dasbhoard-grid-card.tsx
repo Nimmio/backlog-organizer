@@ -22,7 +22,7 @@ interface GameDashboardGridCardProps {
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game, onDelete } = props;
-  const { id, platform, status: gameStatus, igdbGame } = game;
+  const { id, status: gameStatus, igdbGame } = game;
   const [cover, setCover] = useState<string | undefined>(undefined);
 
   useEffect(() => {

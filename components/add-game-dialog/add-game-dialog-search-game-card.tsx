@@ -12,7 +12,7 @@ interface GameCardProps {
 
 const AddGameDialogSearchGameCard = (props: GameCardProps) => {
   const { game, onClick } = props;
-  const { name, first_release_date, cover } = game;
+  const { name, first_release_date } = game;
   return (
     <Card
       className="overflow-hidden cursor-pointer transition-all hover:shadow-md p-0  max-w-[295px] min-w-[200px]"
