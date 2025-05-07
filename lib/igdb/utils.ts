@@ -93,6 +93,7 @@ export const queryBuilder = async (params: queryBuilderParams) => {
   const response = await fetch(requestUrl, {
     ...query,
     body,
+    cache: "force-cache",
   });
 
   const data = await response.json();
@@ -102,7 +103,10 @@ export const queryBuilder = async (params: queryBuilderParams) => {
 export const downloadImage = async (url: string): Promise<Blob> => {
   const newURl = url.replace("t_thumb", "t_cover_big");
 
-  const response = await fetch(newURl, { mode: "no-cors" });
+  const response = await fetch(newURl, {
+    mode: "no-cors",
+    cache: "force-cache",
+  });
   return await response.blob();
 };
 

@@ -19,7 +19,6 @@ const Page = async () => {
         newBreadcrumbs={[{ title: "User" }, { title: "Settings" }]}
       />
       <Card className="p-4">
-        <AppTitel>User Settings</AppTitel>
         <UserSettingsForm settings={settings} userId={currentUserId} />
       </Card>
     </main>

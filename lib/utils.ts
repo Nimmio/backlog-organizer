@@ -16,8 +16,10 @@ export const stringIsJsonParsable = (input: string | null): boolean => {
   }
 };
 
-export const getJsonParsedStringOrNull = (input: string | null): object => {
-  if (!input || !stringIsJsonParsable(input)) return {};
+export const getJsonParsedStringOrNull = (
+  input: string | null
+): object | null => {
+  if (!input || !stringIsJsonParsable(input)) return null;
   else return JSON.parse(input);
 };
 

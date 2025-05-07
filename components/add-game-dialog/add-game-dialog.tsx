@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppDialog from "../Dialog/app-dialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQueryString } from "@/hooks/use-query-string,";
@@ -7,19 +7,55 @@ import AddGameDialogSearch from "./add-game-dialog-search";
 import AddGameDialogDetailView from "./add-game-dialog-detai-view";
 import { createGameStatus } from "@/app/(withNavigation)/actions";
 import { Status } from "@/generated/prisma";
+import { SearchGame } from "@/types/igdb/game";
+import { useDebounce } from "use-debounce";
+import { searchgameOnIGDBParams } from "@/lib/igdb/game";
 
-const AddGameDialog = () => {
+interface handleAddGameParams {
+  id: number;
+  platform: string;
+  status: string;
+}
+
+interface AddGameDialogProps {
+  open: boolean;
+}
+
+const AddGameDialog = (props: AddGameDialogProps) => {
+  const { open } = props;
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const createQueryString = useQueryString();
 
-  const [selectedGameId, setSelectedGameId] = useState<number | null>(null);
+  const [selectedGame, setSelectedGame] = useState<SearchGame | null>(null);
+  const [searchQuery, setsearchQuery] = useState<string>("");
+  const [searchIsLoading, setSearchIsLoading] = useState<boolean>(false);
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
+  const [searchResults, setSearchResults] = useState<SearchGame[]>([]);
 
-  const open = searchParams.get("addGameDialogOpen") === "true";
+  useEffect(() => {
+    if (!open) {
+      setSelectedGame(null);
+      setsearchQuery("");
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (debouncedSearchQuery) {
+      setSearchIsLoading(true);
+      searchgameOnIGDBParams({
+        search: debouncedSearchQuery,
+        filterEditions: true,
+      }).then((games) => {
+        setSearchResults(games);
+        setSearchIsLoading(false);
+      });
+    } else {
+      setSearchResults([]);
+    }
+  }, [debouncedSearchQuery]);
 
   const handleOpenChange = (open: boolean) => {
-    setSelectedGameId(null);
     router.push(
       `${pathname}?${createQueryString(
         "addGameDialogOpen",
@@ -28,12 +64,6 @@ const AddGameDialog = () => {
     );
   };
 
-  interface handleAddGameParams {
-    id: number;
-    platform: string;
-    status: string;
-  }
-
   const handleAddGame = (params: handleAddGameParams) => {
     const { id, platform, status } = params;
 
@@ -41,7 +71,7 @@ const AddGameDialog = () => {
       id,
       platform,
       status: status as Status,
-    });
+    }).then(() => handleOpenChange(false));
   };
 
   return (
@@ -49,19 +79,23 @@ const AddGameDialog = () => {
       title="Add Game"
       open={open}
       content={
-        !selectedGameId ? (
+        !selectedGame ? (
           <AddGameDialogSearch
-            onSelectGame={(id: number) => setSelectedGameId(id)}
+            onSelectGame={(game: SearchGame) => setSelectedGame(game)}
+            isLoading={searchIsLoading}
+            onChangeSearchInput={(newValue) => setsearchQuery(newValue)}
+            searchInput={searchQuery}
+            searchResults={searchResults}
           />
         ) : (
           <AddGameDialogDetailView
-            gameId={selectedGameId}
-            onBack={() => setSelectedGameId(null)}
+            game={selectedGame}
+            onBack={() => setSelectedGame(null)}
             onAddGame={(params) => handleAddGame(params)}
           />
         )
       }
-      onOpenChange={(open) => handleOpenChange(open)}
+      onOpenChange={(isOpen) => handleOpenChange(isOpen)}
     ></AppDialog>
   );
 };

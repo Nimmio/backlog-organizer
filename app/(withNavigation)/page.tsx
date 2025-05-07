@@ -30,13 +30,16 @@ const Home = async ({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const { dashboardControls } = await searchParams;
-
+  const { dashboardControls, addGameDialogOpen } = await searchParams;
   await ensureLogin();
 
   let parsedControls = getJsonParsedStringOrNull(
     dashboardControls as string
   ) as DashboardControlsParsed | null;
+  let addGameDialogOpenParsed = getJsonParsedStringOrNull(
+    addGameDialogOpen as string
+  );
+
   if (!parsedControls) parsedControls = DashboardControlsParsedDefaults;
 
   const { search, status, platform } = parsedControls;
@@ -44,7 +47,7 @@ const Home = async ({
   const games = await getGamesForDashboard({ search, status, platform });
   return (
     <AppPage titel="Dashboard" breadcrumbs={[{ title: "Games" }]}>
-      <AddGameDialog />
+      <AddGameDialog open={addGameDialogOpenParsed !== null} />
       <GameDashboardStoreProvider>
         <GameDashboard games={games} />
       </GameDashboardStoreProvider>

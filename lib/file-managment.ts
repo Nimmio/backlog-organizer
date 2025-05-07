@@ -124,3 +124,25 @@ export const getBlobFromBucket = async ({
     return null;
   }
 };
+
+/**
+ * Delete file from S3 bucket
+ * @param bucketName name of the bucket
+ * @param fileName name of the file
+ * @returns true if file was deleted, false if not
+ */
+export async function deleteFileFromBucket({
+  bucketName,
+  fileName,
+}: {
+  bucketName: string;
+  fileName: string;
+}) {
+  try {
+    await s3Client.removeObject(bucketName, fileName);
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+  return true;
+}

@@ -15,13 +15,13 @@ const AddGameDialogSearchGameCard = (props: GameCardProps) => {
   const { name, first_release_date, cover } = game;
   return (
     <Card
-      className="overflow-hidden cursor-pointer transition-all hover:shadow-md"
+      className="overflow-hidden cursor-pointer transition-all hover:shadow-md p-0  max-w-[295px] min-w-[200px]"
       onClick={onClick}
     >
-      {cover && cover !== "" ? (
-        <div className="aspect-[3/4]  relative">
+      {game.cover && game.cover.url !== "" ? (
+        <div className="aspect-[3/4] relative mx-auto md:mx-0 w-full max-w-[295px]">
           <Image
-            src={getUrl(cover as string, "cover_big")}
+            src={getUrl(game.cover.url as string, "cover_big")}
             alt={name}
             fill
             className="object-cover"
@@ -30,7 +30,7 @@ const AddGameDialogSearchGameCard = (props: GameCardProps) => {
       ) : (
         <div className="aspect-[3/4]  relative"></div>
       )}
-      <CardContent className="p-4">
+      <CardContent className="pb-4">
         <h3 className="font-semibold text-lg line-clamp-1">{name}</h3>
         <p className="text-sm text-muted-foreground">
           {first_release_date

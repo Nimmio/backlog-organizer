@@ -1,24 +1,33 @@
 import { getCoverFromStoreForId } from "@/app/(withNavigation)/actions";
+import DeleteConfirmation from "@/components/delete-confirmation/delete-confirmation";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { getStatusColor, getStatusTranslation, TStatusKey } from "@/lib/status";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { getStatusAsArray, getStatusColor } from "@/lib/status";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
+import { Eye } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface GameDashboardGridCardProps {
   game: GameStatusWithIgdbGame;
+  onDelete: (id: number) => void;
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
-  const { game } = props;
-  const { id, platform, status, igdbGame } = game;
+  const { game, onDelete } = props;
+  const { id, platform, status: gameStatus, igdbGame } = game;
   const [cover, setCover] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (igdbGame?.coverId) {
       getCoverFromStoreForId(igdbGame?.coverId).then((blob) => {
-        console.log(blob);
         setCover(URL.createObjectURL(blob as Blob));
       });
     }
@@ -27,34 +36,63 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
     };
   }, [igdbGame?.coverId]);
 
+  if (!igdbGame) return <></>;
   return (
-    <Card key={id} className="overflow-hidden p-5">
-      <div className="flex h-full">
-        <div className="w-[120px] bg-muted flex-shrink-0 mt-1">
+    <Card key={id} className="overflow-hidden flex flex-col p-0">
+      <div className="flex flex-1">
+        <div className="w-[120px] bg-muted flex-shrink-0">
           <Image
             width={120}
             height={160}
-            src={cover ? cover : "/placeholder.jpg"}
-            alt={`${igdbGame?.name} cover`}
+            src={cover || "/placeholder.svg"}
+            alt={`${igdbGame.name} cover`}
             className="h-full w-full object-cover"
           />
         </div>
-        <CardContent className=" flex flex-col justify-between">
+        <CardContent className="p-4 flex flex-col justify-between">
           <div>
-            <h3 className="font-semibold line-clamp-2">{igdbGame?.name}</h3>
-            <p className="text-sm text-muted-foreground mt-1">
-              {platform ? platform.name : ""}
-            </p>
+            <h3 className="font-semibold line-clamp-2">{igdbGame.name}</h3>
+            {/* <PlatformDropdown gameId={game.id} currentPlatform={game.platform} /> */}
           </div>
-          <Badge
-            className={`mt-2 ${
-              getStatusColor(status as TStatusKey) || "bg-gray-500"
-            } min-w-[100]`}
-          >
-            {getStatusTranslation(status)}
-          </Badge>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Badge
+                className={`mt-2 cursor-pointer ${
+                  getStatusColor(gameStatus) || "bg-gray-500"
+                } hover:${getStatusColor(gameStatus) || "bg-gray-600"}`}
+              >
+                {gameStatus}
+              </Badge>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              {getStatusAsArray().map((status) => (
+                <DropdownMenuItem
+                  key={status.key}
+                  onClick={() => {}}
+                  className={
+                    status.translation.en === gameStatus ? "font-bold" : ""
+                  }
+                >
+                  {status.translation.en}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </CardContent>
       </div>
+      <CardFooter className="px-4 py-2 border-t flex justify-end gap-2 bg-muted/10">
+        <Button variant="outline" size="sm" className="h-8 px-2 gap-1">
+          <Eye className="h-4 w-4" />
+          <span>View</span>
+        </Button>
+        <DeleteConfirmation
+          gameName={igdbGame.name}
+          onDeleteConfirm={() => {
+            onDelete(id);
+          }}
+        />
+      </CardFooter>
     </Card>
   );
 };

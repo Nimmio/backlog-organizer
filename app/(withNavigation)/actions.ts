@@ -23,6 +23,7 @@ import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
 import { CoverField } from "@/types/igdb/cover";
 import { getBlobFromBucket } from "@/lib/file-managment";
+import { revalidatePath } from "next/cache";
 
 interface getGamesForDashboardParams {
   search: string;
@@ -42,7 +43,12 @@ export const getGamesForDashboard = async (
       platform: true,
     },
 
-    where: getWhereString({ userId: currentUserId, status, search, platform }),
+    where: await getWhereString({
+      userId: currentUserId,
+      status,
+      search,
+      platform,
+    }),
   });
 
   return games;
@@ -77,11 +83,11 @@ export const getSearchGameDetails = async (
   )[0];
   const gameWithNested = {
     ...game,
-    cover: game.cover ? await getCoverUrl(game.cover) : undefined,
-    genres: (await getGenresForCreate(game.genres)).map((genre) => genre.name),
-    platforms: (await getPlatformsForCreate(game.platforms)).map(
-      (platform) => platform.name
-    ),
+    // cover: game.cover ? await getCoverUrl(game.cover) : undefined,
+    // genres: (await getGenresForCreate(game.genres)).map((genre) => genre.name),
+    // platforms: (await getPlatformsForCreate(game.platforms)).map(
+    //   (platform) => platform.name
+    // ),
   };
 
   return gameWithNested;
@@ -289,44 +295,8 @@ export const createGameStatus = async (params: createGameStatusParams) => {
       gameId: createGame.id,
     });
   }
-
+  revalidatePath("/");
   return createdGameStatus;
-};
-
-interface searchGameParams {
-  search: string;
-  filterEditions?: boolean;
-}
-
-export const searchGame = async (
-  params: searchGameParams
-): Promise<SearchGame[]> => {
-  const { search, filterEditions = false } = params;
-  const { access_token } = await getAuthentication();
-
-  const filter = filterEditions ? ["version_parent = null"] : undefined;
-  const games = (await queryBuilder({
-    access_token: access_token || undefined,
-    requestUrl: RequestUrls.game,
-    search: search,
-    fields: [
-      "name",
-      "first_release_date",
-      "cover",
-      "version_parent",
-    ] as GameField[],
-    where: filter,
-    limit: 12,
-  })) as SearchGame[];
-
-  const covers = await getCoverForIds(
-    games.map((game) => (game.cover as number) || 0)
-  );
-
-  return games.map((game) => ({
-    ...game,
-    cover: covers.find((cover) => cover.id === game.cover)?.url || undefined,
-  }));
 };
 
 const getCoverForIds = async (ids: number[]) => {

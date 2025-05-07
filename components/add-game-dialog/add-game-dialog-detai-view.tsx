@@ -1,4 +1,4 @@
-import { SearchGameDetails } from "@/types/igdb/game";
+import { SearchGame, SearchGameDetails } from "@/types/igdb/game";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Badge } from "../ui/badge";
@@ -15,10 +15,9 @@ import { format, fromUnixTime } from "date-fns";
 import { Button } from "../ui/button";
 import { ArrowLeft, Plus } from "lucide-react";
 import { getStatusAsArray } from "@/lib/status";
-import { getSearchGameDetails } from "@/app/(withNavigation)/actions";
 
 interface AddGameDialogDetailViewProps {
-  gameId: number;
+  game: SearchGame;
   onBack: () => void;
   onAddGame: ({
     id,
@@ -32,50 +31,32 @@ interface AddGameDialogDetailViewProps {
 }
 
 const AddGameDialogDetailView = (props: AddGameDialogDetailViewProps) => {
-  const { gameId, onBack, onAddGame } = props;
+  const { game, onBack, onAddGame } = props;
 
-  const [game, setGame] = useState<SearchGameDetails | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedPlatform, setSelectedPlatform] = useState<string>("none");
   const [selectedStatus, setSelectedStatus] = useState<string>("BACKLOG");
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (gameId) {
-      getSearchGameDetails({ id: gameId }).then((gameDetails) => {
-        setGame(gameDetails);
-        setIsLoading(false);
-      });
-    } else {
-      setGame(undefined);
-    }
-
-    return () => {
-      setGame(undefined);
-    };
-  }, [gameId]);
-
   const handleAddGame = () => {
     onAddGame({
-      id: gameId,
+      id: game.id,
       platform: selectedPlatform,
       status: selectedStatus,
     });
   };
 
-  return !isLoading && game ? (
+  return game ? (
     <div className="grid md:grid-cols-[200px_1fr] gap-6 py-4">
-      {game.cover && game.cover !== "" ? (
+      {game.cover && game.cover.url !== "" ? (
         <div className="aspect-[3/4] relative mx-auto md:mx-0 w-full max-w-[200px] mt-[8]">
           <Image
-            src={getUrl(game.cover as string, "cover_big")}
+            src={getUrl(game.cover.url as string, "cover_big")}
             alt={game.name}
             fill
             className="object-cover"
           />
         </div>
       ) : (
-        <div className="aspect-[3/4]  relative"></div>
+        <div className="aspect-[3/4] relative mx-auto md:mx-0 w-full max-w-[200px] mt-[8]"></div>
       )}
 
       <div className="space-y-4">
@@ -99,8 +80,8 @@ const AddGameDialogDetailView = (props: AddGameDialogDetailViewProps) => {
             </h4>
             <div className="flex flex-wrap gap-2 mt-1">
               {game.genres.map((genre) => (
-                <Badge key={genre} variant="secondary">
-                  {genre}
+                <Badge key={genre.id} variant="secondary">
+                  {genre.name}
                 </Badge>
               ))}
             </div>
@@ -113,8 +94,8 @@ const AddGameDialogDetailView = (props: AddGameDialogDetailViewProps) => {
             </h4>
             <div className="flex flex-wrap gap-2 mt-1">
               {game.platforms.map((platform) => (
-                <Badge key={platform} variant="outline">
-                  {platform}
+                <Badge key={platform.id} variant="outline">
+                  {platform.name}
                 </Badge>
               ))}
             </div>
@@ -143,8 +124,8 @@ const AddGameDialogDetailView = (props: AddGameDialogDetailViewProps) => {
                   None
                 </SelectItem>
                 {game.platforms?.map((platform) => (
-                  <SelectItem key={platform} value={platform}>
-                    {platform}
+                  <SelectItem key={platform.id} value={platform.name}>
+                    {platform.name}
                   </SelectItem>
                 ))}
               </SelectContent>
