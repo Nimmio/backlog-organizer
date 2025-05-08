@@ -10,6 +10,7 @@ import { Status } from "@/generated/prisma";
 import { SearchGame } from "@/types/igdb/game";
 import { useDebounce } from "use-debounce";
 import { searchgameOnIGDBParams } from "@/lib/igdb/game";
+import { toast } from "sonner";
 
 interface handleAddGameParams {
   id: number;
@@ -66,12 +67,14 @@ const AddGameDialog = (props: AddGameDialogProps) => {
 
   const handleAddGame = (params: handleAddGameParams) => {
     const { id, platform, status } = params;
-
     createGameStatus({
       id,
       platform,
       status: status as Status,
-    }).then(() => handleOpenChange(false));
+    }).then((newGameStatus) => {
+      handleOpenChange(false);
+      toast("Added Game", { description: newGameStatus.igdbGame.name });
+    });
   };
 
   return (

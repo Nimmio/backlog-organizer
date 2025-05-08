@@ -78,11 +78,6 @@ export const getSearchGameDetails = async (
   )[0];
   const gameWithNested = {
     ...game,
-    // cover: game.cover ? await getCoverUrl(game.cover) : undefined,
-    // genres: (await getGenresForCreate(game.genres)).map((genre) => genre.name),
-    // platforms: (await getPlatformsForCreate(game.platforms)).map(
-    //   (platform) => platform.name
-    // ),
   };
 
   return gameWithNested;
@@ -213,7 +208,7 @@ const getCoverUrl = async (id: number): Promise<string> => {
     )[0] as { url: string }
   ).url;
 };
-
+//TODO: Rewrite
 export const createGameStatus = async (params: createGameStatusParams) => {
   const { id, platform, status } = params;
   const createPlatform =

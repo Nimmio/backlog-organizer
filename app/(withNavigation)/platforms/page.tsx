@@ -11,7 +11,6 @@ const Platforms = async () => {
     include: { gameStatus: true },
     where: { gameStatus: { some: { userId: currentUserId } } },
   });
-  console.log("platforms", platforms);
   return (
     <AppPage titel="Dashboard" breadcrumbs={[{ title: "Platforms" }]}>
       <PlatformTable platforms={platforms} />
