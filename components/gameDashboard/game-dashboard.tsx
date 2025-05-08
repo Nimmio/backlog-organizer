@@ -2,6 +2,7 @@
 
 import {
   getMultipleStatusKeysTranslatedWithAll,
+  getStatusTranslation,
   TStatusKeyWithAll,
 } from "@/lib/status";
 import GameDashboardControls from "./controls/game-dashboard-controls";
@@ -15,6 +16,7 @@ import { Button } from "../ui/button";
 import { PlusCircle } from "lucide-react";
 import { GameStatus, Status } from "@/generated/prisma";
 import { changeStatus, deleteGameStatus } from "@/lib/game";
+import { toast } from "sonner";
 
 // Status and platform options for filters
 const platformOptions = [
@@ -85,7 +87,8 @@ export default function GameDashboard(props: GameDashboardProps) {
   };
 
   const handleDelete = (id: number) => {
-    deleteGameStatus({ id }).then(() => {
+    deleteGameStatus({ id }).then((deleteGameStatus) => {
+      toast("Deleted Game");
       router.refresh();
     });
   };
@@ -101,6 +104,9 @@ export default function GameDashboard(props: GameDashboardProps) {
       id,
       status: newStatus,
     }).then(() => {
+      toast("Changed Status", {
+        description: `Changed Status to ${getStatusTranslation(newStatus)}`,
+      });
       router.refresh();
     });
   };

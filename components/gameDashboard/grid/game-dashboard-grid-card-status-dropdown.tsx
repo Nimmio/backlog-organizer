@@ -6,7 +6,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Status } from "@/generated/prisma";
-import { getStatusAsArray, getStatusColor } from "@/lib/status";
+import {
+  getStatusAsArray,
+  getStatusColor,
+  getStatusTranslation,
+} from "@/lib/status";
 import React from "react";
 
 interface GameDashboardGridCardStatusDropdownProps {
@@ -31,7 +35,7 @@ const GameDashboardGridCardStatusDropdown = (
             getStatusColor(statusAsString) || "bg-gray-500"
           } hover:${getStatusColor(statusAsString) || "bg-gray-600"}`}
         >
-          {statusAsString}
+          {getStatusTranslation(statusAsString)}
         </Badge>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">

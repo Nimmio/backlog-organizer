@@ -110,10 +110,12 @@ interface changeStatusParams {
   status: Status;
 }
 
-export const changeStatus = async (params: changeStatusParams) => {
+export const changeStatus = async (
+  params: changeStatusParams
+): Promise<GameStatus> => {
   const { id, status } = params;
 
-  return prisma.gameStatus.update({
+  return await prisma.gameStatus.update({
     where: { id },
     data: { status },
   });

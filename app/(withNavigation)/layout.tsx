@@ -10,6 +10,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import ThemeSetter from "@/components/themeSetter/ThemeSetter";
 import { ensureLogin, getCurrentUser } from "@/lib/user";
 import SidebarLinks from "@/components/layout/sidebar/app-sidebar-link";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Backlog Organizer",
@@ -41,6 +42,7 @@ export default async function RootLayout({
                   <main>
                     <AppMain>{children}</AppMain>
                   </main>
+                  <Toaster />
                 </SidebarInset>
               </SidebarProvider>
             </BreadcrumStoreProvider>
