@@ -1,15 +1,22 @@
 import React from "react";
 import GameDashboardGridEmpty from "./game-dashboard-empty";
 import GameDashboardGridCard from "./game-dasbhoard-grid-card";
-import { GameStatus } from "@/generated/prisma";
+import { GameStatus, Status } from "@/generated/prisma";
 
 interface GameDasbhoardGridProps {
   games: GameStatus[];
   onDelete: (id: number) => void;
+  onStatusChange: ({
+    id,
+    newStatus,
+  }: {
+    id: number;
+    newStatus: Status;
+  }) => void;
 }
 
 const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {
-  const { games, onDelete } = props;
+  const { games, onDelete, onStatusChange } = props;
 
   const isEmpty = games.length === 0;
 
@@ -21,6 +28,9 @@ const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {
             game={game}
             key={game.id}
             onDelete={(id) => onDelete(id)}
+            onChangeStatus={({ id, newStatus }) =>
+              onStatusChange({ id, newStatus })
+            }
           />
         ))
       ) : (

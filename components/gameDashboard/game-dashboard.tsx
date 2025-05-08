@@ -13,8 +13,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { Button } from "../ui/button";
 import { PlusCircle } from "lucide-react";
-import { GameStatus } from "@/generated/prisma";
-import { deleteGameStatus } from "@/lib/game";
+import { GameStatus, Status } from "@/generated/prisma";
+import { changeStatus, deleteGameStatus } from "@/lib/game";
 
 // Status and platform options for filters
 const platformOptions = [
@@ -90,6 +90,21 @@ export default function GameDashboard(props: GameDashboardProps) {
     });
   };
 
+  interface handleStatusChangeParams {
+    id: number;
+    newStatus: Status;
+  }
+
+  const handleStatusChange = (params: handleStatusChangeParams) => {
+    const { id, newStatus } = params;
+    changeStatus({
+      id,
+      status: newStatus,
+    }).then(() => {
+      router.refresh();
+    });
+  };
+
   return (
     <div className="container mx-auto ">
       <div className="flex justify-between items-center mb-6">
@@ -114,7 +129,13 @@ export default function GameDashboard(props: GameDashboardProps) {
             options: getMultipleStatusKeysTranslatedWithAll(),
           }}
         />
-        <GameDasbhoardGrid games={games} onDelete={(id) => handleDelete(id)} />
+        <GameDasbhoardGrid
+          games={games}
+          onDelete={(id) => handleDelete(id)}
+          onStatusChange={({ id, newStatus }) =>
+            handleStatusChange({ id, newStatus })
+          }
+        />
       </div>
     </div>
   );
