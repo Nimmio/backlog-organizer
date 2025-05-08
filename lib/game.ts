@@ -1,6 +1,6 @@
 "use server";
 
-import { GameStatus } from "@/generated/prisma";
+import { GameStatus, Status } from "@/generated/prisma";
 import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 import { getCurrentUserId } from "./user";
@@ -103,4 +103,18 @@ const gameHasConnectedStatus = async (
       })
     ).gameStatus.length > 0
   );
+};
+
+interface changeStatusParams {
+  id: number;
+  status: Status;
+}
+
+export const changeStatus = async (params: changeStatusParams) => {
+  const { id, status } = params;
+
+  return prisma.gameStatus.update({
+    where: { id },
+    data: { status },
+  });
 };

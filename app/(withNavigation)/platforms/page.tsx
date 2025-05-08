@@ -1,8 +1,7 @@
-import BreadcrumbSetter from "@/components/layout/header/breadcrumbs/breadcrum-setter";
 import AppPage from "@/components/layout/page/app-page";
 import PlatformTable from "@/components/platform-table/platform-table";
 import prisma from "@/lib/prisma";
-import { ensureLogin, getCurrentUser, getCurrentUserId } from "@/lib/user";
+import { ensureLogin, getCurrentUserId } from "@/lib/user";
 import React from "react";
 
 const Platforms = async () => {

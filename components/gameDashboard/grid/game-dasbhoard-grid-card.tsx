@@ -1,27 +1,28 @@
 import { getCoverFromStoreForId } from "@/app/(withNavigation)/actions";
 import DeleteConfirmation from "@/components/delete-confirmation/delete-confirmation";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { getStatusAsArray, getStatusColor } from "@/lib/status";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
+import { Status } from "@/generated/prisma";
 
 interface GameDashboardGridCardProps {
   game: GameStatusWithIgdbGame;
   onDelete: (id: number) => void;
+  onChangeStatus: ({
+    id,
+    newStatus,
+  }: {
+    id: number;
+    newStatus: Status;
+  }) => void;
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
-  const { game, onDelete } = props;
+  const { game, onDelete, onChangeStatus } = props;
   const { id, status: gameStatus, igdbGame } = game;
   const [cover, setCover] = useState<string | undefined>(undefined);
 
@@ -35,6 +36,16 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
       setCover(undefined);
     };
   }, [igdbGame?.coverId]);
+
+  const handleStatusChange = ({
+    id,
+    newStatus,
+  }: {
+    id: number;
+    newStatus: Status;
+  }) => {
+    onChangeStatus({ id, newStatus });
+  };
 
   if (!igdbGame) return <></>;
   return (
@@ -55,30 +66,10 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
             {/* <PlatformDropdown gameId={game.id} currentPlatform={game.platform} /> */}
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Badge
-                className={`mt-2 cursor-pointer ${
-                  getStatusColor(gameStatus) || "bg-gray-500"
-                } hover:${getStatusColor(gameStatus) || "bg-gray-600"}`}
-              >
-                {gameStatus}
-              </Badge>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              {getStatusAsArray().map((status) => (
-                <DropdownMenuItem
-                  key={status.key}
-                  onClick={() => {}}
-                  className={
-                    status.translation.en === gameStatus ? "font-bold" : ""
-                  }
-                >
-                  {status.translation.en}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <GameDashboardGridCardStatusDropdown
+            statusAsString={gameStatus}
+            onChange={(newStatus) => handleStatusChange({ id, newStatus })}
+          />
         </CardContent>
       </div>
       <CardFooter className="px-4 py-2 border-t flex justify-end gap-2 bg-muted/10">
