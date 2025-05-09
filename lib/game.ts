@@ -5,6 +5,7 @@ import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 import { getCurrentUserId } from "./user";
 import { deleteFileFromBucket } from "./file-managment";
+import { connect } from "http2";
 
 interface getGamesForDashboardParams {
   search?: string;
@@ -30,7 +31,9 @@ export const getWhereString = async (params: getGamesForDashboardParams) => {
     });
   if (platform && platform !== "All")
     where = Object.assign(where, {
-      platform,
+      platform: {
+        name: platform,
+      },
     });
 
   return where;
@@ -114,25 +117,50 @@ export const changeStatus = async (
   params: changeStatusParams
 ): Promise<GameStatus> => {
   const { id, status } = params;
+  const currentUserId = await getCurrentUserId();
 
   return await prisma.gameStatus.update({
-    where: { id },
+    where: { id, userId: currentUserId },
     data: { status },
   });
 };
 
 interface changePlatformParams {
   id: number;
-  platform: Platform;
+  platform: string;
 }
 
 export const changePlatform = async (
   params: changePlatformParams
 ): Promise<GameStatus> => {
   const { id, platform } = params;
+  const currentUserId = await getCurrentUserId();
+
+  const platformData =
+    platform !== "None"
+      ? {
+          connect: await prisma.platform.findFirstOrThrow({
+            where: { name: platform },
+          }),
+        }
+      : { disconnect: true };
 
   return await prisma.gameStatus.update({
-    where: { id },
-    data: { platform: { connect: platform } },
+    where: { id, userId: currentUserId },
+    data: { platform: platformData },
+  });
+};
+
+export const getAllPlatformsForCurrentUser = async (): Promise<Platform[]> => {
+  const currentUserId = await getCurrentUserId();
+
+  return await prisma.platform.findMany({
+    where: {
+      gameStatus: {
+        some: {
+          userId: currentUserId,
+        },
+      },
+    },
   });
 };

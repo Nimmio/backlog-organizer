@@ -20,14 +20,13 @@ interface GameDashboardGridCardProps {
     id: number;
     newStatus: Status;
   }) => void;
-  onChangePlatform: (newPlatform: Platform) => void;
+  onChangePlatform: (newPlatform: string) => void;
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game, onDelete, onChangeStatus, onChangePlatform } = props;
   const { id, status: gameStatus, igdbGame } = game;
   const [cover, setCover] = useState<string | undefined>(undefined);
-  console.log(igdbGame);
   useEffect(() => {
     if (igdbGame?.coverId) {
       getCoverFromStoreForId(igdbGame?.coverId).then((blob) => {
@@ -67,9 +66,7 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
             <GameDashboardGridCardPlatformDropdown
               currentPlatform={game.platform?.name || "None"}
               platformOptions={igdbGame.platforms}
-              onChange={(newPlatform: Platform) =>
-                onChangePlatform(newPlatform)
-              }
+              onChange={(newPlatform: string) => onChangePlatform(newPlatform)}
             />
           </div>
 
