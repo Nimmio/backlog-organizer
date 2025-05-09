@@ -1,4 +1,10 @@
 import { LoginForm } from "@/components/loginForm/login-form";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Backlog Organizer Login",
+};
 
 export default function Page() {
   return (

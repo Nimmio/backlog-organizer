@@ -23,6 +23,7 @@ import {
 } from "../ui/form";
 import signUp from "@/app/(withoutNavigation)/sign-up/actions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function SignupForm({
   className,
@@ -58,7 +59,12 @@ export function SignupForm({
       username,
       password,
     }).then(({ error }) => {
-      if (!error) router.push("/sign-in");
+      if (error) toast(error.message);
+
+      if (!error) {
+        toast("Successful created User");
+        router.push("/sign-in");
+      }
     });
   };
 

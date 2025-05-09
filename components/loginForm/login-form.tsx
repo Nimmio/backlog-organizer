@@ -24,6 +24,9 @@ import {
   FormMessage,
 } from "../ui/form";
 import signIn from "@/app/(withoutNavigation)/sign-in/actions";
+import { toast } from "sonner";
+import { APIError } from "better-auth";
+import { ApiError } from "next/dist/server/api-utils";
 
 export function LoginForm({
   className,
@@ -45,8 +48,13 @@ export function LoginForm({
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const { email, password } = values;
-    signIn({ email, password }).then((success: boolean) => {
-      if (success) router.push("/");
+    signIn({ email, password }).then((error) => {
+      if (error && error instanceof ApiError) toast(error.message);
+
+      if (!error) {
+        toast("Login successful");
+        router.push("/");
+      }
     });
   };
 

@@ -1,6 +1,7 @@
 "use server";
 
 import { authClient } from "@/lib/auth-client";
+import { TError } from "@/types/betterAuth";
 
 interface SignUpParams {
   email: string;
@@ -10,7 +11,7 @@ interface SignUpParams {
 
 interface SignUpReturn {
   data: object | null;
-  error: object | null;
+  error: TError | null;
 }
 
 const signUp = async (params: SignUpParams): Promise<SignUpReturn> => {
@@ -20,6 +21,7 @@ const signUp = async (params: SignUpParams): Promise<SignUpReturn> => {
     password,
     name: username,
   });
+
   return {
     data,
     error,
