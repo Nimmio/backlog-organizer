@@ -1,6 +1,6 @@
 "use server";
 
-import { GameStatus, Status } from "@/generated/prisma";
+import { GameStatus, Platform, Status } from "@/generated/prisma";
 import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 import { getCurrentUserId } from "./user";
@@ -118,5 +118,21 @@ export const changeStatus = async (
   return await prisma.gameStatus.update({
     where: { id },
     data: { status },
+  });
+};
+
+interface changePlatformParams {
+  id: number;
+  platform: Platform;
+}
+
+export const changePlatform = async (
+  params: changePlatformParams
+): Promise<GameStatus> => {
+  const { id, platform } = params;
+
+  return await prisma.gameStatus.update({
+    where: { id },
+    data: { platform: { connect: platform } },
   });
 };

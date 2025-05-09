@@ -34,8 +34,12 @@ export const getGamesForDashboard = async (
 
   const games = await prisma.gameStatus.findMany({
     include: {
-      igdbGame: true,
       platform: true,
+      igdbGame: {
+        include: {
+          platforms: true,
+        },
+      },
     },
 
     where: await getWhereString({

@@ -14,8 +14,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { Button } from "../ui/button";
 import { PlusCircle } from "lucide-react";
-import { GameStatus, Status } from "@/generated/prisma";
-import { changeStatus, deleteGameStatus } from "@/lib/game";
+import { GameStatus, Platform, Status } from "@/generated/prisma";
+import { changePlatform, changeStatus, deleteGameStatus } from "@/lib/game";
 import { toast } from "sonner";
 
 // Status and platform options for filters
@@ -111,6 +111,22 @@ export default function GameDashboard(props: GameDashboardProps) {
     });
   };
 
+  interface handlePlatformChangeParams {
+    id: number;
+    newPlatform: Platform;
+  }
+
+  const handlePlatformChange = (params: handlePlatformChangeParams) => {
+    const { id, newPlatform } = params;
+    changePlatform({
+      id,
+      platform: newPlatform,
+    }).then(() => {
+      toast("Changed Platform");
+      router.refresh();
+    });
+  };
+
   return (
     <div className="container mx-auto ">
       <div className="flex justify-between items-center mb-6">
@@ -140,6 +156,9 @@ export default function GameDashboard(props: GameDashboardProps) {
           onDelete={(id) => handleDelete(id)}
           onStatusChange={({ id, newStatus }) =>
             handleStatusChange({ id, newStatus })
+          }
+          onPlatformChange={({ id, newPlatform }) =>
+            handlePlatformChange({ id, newPlatform })
           }
         />
       </div>
