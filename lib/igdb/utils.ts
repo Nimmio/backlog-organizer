@@ -1,7 +1,6 @@
 import { IGDBFields } from "@/types/igdb/fields";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
-import prisma from "../prisma";
 
 const rootUrl = "https://api.igdb.com/v4/";
 export const RequestUrls: {
@@ -108,14 +107,3 @@ export const downloadImage = async (url: string): Promise<Blob> => {
   });
   return await response.blob();
 };
-
-interface SaveImageResponse {
-  success: boolean;
-  error?: string;
-}
-
-interface saveImageParams {
-  blob: Blob;
-  filename: string;
-  gameId: number;
-}

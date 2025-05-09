@@ -1,8 +1,6 @@
 import DeleteConfirmation from "@/components/delete-confirmation/delete-confirmation";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
-import { Eye } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
