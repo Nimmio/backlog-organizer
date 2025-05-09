@@ -7,7 +7,8 @@ import { Eye } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
-import { Status } from "@/generated/prisma";
+import { Platform, Status } from "@/generated/prisma";
+import GameDashboardGridCardPlatformDropdown from "./game-dashboard-grid-card-platform-dropdown";
 
 interface GameDashboardGridCardProps {
   game: GameStatusWithIgdbGame;
@@ -19,13 +20,14 @@ interface GameDashboardGridCardProps {
     id: number;
     newStatus: Status;
   }) => void;
+  onChangePlatform: (newPlatform: Platform) => void;
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
-  const { game, onDelete, onChangeStatus } = props;
+  const { game, onDelete, onChangeStatus, onChangePlatform } = props;
   const { id, status: gameStatus, igdbGame } = game;
   const [cover, setCover] = useState<string | undefined>(undefined);
-
+  console.log(igdbGame);
   useEffect(() => {
     if (igdbGame?.coverId) {
       getCoverFromStoreForId(igdbGame?.coverId).then((blob) => {
@@ -51,19 +53,24 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   return (
     <Card key={id} className="overflow-hidden flex flex-col p-0">
       <div className="flex flex-1">
-        <div className="w-[120px] bg-muted flex-shrink-0">
+        <div className="bg-muted flex-shrink-0">
           <Image
-            width={120}
-            height={160}
+            width={80}
+            height={10}
             src={cover || "/placeholder.svg"}
             alt={`${igdbGame.name} cover`}
-            className="h-full w-full object-cover"
           />
         </div>
         <CardContent className="p-4 flex flex-col justify-between">
           <div>
             <h3 className="font-semibold line-clamp-2">{igdbGame.name}</h3>
-            {/* <PlatformDropdown gameId={game.id} currentPlatform={game.platform} /> */}
+            <GameDashboardGridCardPlatformDropdown
+              currentPlatform={game.platform?.name || "None"}
+              platformOptions={igdbGame.platforms}
+              onChange={(newPlatform: Platform) =>
+                onChangePlatform(newPlatform)
+              }
+            />
           </div>
 
           <GameDashboardGridCardStatusDropdown

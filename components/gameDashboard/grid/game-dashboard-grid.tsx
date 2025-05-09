@@ -1,7 +1,7 @@
 import React from "react";
 import GameDashboardGridEmpty from "./game-dashboard-empty";
 import GameDashboardGridCard from "./game-dasbhoard-grid-card";
-import { GameStatus, Status } from "@/generated/prisma";
+import { GameStatus, Platform, Status } from "@/generated/prisma";
 
 interface GameDasbhoardGridProps {
   games: GameStatus[];
@@ -13,10 +13,17 @@ interface GameDasbhoardGridProps {
     id: number;
     newStatus: Status;
   }) => void;
+  onPlatformChange: ({
+    id,
+    newPlatform,
+  }: {
+    id: number;
+    newPlatform: Platform;
+  }) => void;
 }
 
 const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {
-  const { games, onDelete, onStatusChange } = props;
+  const { games, onDelete, onStatusChange, onPlatformChange } = props;
 
   const isEmpty = games.length === 0;
 
@@ -30,6 +37,9 @@ const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {
             onDelete={(id) => onDelete(id)}
             onChangeStatus={({ id, newStatus }) =>
               onStatusChange({ id, newStatus })
+            }
+            onChangePlatform={(newPlatform: Platform) =>
+              onPlatformChange({ id: game.id, newPlatform })
             }
           />
         ))

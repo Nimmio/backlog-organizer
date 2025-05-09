@@ -66,7 +66,7 @@ export interface ExternalGame extends Omit<Game, "created_at" | "updated_at"> {
 }
 
 export interface GameStatusWithIgdbGame extends GameStatus {
-  igdbGame?: Game;
+  igdbGame?: Game & { platforms: Platform[] };
   platform?: Platform | undefined;
 }
 
