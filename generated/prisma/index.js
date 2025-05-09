@@ -284,13 +284,13 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:testpass123@localhost:6500/mydb?schema=public"
+        "value": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZDhkNWY4MzctYTM0OS00MTM5LTg0NjItYWQyNTM0Zjk5ZmU0IiwidGVuYW50X2lkIjoiZGFiMjYyNTIzMWY2NWE5MzQ4YzBlMzNjZGEzMjBlZGJmMzIyYmU4NjIyYWJjOTQ4MDdhMWE3YTg1Y2MzZTJkOCIsImludGVybmFsX3NlY3JldCI6IjU4MDhlNDY5LTJiY2ItNDE2Zi05MjY2LWY3NGNjYjQyOWYwNyJ9.PiZNsyvJR93lAxGt63YbKA-JW3gWXi9qAHt2m2n7GiY"
       }
     }
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"linux-musl-arm64-openssl-3.0.x\", \"linux-musl-openssl-3.0.x\", \"rhel-openssl-1.0.x\"]\n  output        = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel GameStatus {\n  id         Int       @id @default(autoincrement())\n  platform   Platform? @relation(fields: [platformId], references: [id])\n  platformId Int?\n\n  status     Status  @default(BACKLOG)\n  notes      String?\n  user       User    @relation(fields: [userId], references: [id])\n  userId     String\n  igdbGame   Game    @relation(fields: [igdbGameId], references: [id])\n  igdbGameId Int\n}\n\nenum Status {\n  WANT_TO_BUY\n  PREORDER\n  BACKLOG\n  PLAYING\n  COMPLETED\n  ON_HOLD\n}\n\nmodel UserSettings {\n  id     Int    @id @default(autoincrement())\n  theme  Theme  @default(SYSTEM)\n  user   User   @relation(fields: [userId], references: [id])\n  userId String @unique\n}\n\nenum Theme {\n  LIGHT\n  DARK\n  SYSTEM\n}\n\nmodel IGDBAuth {\n  id           Int       @id @default(autoincrement())\n  access_token String?\n  expires      DateTime?\n  updatedAt    DateTime\n}\n\nmodel Genre {\n  id         Int      @id @unique\n  checksum   String\n  created_at DateTime\n  name       String\n  updated_at DateTime\n  game       Game[]\n}\n\nmodel Platform {\n  id         Int          @id @unique\n  checksum   String\n  created_at DateTime\n  name       String\n  updated_at DateTime\n  games      Game[]\n  gameStatus GameStatus[]\n}\n\nmodel Game {\n  id                 Int          @id @unique\n  checksum           String?\n  coverUrl           String?\n  created_at         DateTime?\n  first_release_date Int?\n  genres             Genre[]\n  name               String\n  platforms          Platform[]\n  summary            String?\n  updated_at         DateTime?\n  gameStatus         GameStatus[]\n}\n\nmodel User {\n  id            String        @id\n  name          String\n  email         String\n  emailVerified Boolean\n  image         String?\n  createdAt     DateTime\n  updatedAt     DateTime\n  sessions      Session[]\n  accounts      Account[]\n  gameStatus    GameStatus[]\n  UserSettings  UserSettings?\n\n  @@unique([email])\n  @@map(\"user\")\n}\n\nmodel Session {\n  id        String   @id\n  expiresAt DateTime\n  token     String\n  createdAt DateTime\n  updatedAt DateTime\n  ipAddress String?\n  userAgent String?\n  userId    String\n  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([token])\n  @@map(\"session\")\n}\n\nmodel Account {\n  id                    String    @id\n  accountId             String\n  providerId            String\n  userId                String\n  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n  accessToken           String?\n  refreshToken          String?\n  idToken               String?\n  accessTokenExpiresAt  DateTime?\n  refreshTokenExpiresAt DateTime?\n  scope                 String?\n  password              String?\n  createdAt             DateTime\n  updatedAt             DateTime\n\n  @@map(\"account\")\n}\n\nmodel Verification {\n  id         String    @id\n  identifier String\n  value      String\n  expiresAt  DateTime\n  createdAt  DateTime?\n  updatedAt  DateTime?\n\n  @@map(\"verification\")\n}\n",
   "inlineSchemaHash": "de653d878aa7b4d8ac3765a12e940ca715e9209d4f0196ca662d839ec41ab23b",
-  "copyEngine": true
+  "copyEngine": false
 }
 
 const fs = require('fs')
@@ -327,21 +327,3 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-1.1.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl-arm64-openssl-3.0.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-linux-musl-arm64-openssl-3.0.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-linux-musl-openssl-3.0.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node")
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-rhel-openssl-1.0.x.so.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-rhel-openssl-1.0.x.so.node")
-// file annotations for bundling tools to include these files
-path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "generated/prisma/schema.prisma")
