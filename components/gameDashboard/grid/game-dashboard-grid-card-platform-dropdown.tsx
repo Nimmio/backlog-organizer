@@ -11,7 +11,7 @@ import React from "react";
 interface GameDashboardGridCardPlatformDropdownProps {
   currentPlatform: string;
   platformOptions: Platform[];
-  onChange: (newPlatform: Platform) => void;
+  onChange: (newPlatform: string) => void;
 }
 
 const GameDashboardGridCardPlatformDropdown = (
@@ -19,7 +19,7 @@ const GameDashboardGridCardPlatformDropdown = (
 ) => {
   const { currentPlatform, platformOptions, onChange } = props;
 
-  const handleChange = (newPlatform: Platform) => onChange(newPlatform);
+  const handleChange = (newPlatform: string) => onChange(newPlatform);
 
   return (
     <DropdownMenu>
@@ -28,10 +28,10 @@ const GameDashboardGridCardPlatformDropdown = (
         <ChevronDown className="h-3 w-3" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
-        {platformOptions.map((platformOption) => (
+        {[{ id: 0, name: "None" }, ...platformOptions].map((platformOption) => (
           <DropdownMenuItem
             key={platformOption.id}
-            onClick={() => handleChange(platformOption)}
+            onClick={() => handleChange(platformOption.name)}
             className={
               platformOption.name === currentPlatform ? "font-bold" : ""
             }

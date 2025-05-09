@@ -18,7 +18,7 @@ interface GameDasbhoardGridProps {
     newPlatform,
   }: {
     id: number;
-    newPlatform: Platform;
+    newPlatform: string;
   }) => void;
 }
 
@@ -38,7 +38,7 @@ const GameDasbhoardGrid = (props: GameDasbhoardGridProps) => {
             onChangeStatus={({ id, newStatus }) =>
               onStatusChange({ id, newStatus })
             }
-            onChangePlatform={(newPlatform: Platform) =>
+            onChangePlatform={(newPlatform: string) =>
               onPlatformChange({ id: game.id, newPlatform })
             }
           />

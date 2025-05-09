@@ -18,21 +18,13 @@ import { GameStatus, Platform, Status } from "@/generated/prisma";
 import { changePlatform, changeStatus, deleteGameStatus } from "@/lib/game";
 import { toast } from "sonner";
 
-// Status and platform options for filters
-const platformOptions = [
-  "All",
-  "PC",
-  "PlayStation 5",
-  "Xbox Series X",
-  "Nintendo Switch",
-];
-
 interface GameDashboardProps {
   games: GameStatus[];
+  platformOptions: Platform[];
 }
 
 export default function GameDashboard(props: GameDashboardProps) {
-  const { games } = props;
+  const { games, platformOptions } = props;
   const {
     searchValue,
     platformState,
@@ -113,7 +105,7 @@ export default function GameDashboard(props: GameDashboardProps) {
 
   interface handlePlatformChangeParams {
     id: number;
-    newPlatform: Platform;
+    newPlatform: string;
   }
 
   const handlePlatformChange = (params: handlePlatformChangeParams) => {
@@ -142,7 +134,10 @@ export default function GameDashboard(props: GameDashboardProps) {
           platformFilter={{
             value: platformState,
             onChange: setPlatformState,
-            options: platformOptions,
+            options: [
+              "All",
+              ...platformOptions.map((platformOption) => platformOption.name),
+            ],
           }}
           statusFilter={{
             value: filterState,

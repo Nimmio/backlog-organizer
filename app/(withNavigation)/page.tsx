@@ -7,6 +7,7 @@ import { GameDashboardStoreProvider } from "@/providers/gamedashboard-store-prov
 import { TStatusKeyWithAll } from "@/lib/status";
 import { getJsonParsedStringOrNull } from "@/lib/utils";
 import AddGameDialog from "@/components/add-game-dialog/add-game-dialog";
+import { getAllPlatformsForCurrentUser } from "@/lib/game";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -44,12 +45,14 @@ const Home = async ({
 
   const { search, status, platform } = parsedControls;
 
+  const platformOptions = await getAllPlatformsForCurrentUser();
+
   const games = await getGamesForDashboard({ search, status, platform });
   return (
     <AppPage titel="Dashboard" breadcrumbs={[{ title: "Games" }]}>
       <AddGameDialog open={addGameDialogOpenParsed !== null} />
       <GameDashboardStoreProvider>
-        <GameDashboard games={games} />
+        <GameDashboard games={games} platformOptions={platformOptions} />
       </GameDashboardStoreProvider>
     </AppPage>
   );
