@@ -19,7 +19,6 @@ const signIn = async (params: signInParams): Promise<unknown | undefined> => {
     });
     return undefined;
   } catch (error) {
-    console.log("pong");
     return error;
   }
 };
