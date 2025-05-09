@@ -4,19 +4,13 @@ import prisma from "@/lib/prisma";
 import { TStatusKeyWithAll } from "@/lib/status";
 import { getWhereString } from "@/lib/game";
 import { Status } from "@/generated/prisma";
-import {
-  downloadImage,
-  queryBuilder,
-  RequestUrls,
-  saveImage,
-} from "@/lib/igdb/utils";
+import { queryBuilder, RequestUrls } from "@/lib/igdb/utils";
 import { getAuthentication } from "@/lib/igdb/auth";
 import { ExternalPlatform, platformFields } from "@/types/igdb/platform";
 import { ExternalGame, GameField, SearchGameDetails } from "@/types/igdb/game";
 import { fromUnixTime } from "date-fns";
 import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
-import { CoverField } from "@/types/igdb/cover";
 import { revalidatePath } from "next/cache";
 
 interface getGamesForDashboardParams {
@@ -196,21 +190,6 @@ const getGameForCreate = async (id: number) => {
   )[0] as ExternalGame;
 };
 
-const getCoverUrl = async (id: number): Promise<string> => {
-  const { access_token } = await getAuthentication();
-
-  return (
-    (
-      await queryBuilder({
-        access_token: access_token || undefined,
-        requestUrl: RequestUrls.cover,
-        where: `id = ${id}`,
-        fields: ["url"] as CoverField[],
-        limit: 1,
-      })
-    )[0] as { url: string }
-  ).url;
-};
 //TODO: Rewrite
 export const createGameStatus = async (params: createGameStatusParams) => {
   const { id, platform, status } = params;

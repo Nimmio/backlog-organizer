@@ -79,7 +79,7 @@ export default function GameDashboard(props: GameDashboardProps) {
   };
 
   const handleDelete = (id: number) => {
-    deleteGameStatus({ id }).then((deleteGameStatus) => {
+    deleteGameStatus({ id }).then(() => {
       toast("Deleted Game");
       router.refresh();
     });

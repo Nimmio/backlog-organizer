@@ -64,7 +64,7 @@ interface deleteGameParams {
 const deleteGame = async (params: deleteGameParams) => {
   const { id } = params;
 
-  const deletedGame = await prisma.game.delete({
+  return await prisma.game.delete({
     where: { id },
   });
 };

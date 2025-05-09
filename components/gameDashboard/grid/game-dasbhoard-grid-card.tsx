@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
 import { Eye } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
 import { Status } from "@/generated/prisma";
 import GameDashboardGridCardPlatformDropdown from "./game-dashboard-grid-card-platform-dropdown";
@@ -65,10 +65,10 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
         </CardContent>
       </div>
       <CardFooter className="px-4 py-2 border-t flex justify-end gap-2 bg-muted/10">
-        <Button variant="outline" size="sm" className="h-8 px-2 gap-1">
+        {/* <Button variant="outline" size="sm" className="h-8 px-2 gap-1">
           <Eye className="h-4 w-4" />
           <span>View</span>
-        </Button>
+        </Button> */}
         <DeleteConfirmation
           gameName={igdbGame.name}
           onDeleteConfirm={() => {
