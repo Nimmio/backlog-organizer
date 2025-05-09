@@ -1,7 +1,6 @@
 import { IGDBFields } from "@/types/igdb/fields";
 import { isString } from "../utils";
 import { readIGDBEnvVars } from "./auth";
-import { saveFileInBucket } from "../file-managment";
 import prisma from "../prisma";
 
 const rootUrl = "https://api.igdb.com/v4/";

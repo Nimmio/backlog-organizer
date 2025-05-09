@@ -17,7 +17,6 @@ import { fromUnixTime } from "date-fns";
 import { getCurrentUserId } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
 import { CoverField } from "@/types/igdb/cover";
-import { getBlobFromBucket } from "@/lib/file-managment";
 import { revalidatePath } from "next/cache";
 
 interface getGamesForDashboardParams {
@@ -183,7 +182,7 @@ const getGameForCreate = async (id: number) => {
       where: `id = ${id}`,
       fields: [
         "checksum",
-        "cover",
+        "cover.url",
         "created_at",
         "first_release_date",
         "genres",
@@ -274,38 +273,18 @@ export const createGameStatus = async (params: createGameStatusParams) => {
             updated_at: fromUnixTime(createGame.updated_at),
             platforms: platformsConnectOrCreate,
             genres: genresConnectOrCreate,
+            coverUrl: createGame.cover
+              ? `https:${createGame.cover.url.replace(
+                  "t_thumb",
+                  "t_cover_big"
+                )}`
+              : undefined,
           },
         },
       },
     },
   });
 
-  if (createGame.cover) {
-    const getUrl = await getCoverUrl(createGame.cover);
-    const blob = await downloadImage("https:" + getUrl);
-    await saveImage({
-      blob,
-      filename: createGame.id.toString() + ".jpg",
-      gameId: createGame.id,
-    });
-  }
   revalidatePath("/");
   return createdGameStatus;
-};
-
-export const getCoverFromStoreForId = async (id: string) => {
-  const cover = await prisma.file.findFirstOrThrow({
-    select: {
-      bucket: true,
-      fileName: true,
-    },
-    where: {
-      id: id,
-    },
-  });
-  const test = await getBlobFromBucket({
-    bucketName: cover.bucket,
-    fileName: cover.fileName,
-  });
-  return test;
 };

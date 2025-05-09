@@ -4,8 +4,6 @@ import { GameStatus, Platform, Status } from "@/generated/prisma";
 import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
 import { getCurrentUserId } from "./user";
-import { deleteFileFromBucket } from "./file-managment";
-import { connect } from "http2";
 
 interface getGamesForDashboardParams {
   search?: string;
@@ -68,14 +66,7 @@ const deleteGame = async (params: deleteGameParams) => {
 
   const deletedGame = await prisma.game.delete({
     where: { id },
-    include: { cover: true },
   });
-  if (deletedGame.cover) {
-    await deleteFileFromBucket({
-      bucketName: deletedGame.cover.bucket,
-      fileName: deletedGame.cover.fileName,
-    });
-  }
 };
 
 interface deleteGameIfNoConnection {

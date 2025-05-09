@@ -1,4 +1,3 @@
-import { getCoverFromStoreForId } from "@/app/(withNavigation)/actions";
 import DeleteConfirmation from "@/components/delete-confirmation/delete-confirmation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { Eye } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
-import { Platform, Status } from "@/generated/prisma";
+import { Status } from "@/generated/prisma";
 import GameDashboardGridCardPlatformDropdown from "./game-dashboard-grid-card-platform-dropdown";
 
 interface GameDashboardGridCardProps {
@@ -26,17 +25,6 @@ interface GameDashboardGridCardProps {
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
   const { game, onDelete, onChangeStatus, onChangePlatform } = props;
   const { id, status: gameStatus, igdbGame } = game;
-  const [cover, setCover] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    if (igdbGame?.coverId) {
-      getCoverFromStoreForId(igdbGame?.coverId).then((blob) => {
-        setCover(URL.createObjectURL(blob as Blob));
-      });
-    }
-    return () => {
-      setCover(undefined);
-    };
-  }, [igdbGame?.coverId]);
 
   const handleStatusChange = ({
     id,
@@ -56,7 +44,7 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
           <Image
             width={80}
             height={10}
-            src={cover || "/placeholder.svg"}
+            src={igdbGame.coverUrl || "/placeholder.svg"}
             alt={`${igdbGame.name} cover`}
           />
         </div>

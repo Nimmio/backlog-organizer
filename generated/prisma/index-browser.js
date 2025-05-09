@@ -161,7 +161,7 @@ exports.Prisma.PlatformScalarFieldEnum = {
 exports.Prisma.GameScalarFieldEnum = {
   id: 'id',
   checksum: 'checksum',
-  coverId: 'coverId',
+  coverUrl: 'coverUrl',
   created_at: 'created_at',
   first_release_date: 'first_release_date',
   name: 'name',
@@ -215,15 +215,6 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.FileScalarFieldEnum = {
-  id: 'id',
-  bucket: 'bucket',
-  fileName: 'fileName',
-  originalName: 'originalName',
-  createdAt: 'createdAt',
-  size: 'size'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -263,8 +254,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification',
-  File: 'File'
+  Verification: 'Verification'
 };
 
 /**

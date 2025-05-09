@@ -62,7 +62,7 @@ export interface ExternalGame extends Omit<Game, "created_at" | "updated_at"> {
   updated_at: number;
   platforms: number[];
   genres: number[];
-  cover?: number;
+  cover?: { url: string; id: number };
 }
 
 export interface GameStatusWithIgdbGame extends GameStatus {

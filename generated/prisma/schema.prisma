@@ -79,8 +79,7 @@ model Platform {
 model Game {
   id                 Int          @id @unique
   checksum           String?
-  cover              File?        @relation(fields: [coverId], references: [id])
-  coverId            String?      @unique
+  coverUrl           String?
   created_at         DateTime?
   first_release_date Int?
   genres             Genre[]
@@ -151,14 +150,4 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
-}
-
-model File {
-  id           String   @id @default(uuid())
-  bucket       String
-  fileName     String   @unique
-  originalName String
-  createdAt    DateTime @default(now())
-  size         Int
-  Game         Game?
 }
