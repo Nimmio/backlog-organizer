@@ -1,11 +1,9 @@
 import DeleteConfirmation from "@/components/delete-confirmation/delete-confirmation";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { GameStatusWithIgdbGame } from "@/types/igdb/game";
 import Image from "next/image";
 import React from "react";
 import GameDashboardGridCardStatusDropdown from "./game-dashboard-grid-card-status-dropdown";
 import { Status } from "@/generated/prisma";
-import GameDashboardGridCardPlatformDropdown from "./game-dashboard-grid-card-platform-dropdown";
 
 interface GameDashboardGridCardProps {
   game: GameStatusWithIgdbGame;
@@ -21,7 +19,7 @@ interface GameDashboardGridCardProps {
 }
 
 const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
-  const { game, onDelete, onChangeStatus, onChangePlatform } = props;
+  const { game, onDelete, onChangeStatus } = props;
   const { id, status: gameStatus, igdbGame } = game;
 
   const handleStatusChange = ({
@@ -39,7 +37,8 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
     <div className="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 border-2 pointer-none:">
       {/* Cover Image */}
       <div className="aspect-[3/4] relative">
-        <img
+        <Image
+          fill
           src={igdbGame.coverUrl || "/placeholder.svg"}
           alt={`${igdbGame.name} cover`}
           className="w-full h-full object-cover"

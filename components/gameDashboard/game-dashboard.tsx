@@ -17,7 +17,6 @@ import { PlusCircle } from "lucide-react";
 import { GameStatus, Platform, Status } from "@/generated/prisma";
 import { changePlatform, changeStatus, deleteGameStatus } from "@/lib/game";
 import { toast } from "sonner";
-import { Value } from "@radix-ui/react-select";
 
 interface GameDashboardProps {
   games: GameStatus[];
