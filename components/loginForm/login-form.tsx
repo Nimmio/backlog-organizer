@@ -30,8 +30,12 @@ import { ApiError } from "next/dist/server/api-utils";
 export function LoginForm({
   className,
   canSignup,
+  demoMode,
   ...props
-}: React.ComponentPropsWithoutRef<"div"> & { canSignup: boolean }) {
+}: React.ComponentPropsWithoutRef<"div"> & {
+  canSignup: boolean;
+  demoMode: boolean;
+}) {
   const router = useRouter();
   const formSchema = z.object({
     email: z.string().email().min(5),
@@ -118,6 +122,19 @@ export function LoginForm({
                   <Link href="sign-up" className="underline underline-offset-4">
                     Sign up
                   </Link>
+                </div>
+              )}
+              {demoMode && (
+                <div className="mt-4 text-sm ml-16">
+                  Demo Login:
+                  <p>
+                    <span className="inline-block min-w-[68]">E-Mail:</span>{" "}
+                    demo@demo.com
+                  </p>
+                  <p>
+                    <span className="inline-block min-w-[68]">Password:</span>{" "}
+                    demodemo
+                  </p>
                 </div>
               )}
             </form>

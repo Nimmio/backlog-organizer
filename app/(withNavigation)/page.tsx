@@ -23,7 +23,7 @@ interface DashboardControlsParsed {
 const DashboardControlsParsedDefaults: DashboardControlsParsed = {
   search: "",
   status: "All",
-  platform: "All",
+  platform: "All Platforms",
 };
 
 const Home = async ({

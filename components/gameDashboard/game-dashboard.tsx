@@ -17,6 +17,7 @@ import { PlusCircle } from "lucide-react";
 import { GameStatus, Platform, Status } from "@/generated/prisma";
 import { changePlatform, changeStatus, deleteGameStatus } from "@/lib/game";
 import { toast } from "sonner";
+import { Value } from "@radix-ui/react-select";
 
 interface GameDashboardProps {
   games: GameStatus[];
@@ -29,9 +30,11 @@ export default function GameDashboard(props: GameDashboardProps) {
     searchValue,
     platformState,
     filterState,
+    limitCount,
     setFilterState,
     setPlatformState,
     setSearchValue,
+    setLimitCount,
   } = useGameDashboardStore((state) => state);
 
   const [debouncedSearchValue] = useDebounce(searchValue, 500);
@@ -130,20 +133,27 @@ export default function GameDashboard(props: GameDashboardProps) {
       </div>
       <div>
         <GameDashboardControls
-          search={{ value: searchValue, onChange: setSearchValue }}
+          search={{
+            value: searchValue,
+            onChange: (newValue) => setSearchValue(newValue as string),
+          }}
           platformFilter={{
             value: platformState,
-            onChange: setPlatformState,
+            onChange: (newValue) => setPlatformState(newValue as string),
             options: [
-              "All",
+              "All Platforms",
               ...platformOptions.map((platformOption) => platformOption.name),
             ],
           }}
           statusFilter={{
             value: filterState,
-            onChange: (value: string) =>
-              setFilterState(value as TStatusKeyWithAll),
+            onChange: (value) => setFilterState(value as TStatusKeyWithAll),
             options: getMultipleStatusKeysTranslatedWithAll(),
+          }}
+          limitProps={{
+            value: limitCount,
+            options: [0, 8, 16, 32],
+            onChange: (newValue) => setLimitCount(+newValue),
           }}
         />
         <GameDasbhoardGrid

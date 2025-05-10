@@ -36,45 +36,39 @@ const GameDashboardGridCard = (props: GameDashboardGridCardProps) => {
 
   if (!igdbGame) return <></>;
   return (
-    <Card key={id} className="overflow-hidden flex flex-col p-0">
-      <div className="flex flex-1">
-        <div className="bg-muted flex-shrink-0">
-          <Image
-            width={80}
-            height={10}
-            src={igdbGame.coverUrl || "/placeholder.svg"}
-            alt={`${igdbGame.name} cover`}
-          />
-        </div>
-        <CardContent className="p-4 flex flex-col justify-between">
-          <div>
-            <h3 className="font-semibold line-clamp-2">{igdbGame.name}</h3>
-            <GameDashboardGridCardPlatformDropdown
-              currentPlatform={game.platform?.name || "None"}
-              platformOptions={igdbGame.platforms}
-              onChange={(newPlatform: string) => onChangePlatform(newPlatform)}
-            />
-          </div>
+    <div className="group relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-200 border-2 pointer-none:">
+      {/* Cover Image */}
+      <div className="aspect-[3/4] relative">
+        <img
+          src={igdbGame.coverUrl || "/placeholder.svg"}
+          alt={`${igdbGame.name} cover`}
+          className="w-full h-full object-cover"
+        />
 
+        {/* Status Badge - Top Left */}
+        <div className="absolute top-2 left-2">
           <GameDashboardGridCardStatusDropdown
             statusAsString={gameStatus}
             onChange={(newStatus) => handleStatusChange({ id, newStatus })}
           />
-        </CardContent>
+        </div>
+        <div className="absolute top-2 right-2">
+          <DeleteConfirmation
+            gameName={igdbGame.name}
+            onDeleteConfirm={() => {
+              onDelete(id);
+            }}
+          />
+        </div>
+
+        {/* Dark Gradient Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="absolute bottom-2 text-center w-full">
+            <h3 className="font-semibold line-clamp-1 mb-1">{igdbGame.name}</h3>
+          </div>
+        </div>
       </div>
-      <CardFooter className="px-4 py-2 border-t flex justify-end gap-2 bg-muted/10">
-        {/* <Button variant="outline" size="sm" className="h-8 px-2 gap-1">
-          <Eye className="h-4 w-4" />
-          <span>View</span>
-        </Button> */}
-        <DeleteConfirmation
-          gameName={igdbGame.name}
-          onDeleteConfirm={() => {
-            onDelete(id);
-          }}
-        />
-      </CardFooter>
-    </Card>
+    </div>
   );
 };
 

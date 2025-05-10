@@ -46,3 +46,11 @@ export const getCurrentUserId = async (): Promise<string> => {
   });
   return sessionResponse?.user.id as string;
 };
+
+export const isDemoUser = async (): Promise<boolean> => {
+  "use server";
+  return (
+    process.env.DEMO_MODE === "TRUE" &&
+    (await getCurrentUser()).email === "demo@demo.com"
+  );
+};

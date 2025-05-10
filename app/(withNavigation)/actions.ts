@@ -9,7 +9,7 @@ import { getAuthentication } from "@/lib/igdb/auth";
 import { ExternalPlatform, platformFields } from "@/types/igdb/platform";
 import { ExternalGame, GameField, SearchGameDetails } from "@/types/igdb/game";
 import { fromUnixTime } from "date-fns";
-import { getCurrentUserId } from "@/lib/user";
+import { getCurrentUserId, isDemoUser } from "@/lib/user";
 import { ExternalGenre, GenreField } from "@/types/igdb/genre";
 import { revalidatePath } from "next/cache";
 
@@ -193,6 +193,8 @@ const getGameForCreate = async (id: number) => {
 //TODO: Rewrite
 export const createGameStatus = async (params: createGameStatusParams) => {
   const { id, platform, status } = params;
+  if (await isDemoUser()) throw new Error("No Creation As Demo");
+
   const createPlatform =
     platform !== "none" ? await getPlatformForCreate(platform) : undefined;
   const createGame = await getGameForCreate(id);

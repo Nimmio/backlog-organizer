@@ -3,7 +3,7 @@
 import { GameStatus, Platform, Status } from "@/generated/prisma";
 import prisma from "./prisma";
 import { getStatusKeyForTranslation, TStatusKeyWithAll } from "./status";
-import { getCurrentUserId } from "./user";
+import { getCurrentUserId, isDemoUser } from "./user";
 
 interface getGamesForDashboardParams {
   search?: string;
@@ -27,7 +27,7 @@ export const getWhereString = async (params: getGamesForDashboardParams) => {
     where = Object.assign(where, {
       status: getStatusKeyForTranslation(status),
     });
-  if (platform && platform !== "All")
+  if (platform && platform !== "All Platforms")
     where = Object.assign(where, {
       platform: {
         name: platform,
@@ -45,7 +45,7 @@ export const deleteGameStatus = async (
   params: deleteGameParams
 ): Promise<GameStatus> => {
   const { id } = params;
-
+  if (await isDemoUser()) throw new Error("No CRUD As Demo");
   const currentUserId = await getCurrentUserId();
   const deletedGameStatus = await prisma.gameStatus.delete({
     where: {
@@ -109,7 +109,7 @@ export const changeStatus = async (
 ): Promise<GameStatus> => {
   const { id, status } = params;
   const currentUserId = await getCurrentUserId();
-
+  if (await isDemoUser()) throw new Error("No CRUD As Demo");
   return await prisma.gameStatus.update({
     where: { id, userId: currentUserId },
     data: { status },
@@ -125,6 +125,7 @@ export const changePlatform = async (
   params: changePlatformParams
 ): Promise<GameStatus> => {
   const { id, platform } = params;
+  if (await isDemoUser()) throw new Error("No CRUD As Demo");
   const currentUserId = await getCurrentUserId();
 
   const platformData =
